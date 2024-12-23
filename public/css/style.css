@@ -1,0 +1,56 @@
+.navbar-brand{
+    font-family: "Shrikhand", serif !important;
+    color: #FFA965 !important;
+    font-size: 50px !important;
+
+}
+.nav-link.nav-username {
+    font-family: 'Suwannaphum', sans-serif;
+    font-size: 120%;
+}
+.nav-user-icon{
+    border-radius: 50% ; /* 丸い写真 */
+    width: 50px ;
+    height: 50px ;
+    object-fit: cover ;
+    margin: 20px auto 10px;
+}
+
+
+body {
+    background-color: #F7FCF1 !important; /* 背景色 */
+    font-family: 'lora', sans-serif !important;
+
+  }
+  .nutri-h2 {
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+  }
+  .nutri-card {
+    width: 70%;  /* 幅を80%に設定して細長くする */
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .nutri-card-img-top {
+    border-radius: 50% ; /* 丸い写真 */
+    width: 80px ;
+    height: 80px ;
+    object-fit: cover ;
+    margin: 20px auto 10px ;
+  }
+  .nutri-card-title {
+    font-size: 16px ;
+    font-weight: bold ;
+    color: #333 ;
+  }
+  .nutri-btn {
+    background-color: #FFEDD5 ;
+    color: #FF7F50 ;
+    font-weight: bold ;
+    border: none ;
+  }
+  .nutri-btn:hover {
+    background-color: #FFDBB1 ;
+  }
