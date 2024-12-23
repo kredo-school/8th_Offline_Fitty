@@ -10,9 +10,8 @@ class NutritionistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    function index(){
+        return view('nutritionists.index');
     }
 
     /**
