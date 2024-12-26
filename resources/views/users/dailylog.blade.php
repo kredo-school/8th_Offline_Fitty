@@ -3,60 +3,14 @@
 @section('title', 'Create Post')
 
 @section('content')
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-        }
 
-        .meal-container {
-            margin: 30px auto;
-            max-width: 1200px;
-        }
+<div class="container user-dailylog">
+    <!-- Header Section -->
+    <div class="user-dailylog-header">
+        <h1>Daily Log (Thu Dec 26)</h1>
+        <p>Weight: 64.5Kg</p>
+    </div>
 
-        .meal-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .meal-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 10px;
-        }
-
-        .accordion-button {
-            font-weight: bold;
-            color: #555;
-        }
-                /* アコーディオンボタンの色変更 */
-                .accordion-button {
-            background-color: #91CF98; /* 緑色 */
-            color: #ffffff; /* 白色 */
-            font-weight: bold;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #91CF98; /* 展開時の背景色 */
-            color: #ffffff; /* 展開時のテキスト色 */
-        }
-
-        .accordion-button:focus {
-            box-shadow: none; /* フォーカス時の枠線を無効に */
-        }
-
-        .accordion-body {
-            background-color: #f8f9fa;
-        }
-    </style>
-
-<div class="container meal-container">
     <!-- 朝食 -->
     <div class="meal-card">
         <div class="meal-title">🍳 Breakfast</div>
@@ -129,6 +83,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
