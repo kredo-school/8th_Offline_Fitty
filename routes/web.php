@@ -13,6 +13,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/nutri/index', [NutritionistController::class, 'index']);
+Route::get('nutri/sendAdvice', [NutritionistController::class, 'sendAdvice']);
 
 //user dailylog
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');

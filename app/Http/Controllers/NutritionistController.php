@@ -14,6 +14,11 @@ class NutritionistController extends Controller
         return view('nutritionists.index');
     }
 
+
+    function sendAdvice(){
+        return view('nutritionists.sendAdvice');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
