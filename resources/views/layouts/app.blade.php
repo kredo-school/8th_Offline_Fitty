@@ -12,12 +12,114 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f0;
+        }
+        .sidemenu {
+            width: 240px;
+            background-color: #d8efd1;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidemenu h1 {
+            font-size: 24px;
+            color: #f68b1e;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .sidemenu h1 img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .menu-item:hover {
+            background-color: #a4d4a2;
+            color: #000;
+        }
+        .menu-item.active {
+            background-color: #54b76a;
+            color: white;
+            font-weight: bold;
+        }
+        .menu-item .material-icons {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .menu-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .menu-footer p {
+            font-size: 14px;
+            color: #666;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+
+        @if(auth()->check())
+    
+    
+            <!-- サイドメニュー -->
+            <div class="sidemenu">
+                <h1>
+                    <img src="{{ asset('images/logo.png') }}" alt="Fitty Logo"> FITTY
+                </h1>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">assignment</span> Record
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">person</span> Profile
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">history</span> History
+                </a>
+                <a href="#" class="menu-item active">
+                    <span class="material-icons">notifications</span> Notification
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">help_outline</span> Help
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">help</span> FAQ
+                </a>
+                <a href="#" class="menu-item">
+                    <span class="material-icons">logout</span> Logout
+                </a>
+            </div>
+        @endif
+
+        <!-- ナビバー -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -29,13 +131,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
+                    <ul class="navbar-nav me-auto"></ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -72,9 +171,17 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <!-- メインコンテンツ -->
+        <main class="py-4 main-content">
             @yield('content')
         </main>
     </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 20px; padding: 10px 0; background-color: #0a8f2c; color: white; border-radius: 8px;">
+        <p style="margin: 0;">Terms of Use | Privacy Policy | Help</p>
+        <p style="margin: 0;">© 2024 Ichikawa-tech. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
