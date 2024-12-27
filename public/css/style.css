@@ -122,4 +122,27 @@ body {
     background-color: #f8f9fa;
 }
 
+
+.inputmeal {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for the form */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.inputmeal .btn-submit {
+  background-color: #ffcc80; /* Orange submit button */
+  color: #ffffff;
+  border: none;
+}
+.inputmeal .btn-submit:hover {
+  background-color: #ffa726; /* Darker orange on hover */
+}
+.inputmeal .textarea-border {
+  border: 2px dashed #9575cd; /* Purple dashed border */
+  border-radius: 5px;
+}
+
 /* omori add end */
