@@ -223,3 +223,52 @@ body {
 }
 
 /* omori add end */
+
+
+/* テーブルのスタイル */
+.unique-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'lora', sans-serif;
+  }
+
+  .unique-table th, .unique-table td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  .unique-table th {
+    background-color: #4DAF4A;
+    color: white;
+    font-weight: bold;
+  }
+
+  .unique-table td {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+  }
+
+  /* リンクのスタイル */
+  .unique-table a {
+    text-decoration: none;
+    color: #202F55;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .unique-table a:hover {
+    color: #FFA965;
+  }
+
+  /* 行にホバー効果 */
+  .unique-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 600px) {
+    .unique-table {
+      font-size: 14px;
+    }
+  }
