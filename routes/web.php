@@ -15,6 +15,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/nutri/index', [NutritionistController::class, 'index']);
 Route::get('nutri/sendAdvice', [NutritionistController::class, 'sendAdvice']);
 Route::get('nutri/history', [NutritionistController::class, 'history']);
+Route::get('/nutri/profile', [NutritionistController::class, 'profile']);
 
 
 //user dailylog

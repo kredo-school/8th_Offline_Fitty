@@ -24,6 +24,10 @@ class NutritionistController extends Controller
         return view('nutritionists.history');
     }
 
+    function profile(){
+        return view('nutritionists.profile');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
