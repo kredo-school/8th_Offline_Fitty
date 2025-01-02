@@ -22,6 +22,10 @@ class UserController extends Controller
         return view('users.inputmeal');
     }
 
+    public function profile(){
+        return view('users.profile');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
