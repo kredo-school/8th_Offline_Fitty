@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,8 @@ Route::get('/', function () {
 // 認証ルートを有効化
 Auth::routes();
 
-// ホームページルート
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/nutri/index', [NutritionistController::class, 'index']);
 
-// Registerページルート
-Route::get('/register', function () {
-    return view('auth.register'); // resources/views/auth/register.blade.php
-})->name('register');
+//user dailylog
+Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
