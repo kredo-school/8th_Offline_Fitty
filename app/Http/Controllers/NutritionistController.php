@@ -27,6 +27,9 @@ class NutritionistController extends Controller
     function profile(){
         return view('nutritionists.profile');
     }
+    function editprofile(){
+        return view('nutritionists.editprofile');
+    }
 
     /**
      * Show the form for creating a new resource.
