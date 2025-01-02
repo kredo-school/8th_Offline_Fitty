@@ -11,6 +11,7 @@ class NutritionistController extends Controller
      * Display a listing of the resource.
      */
     function index(){
+        
         return view('nutritionists.index');
     }
 
