@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('nutritionists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->longText('avatar')->nullable();
             $table->timestamps();
         });
