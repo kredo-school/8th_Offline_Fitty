@@ -183,3 +183,277 @@ body {
   padding: 25px;
   position:relative;
 }
+  
+  .nutri-h2 {
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+  }
+  .nutri-card {
+    width: 70%;  /* 幅を80%に設定して細長くする */
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .nutri-card-img-top {
+    border-radius: 50% ; /* 丸い写真 */
+    width: 80px ;
+    height: 80px ;
+    object-fit: cover ;
+    margin: 20px auto 10px ;
+  }
+  .nutri-card-title {
+    font-size: 16px ;
+    font-weight: bold ;
+    color: #333 ;
+  }
+  .nutri-btn {
+    background-color: #FFEDD5 ;
+    color: #FF7F50 ;
+    font-weight: bold ;
+    border: none ;
+  }
+  .nutri-btn:hover {
+    background-color: #FFDBB1 ;
+  }
+
+.fixed-back-button {
+    position: fixed;
+    top: 120px; /* Align with header */
+    left: 10px;
+    z-index: 1000;
+    width: 50px; /* ボタンの幅を指定（例: 50px） */
+}
+
+.custom-left-section {
+    width: calc(48% - 50px);  /* 幅を48%からボタンの幅分引く */
+    height: calc(100vh - 135px); /* ビューポートの高さからヘッダー部分を引く */
+    overflow-y: auto; /* 垂直方向にスクロール可能にする */
+    background-color: #F7FCF1;
+    padding-left: 50px;
+    margin-right: 2%; /* 右側との間に余白を作る */
+    float: left; /* 左側に配置 */
+}
+
+.custom-right-section {
+    width: 48%;  /* 幅を48%に設定 */
+    padding: 2rem;
+    background-color: #FFFFFF;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: 2%; /* 左側との間に余白を作る */
+    margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
+    float: left; /* 右側に配置 */
+}
+
+.custom-blank-card {
+    height: 200px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.custom-right-section form {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #DDD;
+    margin: 0 auto;
+}
+
+.custom-right-section form textarea {
+    padding: 15px;
+}
+/* アイコンを丸くしてY軸の中央に配置 */
+.user-photo {
+    width: 100px; /* アイコンの幅 */
+    height: 100px; /* アイコンの高さ */
+    border-radius: 50%; /* 丸くする */
+    object-fit: cover; /* 画像が歪まないように */
+    margin-right: 15px; /* テキストとの間に余白を作る */
+    align-self: center; /* Y軸の中央に配置 */
+}
+
+/* 行間を狭くする */
+.user-info p {
+    margin-bottom: 5px; /* pタグの下の余白を狭くする */
+    line-height: 1.2; /* 行間を調整 */
+}
+
+/* 通常状態のスタイル */
+.see-previous-btn {
+    background-color: #D4E7BA !important; /* 背景色 */
+    color: #00984F !important; /* 文字色 */
+    border: none; /* 枠線をなくす */
+    padding: 10px 20px; /* パディング調整 */
+    border-radius: 5px; /* 角丸 */
+    font-size: 16px; /* フォントサイズ */
+    transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
+}
+
+.see-previous-btn:hover {
+    background-color: #4DAF4A !important; /* ホバー時の背景色 */
+    color: #FFFFFF !important; /* ホバー時の文字色 */
+}
+
+.send-btn {
+    background-color: rgba(255, 169, 101, 0.4) !important; /* 背景色 40%透明度 */
+    color: #FFA965 !important; /* 文字色 */
+    border: none; /* 枠線をなくす */
+    padding: 10px 20px; /* パディング調整 */
+    border-radius: 5px; /* 角丸 */
+    font-size: 16px; /* フォントサイズ */
+    transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
+}
+
+/* Sendボタンがホバーされた時 */
+.send-btn:hover {
+    background-color: #FFA965 !important; /* ホバー時の背景色 */
+    color: #FFFFFF !important; /* ホバー時の文字色 */
+}
+
+.custom-back-button {
+    background-color: #D4E7BA !important; /* ボタンの背景色 */
+    color: #202F55 !important; /* 矢印の色 */
+    border: none !important; /* ボーダーを削除 */
+}
+
+.user-dailylog {
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.user-dailylog-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.user-dailylog-header h1 {
+    font-size: 32px;
+    margin: 0;
+    color: #333;
+}
+
+.user-dailylog-header p {
+    font-size: 18px;
+    margin: 5px 0 0;
+    color: #555;
+}
+
+.user-dailylog .meal-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.user-dailylog .meal-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.user-dailylog .accordion-button {
+    font-weight: bold;
+    color: #555;
+}
+/* アコーディオンボタンの色変更 */
+.user-dailylog .accordion-button {
+    background-color: #91CF98; /* 緑色 */
+    color: #ffffff; /* 白色 */
+    font-weight: bold;
+}
+
+.user-dailylog .accordion-button:not(.collapsed) {
+    background-color: #91CF98; /* 展開時の背景色 */
+    color: #ffffff; /* 展開時のテキスト色 */
+}
+
+.user-dailylog .accordion-button:focus {
+    box-shadow: none; /* フォーカス時の枠線を無効に */
+}
+
+.user-dailylog .accordion-body {
+    background-color: #f8f9fa;
+}
+
+
+.inputmeal {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for the form */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.inputmeal .btn-submit {
+  background-color: #ffcc80; /* Orange submit button */
+  color: #ffffff;
+  border: none;
+}
+.inputmeal .btn-submit:hover {
+  background-color: #ffa726; /* Darker orange on hover */
+}
+.inputmeal .textarea-border {
+  border: 2px dashed #9575cd; /* Purple dashed border */
+  border-radius: 5px;
+}
+
+/* omori add end */
+
+
+/* テーブルのスタイル */
+.unique-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'lora', sans-serif;
+  }
+
+  .unique-table th, .unique-table td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  .unique-table th {
+    background-color: #4DAF4A;
+    color: white;
+    font-weight: bold;
+  }
+
+  .unique-table td {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+  }
+
+  /* リンクのスタイル */
+  .unique-table a {
+    text-decoration: none;
+    color: #202F55;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .unique-table a:hover {
+    color: #FFA965;
+  }
+
+  /* 行にホバー効果 */
+  .unique-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 600px) {
+    .unique-table {
+      font-size: 14px;
+    }
+  }

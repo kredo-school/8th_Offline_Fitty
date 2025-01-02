@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Nutritionist;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -12,12 +13,11 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-    }
+{
+    // 他のシーダーも必要に応じて追加
+    $this->call([
+        UsersTableSeeder::class,  // ユーザーのシーダー
+        NutritionistsTableSeeder::class,  // Nutritionists のシーダー
+    ]);
+}
 }

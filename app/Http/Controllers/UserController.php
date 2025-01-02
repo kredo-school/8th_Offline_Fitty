@@ -17,6 +17,15 @@ class UserController extends Controller
     public function showdailylog(){
         return view('users.dailylog');
     }
+
+    public function showinputmeal(){
+        return view('users.inputmeal');
+    }
+
+    public function showhistory(){
+        return view('users.history');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
