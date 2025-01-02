@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Edit Profile')
 
 @section('content')
 
@@ -10,13 +10,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User Profile</title>
+        <title>Edit Profile</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <style>
             body {
-                background-color: #F7FCF1 !important;
-                /* 背景色 */
-                font-family: 'lora', sans-serif !important;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #F5F5F5;
             }
 
             .container {
@@ -29,7 +29,7 @@
             .profile-card {
                 background-color: #FFFFFF;
                 border-radius: 10px;
-                padding: 50px;
+                padding: 30px;
                 width: 800px;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 margin-left: 50px;
@@ -47,7 +47,6 @@
                 justify-content: center;
                 align-items: center;
                 gap: 20px;
-                font-size: 1.3rem;
             }
 
             .profile-photo img {
@@ -57,15 +56,13 @@
                 object-fit: cover;
             }
 
-            .profile-photo p {
-                font-size: 1.1rem;
-                color: #333;
+            .profile-photo input[type="file"] {
+                display: block;
             }
 
             .info-group {
                 display: flex;
                 justify-content: space-between;
-                margin-left: 70px;
                 margin-bottom: 15px;
             }
 
@@ -78,34 +75,32 @@
                 font-weight: bold;
                 color: #333;
                 display: block;
-                font-size: 1.3rem;
                 margin-bottom: 5px;
             }
 
-            .info-group .value {
-                color: #555;
-                font-size: 1.3rem;
+            .info-group input,
+            .info-group textarea {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
             }
 
             .info-group.full {
                 flex-direction: column;
-                align-items: flex-start;
-                margin-left: 90px;
+                margin-left: 20px;
             }
 
-            .info-group.full .value {
-                margin-top: 5px;
-                text-align: left;
+            .info-group.full textarea {
+                width: 100%;
             }
 
-            .edit-button {
-                text-align: left;
-                margin-left: 90px;
-                font-size: 1.15rem;
-                margin-top: 70px;
+            .save-button {
+                margin-left: 20px;
+                margin-top: 20px;
             }
 
-            .edit-button button {
+            .save-button button {
                 background-color: #FFA965;
                 color: white;
                 border: none;
@@ -114,7 +109,7 @@
                 cursor: pointer;
             }
 
-            .edit-button button:hover {
+            .save-button button:hover {
                 background-color: #FF8C50;
             }
         </style>
@@ -122,52 +117,52 @@
 
     <body>
         <div class="container">
-            <div class="profile-card">
+            <form class="profile-card">
                 <div class="profile-photo">
-                    <img src="images/fitty_logo.png" alt="Profile Photo">
-                    <p>alexarawles@gmail.com</p>
+                    <img src="" alt="Profile Photo">
+                    <input type="file" accept="image/*" class="form-control-sm">
                 </div>
                 <div class="info-group">
                     <div class="info-item">
-                        <label>First Name</label>
-                        <div class="value">Emiko</div>
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" value="Emiko">
                     </div>
                     <div class="info-item">
-                        <label>Last Name</label>
-                        <div class="value">Imai</div>
-                    </div>
-                </div>
-                <div class="info-group">
-                    <div class="info-item">
-                        <label>Gender</label>
-                        <div class="value">Female</div>
-                    </div>
-                    <div class="info-item">
-                        <label>Date of Birth</label>
-                        <div class="value">Age</div>
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" value="Imai">
                     </div>
                 </div>
                 <div class="info-group">
                     <div class="info-item">
-                        <label>Height (cm)</label>
-                        <div class="value">169</div>
+                        <label for="gender">Gender</label>
+                        <input type="text" id="gender" name="gender" value="Female">
                     </div>
                     <div class="info-item">
-                        <label>Exercise Frequency</label>
-                        <div class="value">3</div>
+                        <label for="dob">Date of Birth</label>
+                        <input type="text" id="dob" name="dob" value="Age">
+                    </div>
+                </div>
+                <div class="info-group">
+                    <div class="info-item">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" name="height" value="169">
+                    </div>
+                    <div class="info-item">
+                        <label for="exercise">Exercise Frequency</label>
+                        <input type="number" id="exercise" name="exercise" value="3">
                     </div>
                 </div>
                 <div class="info-group full">
-                    <label>Current Health Conditions</label>
-                    <div class="value">{Add conditions here}</div>
+                    <label for="health">Current Health Conditions</label>
+                    <textarea id="health" name="health" rows="4" placeholder="Add conditions here"></textarea>
                 </div>
-                <div class="edit-button">
-                    <button>Edit</button>
+                <div class="save-button">
+                    <button type="submit">Save</button>
                 </div>
-            </div>
+            </form>
         </div>
     </body>
 
     </html>
 
-    @
+@endsection

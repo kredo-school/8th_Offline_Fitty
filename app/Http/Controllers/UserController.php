@@ -14,16 +14,23 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog(){
+    public function showdailylog()
+    {
         return view('users.dailylog');
     }
 
-    public function showinputmeal(){
+    public function showinputmeal()
+    {
         return view('users.inputmeal');
     }
 
-    public function profile(){
+    public function profile()
+    {
         return view('users.profile');
+    }
+    public function editprofile()
+    {
+        return view('users.editprofile');
     }
 
     /**
