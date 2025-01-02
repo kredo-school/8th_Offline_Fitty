@@ -30,7 +30,6 @@
         @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
-            </h1>
             <a href="#" class="menu-item">
                 <span class="material-icons mt-3">assignment</span> Record
             </a>
