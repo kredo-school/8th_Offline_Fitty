@@ -30,11 +30,8 @@
         @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
-            <h1>
-                <img src="{{ asset('images/logo.png') }}" alt="Fitty Logo"> FITTY
-            </h1>
             <a href="#" class="menu-item">
-                <span class="material-icons">assignment</span> Record
+                <span class="material-icons mt-3">assignment</span> Record
             </a>
             <a href="#" class="menu-item">
                 <span class="material-icons">person</span> Profile
