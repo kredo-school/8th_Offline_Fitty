@@ -13,8 +13,7 @@
                         class="profile-picture profile-picture-edit">
                     <div class="info info-edit">
                         <label class="form-label form-label-edit">Emiko Imai</label>
-                        <input type="email" name="email" value="alexarawles@gmail.com"
-                            class="form-control form-control-edit">
+                        <p class="profile-email profile-email-view">alexarawles@gmail.com</p>
                     </div>
                 </div>
                 <div class="details details-edit">
