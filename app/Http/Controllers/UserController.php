@@ -32,6 +32,9 @@ class UserController extends Controller
     {
         return view('users.editprofile');
     }
+    public function showhistory(){
+        return view('users.history');
+    }
 
     /**
      * Show the form for creating a new resource.
