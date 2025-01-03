@@ -1,0 +1,247 @@
+/* Admin Home Styles */
+
+/* 全体のスタイル */
+.admin-home-body {
+  font-family: 'Shrikhand', sans-serif;
+  background-color: #F7FCF1;
+  margin: 0;
+  padding: 0;
+  color: #F7FCF1;
+}
+
+.admin-home-title {
+  font-size: 2rem;
+  color: #00984F;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-left: calc(50% - 350px);
+}
+
+/* カードのスタイル */
+.admin-home-card {
+  width: 331px;
+  height: 203px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #00984F;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #00984F;
+  font-weight: bold;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  margin: 15px;
+}
+
+/* ホバー時のスタイル */
+.admin-home-card:hover {
+  background-color: #ffa965;
+  border-color: #ffa965;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.admin-home-card-icon {
+  font-size: 120px;
+  color: #00984F;
+}
+
+.admin-home-card:hover .admin-home-card-icon {
+  color: #fff;
+}
+
+.admin-home-card span {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.admin-home-row {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Admin Users Index Styles */
+
+/* 全体のフォント */
+body.admin-users {
+  font-family: 'Shrikhand', sans-serif;
+}
+
+/* タイトルスタイル */
+h1.admin-users-title {
+  font-family: 'Shrikhand', sans-serif;
+  font-size: 2rem;
+  margin-top: 100px;
+}
+
+/* 検索ボックス */
+.admin-users-search-box {
+  margin-bottom: 20px;
+}
+
+.admin-users-search-box .input-group {
+  max-width: 400px;
+}
+
+/* テーブルスタイル */
+.admin-users-table {
+  font-family: 'Poppins', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.admin-users-table th,
+.admin-users-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-users-table th {
+  background-color: #f9f9f9;
+  color: #6c757d;
+}
+
+/* テーブルホバー時のスタイル */
+.admin-users-table tr:hover {
+  background-color: #ffa965;
+  color: white;
+}
+
+.admin-users-table tr:hover a {
+  color: white;
+}
+
+/* ステータスバッジのスタイル */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid #001F54;
+  color: #001F54;
+  background-color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.status-badge .status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+/* Activeステータス */
+.status-active {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.status-active .status-dot {
+  background-color: #28a745 !important; /* 色を固定 */
+}
+
+/* Inactiveステータス */
+.status-inactive {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.status-inactive .status-dot {
+  background-color: #dc3545 !important; /* 色を固定 */
+}
+
+/* ホバー時のスタイル */
+.status-badge:hover {
+  background-color: #001F54;
+  color: #fff;
+  border-color: #001F54;
+}
+
+.status-badge:hover .status-dot {
+  background-color: initial !important; /* ドットの色をホバーで変えない */
+}
+
+/* テーブルホバー時のスタイル */
+.admin-users-table tr:hover {
+  background-color: #ffa965;
+  color: white;
+}
+
+.admin-users-table tr:hover a {
+  color: white;
+}
+
+.admin-users-table tr:hover .status-badge {
+  background-color: #ffa965;
+  color: white;
+  border-color: #ffa965;
+}
+
+.admin-users-table tr:hover .status-badge .status-dot {
+  background-color: initial !important; /* ホバー時も色を変えない */
+}
+
+/* その他のボタンスタイル */
+.admin-users-action-button {
+  font-size: 1.2rem;
+  padding: 0 15px;
+  border: none;
+  background: none;
+  color: #001F54;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.admin-users-action-button:hover {
+  color: white;
+}
+
+.admin-users-action-button .material-symbols-outlined {
+  font-size: 30px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* ページネーション */
+.admin-users-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.admin-users-pagination p {
+  margin: 0;
+}
+
+.admin-users-pagination .pagination {
+  margin: 0;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  .admin-users-search-box .input-group {
+    width: 100%;
+  }
+
+  h1.admin-users-title {
+    font-size: 1.5rem;
+  }
+
+  .admin-users-table th,
+  .admin-users-table td {
+    padding: 8px;
+  }
+
+  .admin-users-table tr:hover {
+    background-color: #ffa965;
+    color: white;
+  }
+}
