@@ -8,7 +8,7 @@
   background-color: #fff; /* 背景色 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   margin: 0;
-  padding: 0 15px; 
+  padding: 0 15px;
 }
 
 .navbar-brand {
@@ -175,6 +175,9 @@ footer {
 }
 
 body {
+    background-color: #F7FCF1 !important; /* 背景色 */
+    font-family: 'lora', sans-serif !important;
+    color: #202F55  !important;
   margin: 0;
   padding: 0;
 }
@@ -183,7 +186,7 @@ body {
   padding: 25px;
   position:relative;
 }
-  
+
   .nutri-h2 {
     text-align: center !important;
     font-weight: bold !important;
@@ -201,11 +204,20 @@ body {
     height: 80px ;
     object-fit: cover ;
     margin: 20px auto 10px ;
+
   }
+
+  .material-symbols-outlined {
+    font-size: 80px  !important; /* アイコンのサイズを80pxに設定 */
+    margin: 20px auto 10px; /* アイコンの余白を調整 */
+    color: #202F55;
+
+}
+
   .nutri-card-title {
     font-size: 16px ;
     font-weight: bold ;
-    color: #333 ;
+    color: #202F55;
   }
   .nutri-btn {
     background-color: #FFEDD5 ;
