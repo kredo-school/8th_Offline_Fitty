@@ -40,17 +40,20 @@ body {
     height: 80px ;
     object-fit: cover ;
     margin: 20px auto 10px ;
+
   }
 
   .material-symbols-outlined {
-    font-size: 3000px " !important"; /* アイコンのサイズを80pxに設定 */
+    font-size: 80px  !important; /* アイコンのサイズを80pxに設定 */
     margin: 20px auto 10px; /* アイコンの余白を調整 */
+    color: #202F55;
+
 }
 
   .nutri-card-title {
     font-size: 16px ;
     font-weight: bold ;
-    color: #333 ;
+    color: #202F55;
   }
   .nutri-btn {
     background-color: #FFEDD5 ;
