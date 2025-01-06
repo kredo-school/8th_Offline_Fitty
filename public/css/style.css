@@ -1,3 +1,8 @@
+.navbar-brand{
+    font-family: "Shrikhand", serif !important;
+    color: #FFA965 !important;
+    font-size: 50px !important;
+}
 /* ナビバーのスタイル */
 .navbar {
   position: fixed;
@@ -8,7 +13,7 @@
   background-color: #fff; /* 背景色 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   margin: 0;
-  padding: 0 15px; 
+  padding: 0 15px;
 }
 
 .navbar-brand {
@@ -176,6 +181,9 @@ footer {
 }
 
 body {
+    background-color: #F7FCF1 !important; /* 背景色 */
+    font-family: 'lora', sans-serif !important;
+    color: #202F55  !important;
   margin: 0;
   padding: 0;
 }
@@ -184,7 +192,7 @@ body {
   padding: 25px;
   position:relative;
 }
-  
+
   .nutri-h2 {
     text-align: center !important;
     font-weight: bold !important;
@@ -202,11 +210,20 @@ body {
     height: 80px ;
     object-fit: cover ;
     margin: 20px auto 10px ;
+
   }
+
+  .material-symbols-outlined {
+    font-size: 80px  !important; /* アイコンのサイズを80pxに設定 */
+    margin: 20px auto 10px; /* アイコンの余白を調整 */
+    color: #202F55;
+
+}
+
   .nutri-card-title {
     font-size: 16px ;
     font-weight: bold ;
-    color: #333 ;
+    color: #202F55;
   }
   .nutri-btn {
     background-color: #FFEDD5 ;
@@ -458,6 +475,165 @@ body {
       font-size: 14px;
     }
   }
+
+  /*　Edit Profile用*/
+  /* 共通カードスタイル */
+  /* UserProfile用
+.profile-card {
+    background-color: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+/* 編集用カード */
+/* .profile-card-edit {} */
+
+/* 表示用カード */
+/* .profile-card-view {} */
+
+/* 共通ヘッダースタイル */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 編集用ヘッダー */
+.profile-header-edit {
+    margin-left: 175px;
+    margin-bottom: 30px;
+}
+
+/* 表示用ヘッダー */
+.profile-header-view {
+    margin-bottom: 30px;
+}
+
+/* 共通画像スタイル */
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 編集用画像
+.profile-picture-edit {}
+
+/* 表示用画像 */
+/* .profile-picture-view {}  */
+
+/* 共通情報スタイル */
+.info {
+    font-size: 18px;
+}
+
+/* 編集用情報 */
+.info-edit label {
+    font-size: 24px;
+    margin: 0;
+}
+
+.info-edit .form-control {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 表示用情報 */
+.info-view .profile-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.info-view .profile-email {
+    color: gray;
+    margin: 5px 0;
+}
+
+/* 共通詳細スタイル */
+.details {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+/* 編集用詳細 */
+.details-edit .detail-item {
+    margin-bottom: 20px;
+}
+
+.details-edit .detail-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.details-edit .detail-input,
+.details-edit .detail-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 表示用詳細 */
+.details-view .detail-item {
+    margin-bottom: 20px;
+}
+
+.details-view .detail-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.details-view .detail-value {
+    font-size: 18px;
+}
+
+/* 共通ボタンスタイル */
+.edit-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 編集用ボタン */
+.edit-button-edit .save-button {
+    text-decoration: none;
+    background-color: #FFA965;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button-edit .save-button:hover {
+    background-color: #ff8a30;
+}
+
+/* 表示用ボタン */
+.edit-button-view .edit-link {
+    text-decoration: none;
+    background-color: #FFA965;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.edit-button-view .edit-link:hover {
+    background-color: #ff8a30;
+}
+
 
 
 /* カード全体をスタイルする */
