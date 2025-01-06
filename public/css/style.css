@@ -33,6 +33,7 @@
 /* サイドメニュー */
 .sidemenu {
   width: 240px;
+  margin-top:80px;
   background-color: #d8efd1;
   height: 100vh;
   position: fixed;
@@ -457,3 +458,63 @@ body {
       font-size: 14px;
     }
   }
+
+
+/* カード全体をスタイルする */
+.card.card-login {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* カードの背景画像 */
+.card.card-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0.2; /* 背景画像を薄くする */
+  z-index: -1;
+  filter: brightness(80%);
+}
+
+/* カードヘッダーのスタイル */
+.card-header.card-header-login {
+  position: absolute;
+  line-height: 1.7; /* 行間をリセット */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* カードのコンテンツ */
+.card-body-login {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
+  color: #202F55; /* テキストの色を黒に設定 */
+  border-radius: 0 0 8px 8px;
+  margin-top: 70px;
+}
+
+/* ログインページ全体のスタイル */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
