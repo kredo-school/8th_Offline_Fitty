@@ -3,6 +3,8 @@
 @section('title', 'Edit Profile')
 
 @section('content')
+
+
     <form action="/profile/update" method="POST">
         @csrf
         <div class="profile-card profile-card-edit">
@@ -10,6 +12,8 @@
                 <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture profile-picture-edit">
                 <div class="info info-edit">
                     <label class="form-label form-label-edit">Emiko Imai</label>
+                    <input type="email" name="email" value="alexarawles@gmail.com"
+                        class="form-control form-control-edit">
                     <input type="email" name="email" value="alexarawles@gmail.com"
                         class="form-control form-control-edit">
                 </div>
@@ -29,6 +33,4 @@
             </div>
         </div>
     </form>
-@endsection
-
 @endsection
