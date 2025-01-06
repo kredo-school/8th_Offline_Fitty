@@ -1,3 +1,8 @@
+.navbar-brand{
+    font-family: "Shrikhand", serif !important;
+    color: #FFA965 !important;
+    font-size: 50px !important;
+}
 /* ナビバーのスタイル */
 .navbar {
   position: fixed;
