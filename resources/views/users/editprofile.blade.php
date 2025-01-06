@@ -4,165 +4,30 @@
 
 @section('content')
 
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit Profile</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background-color: #F5F5F5;
-            }
-
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-
-            .profile-card {
-                background-color: #FFFFFF;
-                border-radius: 10px;
-                padding: 30px;
-                width: 800px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                margin-left: 50px;
-            }
-
-            .profile-card h2 {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            .profile-photo {
-                text-align: center;
-                margin-bottom: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 20px;
-            }
-
-            .profile-photo img {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
-                object-fit: cover;
-            }
-
-            .profile-photo input[type="file"] {
-                display: block;
-            }
-
-            .info-group {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 15px;
-            }
-
-            .info-group .info-item {
-                flex: 1;
-                margin: 0 20px;
-            }
-
-            .info-group label {
-                font-weight: bold;
-                color: #333;
-                display: block;
-                margin-bottom: 5px;
-            }
-
-            .info-group input,
-            .info-group textarea {
-                width: 100%;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-
-            .info-group.full {
-                flex-direction: column;
-                margin-left: 20px;
-            }
-
-            .info-group.full textarea {
-                width: 100%;
-            }
-
-            .save-button {
-                margin-left: 20px;
-                margin-top: 20px;
-            }
-
-            .save-button button {
-                background-color: #FFA965;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            .save-button button:hover {
-                background-color: #FF8C50;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="container">
-            <form class="profile-card">
-                <div class="profile-photo">
-                    <img src="" alt="Profile Photo">
-                    <input type="file" accept="image/*" class="form-control-sm">
+    <form action="/profile/update" method="POST">
+        @csrf
+        <div class="profile-card profile-card-edit">
+            <div class="profile-header profile-header-edit">
+                <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture profile-picture-edit">
+                <div class="info info-edit">
+                    <label class="form-label form-label-edit">Emiko Imai</label>
+                    <input type="email" name="email" value="alexarawles@gmail.com" class="form-control form-control-edit">
                 </div>
-                <div class="info-group">
-                    <div class="info-item">
-                        <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" name="first-name" value="Emiko">
-                    </div>
-                    <div class="info-item">
-                        <label for="last-name">Last Name</label>
-                        <input type="text" id="last-name" name="last-name" value="Imai">
-                    </div>
+            </div>
+            <div class="details details-edit">
+                <div class="detail-item detail-item-edit">
+                    <span class="detail-label detail-label-edit">Full Name</span>
+                    <input type="text" name="full_name" value="Emiko Imai" class="detail-input detail-input-edit">
                 </div>
-                <div class="info-group">
-                    <div class="info-item">
-                        <label for="gender">Gender</label>
-                        <input type="text" id="gender" name="gender" value="Female">
-                    </div>
-                    <div class="info-item">
-                        <label for="dob">Date of Birth</label>
-                        <input type="text" id="dob" name="dob" value="Age">
-                    </div>
+                <div class="detail-item detail-item-edit">
+                    <span class="detail-label detail-label-edit">Description</span>
+                    <textarea name="description" class="detail-textarea detail-textarea-edit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</textarea>
                 </div>
-                <div class="info-group">
-                    <div class="info-item">
-                        <label for="height">Height (cm)</label>
-                        <input type="number" id="height" name="height" value="169">
-                    </div>
-                    <div class="info-item">
-                        <label for="exercise">Exercise Frequency</label>
-                        <input type="number" id="exercise" name="exercise" value="3">
-                    </div>
-                </div>
-                <div class="info-group full">
-                    <label for="health">Current Health Conditions</label>
-                    <textarea id="health" name="health" rows="4" placeholder="Add conditions here"></textarea>
-                </div>
-                <div class="save-button">
-                    <button type="submit">Save</button>
-                </div>
-            </form>
+            </div>
+            <div class="edit-button edit-button-edit">
+                <button type="submit" class="save-button save-button-edit">Save Changes</button>
+            </div>
         </div>
-    </body>
-
-    </html>
-
+    </form>
 @endsection
