@@ -2,26 +2,197 @@
     font-family: "Shrikhand", serif !important;
     color: #FFA965 !important;
     font-size: 50px !important;
-
 }
+/* ナビバーのスタイル */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 80px;
+  background-color: #fff; /* 背景色 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  margin: 0;
+  padding: 0 15px;
+}
+
+.navbar-brand {
+  font-family: "Shrikhand", serif !important;
+  color: #FFA965 !important;
+  font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+}
+
 .nav-link.nav-username {
-    font-family: 'Suwannaphum', sans-serif;
-    font-size: 120%;
-}
-.nav-user-icon{
-    border-radius: 50% ; /* 丸い写真 */
-    width: 50px ;
-    height: 50px ;
-    object-fit: cover ;
-    margin: 20px auto 10px;
+  font-family: 'Suwannaphum', sans-serif;
+  font-size: 120%; /* ユーザー名のフォントサイズ */
 }
 
+.nav-user-icon {
+  border-radius: 50%; /* 丸い写真 */
+  width: 50px;
+  height: 50px;
+  object-fit: cover; /* 画像を比率を保ちながら中央揃え */
+  margin-right: 10px;
+}
+
+/* サイドメニュー */
+.sidemenu {
+  width: 240px;
+  margin-top:80px;
+  background-color: #d8efd1;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+.sidemenu h1 {
+  font-size: 24px;
+  color: #f68b1e;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.sidemenu h1 img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #a4d4a2;
+  color: #000;
+}
+
+.menu-item.active {
+  background-color: #54b76a;
+  color: white;
+  font-weight: bold;
+}
+
+.menu-item .material-icons {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+
+/* nutri系のスタイル */
+.nutri-h2 {
+  text-align: center !important; /* 見出しを中央揃え */
+  font-weight: bold !important; /* 太字に設定 */
+  margin-bottom: 30px !important; /* 下に余白を追加 */
+}
+
+.nutri-card {
+  width: 70%; /* 幅を70%に設定して細長く */
+  border: none;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックス影を追加 */
+}
+
+.nutri-card-img-top {
+  border-radius: 50%; /* 丸い写真 */
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* 中央揃えで拡大縮小 */
+  margin: 20px auto 10px; /* 上・下の余白 */
+}
+
+.nutri-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.nutri-btn {
+  background-color: #FFEDD5; /* ボタンの背景色 */
+  color: #FF7F50; /* テキストの色 */
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nutri-btn:hover {
+  background-color: #FFDBB1; /* ホバー時の背景色 */
+}
+
+/* ボタンのスタイル */
+.btn-submit {
+  background-color: #00984f;
+  color: white;
+  padding: 10px 20px; /* ボタン内のテキストの余白 */
+  margin: 20px auto; /* ボタン周囲の余白 */
+  display: block;
+  border: none;
+  border-radius: 5px; /* 角を丸める */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  width: auto; /* ボタンの幅を自動調整 */
+}
+
+.btn-submit:hover {
+  background-color: #087722; /* ホバー時の色 */
+}
+
+/* フッター */
+footer {
+  display: none; /* 初期状態で非表示 */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #00984f; /* 背景色 */
+  color: white; /* テキスト色 */
+  text-align: center;
+  padding: 15px 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  font-size: 14px;
+}
+
+.footer-p-1 {
+  text-align: center; /* テキスト中央寄せ */
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #f0f0f0;
+}
+
+.footer-p-2 {
+  text-align: center; /* テキスト中央寄せ */
+  font-size: 12px;
+  color: #dcdcdc;
+  margin-top: 5px;
+}
 
 body {
     background-color: #F7FCF1 !important; /* 背景色 */
     font-family: 'lora', sans-serif !important;
+    color: #202F55  !important;
+  margin: 0;
+  padding: 0;
+}
 
-  }
+.container {
+  padding: 25px;
+  position:relative;
+}
+
   .nutri-h2 {
     text-align: center !important;
     font-weight: bold !important;
@@ -39,11 +210,20 @@ body {
     height: 80px ;
     object-fit: cover ;
     margin: 20px auto 10px ;
+
   }
+
+  .material-symbols-outlined {
+    font-size: 80px  !important; /* アイコンのサイズを80pxに設定 */
+    margin: 20px auto 10px; /* アイコンの余白を調整 */
+    color: #202F55;
+
+}
+
   .nutri-card-title {
     font-size: 16px ;
     font-weight: bold ;
-    color: #333 ;
+    color: #202F55;
   }
   .nutri-btn {
     background-color: #FFEDD5 ;
@@ -297,6 +477,9 @@ body {
   }
 
 /* 共通カードスタイル */
+  /*　Edit Profile用*/
+  /* 共通カードスタイル */
+  /* UserProfile用 */
 .profile-card {
     background-color: white;
     padding: 50px;
@@ -312,6 +495,10 @@ body {
 
 /* 表示用カード */
 .profile-card-view {}
+/* .profile-card-edit {} */
+
+/* 表示用カード */
+/* .profile-card-view {} */
 
 /* 共通ヘッダースタイル */
 .profile-header {
@@ -344,6 +531,11 @@ body {
 
 /* 表示用画像 */
 .profile-picture-view {}
+/* 編集用画像
+.profile-picture-edit {}
+
+/* 表示用画像 */
+/* .profile-picture-view {}  */
 
 /* 共通情報スタイル */
 .info {
@@ -450,4 +642,65 @@ body {
 
 .edit-button-view .edit-link:hover {
     background-color: #ff8a30;
+}
+
+
+
+/* カード全体をスタイルする */
+.card.card-login {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* カードの背景画像 */
+.card.card-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0.2; /* 背景画像を薄くする */
+  z-index: -1;
+  filter: brightness(80%);
+}
+
+/* カードヘッダーのスタイル */
+.card-header.card-header-login {
+  position: absolute;
+  line-height: 1.7; /* 行間をリセット */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* カードのコンテンツ */
+.card-body-login {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
+  color: #202F55; /* テキストの色を黒に設定 */
+  border-radius: 0 0 8px 8px;
+  margin-top: 70px;
+}
+
+/* ログインページ全体のスタイル */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
 }
