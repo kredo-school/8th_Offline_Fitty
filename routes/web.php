@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 
 
@@ -34,6 +35,9 @@ Route::get('/contact', function () {
 });
 
 // 認証ルートを有効化
+Auth::routes();
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
