@@ -476,9 +476,10 @@ body {
     }
   }
 
+/* 共通カードスタイル */
   /*　Edit Profile用*/
   /* 共通カードスタイル */
-  /* UserProfile用
+  /* UserProfile用 */
 .profile-card {
     background-color: white;
     padding: 50px;
@@ -490,6 +491,10 @@ body {
 }
 
 /* 編集用カード */
+.profile-card-edit {}
+
+/* 表示用カード */
+.profile-card-view {}
 /* .profile-card-edit {} */
 
 /* 表示用カード */
@@ -521,6 +526,11 @@ body {
     object-fit: cover;
 }
 
+/* 編集用画像 */
+.profile-picture-edit {}
+
+/* 表示用画像 */
+.profile-picture-view {}
 /* 編集用画像
 .profile-picture-edit {}
 
