@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.landing')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitty Team</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'team')
+
+@section('content')
 
     <style>
         body {
@@ -17,7 +13,6 @@
             flex-direction: column;
         }
     </style>
-</head>
 
 <body class="bg-green-100">
     {{-- <header class="text-center py-5 bg-green-300">
@@ -60,6 +55,5 @@
             </div>
         </section>
     </main>
-</body>
 
-</html>
+@endsection

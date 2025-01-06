@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.landing')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Information</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'Create Post')
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+@section('content')
 
+  <style>
+
+  </style>
 
     <body class="contact-page">
         <div>
@@ -36,4 +31,4 @@
             </div>
         </div>
     </body>
-</html>
+ @endsection
