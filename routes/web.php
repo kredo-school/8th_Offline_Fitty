@@ -43,3 +43,4 @@ Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'show
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
+Route::get('/user/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
