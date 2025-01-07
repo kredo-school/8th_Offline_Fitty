@@ -15,6 +15,8 @@
   font-family: "Shrikhand", serif !important;
   color: #FFA965 !important;
   font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+  display: flex; /* フレックスボックスで横並びにする */
+  align-items: center; /* 縦方向の中央揃え */
 }
 
 .nav-link.nav-username {
@@ -33,10 +35,12 @@
 /* サイドメニュー */
 .sidemenu {
   width: 240px;
+  margin-top: 80px !important; /* ヘッダーの高さ分 */
+  position: fixed; /* サイドバーも固定 */
   background-color: #d8efd1;
-  height: 100vh;
+  height: calc(100vh - 56px); /* ヘッダーを除いた高さ */
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 0;
   padding: 20px 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
@@ -82,6 +86,86 @@
   margin-right: 10px;
   font-size: 20px;
 }
+
+
+/* responsive sidebar omori start */
+@media (max-width: 768px) {
+  .sidemenu {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      display: none;
+      background-color: #f8f9fa; /* 背景色を追加 */
+      height: 100vh; /* サイドバー全体を覆う */
+      top: -56px; /* ヘッダーの高さを考慮 */
+      width: 100%; /* サイドバーを全幅に変更 */
+
+  }
+
+  .sidemenu.show {
+      display: block;
+  }
+  /* ハンバーガーボタン */
+  .hamburger-btn {
+      border: 2px solid #c0c0c0; /* グレーの枠線 */
+      background-color: #ffffff; /* 白背景 */
+      border-radius: 10px; /* 四隅を角丸にする */
+      padding: 10px; /* 内側の余白を調整 */
+      width: 50px; /* ボタンの幅 */
+      height: 50px; /* ボタンの高さ */
+      display: flex;
+      justify-content: center; /* 中央揃え */
+      align-items: center; /* 中央揃え */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
+      cursor: pointer; /* マウスカーソルをポインターに変更 */
+      z-index: 1050; /* 他の要素より前面に配置 */
+      transition: all 0.3s ease; /* ホバー時のアニメーション */
+      float:right;
+  }
+  #sidebar{
+      background-color: #d8efd1;
+  }
+  
+  /* ホバー時のエフェクト */
+  .hamburger-btn:hover {
+      background-color: #f8f9fa; /* ホバー時の背景色 */
+      transform: scale(1.05); /* 少し拡大 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
+  }
+  
+  .hamburger-btn {
+      position: relative;
+      z-index: 1050; /* 他の要素より前面に表示 */
+      width: 60px; /* ボタン全体を大きく */
+      height: 60px; /* ボタン全体を大きく */
+  }
+  
+  .hamburger-icon span {
+      height: 3px; /* 線の高さを増やす */
+      background-color: #6c757d;
+  }
+  
+  /* ハンバーガーアイコン */
+  .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 20px; /* 線の幅 */
+      height: 15px; /* 線全体の高さ */
+      pointer-events: none; /* アイコン内部の要素はクリックを受け付けない */
+  }
+  
+  .hamburger-icon span {
+      display: block;
+      height: 2px; /* 線の高さ */
+      background-color: #6c757d; /* グレーの線 */
+      border-radius: 1px; /* 角を少し丸める */
+  }
+
+}
+
+/* responsive sidebar omori end */
+
 
 
 /* nutri系のスタイル */
@@ -178,12 +262,12 @@ body {
     background-color: #F7FCF1 !important; /* 背景色 */
     font-family: 'lora', sans-serif !important;
     color: #202F55  !important;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-  padding: 25px;
+  /* padding: 25px; */
   position:relative;
 }
 
