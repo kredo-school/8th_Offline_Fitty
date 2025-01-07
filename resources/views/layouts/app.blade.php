@@ -31,7 +31,7 @@
         <!-- ナビバー -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand-logo" href="{{ url('/') }}">
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -90,7 +90,7 @@
     </div>
 
     <!-- フッター -->
-<footer class="footer" style="display: none;">
+<footer class="footer">
     <p class="footer-p-1">Terms of Use | Privacy Policy | Help</p>
     <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
 </footer>
