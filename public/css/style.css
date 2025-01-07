@@ -134,26 +134,26 @@
   #sidebar{
       background-color: #d8efd1;
   }
-  
+
   /* ホバー時のエフェクト */
   .hamburger-btn:hover {
       background-color: #f8f9fa; /* ホバー時の背景色 */
       transform: scale(1.05); /* 少し拡大 */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
   }
-  
+
   .hamburger-btn {
       position: relative;
       z-index: 1050; /* 他の要素より前面に表示 */
       width: 60px; /* ボタン全体を大きく */
       height: 60px; /* ボタン全体を大きく */
   }
-  
+
   .hamburger-icon span {
       height: 3px; /* 線の高さを増やす */
       background-color: #6c757d;
   }
-  
+
   /* ハンバーガーアイコン */
   .hamburger-icon {
       display: flex;
@@ -163,7 +163,7 @@
       height: 15px; /* 線全体の高さ */
       pointer-events: none; /* アイコン内部の要素はクリックを受け付けない */
   }
-  
+
   .hamburger-icon span {
       display: block;
       height: 2px; /* 線の高さ */
@@ -581,7 +581,9 @@ body {
 .profile-card-edit {}
 
 /* 表示用カード */
-.profile-card-view {}
+.profile-card-view {
+    justify-content: center;
+}
 /* .profile-card-edit {} */
 
 /* 表示用カード */
@@ -591,6 +593,7 @@ body {
 .profile-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
