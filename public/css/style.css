@@ -276,14 +276,20 @@ body {
     padding: 15px;
 }
 /* アイコンを丸くしてY軸の中央に配置 */
-.user-photo {
-    width: 100px; /* アイコンの幅 */
-    height: 100px; /* アイコンの高さ */
+.user-photo, .material-symbols-outlined.user-photo {
+    width: 100px; /* 幅を統一 */
+    height: 100px; /* 高さを統一 */
     border-radius: 50%; /* 丸くする */
-    object-fit: cover; /* 画像が歪まないように */
-    margin-right: 15px; /* テキストとの間に余白を作る */
-    align-self: center; /* Y軸の中央に配置 */
+    object-fit: cover; /* 画像が枠に収まる */
+    display: flex; /* フレックスで中央揃えに */
+    align-items: center; /* 縦中央揃え */
+    justify-content: center; /* 横中央揃え */
+    background-color: #F7FCF1; /* アイコン背景色（Googleアイコン時） */
+    color: #202F55; /* Googleアイコンの色 */
+    font-size: 50px; /* Googleアイコンのフォントサイズ */
+    margin-right: 15px; /* テキストとの間隔を統一 */
 }
+
 
 /* 行間を狭くする */
 .user-info p {

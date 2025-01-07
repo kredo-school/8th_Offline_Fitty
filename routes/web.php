@@ -28,13 +28,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
+        Route::get('/index', [NutritionistController::class, 'index'])->name('index');
 
-        Route::get('nutri/sendAdvice', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
         Route::get('nutri/history', [NutritionistController::class, 'history']);
     });
 });
 
-Route::get('/nutri/index', [NutritionistController::class, 'index'])->name('index');
 
 
 //user dailylog

@@ -11,18 +11,25 @@
     <!-- User Information -->
     <div class="card mb-4">
     <div class="card-body">
-        <div class="d-flex">
-            <img src="https://via.placeholder.com/100" alt="User Photo" class="user-photo">
-            <div class="user-info">
-                <p><strong>Name:</strong> Jessica Brown</p>
-                <p><strong>Age:</strong> 25</p>
-                <p><strong>Gender:</strong> Female</p>
-                <p><strong>Height(cm):</strong> 150</p>
-                <p><strong>Exercise Frequency:</strong> 1</p>
-                <p><strong>Dietary Preferences:</strong> Vegetarian</p>
-                <p><strong>Food Allergies:</strong> Peanuts</p>
-                <p><strong>Goals:</strong> Drop to 45 kilograms.</p>
-                <p><strong>Memo:</strong> Be a picky eater</p>
+        <div class="d-flex align-items-center">
+            <!-- アイコン部分 -->
+            @if ($user->avatar)
+                <img src="{{ $user->avatar }}" class="user-photo" alt="Avatar">
+            @else
+                <span class="material-symbols-outlined user-photo">account_circle</span>
+            @endif
+
+            <!-- ユーザー情報部分 -->
+            <div class="user-info ms-4">
+                <p><strong>Name:</strong> {{$user->name}}</p>
+                <p><strong>Age:</strong> {{$user->age}}</p>
+                <p><strong>Gender:</strong> {{$user->gender}}</p>
+                <p><strong>Height(cm):</strong> {{$user->height}}</p>
+                <p><strong>Exercise Frequency:</strong> {{$user->activity_level}}</p>
+                <p><strong>Dietary Preferences:</strong> {{$user->dietary_preferences}}</p>
+                <p><strong>Food Allergies:</strong> {{$user->allergies}}</p>
+                <p><strong>Goals:</strong> {{$user->goal}}</p>
+                <p><strong>Memo:</strong> {{$user->memo}}</p>
             </div>
         </div>
     </div>

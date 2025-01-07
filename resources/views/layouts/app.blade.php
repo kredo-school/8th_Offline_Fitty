@@ -107,13 +107,13 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="py-4 main-content">
+        <main class="py-4 mb-5 main-content">
             @yield('content')
         </main>
     </div>
 
     <!-- フッター -->
-<footer class="footer" style="display: none;">
+<footer class="footer mt-5" style="display: none;">
     <p class="footer-p-1">Terms of Use | Privacy Policy | Help</p>
     <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
 </footer>
@@ -152,6 +152,6 @@
 
 
 
-    
+
 </body>
 </html>
