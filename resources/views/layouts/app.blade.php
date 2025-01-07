@@ -27,32 +27,6 @@
 </head>
 <body>
     <div id="app">
-        @if(auth()->check())
-        <!-- サイドメニュー -->
-        <div class="sidemenu">
-            <a href="#" class="menu-item">
-                <span class="material-icons mt-3">assignment</span> Record
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">person</span> Profile
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">history</span> History
-            </a>
-            <a href="#" class="menu-item active">
-                <span class="material-icons">notifications</span> Notification
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help_outline</span> Help
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help</span> FAQ
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">logout</span> Logout
-            </a>
-        </div>
-        @endif
 
         <!-- ナビバー -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
@@ -61,9 +35,12 @@
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> -->
+
+
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
