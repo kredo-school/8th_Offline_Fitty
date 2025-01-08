@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UsersController;
 
 
 /*

@@ -1,26 +1,33 @@
-/* Admin Home Styles */
+/* Admin Home Styles
 
 /* 全体のスタイル */
-.admin-home-body {
+.admin-home {
   font-family: 'Shrikhand', sans-serif;
   background-color: #F7FCF1;
   margin: 0;
   padding: 0;
   color: #F7FCF1;
+  min-height: 100vh;
 }
 
-.admin-home-title {
+/* タイトルのスタイル */
+.admin-home .title {
   font-size: 2rem;
   color: #00984F;
   text-align: left;
   margin-bottom: 10px;
-  margin-left: calc(50% - 350px);
+  /* margin-left: calc(50% - 310px); */
+
+
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
 }
 
 /* カードのスタイル */
-.admin-home-card {
-  width: 331px;
-  height: 203px;
+.admin-home .card {
+  width: 300px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,36 +38,63 @@
   color: #00984F;
   font-weight: bold;
   background-color: #fff;
-  transition: transform 0.2s ease-in-out, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease;
   margin: 15px;
 }
 
-/* ホバー時のスタイル */
-.admin-home-card:hover {
+/* カードのホバー時 */
+.admin-home .card:hover {
   background-color: #ffa965;
   border-color: #ffa965;
   color: #fff;
   transform: scale(1.05);
 }
 
-.admin-home-card-icon {
-  font-size: 120px;
-  color: #00984F;
-}
-
-.admin-home-card:hover .admin-home-card-icon {
+/* アイコンのホバー時 */
+.admin-home .card:hover .material-symbols-outlined {
   color: #fff;
 }
 
-.admin-home-card span {
+/* カード内のアイコン */
+.admin-home .card .material-symbols-outlined {
+  font-size: 200px;
+  color: #00984F;
+}
+
+/* カード内の文字 */
+.admin-home .card span {
   font-size: 1.5rem;
   margin-top: 10px;
 }
 
-.admin-home-row {
+/* カードの外側余白 */
+.admin-home .row {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+/* メディアクエリ：スマホ対応 */
+@media (max-width: 768px) {
+  .admin-home .card {
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+  }
+
+  .admin-home .card .material-symbols-outlined {
+      font-size: 120px;
+  }
+
+  .admin-home .card span {
+      font-size: 1.2rem;
+  }
+
+  .admin-home .title {
+      font-size: 1.8rem;
+  }
+}
+
+
 
 /* Admin Users Index Styles */
 
