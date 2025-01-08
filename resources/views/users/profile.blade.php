@@ -22,26 +22,28 @@
                     <div class="details details-view">
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Full Name</span>
-                            <span class="detail-value detail-value-view">{{$user->name}}</span>
+                            <span class="detail-value detail-value-view">{{ $user->name }}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Gender</span>
-                            <span class="detail-value detail-value-view">{{$user->gender}}</span>
+                            <span class="detail-value detail-value-view">{{ $user->gender }}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Birth Day</span>
-                            <span class="detail-value detail-value-view">     {{ \Carbon\Carbon::parse($user->birthday)->format('m-d-Y') }}</span>
+                            <span class="detail-value detail-value-view">
+                                {{ \Carbon\Carbon::parse($user->birthday)->format('m-d-Y') }}</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Height</span>
+                            <span class="detail-value detail-value-view">{{ $user->height }}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Activity Level</span>
-                            <span class="detail-value detail-value-view">{{$user->activity_level}}</span>
+                            <span class="detail-value detail-value-view">{{ $user->activity_level }}</span>
                         </div>
-                        {{-- <div class="detail-item detail-item-view">
-                            <span class="detail-label detail-label-view">Description</span>
-                            <span class="detail-value detail-value-view">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                                Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</span>
-                        </div> --}}
+
+
+
                     </div>
                     <div class="edit-button edit-button-view">
                         <a href="#" class="edit-link edit-link-view">Edit Profile</a>

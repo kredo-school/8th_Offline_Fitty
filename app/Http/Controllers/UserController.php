@@ -42,6 +42,7 @@ class UserController extends Controller
 
         return view('users.profile',compact('user'));
     }
+        
     public function editprofile()
     {
         return view('users.editprofile');
