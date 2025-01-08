@@ -25,11 +25,23 @@
                             <span class="detail-value detail-value-view">Emiko Imai</span>
                         </div>
                         <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Gender</span>
+                            <span class="detail-value detail-value-view">Female</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Birth Day</span>
+                            <span class="detail-value detail-value-view">1991-02-01</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Activity Level</span>
+                            <span class="detail-value detail-value-view">3</span>
+                        </div>
+                        {{-- <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Description</span>
                             <span class="detail-value detail-value-view">Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit.
                                 Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</span>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="edit-button edit-button-view">
                         <a href="#" class="edit-link edit-link-view">Edit Profile</a>

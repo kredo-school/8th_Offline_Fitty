@@ -14,6 +14,10 @@
     display: flex;
     flex-direction: column;
 }
+
+.navbar {
+    margin-top: 0; /* 不要であれば削除可能 */
+}
   </style>
 
     <!-- Navbar -->

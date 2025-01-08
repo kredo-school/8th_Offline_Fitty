@@ -4,7 +4,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #f9f9f9;
+    margin-top: 0;
 }
 
 .navbar .navbar-brand {
