@@ -14,6 +14,11 @@
             display: flex;
             flex-direction: column;
         }
+
+        .navbar {
+            margin-top: 0;
+            /* 不要であれば削除可能 */
+        }
     </style>
 
     <!-- Navbar -->
@@ -22,6 +27,7 @@
         <div>
             <a class="nav-link login" href="{{ route('login') }}">Login</a>
             <a class="nav-link" href="{{ route('about') }}">About Us</a>
+            <a class="nav-link" href="#">About Us</a>
         </div>
     </nav>
 
