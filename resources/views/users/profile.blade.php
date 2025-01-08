@@ -25,10 +25,20 @@
                             <span class="detail-value detail-value-view">Emiko Imai</span>
                         </div>
                         <div class="detail-item detail-item-view">
-                            <span class="detail-label detail-label-view">Description</span>
-                            <span class="detail-value detail-value-view">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                                Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</span>
+                            <span class="detail-label detail-label-view">Gender</span>
+                            <span class="detail-value detail-value-view">{{$user->gender}}</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Birthday</span>
+                            <span class="detail-value detail-value-view">{{ \Carbon\Carbon::parse($user->birthday)->format('m-d-Y') }}</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Height</span>
+                            <span class="detail-value detail-value-view">{{$user->height}}</span>
+                        </div>
+                        <div class="detail-item detail-item-view">
+                            <span class="detail-label detail-label-view">Acticity Level</span>
+                            <span class="detail-value detail-value-view">{{$user->activity_level}}</span>
                         </div>
                     </div>
                     <div class="edit-button edit-button-view">
