@@ -608,8 +608,8 @@ footer {
 
 /* 編集用ヘッダー */
 .profile-header-edit {
-    margin-left: 175px;
     margin-bottom: 30px;
+    justify-content: center;
 }
 
 /* 表示用ヘッダー */
