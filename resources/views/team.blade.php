@@ -28,12 +28,12 @@
             </div>
             <div class="team-grid">
                 <div class="team-card">
-                    <img src="{{ asset('images/asumi.jpg') }}" alt="Asumi Matsushita" class="team-image">
+                    <img src="{{ asset('images/Asumi.jpg') }}" alt="Asumi Matsushita" class="team-image">
                     <h3 class="team-name">Asumi Matsushita</h3>
                     <p class="team-role">UI Designer</p>
                 </div>
                 <div class="team-card">
-                    <img src="{{ asset('images/ryohei.jpg') }}" alt="Ryohei Ohishi" class="team-image">
+                    <img src="{{ asset('images/ooishi.jpg') }}" alt="Ryohei Ohishi" class="team-image">
                     <h3 class="team-name">Ryohei Ohishi</h3>
                     <p class="team-role">Short-pants-boy</p>
                 </div>
@@ -43,7 +43,7 @@
                     <p class="team-role">Executive Director</p>
                 </div>
                 <div class="team-card">
-                    <img src="{{ asset('images/atsuki.jpg') }}" alt="Atsuki Ohmori" class="team-image">
+                    <img src="{{ asset('images/Atsuki.jpg') }}" alt="Atsuki Ohmori" class="team-image">
                     <h3 class="team-name">Atsuki Ohmori</h3>
                     <p class="team-role">Japanese Himo-Neet</p>
                 </div>

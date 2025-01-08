@@ -33,6 +33,7 @@
     justify-content: space-between;
     padding: 60px 10%;
     margin: 0 auto;
+    margin-top: 7rem;
     max-width: 1200px;
 }
 
@@ -176,7 +177,7 @@ footer span {
 }
 
 .about-image-section {
-    max-width: 25%;
+    max-width: 35%;
     flex: 1;
 }
 
@@ -265,9 +266,9 @@ footer span {
 }
 
 .team-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 10%;
     margin-bottom: 10px;
 }
 

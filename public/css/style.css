@@ -16,12 +16,13 @@
   padding: 0 15px;
 }
 
-.navbar-brand {
+.navbar-brand-logo {
   font-family: "Shrikhand", serif !important;
   color: #FFA965 !important;
-  font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+  font-size: 40px !important; /* ナビゲーションブランドのフォントサイズ */
   display: flex; /* フレックスボックスで横並びにする */
   align-items: center; /* 縦方向の中央揃え */
+  text-decoration: none;
 }
 
 .nav-link.nav-username {
@@ -108,6 +109,10 @@
 
   .sidemenu.show {
       display: block;
+  }
+
+  .main-col{
+    padding-top: 1.5rem !important; /* 1.5rem は通常 24px に相当 */
   }
   /* ハンバーガーボタン */
   .hamburger-btn {
