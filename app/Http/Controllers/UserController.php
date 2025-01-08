@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Nutritionist;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    private $user;
+    private $nutritionist;
+
+    public function __construct(Nutritionist $nutritionist, User $user)
+    {
+        $this->nutritionist = $nutritionist;
+        $this->user = $user;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,13 +38,17 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('users.profile');
+        $user = $this->user->where('id', 1)->first();
+
+        return view('users.profile',compact('user'));
     }
+        
     public function editprofile()
     {
         return view('users.editprofile');
     }
-    public function showhistory(){
+    public function showhistory()
+    {
         return view('users.history');
     }
 

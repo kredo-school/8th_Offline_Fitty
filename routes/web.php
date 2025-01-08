@@ -87,6 +87,6 @@ Route::get('/nutri/editprofile', [NutritionistController::class, 'editprofile'])
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
-Route::get('/user/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
+Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
-Route::get('/user/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
+

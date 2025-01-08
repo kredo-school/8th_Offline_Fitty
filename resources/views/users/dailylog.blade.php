@@ -13,7 +13,7 @@
 
     <div class="row">
     @include('sidebar.user-sidebar')
-        <div class="col-md-9 ms-sm-auto col-lg-10 mt-4 main-col"> 
+        <div class="col-md-9 ms-sm-auto col-lg-10"> 
                 <!-- Header Section -->
             <div class="user-dailylog-header">
                 <h1>Daily Log (Thu Dec 26)</h1>
