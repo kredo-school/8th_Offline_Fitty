@@ -38,6 +38,8 @@ class UserController extends Controller
 
     public function profile()
     {
+        $user = $this->user->where('id', 1)->first();
+
         return view('users.profile',compact('user'));
     }
     public function editprofile()

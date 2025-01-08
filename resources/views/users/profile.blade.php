@@ -22,19 +22,19 @@
                     <div class="details details-view">
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Full Name</span>
-                            <span class="detail-value detail-value-view">Emiko Imai</span>
+                            <span class="detail-value detail-value-view">{{$user->name}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Gender</span>
-                            <span class="detail-value detail-value-view">Female</span>
+                            <span class="detail-value detail-value-view">{{$user->gender}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Birth Day</span>
-                            <span class="detail-value detail-value-view">1991-02-01</span>
+                            <span class="detail-value detail-value-view">     {{ \Carbon\Carbon::parse($user->birthday)->format('m-d-Y') }}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Activity Level</span>
-                            <span class="detail-value detail-value-view">3</span>
+                            <span class="detail-value detail-value-view">{{$user->activity_level}}</span>
                         </div>
                         {{-- <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Description</span>
