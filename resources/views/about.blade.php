@@ -1,4 +1,18 @@
+@extends('layouts.landing')
 
+@section('title', 'About Us')
+
+@section('content')
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 
     <!-- About Section -->
     <div class="about-page">
@@ -37,13 +51,12 @@
                         <span>Smarter Ways to Solve Problems</span>
                     </div>
                 </div>
-                <a href="#" class="team-button">OUR TEAM</a>
+                <a href="{{route('team')}}" class="team-button">OUR TEAM</a>
             </div>
 
             <!-- Right Section -->
             <div class="about-image-section">
-                <img src="{{ asset('images/team_photo.jpg') }}" alt="Our Team">
+                <img src="{{ asset('images/our_team.jpg') }}" alt="Our Team">
             </div>
         </div>
     </div>
-

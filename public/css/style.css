@@ -1,3 +1,15 @@
+body {
+  background-color: #F7FCF1 !important; /* 背景色 */
+  font-family: 'lora', sans-serif !important;
+  color: #202F55  !important;
+  margin: 0;
+  padding: 0;
+}
+
+main.main-padding{
+  padding-top:6rem !important;
+}
+
 .navbar-brand{
     font-family: "Shrikhand", serif !important;
     color: #FFA965 !important;
@@ -16,12 +28,13 @@
   padding: 0 15px;
 }
 
-.navbar-brand {
+.navbar-brand-logo {
   font-family: "Shrikhand", serif !important;
   color: #FFA965 !important;
-  font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+  font-size: 40px !important; /* ナビゲーションブランドのフォントサイズ */
   display: flex; /* フレックスボックスで横並びにする */
   align-items: center; /* 縦方向の中央揃え */
+  text-decoration: none;
 }
 
 .nav-link.nav-username {
@@ -93,9 +106,13 @@
 
 
 /* responsive sidebar omori start */
+.hamburger-btn {
+  display:none;
+}
 @media (max-width: 768px) {
   .sidemenu {
-      position: absolute;
+      position: fixed;
+      padding-top: 80px !important; /* ヘッダーの高さ分 */
       z-index: 10;
       width: 100%;
       display: none;
@@ -109,6 +126,7 @@
   .sidemenu.show {
       display: block;
   }
+
   /* ハンバーガーボタン */
   .hamburger-btn {
       border: 2px solid #c0c0c0; /* グレーの枠線 */
@@ -138,7 +156,9 @@
   }
 
   .hamburger-btn {
-      position: relative;
+    position: fixed; /* 画面全体で位置を固定 */
+    top: 10px; /* 上から10pxの余白を確保 */
+    right: 10px; /* 右から10pxの余白を確保 */
       z-index: 1050; /* 他の要素より前面に表示 */
       width: 60px; /* ボタン全体を大きく */
       height: 60px; /* ボタン全体を大きく */
@@ -264,13 +284,7 @@ footer {
   margin-top: 5px;
 }
 
-body {
-    background-color: #F7FCF1 !important; /* 背景色 */
-    font-family: 'lora', sans-serif !important;
-    color: #202F55  !important;
-    margin: 0;
-    padding: 0;
-}
+
 
 .container {
   /* padding: 25px; */
@@ -587,7 +601,9 @@ body {
 /* .profile-card-edit {} */
 
 /* 表示用カード */
-/* .profile-card-view {} */
+.profile-card-view {
+    justify-content: center;
+}
 /* .profile-card-edit {} */
 
 /* 表示用カード */
@@ -597,13 +613,14 @@ body {
 .profile-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
 /* 編集用ヘッダー */
 .profile-header-edit {
-    margin-left: 175px;
     margin-bottom: 30px;
+    justify-content: center;
 }
 
 /* 表示用ヘッダー */
