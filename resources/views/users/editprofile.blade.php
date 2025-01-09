@@ -13,28 +13,63 @@
             @include('sidebar.user-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
                 <!-- main content -->
-                <form action="/profile/update" method="POST">
+                <form action="{{ route('user.update', $user->id) }}" method="POST">
                     @csrf
                     <div class="profile-card profile-card-edit">
                         <div class="profile-header profile-header-edit">
-                            <img src="https://via.placeholder.com/120" alt="Profile Picture"
+                            {{-- 後ほど画像 --}}
+                            <img src="{{ $user->avatar }}" alt="https://via.placeholder.com/120"
                                 class="profile-picture profile-picture-edit">
                             <div class="info info-edit">
-                                <label class="form-label form-label-edit">Emiko Imai</label>
-                                <input type="email" name="email" value="alexarawles@gmail.com"
+
+                                <input type="text" name="name" value="{{ $user->name }}"
+                                    class="form-control form-control-edit">
+                                <input type="email" name="email" value="{{ $user->email }}"
                                     class="form-control form-control-edit">
                             </div>
                         </div>
+
+
                         <div class="details details-edit">
-                            <div class="detail-item detail-item-edit">
-                                <span class="detail-label detail-label-edit">Full Name</span>
-                                <input type="text" name="full_name" value="Emiko Imai"
-                                    class="detail-input detail-input-edit">
+                            <div class="row">
+                                <div class="detail-item detail-item-edit col-6">
+                                    <span class="detail-label detail-label-edit">Gender</span>
+                                    <select name="gender" class="form-select form-select-edit">
+                                        <option value="male" {{ $user->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                        <option value="female" {{ $user->gender == 'female' ? 'selected' : '' }}>Female
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                                <div class="detail-item detail-item-edit col-6">
+                                    <span class="detail-label detail-label-edit">Birthday</span>
+                                    <input type="date" name="birthday" value="{{ $user->birthday }}"
+                                        class="detail-input detail-input-edit">
+                                </div>
                             </div>
-                            <div class="detail-item detail-item-edit">
-                                <span class="detail-label detail-label-edit">Description</span>
-                                <textarea name="description" class="detail-textarea detail-textarea-edit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</textarea>
+
+                            <div class="row">
+                                <div class="detail-item detail-item-edit col-6">
+                                    <span class="detail-label detail-label-edit">Height(cm)</span>
+                                    <input type="number" name="height" value="{{ $user->height }}"
+                                        class="detail-input detail-input-edit">
+                                </div>
+                                <div class="detail-item detail-item-edit col-6">
+                                    <span class="detail-label detail-label-edit">Activity Level</span>
+                                    <select name="activity_level" class="form-select form-select-edit">
+                                        <option value="1" {{ $user->activity_level == 1 ? 'selected' : '' }}>1 - Low
+                                            Activity</option>
+                                        <option value="2" {{ $user->activity_level == 2 ? 'selected' : '' }}>2 -
+                                            Moderate
+                                            Activity</option>
+                                        <option value="3" {{ $user->activity_level == 3 ? 'selected' : '' }}>3 - High
+                                            Activity</option>
+                                    </select>
+
+                                </div>
                             </div>
+
                         </div>
                         <div class="edit-button edit-button-edit">
                             <button type="submit" class="save-button save-button-edit">Save Changes</button>

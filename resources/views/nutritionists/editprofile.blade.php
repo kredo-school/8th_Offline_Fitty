@@ -12,7 +12,8 @@
                 <!-- main content -->
 
                 <body>
-                    <form action="/profile/update" method="POST">
+                    <form action="{{ route('user.update', $user->id) }}" method="POST">
+                        @method('PATCH')
                         @csrf
                         <div class="profile-card profile-card-edit">
                             <div class="profile-header profile-header-edit">
