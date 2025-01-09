@@ -196,7 +196,9 @@ main.main-padding{
 .nutri-h2 {
   text-align: center !important; /* 見出しを中央揃え */
   font-weight: bold !important; /* 太字に設定 */
-  margin-bottom: 30px !important; /* 下に余白を追加 */
+  margin-bottom: 50px !important; /* 下に余白を追加 */
+  /* margin-top: 50px !important; 下に余白を追加 */
+
 }
 
 .nutri-card {
@@ -347,6 +349,7 @@ footer {
     padding-left: 50px;
     margin-right: 2%; /* 右側との間に余白を作る */
     float: left; /* 左側に配置 */
+    margin-top: 100px;
 }
 
 .custom-right-section {
@@ -357,6 +360,8 @@ footer {
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: left; /* 右側に配置 */
+    margin-top: 100px;
+
 }
 
 .custom-blank-card {
@@ -364,7 +369,7 @@ footer {
     background-color: #FFFFFF;
     border: 1px solid #DDD;
     border-radius: 8px;
-    margin-top: 1rem;
+    margin-top: 100px;
 }
 
 .custom-right-section form {
@@ -378,14 +383,20 @@ footer {
     padding: 15px;
 }
 /* アイコンを丸くしてY軸の中央に配置 */
-.user-photo {
-    width: 100px; /* アイコンの幅 */
-    height: 100px; /* アイコンの高さ */
+.user-photo, .material-symbols-outlined.user-photo {
+    width: 100px; /* 幅を統一 */
+    height: 100px; /* 高さを統一 */
     border-radius: 50%; /* 丸くする */
-    object-fit: cover; /* 画像が歪まないように */
-    margin-right: 15px; /* テキストとの間に余白を作る */
-    align-self: center; /* Y軸の中央に配置 */
+    object-fit: cover; /* 画像が枠に収まる */
+    display: flex; /* フレックスで中央揃えに */
+    align-items: center; /* 縦中央揃え */
+    justify-content: center; /* 横中央揃え */
+    background-color: #F7FCF1; /* アイコン背景色（Googleアイコン時） */
+    color: #202F55; /* Googleアイコンの色 */
+    font-size: 50px; /* Googleアイコンのフォントサイズ */
+    margin-right: 15px; /* テキストとの間隔を統一 */
 }
+
 
 /* 行間を狭くする */
 .user-info p {
@@ -587,7 +598,7 @@ footer {
 }
 
 /* 編集用カード */
-.profile-card-edit {}
+/* .profile-card-edit {} */
 
 /* 表示用カード */
 .profile-card-view {
@@ -626,10 +637,10 @@ footer {
 }
 
 /* 編集用画像 */
-.profile-picture-edit {}
+/* .profile-picture-edit {} */
 
 /* 表示用画像 */
-.profile-picture-view {}
+/* .profile-picture-view {} */
 /* 編集用画像
 .profile-picture-edit {}
 

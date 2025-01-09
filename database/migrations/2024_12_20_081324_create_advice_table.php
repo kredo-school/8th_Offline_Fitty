@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('advice', function (Blueprint $table) {
             $table->id();
+            $table->integer('overall');
             $table->text('message');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('nutritionist_id')->constrained('nutritionists')->cascadeOnDelete();

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->integer('height')->nullable();
             $table->longText('avatar')->nullable();
             $table->integer('activity_level')->nullable();
+            $table->string('dietary_preferences')->nullable();
+            $table->string('allergies')->nullable();
+            $table->text('goal')->nullable();
             $table->text('nutritionist_memo')->nullable();
             $table->string('role')->default('user');
             $table->foreignId('nutritionist_id')->nullable()->constrained('nutritionists')->nullOnDelete();
