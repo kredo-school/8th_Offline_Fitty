@@ -43,9 +43,9 @@ class NutritionistController extends Controller
     }
 
 
-    function history(){
-        return view('nutritionists.history');
-    }
+
+
+    
 
     function profile(){
         return view('nutritionists.profile');
@@ -65,10 +65,6 @@ class NutritionistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

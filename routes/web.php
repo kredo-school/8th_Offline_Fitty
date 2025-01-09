@@ -4,7 +4,9 @@ use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\AdviceController;
 
+use App\Models\Advice;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +39,13 @@ Route::get('/contact', function () {
 // 認証ルートを有効化
 Auth::routes();
 
-
+Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
-
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
-        Route::get('nutri/history', [NutritionistController::class, 'history']);
+        Route::post('store',[AdviceController::class, 'store'])->name('store');
+
+        Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });
 });
 

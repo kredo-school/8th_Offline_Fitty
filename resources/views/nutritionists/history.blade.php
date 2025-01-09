@@ -6,7 +6,7 @@
 <table class="unique-table ">
   <thead>
     <tr>
-      <th>History of John Smith</th>
+      <th>History of {{$user->name}}</th>
     </tr>
   </thead>
   <tbody>

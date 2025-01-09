@@ -176,7 +176,9 @@
 .nutri-h2 {
   text-align: center !important; /* 見出しを中央揃え */
   font-weight: bold !important; /* 太字に設定 */
-  margin-bottom: 30px !important; /* 下に余白を追加 */
+  margin-bottom: 50px !important; /* 下に余白を追加 */
+  /* margin-top: 50px !important; 下に余白を追加 */
+
 }
 
 .nutri-card {
@@ -333,6 +335,7 @@ body {
     padding-left: 50px;
     margin-right: 2%; /* 右側との間に余白を作る */
     float: left; /* 左側に配置 */
+    margin-top: 100px;
 }
 
 .custom-right-section {
@@ -343,6 +346,8 @@ body {
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: left; /* 右側に配置 */
+    margin-top: 100px;
+
 }
 
 .custom-blank-card {
@@ -350,7 +355,7 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #DDD;
     border-radius: 8px;
-    margin-top: 1rem;
+    margin-top: 100px;
 }
 
 .custom-right-section form {
