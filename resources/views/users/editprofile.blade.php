@@ -4,9 +4,6 @@
 
 @section('content')
 
-
-
-
     @include('sidebar.humburger')
     <div class="container user-dailylog">
         <div class="row">
