@@ -25,9 +25,9 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/about',[App\Http\Controllers\Controller::class, 'about'])->name('about');
-Route::get('/team',[App\Http\Controllers\Controller::class, 'team'])->name('team');
-Route::get('/contact',[App\Http\Controllers\Controller::class, 'contact'])->name('contact');
+Route::get('/about', [App\Http\Controllers\Controller::class, 'about'])->name('about');
+Route::get('/team', [App\Http\Controllers\Controller::class, 'team'])->name('team');
+Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->name('contact');
 
 
 // 認証ルートを有効化
@@ -55,5 +55,7 @@ Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showd
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
+Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'profileupdate'])->name('user.update');
+Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
 
