@@ -73,8 +73,44 @@
                         <div class="edit-button edit-button-edit">
                             <button type="submit" class="save-button save-button-edit">Save Changes</button>
                         </div>
+                        <div class="edit-button edit-button-edit mt-2 text-end">
+                            <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal">Change
+                                Password</a>
+                        </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success" id="passwordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.change_password', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" name="current_password"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

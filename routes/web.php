@@ -49,5 +49,6 @@ Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'show
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
 Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'profileupdate'])->name('user.update');
+Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
 
