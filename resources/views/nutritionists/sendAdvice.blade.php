@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Send Advice')
 @section('content')
+<div class="custom-left-right-container">
 
 <div class="custom-left-section">
     <!-- Back Button -->
@@ -9,31 +10,90 @@
     </div>
 
     <!-- User Information -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <!-- アイコン部分 -->
-                @if ($user->avatar)
-                    <img src="{{ $user->avatar }}" class="user-photo" alt="Avatar">
+    <div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <!-- アイコン部分 -->
+            <div class="user-photo-container">
+                @if ($user->profile_image)
+                    <img src="{{ $user->profile_image }}" class="user-photo" alt="Avatar">
                 @else
-                    <span class="material-symbols-outlined user-photo">account_circle</span>
+                    <span class="material-symbols-outlined nutri-material-symbols-outlined-user-photo" style="font-size:80px;">account_circle</span>
                 @endif
+            </div>
 
-                <!-- ユーザー情報部分 -->
-                <div class="user-info ms-4">
-                    <p><strong>Name:</strong> {{$user->name}}</p>
-                    <p><strong>Age:</strong> {{$user->age}}</p>
-                    <p><strong>Gender:</strong> {{$user->gender}}</p>
-                    <p><strong>Height(cm):</strong> {{$user->height}}</p>
-                    <p><strong>Exercise Frequency:</strong> {{$user->activity_level}}</p>
-                    <p><strong>Dietary Preferences:</strong> {{$user->dietary_preferences}}</p>
-                    <p><strong>Food Allergies:</strong> {{$user->allergies}}</p>
-                    <p><strong>Goals:</strong> {{$user->goal}}</p>
-                    <p><strong>Memo:</strong> {{$user->memo}}</p>
-                </div>
+            <!-- ユーザー情報部分 -->
+            <div class="user-info-custom ms-4">
+                <table class="table table-borderless custom-table-text-color">
+                    <tr>
+                        <td><strong>Name:</strong></td>
+                        <td class="text-start custom-data">{{$user->name}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Age:</strong></td>
+                        <td class="text-start custom-data">{{$user->age}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gender:</strong></td>
+                        <td class="text-start custom-data">{{$user->gender}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Height(cm):</strong></td>
+                        <td class="text-start custom-data">{{$user->height}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exercise Frequency:</strong></td>
+                        <td class="text-start custom-data">{{$user->activity_level}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Current Health Conditions:</strong></td>
+                        <td class="text-start custom-data">{{$user->health_conditions}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dietary Preferences:</strong></td>
+                        <td class="text-start custom-data">{{$user->dietary_preferences}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Food Allergies:</strong></td>
+                        <td class="text-start custom-data">{{$user->allergies}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Goals:</strong></td>
+                        <td class="text-start custom-data">{{$user->goal}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="">
+                            <strong>Memo</strong>
+                            <span class="material-symbols-outlined memo-icon" data-bs-toggle="modal" data-bs-target="#memoModal">
+                                edit
+                            </span>
+
+                            <style>
+                                .memo-icon {
+                                    transition: transform 0.3s ease, color 0.3s ease; /* トランジションでスムーズな変化 */
+                                    cursor: pointer; /* カーソルを指のマークに変更 */
+                                }
+
+                                .memo-icon:hover {
+                                    transform: scale(1.2); /* アイコンを少し大きくする */
+                                    color: #202F55; /* ホバー時に色を変更 */
+                                }
+                            </style>
+                        </td>
+                        @include('nutritionists.modals.memo')
+                    </tr>
+                    <!-- Memo Content -->
+                    <tr>
+                    <td colspan="2" class="memo-container @if(empty($user->nutritionist_memo)) no-border @else" style="border: 1px solid #202F55; @endif">
+                        {!! nl2br(e($user->nutritionist_memo)) !!}
+                    </td>
+
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Radar Chart Placeholder -->
     <div class="card">
@@ -52,19 +112,19 @@
 </div>
 
 <div class="custom-right-section">
-    <h4 class="text-center mb-4">Send Advice</h4>
-    <form action="{{route('nutri.store')}}" method="post">
+    <h4 class="text-center p-4">Send Advice</h4>
+    <form action="{{route('nutri.store')}}" method="post" class="w-75">
     @csrf
 
     <!-- Overall Rating -->
-    <div class="mb-3">
+    <div class="">
         <label for="overall" class="form-label">Overall Rating</label>
         <div id="overall" class="d-flex justify-content-start gap-4">
-            <span class="material-symbols-outlined @if(old('overall') == 5) selected @endif" data-value="5">sentiment_excited</span>
-            <span class="material-symbols-outlined @if(old('overall') == 4) selected @endif" data-value="4">sentiment_satisfied</span>
-            <span class="material-symbols-outlined @if(old('overall') == 3) selected @endif" data-value="3">sentiment_content</span>
-            <span class="material-symbols-outlined @if(old('overall') == 2) selected @endif" data-value="2">sentiment_neutral</span>
-            <span class="material-symbols-outlined @if(old('overall') == 1) selected @endif" data-value="1">sentiment_sad</span>
+            <span class="material-symbols-outlined nutri-material-symbols-outlined @if(old('overall') == 5) selected @endif" data-value="5">sentiment_excited</span>
+            <span class="material-symbols-outlined nutri-material-symbols-outlined @if(old('overall') == 4) selected @endif" data-value="4">sentiment_satisfied</span>
+            <span class="material-symbols-outlined nutri-material-symbols-outlined @if(old('overall') == 3) selected @endif" data-value="3">sentiment_content</span>
+            <span class="material-symbols-outlined nutri-material-symbols-outlined @if(old('overall') == 2) selected @endif" data-value="2">sentiment_neutral</span>
+            <span class="material-symbols-outlined nutri-material-symbols-outlined @if(old('overall') == 1) selected @endif" data-value="1">sentiment_sad</span>
         </div>
         <input type="hidden" name="overall" id="overall-input" value="{{ old('overall') }}">
         @error('overall')
@@ -75,7 +135,7 @@
     <!-- Comment -->
     <div class="mb-3">
         <label for="message" class="form-label">Comment</label>
-        <textarea class="form-control" id="message" name="message" rows="20" style="padding: 12px;">{{ old('message') }}</textarea>
+        <textarea class="form-control" id="message" name="message" rows="18" style="padding: 12px;">{{ old('message') }}</textarea>
         @error('message')
             <p class="text-danger small">{{ $message }}</p>
         @enderror
@@ -94,6 +154,7 @@
 
 
 
+</div>
 </div>
 
 <script>
@@ -120,14 +181,15 @@
         font-weight: bold;
     }
 
-    .material-symbols-outlined {
+    .nutri-material-symbols-outlined {
         cursor: pointer;
         transition: color 0.2s;
     }
 
-    .material-symbols-outlined:hover {
+    .nutri-material-symbols-outlined:hover {
         color: #4DAF4A;
     }
 </style>
 
 @endsection
+
