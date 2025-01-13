@@ -40,18 +40,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('gender', ['male', 'female', 'non_binary', 'other', 'prefer_not_to_say']);
-            $table->date('birthday')->default('2011-01-01');
-            $table->integer('height')->default(0);
-            $table->enum('exercise_frequency', ['Level_1', 'Level_2', 'Level_3'])->nullable();
-            $table->string('profile_image')->default('default_profile_image.png');
-            // $table->text('nutritionist_memo')->nullable();
-            $table->string('role')->default('user');
-            $table->foreignId('nutritionist_id')->nullable()->constrained('nutritionists')->nullOnDelete();
-            $table->json('health_conditions')->default(json_encode([])); // JSONカラムにデフォルト値を設定
-            $table->json('dietary_preferences')->default(json_encode([])); // デフォルト値を設定
-            $table->text('food_allergies')->nullable();
-            $table->text('goals')->nullable();
+            $table->string('role')->default('U');
             $table->timestamps();
         });
     

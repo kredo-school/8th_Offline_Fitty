@@ -26,7 +26,7 @@
 
 </head>
 <body>
-    {{-- <div id="app">
+    <div id="app">
         @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
@@ -52,18 +52,21 @@
                 <span class="material-icons">logout</span> Logout
             </a>
         </div>
-        @endif --}}
+        @endif
 
         <!-- ナビバー -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-            <div class="container navbar-container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> -->
+
+
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -107,13 +110,13 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="py-4 main-content">
+        <main class="main-padding main-content">
             @yield('content')
         </main>
     </div>
 
     <!-- フッター -->
-<footer class="footer" style="display: none;">
+<footer class="footer">
     <p class="footer-p-1">Terms of Use | Privacy Policy | Help</p>
     <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
 </footer>
@@ -152,6 +155,6 @@
 
 
 
-    
+
 </body>
 </html>

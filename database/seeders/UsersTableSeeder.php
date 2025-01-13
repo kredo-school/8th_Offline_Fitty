@@ -56,6 +56,23 @@ class UsersTableSeeder extends Seeder
                 'dietary_preferences' => json_encode($i % 3 == 0 ? ['vegetarian'] : []), // 3の倍数の人は「ベジタリアン」、それ以外は空
                 'food_allergies' => $i % 4 == 0 ? 'peanuts' : null, // 4の倍数の人のみアレルギーあり
                 'goals' => $i % 5 == 0 ? 'Weight management' : null, // 5の倍数の人は特定の目標あり
+        for ($i = 1; $i <= 101; $i++) {
+            if($i == 1){
+                $user_name = "admin";
+                $role = "A";
+            }elseif($i <= 51){
+                $user_name = "test".($i-1);
+                $role = "U";
+            }else{
+                $user_name = "nutri".($i-51);
+                $role = "N";
+            }
+
+            $users[] = [
+                'name' => $user_name,
+                'email' => $user_name . '@gmail.com',
+                'password' => Hash::make($user_name),
+                'role' => $role,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

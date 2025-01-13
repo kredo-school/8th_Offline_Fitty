@@ -1,0 +1,387 @@
+/* landing page */
+.navbar {
+    padding: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    margin-top: 0;
+}
+
+.navbar .navbar-brand {
+    font-family: "Shrikhand", serif !important;
+    color: #FFA965 !important;
+    font-size: 50px !important;
+    text-decoration: none;
+}
+
+.navbar .nav-link {
+    color: #555;
+    font-size: 1.2rem;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+    color: #ffa965;
+}
+
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center; /* 縦方向の中央配置 */
+    justify-content: space-between;
+    padding: 60px 10%;
+    margin: 0 auto;
+    margin-top: 7rem;
+    max-width: 1200px;
+}
+
+.hero .text-section {
+    max-width: 70%;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.hero p span {
+    color: #ffa965;
+    font-weight: bold;
+}
+
+.hero .btn {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.hero .btn:hover {
+    background-color: #218838;
+}
+
+.hero .image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero .image-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    padding: 20px 10%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+footer span {
+    font-weight: bold;
+}
+
+/* about page用 */
+.about-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #00984F; /* 緑色 */
+    color: #ffffff;
+    min-height: 100vh; /* 画面全体の高さをカバー */
+    padding: 20px 10%;
+}
+
+.about-header-section {
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.about-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.about-description {
+    max-width: 70%;
+    flex: 1;
+}
+
+.about-description h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2列 */
+    gap: 20px;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+.features-list .highlight-simplicity {
+    color: orange;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.feature-item i {
+    font-size: 4.5rem;
+    margin-right: 0.5rem;
+}
+
+.team-button {
+    display: inline-block;
+    margin-top: 60px;
+    padding: 10px 20px;
+    background-color: #e0ffe0;
+    color: #008000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.team-button:hover{
+    background-color: #008000;
+    color: #e0ffe0;
+}
+
+.about-image-section {
+    max-width: 35%;
+    flex: 1;
+}
+
+.about-image-section img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Team ページ固有のスタイル */
+.team-section {
+    min-height: 100vh;
+    /* 画面全体の高さ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #d1ecd1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.team-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.team-description {
+    font-size: 1.6rem;
+    color: #666;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 75px;
+}
+
+.button-orange,
+.button-green {
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.button-orange {
+    background-color: #FFA500;
+}
+
+.button-orange:hover {
+    background-color: #FF8C00;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-green {
+    background-color: #32CD32;
+}
+
+.button-green:hover {
+    background-color: #228B22;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.team-card {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10%;
+    margin-bottom: 10px;
+}
+
+.team-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.team-role {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .team-title {
+        font-size: 2rem;
+    }
+
+    .team-description {
+        font-size: 1rem;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .team-card {
+        padding: 15px;
+    }
+
+    .team-image {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.contact-page {
+    background-color: #00A550;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    height: 100%;
+}
+
+.contact-title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.contact-item {
+    margin: 50px 0;
+    font-size: 1.2rem;
+}
+
+.contact-item h1 {
+    font-size: 50px;
+}
+
+.contact-item p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.decorative-circles {
+    position: relative;
+    margin-top: 50px;
+    height: 150px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.circle.black {
+    background-color: black;
+    bottom: 0;
+    left: 10%;
+}
+
+.circle.white {
+    background-color: white;
+    bottom: 10px;
+    left: 30%;
+}
+
+.circle.grey {
+    background-color: grey;
+    bottom: 20px;
+    left: 50%;
+}
+
+.circle.light-grey {
+    background-color: lightgrey;
+    bottom: 40px;
+    left: 70%;
+}
+
+.circle.dark-grey {
+    background-color: #333;
+    bottom: 60px;
+    left: 20%;
+}
+
+.circle.green {
+    background-color: #006600;
+    bottom: 80px;
+    left: 40%;
+}
+
