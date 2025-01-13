@@ -12,9 +12,9 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    public function nutritionist()
+    public function profile()
     {
-        return $this->belongsTo(Nutritionist::class);
+        return $this->hasOne(UserProfile::class);
     }
     
     public function dailyLogs()
@@ -60,5 +60,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * リレーション: UserProfileとの1対1関係
+     */
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    /**
+     * リレーション: NutritionistsProfileとの1対1関係（栄養士の場合）
+     */
+    public function nutritionistsProfile()
+    {
+        return $this->hasOne(NutritionistsProfile::class);
     }
 }

@@ -22,19 +22,23 @@ class UsersTableSeeder extends Seeder
     {
         $users = [];
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 101; $i++) {
+            if($i == 1){
+                $user_name = "admin";
+                $role = "A";
+            }elseif($i <= 51){
+                $user_name = "test".($i-1);
+                $role = "U";
+            }else{
+                $user_name = "nutri".($i-51);
+                $role = "N";
+            }
+
             $users[] = [
-                'name' => 'test' . $i,
-                'email' => 'test' . $i . '@gmail.com',
-                'password' => Hash::make('test' . (8000 + $i)),
-                'birthday' => now()->subYears(rand(20, 40))->format('Y-m-d'),
-                'height' => rand(150, 200),
-                'avatar' => null, // アバター画像は空
-                'gender' => rand(0, 1) ? 'male' : 'female', // maleまたはfemaleをランダムに設定
-                'activity_level' => rand(1, 3), // 1~3のランダム値
-                'nutritionist_memo' => $i % 2 == 0 ? 'Moderate activity level.' : null, // 偶数の人のみメモあり
-                'role' => 'user', // 全員ユーザー権限
-                'nutritionist_id' => rand(1, 5),
+                'name' => $user_name,
+                'email' => $user_name . '@gmail.com',
+                'password' => Hash::make($user_name),
+                'role' => $role,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

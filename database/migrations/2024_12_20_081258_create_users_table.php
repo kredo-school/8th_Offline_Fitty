@@ -16,14 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('gender');
-            $table->date('birthday')->nullable();
-            $table->integer('height')->nullable();
-            $table->longText('avatar')->nullable();
-            $table->integer('activity_level')->nullable();
-            $table->text('nutritionist_memo')->nullable();
-            $table->string('role')->default('user');
-            $table->foreignId('nutritionist_id')->nullable()->constrained('nutritionists')->nullOnDelete();
+            $table->string('role')->default('U');
             $table->timestamps();
         });
 

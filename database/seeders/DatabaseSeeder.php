@@ -16,8 +16,10 @@ class DatabaseSeeder extends Seeder
 {
     // 他のシーダーも必要に応じて追加
     $this->call([
-        NutritionistsTableSeeder::class,  // Nutritionists のシーダー
         UsersTableSeeder::class,  // ユーザーのシーダー 
+        UserProfilesTableSeeder::class,
+        NutritionistsProfilesTableSeeder::class,
     ]);
+
 }
 }
