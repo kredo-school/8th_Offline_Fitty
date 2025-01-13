@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->integer('height')->nullable();
             $table->integer('activity_level')->nullable();
-            $table->longtext('avatar')->nullable();
             $table->longtext('profile_image')->nullable();
             $table->text('memo')->nullable();
             $table->text('nutritionist_memo')->nullable();
