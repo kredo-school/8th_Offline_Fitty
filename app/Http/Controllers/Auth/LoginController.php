@@ -1,31 +1,34 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Redirect users after login based on their role.
      *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        $role = Auth::user()->role;
+
+        switch ($role) {
+            case 'A':
+                return '/admin/home'; // 管理者のリダイレクト先
+            case 'N':
+                return '/nutri/index'; // 栄養士のリダイレクト先
+            case 'U':
+                return '/user/profile'; // 一般ユーザーのリダイレクト先
+            default:
+                return '/home'; // デフォルトのリダイレクト先
+        }
+    }
 
     /**
      * Create a new controller instance.

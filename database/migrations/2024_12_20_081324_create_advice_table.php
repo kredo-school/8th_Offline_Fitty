@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('overall');
             $table->text('message');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('nutritionist_id')->constrained('nutritionists')->cascadeOnDelete();
             $table->timestamps();
         });
     }
