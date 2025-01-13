@@ -1,16 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="register-page">
+<div class="register-page" style="padding-top: 70px;">
 
     <div class="container d-flex justify-content-center w-50">
-        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('register.step2.submit') }}" enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
             
+        @if(session('step1.profile_image_path'))
+    <div class="mb-4">
+        <p>Uploaded Profile Image:</p>
+        <img src="{{ asset('storage/' . session('step1.profile_image_path')) }}" alt="Profile Image" style="max-width: 150px; max-height: 150px;">
+    </div>
+@endif
+
         <!-- Section 2: Health Information -->
             <div class="form-section">
-                <h2>2. Health Information</h2>
-                <div class="form-row">
+                <div class="form-row ">
+                    <h2>2. Health Information</h2>
                     {{-- Date of Birth --}}
                     <div class="form-group mb-2">
                         <label for="dob">Date of Birth (D/M/Y)</label>
@@ -90,41 +98,85 @@
         <!-- Section 3: Lifestyle -->
             <div class="form-section">
                 <h2>3. Lifestyle</h2>
-                {{-- Dietary Preferences --}}
+                {{-- Current Health Conditions --}}
                 <div class="form-group mb-4 mt-4">
                     <label for="dietary_preferences">Dietary Preferences</label>
-                    <select name="dietary_preferences" id="dietary_preferences" class="form-control">
-                        <option value="">--Please choose an option--</option>
-                        
-                        <!-- No restrictions -->
-                        <option value="no_restrictions">No Dietary Restrictions</option>
-
-                        <!-- Health and allergy related -->
-                        <option value="lactose_free">Lactose-Free</option>
-                        <option value="nut_free">Nut-Free</option>
-                        <option value="dairy_free">Dairy-Free</option>
-                        <option value="soy_free">Soy-Free</option>
-                        <option value="gluten_free">Gluten-Free</option>
-
-                        <!-- Diet and lifestyle -->
-                        <option value="vegetarian">Vegetarian</option>
-                        <option value="vegan">Vegan</option>
-                        <option value="pescatarian">Pescatarian</option>
-                        <option value="low_carb">Low Carb</option>
-                        <option value="keto">Ketogenic</option>
-                        <option value="paleo">Paleo</option>
-                        <option value="intermittent_fasting">Intermittent Fasting</option>
-
-                        <!-- Ethical and environmental choices -->
-                        <option value="organic">Organic Only</option>
-                        <option value="locavore">Locavore</option>
-                        <option value="flexitarian">Flexitarian</option>
-
-                        <!-- Other -->
-                        <option value="other">Other</option>
-                    </select>
+                    <div id="dietary_preferences" class="" style="height: auto;">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="no_restrictions" name="dietary_preferences[]" value="no_restrictions">
+                            <label class="form-check-label" for="no_restrictions">No Dietary Restrictions</label>
+                        </div>
+                
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="lactose_free" name="dietary_preferences[]" value="lactose_free">
+                            <label class="form-check-label" for="lactose_free">Lactose-Free</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="nut_free" name="dietary_preferences[]" value="nut_free">
+                            <label class="form-check-label" for="nut_free">Nut-Free</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="dairy_free" name="dietary_preferences[]" value="dairy_free">
+                            <label class="form-check-label" for="dairy_free">Dairy-Free</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="soy_free" name="dietary_preferences[]" value="soy_free">
+                            <label class="form-check-label" for="soy_free">Soy-Free</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gluten_free" name="dietary_preferences[]" value="gluten_free">
+                            <label class="form-check-label" for="gluten_free">Gluten-Free</label>
+                        </div>
+                
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="vegetarian" name="dietary_preferences[]" value="vegetarian">
+                            <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="vegan" name="dietary_preferences[]" value="vegan">
+                            <label class="form-check-label" for="vegan">Vegan</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pescatarian" name="dietary_preferences[]" value="pescatarian">
+                            <label class="form-check-label" for="pescatarian">Pescatarian</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="low_carb" name="dietary_preferences[]" value="low_carb">
+                            <label class="form-check-label" for="low_carb">Low Carb</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="keto" name="dietary_preferences[]" value="keto">
+                            <label class="form-check-label" for="keto">Ketogenic</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="paleo" name="dietary_preferences[]" value="paleo">
+                            <label class="form-check-label" for="paleo">Paleo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="intermittent_fasting" name="dietary_preferences[]" value="intermittent_fasting">
+                            <label class="form-check-label" for="intermittent_fasting">Intermittent Fasting</label>
+                        </div>
+                
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="organic" name="dietary_preferences[]" value="organic">
+                            <label class="form-check-label" for="organic">Organic Only</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="locavore" name="dietary_preferences[]" value="locavore">
+                            <label class="form-check-label" for="locavore">Locavore</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="flexitarian" name="dietary_preferences[]" value="flexitarian">
+                            <label class="form-check-label" for="flexitarian">Flexitarian</label>
+                        </div>
+                
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="other" name="dietary_preferences[]" value="other">
+                            <label class="form-check-label" for="other">Other</label>
+                        </div>
+                    </div>
                 </div>
-
+                
 
                 {{-- Food Allergies --}}
                 <div class="form-group mb-2">

@@ -179,8 +179,8 @@ body {
   padding: 0;
 }
 
-.container {
-  padding: 25px;
+.navbar-container {
+  padding:15px;
   position:relative;
 }
   

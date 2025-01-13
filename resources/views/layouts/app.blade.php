@@ -26,7 +26,7 @@
 
 </head>
 <body>
-    <div id="app">
+    {{-- <div id="app">
         @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
@@ -52,11 +52,11 @@
                 <span class="material-icons">logout</span> Logout
             </a>
         </div>
-        @endif
+        @endif --}}
 
         <!-- ナビバー -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+            <div class="container navbar-container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
@@ -78,15 +78,15 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            @if (Route::has('register.step1'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register.step1') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="https://via.placeholder.com/50" class="nav-user-icon" alt="Avatar">
+                                    <img src="https://via.placeholder.com/50" class="nav-user-icon" alt="profile_image">
                                     {{ Auth::user()->name }}
                                 </a>
 
