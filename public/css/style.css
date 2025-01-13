@@ -1,3 +1,15 @@
+body {
+  background-color: #F7FCF1 !important; /* 背景色 */
+  font-family: 'lora', sans-serif !important;
+  color: #202F55  !important;
+  margin: 0;
+  padding: 0;
+}
+
+main.main-padding{
+  padding-top:6rem !important;
+}
+
 .navbar-brand{
     font-family: "Shrikhand", serif !important;
     color: #FFA965 !important;
@@ -94,9 +106,13 @@
 
 
 /* responsive sidebar omori start */
+.hamburger-btn {
+  display:none;
+}
 @media (max-width: 768px) {
   .sidemenu {
-      position: absolute;
+      position: fixed;
+      padding-top: 80px !important; /* ヘッダーの高さ分 */
       z-index: 10;
       width: 100%;
       display: none;
@@ -111,9 +127,6 @@
       display: block;
   }
 
-  .main-col{
-    padding-top: 1.5rem !important; /* 1.5rem は通常 24px に相当 */
-  }
   /* ハンバーガーボタン */
   .hamburger-btn {
       border: 2px solid #c0c0c0; /* グレーの枠線 */
@@ -143,7 +156,9 @@
   }
 
   .hamburger-btn {
-      position: relative;
+    position: fixed; /* 画面全体で位置を固定 */
+    top: 10px; /* 上から10pxの余白を確保 */
+    right: 10px; /* 右から10pxの余白を確保 */
       z-index: 1050; /* 他の要素より前面に表示 */
       width: 60px; /* ボタン全体を大きく */
       height: 60px; /* ボタン全体を大きく */
@@ -181,7 +196,9 @@
 .nutri-h2 {
   text-align: center !important; /* 見出しを中央揃え */
   font-weight: bold !important; /* 太字に設定 */
-  margin-bottom: 30px !important; /* 下に余白を追加 */
+  margin-bottom: 50px !important; /* 下に余白を追加 */
+  /* margin-top: 50px !important; 下に余白を追加 */
+
 }
 
 .nutri-card {
@@ -267,13 +284,7 @@ footer {
   margin-top: 5px;
 }
 
-body {
-    background-color: #F7FCF1 !important; /* 背景色 */
-    font-family: 'lora', sans-serif !important;
-    color: #202F55  !important;
-    margin: 0;
-    padding: 0;
-}
+
 
 .container {
   /* padding: 25px; */
@@ -338,6 +349,7 @@ body {
     padding-left: 50px;
     margin-right: 2%; /* 右側との間に余白を作る */
     float: left; /* 左側に配置 */
+    margin-top: 100px;
 }
 
 .custom-right-section {
@@ -348,6 +360,8 @@ body {
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: left; /* 右側に配置 */
+    margin-top: 100px;
+
 }
 
 .custom-blank-card {
@@ -355,7 +369,7 @@ body {
     background-color: #FFFFFF;
     border: 1px solid #DDD;
     border-radius: 8px;
-    margin-top: 1rem;
+    margin-top: 100px;
 }
 
 .custom-right-section form {
@@ -369,14 +383,20 @@ body {
     padding: 15px;
 }
 /* アイコンを丸くしてY軸の中央に配置 */
-.user-photo {
-    width: 100px; /* アイコンの幅 */
-    height: 100px; /* アイコンの高さ */
+.user-photo, .material-symbols-outlined.user-photo {
+    width: 100px; /* 幅を統一 */
+    height: 100px; /* 高さを統一 */
     border-radius: 50%; /* 丸くする */
-    object-fit: cover; /* 画像が歪まないように */
-    margin-right: 15px; /* テキストとの間に余白を作る */
-    align-self: center; /* Y軸の中央に配置 */
+    object-fit: cover; /* 画像が枠に収まる */
+    display: flex; /* フレックスで中央揃えに */
+    align-items: center; /* 縦中央揃え */
+    justify-content: center; /* 横中央揃え */
+    background-color: #F7FCF1; /* アイコン背景色（Googleアイコン時） */
+    color: #202F55; /* Googleアイコンの色 */
+    font-size: 50px; /* Googleアイコンのフォントサイズ */
+    margin-right: 15px; /* テキストとの間隔を統一 */
 }
+
 
 /* 行間を狭くする */
 .user-info p {
@@ -574,11 +594,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 /* 編集用カード */
-.profile-card-edit {}
+/* .profile-card-edit {} */
 
 /* 表示用カード */
 .profile-card-view {
@@ -599,8 +619,8 @@ body {
 
 /* 編集用ヘッダー */
 .profile-header-edit {
-    margin-left: 175px;
     margin-bottom: 30px;
+    justify-content: center;
 }
 
 /* 表示用ヘッダー */
@@ -617,10 +637,10 @@ body {
 }
 
 /* 編集用画像 */
-.profile-picture-edit {}
+/* .profile-picture-edit {} */
 
 /* 表示用画像 */
-.profile-picture-view {}
+/* .profile-picture-view {} */
 /* 編集用画像
 .profile-picture-edit {}
 
@@ -643,6 +663,7 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 /* 表示用情報 */
@@ -689,12 +710,13 @@ body {
 
 .details-view .detail-label {
     font-weight: bold;
+    font-size: 20px;
     display: block;
     margin-bottom: 5px;
 }
 
 .details-view .detail-value {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* 共通ボタンスタイル */
@@ -732,6 +754,18 @@ body {
 
 .edit-button-view .edit-link:hover {
     background-color: #ff8a30;
+}
+
+.form-control-edit,
+.form-select-edit,
+.detail-input-edit {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 

@@ -51,7 +51,7 @@
                         <span>Smarter Ways to Solve Problems</span>
                     </div>
                 </div>
-                <a href="#" class="team-button">OUR TEAM</a>
+                <a href="{{route('team')}}" class="team-button">OUR TEAM</a>
             </div>
 
             <!-- Right Section -->

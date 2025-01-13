@@ -28,7 +28,6 @@ class NutritionistController extends Controller
         $nutritionist = $this->nutritionist->where('id', 1)->first();
 
         // 栄養士に関連するユーザー情報を取得
-        //$user = $this->user->where('nutritionist_id', $nutritionist->id);
         $users = $this->user->where('nutritionist_id', 3)->get();
 
         // 栄養士とその関連ユーザー情報をビューに渡す
@@ -36,14 +35,17 @@ class NutritionistController extends Controller
     }
 
 
-    function sendAdvice(){
-        return view('nutritionists.sendAdvice');
+    function sendAdvice($id){
+        $user = $this->user->findOrFail($id);
+
+
+        return view('nutritionists.sendAdvice', compact('user'));
     }
 
 
-    function history(){
-        return view('nutritionists.history');
-    }
+
+
+    
 
     function profile(){
         return view('nutritionists.profile');
@@ -63,10 +65,6 @@ class NutritionistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

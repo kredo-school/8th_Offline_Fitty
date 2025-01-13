@@ -23,8 +23,8 @@
             <h2 class="team-title">Meet the Team</h2>
             <p class="team-description">Meet our team of professionals to serve you</p>
             <div class="button-container">
-                <button class="button-orange">About us</button>
-                <button class="button-green">Contact Us</button>
+                <a class="button-orange" href="{{route('about')}}">About us</a>
+                <a class="button-green" href="{{route('contact')}}">Contact Us</a>
             </div>
             <div class="team-grid">
                 <div class="team-card">
