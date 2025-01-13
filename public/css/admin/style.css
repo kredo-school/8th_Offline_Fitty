@@ -16,7 +16,7 @@
   color: #00984F;
   text-align: left;
   margin-bottom: 10px;
-  /* margin-left: calc(50% - 310px); */
+  margin-left: 15px; /* カードのマージンと同じ値に設定 */
 
 
     visibility: visible !important;
@@ -95,35 +95,34 @@
 }
 
 
-
-/* Admin Users Index Styles */
+/* /Admin Users Index Styles */
 
 /* 全体のフォント */
 body.admin-users {
   font-family: 'Shrikhand', sans-serif;
-}
-
-/* タイトルスタイル */
-h1.admin-users-title {
+}  
+/* 
+タイトルスタイル */
+.admin-users h1.admin-users-title {
   font-family: 'Shrikhand', sans-serif;
   font-size: 2rem;
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 /* 検索ボックスのカスタムスタイル */
-.admin-users-search-box .input-group {
-  max-width: 400px;
+.admin-users .admin-users-search-box .input-group {
+  max-width: 300px; /* 幅を細く調整 */
   border: 2px solid #00984F;
   border-radius: 8px;
   overflow: hidden;
 }
 
 /* 検索ボタンのスタイル */
-.admin-users-search-btn {
+.admin-users .admin-users-search-btn {
   background-color: #00984F;
   border: none;
   color: white;
-  padding: 5px 12px;
+  padding: 4px 10px; /* 少し小さく調整 */
   border-radius: 0;
   display: flex;
   align-items: center;
@@ -131,215 +130,213 @@ h1.admin-users-title {
   transition: background-color 0.3s ease;
 }
 
-.admin-users-search-btn:hover {
+.admin-users .admin-users-search-btn:hover {
   background-color: #007b3a;
 }
 
 /* テーブルスタイル */
-.admin-users-table {
+.admin-users .admin-users-table {
   font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-.admin-users-table th,
-.admin-users-table td {
+.admin-users .admin-users-table th,
+.admin-users .admin-users-table td {
   text-align: left;
-  padding: 12px;
+  padding: 8px; /* 行間隔を狭める */
   border-bottom: 1px solid #ddd;
 }
 
-.admin-users-table th {
+.admin-users .admin-users-table th {
   background-color: #f9f9f9;
   color: #6c757d;
 }
 
 /* テーブル行ホバー時のスタイル */
-.admin-users-table tbody tr:hover {
-  background-color: #ffa965; /* オレンジ背景 */
-  color: white; /* 文字を白に */
+.admin-users tbody tr:hover {
+  background-color: #ffa965 !important; /* 背景色をオレンジに */
+  color: white; /* 文字色を白に */
 }
 
+
 /* テーブル行ホバー時にリンクとアイコンの色を白に変更 */
-.admin-users-table tbody tr:hover a,
-.admin-users-table tbody tr:hover .material-symbols-outlined {
+.admin-users .admin-users-table tbody tr:hover a,
+.admin-users .admin-users-table tbody tr:hover .material-symbols-outlined {
   color: white;
 }
 
 /* テーブル行ホバー時の "Name" と "Registration Date" の文字を白に */
-.admin-users-table tbody tr:hover td {
-  color: white; /* 文字を白に */
+.admin-users .admin-users-table tbody tr:hover td {
+  color: white;
 }
 
-
 /* ステータスバッジのホバー時のスタイル */
-.admin-users-table tbody tr:hover .status-badge {
-  background-color: transparent; /* 背景を透明にしてバッジ枠のみ見える */
-  color: white; /* バッジ内の文字を白に */
-  border-color: white; /* バッジの枠線を白に */
+.admin-users .admin-users-table tbody tr:hover .status-badge {
+  background-color: transparent;
+  color: white;
+  border-color: white;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-
 /* テーブルのIDリンクのスタイル */
-.admin-users-id-link {
+.admin-users .admin-users-id-link {
   color: #000;
   text-decoration: none;
 }
 
-.admin-users-id-link:hover {
+.admin-users .admin-users-id-link:hover {
   color: #ffa965;
   text-decoration: underline;
 }
 
 /* ステータスバッジのスタイル */
-.status-badge {
+.admin-users .status-badge {
   display: inline-flex;
   align-items: center;
   font-size: 0.9rem;
   font-weight: bold;
-  padding: 5px 12px;
+  padding: 4px 10px; /* バッジ内の余白を調整 */
   border-radius: 20px;
   border: 1px solid;
   background-color: #fff;
 }
 
 /* Activeステータス */
-.status-active {
+.admin-users .status-active {
   border-color: #28a745;
   color: #28a745;
 }
 
-.status-active .status-dot {
+.admin-users .status-active .status-dot {
   background-color: #28a745;
 }
 
 /* Inactiveステータス */
-.status-inactive {
+.admin-users .status-inactive {
   border-color: #dc3545;
   color: #dc3545;
 }
 
-.status-inactive .status-dot {
+.admin-users .status-inactive .status-dot {
   background-color: #dc3545;
 }
 
 /* ホバー時のスタイルを無効化 */
-.status-active:hover,
-.status-inactive:hover {
+.admin-users .status-active:hover,
+.admin-users .status-inactive:hover {
   border-color: inherit;
   color: inherit;
   background-color: inherit;
 }
 
-.status-active:hover .status-dot,
-.status-inactive:hover .status-dot {
+.admin-users .status-active:hover .status-dot,
+.admin-users .status-inactive:hover .status-dot {
   background-color: inherit;
 }
 
 /* アクションボタンのスタイル */
-.admin-users-action-button {
+.admin-users .admin-users-action-button {
   border: none;
   background: none;
-  padding: 0 15px;
-  font-size: 1.5rem;
+  padding: 0 10px; /* 余白を少なく調整 */
+  font-size: 1.3rem; /* 少し小さく調整 */
   color: #001F54;
   cursor: pointer;
   transition: color 0.2s ease;
   text-decoration: none;
 }
 
-.admin-users-action-button .material-symbols-outlined {
-  font-size: 36px;
+.admin-users .admin-users-action-button .material-symbols-outlined {
+  font-size: 28px; /* アイコンサイズを調整 */
   line-height: 1;
   vertical-align: middle;
 }
 
-.admin-users-action-button:hover {
+.admin-users .admin-users-action-button:hover {
   color: #ffa965;
 }
 
 /* モーダルヘッダー */
-.modal-header {
+.admin-users .modal-header {
   display: flex;
   align-items: center;
   gap: 10px;
   border-bottom: 2px solid #00984F;
 }
 
-.modal-icon {
+.admin-users .modal-icon {
   font-size: 36px;
   color: #00984F;
 }
 
-.modal-title {
+.admin-users .modal-title {
   font-family: 'Shrikhand', sans-serif;
   color: #00984F;
 }
 
 /* モーダルボタン */
-.cancel-btn,
-.delete-btn {
+.admin-users .cancel-btn,
+.admin-users .delete-btn {
   border-radius: 8px;
-  padding: 8px 20px;
+  padding: 6px 16px;
   font-family: 'Shrikhand', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.cancel-btn {
+.admin-users .cancel-btn {
   background-color: #fff;
   color: #ffa965;
   border: 2px solid #ffa965;
 }
 
-.cancel-btn:hover {
+.admin-users .cancel-btn:hover {
   background-color: #ffa965;
   color: #fff;
 }
 
-.delete-btn {
+.admin-users .delete-btn {
   background-color: #ffa965;
   color: #fff;
   border: none;
 }
 
-.delete-btn:hover {
+.admin-users .delete-btn:hover {
   background-color: #ff8c00;
 }
 
 /* ページネーション */
-.admin-users-pagination {
+.admin-users .admin-users-pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px; /* 余白を狭める */
 }
 
-.admin-users-pagination p {
+.admin-users .admin-users-pagination p {
   margin: 0;
 }
 
-.admin-users-pagination .pagination {
+.admin-users .admin-users-pagination .pagination {
   margin: 0;
 }
 
 /* スマホ対応 */
 @media (max-width: 768px) {
-  .admin-users-search-box .input-group {
+  .admin-users .admin-users-search-box .input-group {
     width: 100%;
   }
 
-  h1.admin-users-title {
+  .admin-users h1.admin-users-title {
     font-size: 1.5rem;
   }
 
-  .admin-users-table th,
-  .admin-users-table td {
-    padding: 8px;
-  }
-
-  .admin-users-table tbody tr:hover {
-    background-color: #ffa965;
-    color: white;
+  .admin-users .admin-users-table th,
+  .admin-users .admin-users-table td {
+    padding: 6px; /* スマホ時の行間隔をさらに狭く */
   }
 }
+
+/* 今井cssエンド */
+
+
