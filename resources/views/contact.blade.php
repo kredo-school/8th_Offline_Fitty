@@ -4,9 +4,6 @@
 
 @section('content')
 
-  <style>
-
-  </style>
 
     <body class="contact-page">
         <div>

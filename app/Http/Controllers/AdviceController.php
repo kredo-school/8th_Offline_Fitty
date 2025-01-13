@@ -4,33 +4,73 @@ namespace App\Http\Controllers;
 
 use App\Models\Advice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+
 
 class AdviceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $advice;
+    private $user;
+
+    public function __construct(Advice $advice, User $user)
     {
-        //
+        $this->advice = $advice;
+        $this->user = $user;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    function store(Request $request){
+        // dd('test');
+        $request->validate([
+            'overall'      => 'required',
+            'message'     => 'required',
+            'user_id'   => 'required|exists:users,id'
+
+        ]);
+
+        $this->advice->nutritionist_id = Auth::user()->id;
+        $this->advice->user_id = $request->user_id;;
+
+        $this->advice->overall = $request->overall;
+        $this->advice->message = $request->message;
+
+
+        $this->advice->save();
+
+        return redirect()->route('nutri.index')->with('success', 'Advice sent successfully!');
+
+
     }
 
+
+public function updateMemo(Request $request, $id)
+    {
+        // メモが空でないかを検証
+        $request->validate([
+            'memo' => 'max:1000',
+        ]);
+
+        // ユーザーのメモを更新
+        $user = $this->user->findOrFail($id);
+        $user->nutritionist_memo = $request->memo;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Memo updated successfully!');
+    }
+
+
+
+    function history($id){
+        $user = $this->user->findOrFail($id);
+
+        return view('nutritionists.history')->with('user', $user);
+    }
     /**
      * Display the specified resource.
      */

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
@@ -10,7 +11,9 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdviceController;
 
+use App\Models\Advice;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,25 +62,27 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/about', function () {
     return view('about');
 });
+Route::get('/about', [App\Http\Controllers\Controller::class, 'about'])->name('about');
+Route::get('/team', [App\Http\Controllers\Controller::class, 'team'])->name('team');
+Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->name('contact');
 
-Route::get('/team', function () {
-    return view('team');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-});
 
 // 認証ルートを有効化
 Auth::routes();
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
+        Route::get('index', [NutritionistController::class, 'index'])->name('index');
+        Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::post('store',[AdviceController::class, 'store'])->name('store');
+        Route::post('/updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
 
+        Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
+    });
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/nutri/index', [NutritionistController::class, 'index']);
-Route::get('nutri/sendAdvice', [NutritionistController::class, 'sendAdvice']);
-Route::get('nutri/history', [NutritionistController::class, 'history']);
 Route::get('/nutri/profile', [NutritionistController::class, 'profile']);
 Route::get('/nutri/editprofile', [NutritionistController::class, 'editprofile']);
 
@@ -88,5 +93,7 @@ Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showd
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
 Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
+Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'profileupdate'])->name('user.update');
+Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
 

@@ -194,7 +194,9 @@ main.main-padding{
 .nutri-h2 {
   text-align: center !important; /* 見出しを中央揃え */
   font-weight: bold !important; /* 太字に設定 */
-  margin-bottom: 30px !important; /* 下に余白を追加 */
+  margin-bottom: 50px !important; /* 下に余白を追加 */
+  /* margin-top: 50px !important; 下に余白を追加 */
+
 }
 
 .nutri-card {
@@ -264,6 +266,7 @@ footer {
   padding: 15px 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   font-size: 14px;
+
 }
 
 .footer-p-1 {
@@ -307,6 +310,12 @@ footer {
 
   }
 
+  .nutri-material-symbols-outlined {
+    font-size: 80px  !important; /* アイコンのサイズを80pxに設定 */
+    margin: 20px auto 10px; /* アイコンの余白を調整 */
+    color: #202F55;
+}
+
   .nutri-card-title {
     font-size: 16px ;
     font-weight: bold ;
@@ -324,30 +333,38 @@ footer {
 
 .fixed-back-button {
     position: fixed;
-    top: 120px; /* Align with header */
+    top: 95px; /* Align with header */
     left: 10px;
     z-index: 1000;
     width: 50px; /* ボタンの幅を指定（例: 50px） */
 }
 
 .custom-left-section {
-    width: calc(48% - 50px);  /* 幅を48%からボタンの幅分引く */
-    height: calc(100vh - 135px); /* ビューポートの高さからヘッダー部分を引く */
+    width: 48%;
+    height: 100%; /* 親の高さに合わせる */
     overflow-y: auto; /* 垂直方向にスクロール可能にする */
     background-color: #F7FCF1;
     padding-left: 50px;
-    margin-right: 2%; /* 右側との間に余白を作る */
-    float: left; /* 左側に配置 */
 }
 
+/* 右側セクション */
 .custom-right-section {
-    width: 48%;  /* 幅を48%に設定 */
-    padding: 2rem;
+    width: 48%;
     background-color: #FFFFFF;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    margin-left: 2%; /* 左側との間に余白を作る */
-    margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
-    float: left; /* 右側に配置 */
+    /* display: flex; 高さを揃えるためにフレックスボックスを利用 */
+    flex-direction: column; /* 内容を縦に配置 */
+    justify-content: space-between; /* 内容を上下に配置 */
+}
+
+
+.custom-table td {
+    padding: 3px 10px; /* 上下は3px、左右は10pxに設定 */
+    line-height: 1.2;   /* 行高を少し小さく設定 */
+}
+
+.user-info-custom .custom-data {
+    color: #202F55; /* データのテキスト色 */
 }
 
 .custom-blank-card {
@@ -355,7 +372,13 @@ footer {
     background-color: #FFFFFF;
     border: 1px solid #DDD;
     border-radius: 8px;
-    margin-top: 1rem;
+    margin-top: 100px;
+}
+
+.custom-left-right-container {
+    display: flex;
+    gap: 2%; /* 左右セクションの間隔を設定 */
+    height: calc(100vh - 135px); /* ビューポートの高さからヘッダー部分を引く */
 }
 
 .custom-right-section form {
@@ -369,19 +392,38 @@ footer {
     padding: 15px;
 }
 /* アイコンを丸くしてY軸の中央に配置 */
-.user-photo {
-    width: 100px; /* アイコンの幅 */
-    height: 100px; /* アイコンの高さ */
-    border-radius: 50%; /* 丸くする */
-    object-fit: cover; /* 画像が歪まないように */
-    margin-right: 15px; /* テキストとの間に余白を作る */
-    align-self: center; /* Y軸の中央に配置 */
+
+
+
+.user-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* アイコンが縦に中央揃えされるように */
 }
 
-/* 行間を狭くする */
-.user-info p {
-    margin-bottom: 5px; /* pタグの下の余白を狭くする */
-    line-height: 1.2; /* 行間を調整 */
+.user-photo, .nutri-material-symbols-outlined-user-photo {
+    width: 80px; /* アイコンの幅 */
+    height: 80px; /* アイコンの高さ */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* テーブルの横幅を広げ、項目とデータの間隔を広げる */
+.custom-table {
+    width: 100%; /* テーブルの横幅を100%に */
+}
+
+
+
+.user-info-custom .custom-data {
+    color: #202F55; /* データのテキスト色 */
+}
+
+
+
+.custom-table-text-color {
+    color: #202F55 !important;  /* テーブル内のすべての文字の色を変更 */
 }
 
 /* 通常状態のスタイル */
@@ -399,7 +441,15 @@ footer {
     background-color: #4DAF4A !important; /* ホバー時の背景色 */
     color: #FFFFFF !important; /* ホバー時の文字色 */
 }
-
+.sendAdvice-memo{
+    background-color: rgba(255, 169, 101, 0.4) !important; /* 背景色 40%透明度 */
+    color: #FFA965 !important; /* 文字色 */
+    border: none; /* 枠線をなくす */
+}
+.sendAdvice-memo:hover{
+    background-color: #FFA965 !important; /* ホバー時の背景色 */
+    color: #FFFFFF !important; /* ホバー時の文字色 */
+}
 .send-btn {
     background-color: rgba(255, 169, 101, 0.4) !important; /* 背景色 40%透明度 */
     color: #FFA965 !important; /* 文字色 */
@@ -574,11 +624,11 @@ footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 /* 編集用カード */
-.profile-card-edit {}
+/* .profile-card-edit {} */
 
 /* 表示用カード */
 .profile-card-view {
@@ -617,10 +667,10 @@ footer {
 }
 
 /* 編集用画像 */
-.profile-picture-edit {}
+/* .profile-picture-edit {} */
 
 /* 表示用画像 */
-.profile-picture-view {}
+/* .profile-picture-view {} */
 /* 編集用画像
 .profile-picture-edit {}
 
@@ -643,6 +693,7 @@ footer {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 /* 表示用情報 */
@@ -689,12 +740,13 @@ footer {
 
 .details-view .detail-label {
     font-weight: bold;
+    font-size: 20px;
     display: block;
     margin-bottom: 5px;
 }
 
 .details-view .detail-value {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* 共通ボタンスタイル */
@@ -733,6 +785,20 @@ footer {
 .edit-button-view .edit-link:hover {
     background-color: #ff8a30;
 }
+
+.form-control-edit,
+.form-select-edit,
+.detail-input-edit {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
 
 /* カード全体をスタイルする */
 .card.card-login {
