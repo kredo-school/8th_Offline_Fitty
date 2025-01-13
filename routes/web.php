@@ -35,9 +35,10 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
-        Route::get('/index', [NutritionistController::class, 'index'])->name('index');
+        Route::get('index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
+        Route::post('/updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
 
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });
