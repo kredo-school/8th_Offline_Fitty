@@ -12,8 +12,10 @@
                 <!-- main content -->
 
                 <body>
-                    <form action="/profile/update" method="POST">
+                    <form action="{{ route('user.update', $user->id) }}" method="POST">
                         @csrf
+                        @method('PATCH')
+
                         <div class="profile-card profile-card-edit">
                             <div class="profile-header profile-header-edit">
                                 <img src="https://via.placeholder.com/120" alt="Profile Picture"

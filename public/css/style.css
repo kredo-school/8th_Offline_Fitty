@@ -626,7 +626,7 @@ footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 /* 編集用カード */
@@ -695,6 +695,7 @@ footer {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 /* 表示用情報 */
@@ -741,12 +742,13 @@ footer {
 
 .details-view .detail-label {
     font-weight: bold;
+    font-size: 20px;
     display: block;
     margin-bottom: 5px;
 }
 
 .details-view .detail-value {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /* 共通ボタンスタイル */
@@ -784,6 +786,18 @@ footer {
 
 .edit-button-view .edit-link:hover {
     background-color: #ff8a30;
+}
+
+.form-control-edit,
+.form-select-edit,
+.detail-input-edit {
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 
