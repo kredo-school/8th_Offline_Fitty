@@ -39,9 +39,9 @@ class UserController extends Controller
         return view('users.inputmeal');
     }
 
-    public function profile()
+    public function profile($id)
     {
-        $user = Auth::user();
+        $user = $this->user->findOrFail($id);
 
         return view('users.profile', compact('user'));
     }
