@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         UsersTableSeeder::class,  // ユーザーのシーダー 
         UserProfilesTableSeeder::class,
         NutritionistsProfilesTableSeeder::class,
+        CategoriesTableSeeder::class,
+        SubCategoriesTableSeeder::class,
     ]);
 
 }

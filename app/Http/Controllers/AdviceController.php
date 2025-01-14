@@ -42,9 +42,26 @@ class AdviceController extends Controller
 
 
         $this->advice->save();
+
         return redirect()->route('nutri.index')->with('success', 'Advice sent successfully!');
 
 
+    }
+
+
+public function updateMemo(Request $request, $id)
+    {
+        // メモが空でないかを検証
+        $request->validate([
+            'memo' => 'max:1000',
+        ]);
+
+        // ユーザーのメモを更新
+        $user = $this->user->findOrFail($id);
+        $user->nutritionist_memo = $request->memo;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Memo updated successfully!');
     }
 
 

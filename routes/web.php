@@ -3,8 +3,14 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\NutritionistsController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\InquiriesController;
+
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AdviceController;
 
 use App\Models\Advice;
@@ -25,6 +31,37 @@ Route::get('/', function () {
     return view('landing');
 });
 
+// Laravelのデフォルト認証ルート
+Auth::routes();
+
+// Adminルート
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // // 認証関連のルート
+    // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+    // Route::post('login', [AuthController::class, 'login']);
+    // Route::get('password/request', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
+
+    // Admin Index
+    Route::get('/index', [AdminController::class, 'index'])->name('index');
+
+    // リソース別ルート
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
+    Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+
+    // Categories関連のルート
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
 Route::get('/about', [App\Http\Controllers\Controller::class, 'about'])->name('about');
 Route::get('/team', [App\Http\Controllers\Controller::class, 'team'])->name('team');
 Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->name('contact');
@@ -33,11 +70,11 @@ Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->nam
 // 認証ルートを有効化
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
+Route::group(['middleware' => 'auth'], function(){
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
-        Route::post('store', [AdviceController::class, 'store'])->name('store');
+        Route::post('store',[AdviceController::class, 'store'])->name('store');
 
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });

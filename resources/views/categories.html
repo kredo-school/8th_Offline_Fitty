@@ -1,0 +1,316 @@
+<style>
+  .categories-wrapper {
+    background-color: rgba(247, 252, 241, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: start;
+    justify-content: center;
+    padding: 87px 80px;
+  }
+  .categories-container {
+    display: flex;
+    width: 100%;
+    max-width: 819px;
+    flex-direction: column;
+  }
+  .header-container {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    font-family: Shrikhand, sans-serif;
+    font-weight: 400;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .category-title {
+    color: rgba(0, 152, 79, 1);
+    font-size: 32px;
+    margin: auto 0;
+  }
+  .add-button {
+    border-radius: 5px;
+    background-color: rgba(255, 169, 101, 1);
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+    color: var(--Text-Colors-Text-Color-3, #fff);
+    text-align: center;
+    line-height: 1;
+    padding: 10px 28px;
+    cursor: pointer;
+  }
+  .add-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 14px;
+    margin: auto 0;
+  }
+  .category-item {
+    align-self: center;
+    display: flex;
+    margin-top: 51px;
+    width: 100%;
+    max-width: 767px;
+    gap: 20px;
+    color: rgba(0, 152, 79, 1);
+    white-space: nowrap;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font: 700 20px/1 Poppins, sans-serif;
+  }
+  .category-icon {
+    aspect-ratio: 0.91;
+    object-fit: contain;
+    object-position: center;
+    width: 20px;
+  }
+  .divider {
+    aspect-ratio: 1000;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    margin-top: 23px;
+  }
+  .subcategory-wrapper {
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 19px 0 65px;
+  }
+  .subcategory-item {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .subcategory-text {
+    color: rgba(0, 152, 79, 1);
+    font: 400 20px Poppins, sans-serif;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 29px;
+    margin: auto 0;
+  }
+  .edit-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 18px;
+    margin: auto 0;
+    cursor: pointer;
+  }
+  .delete-icon {
+    aspect-ratio: 0.81;
+    object-fit: contain;
+    object-position: center;
+    width: 17px;
+    cursor: pointer;
+  }
+  .selected-category {
+    border-radius: 3px;
+    background-color: rgba(255, 169, 101, 1);
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    align-items: start;
+    gap: 20px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 9px 19px 16px 65px;
+  }
+  .selected-text {
+    color: rgba(255, 255, 255, 1);
+    font: 300 20px Poppins, sans-serif;
+  }
+  @media (max-width: 991px) {
+    .categories-wrapper {
+      padding: 0 20px;
+    }
+    .categories-container {
+      max-width: 100%;
+    }
+    .header-container {
+      max-width: 100%;
+      margin-right: 5px;
+    }
+    .add-button {
+      padding: 0 20px;
+    }
+    .category-item {
+      max-width: 100%;
+      margin-top: 40px;
+      white-space: initial;
+    }
+    .divider {
+      max-width: 100%;
+    }
+    .subcategory-wrapper {
+      max-width: 100%;
+      padding-left: 20px;
+    }
+    .subcategory-item {
+      max-width: 100%;
+    }
+    .selected-category {
+      padding-left: 20px;
+    }
+  }
+</style>
+
+<div class="categories-wrapper">
+  <div class="categories-container">
+    <div class="header-container">
+      <div class="category-title">Categories</div>
+      <button class="add-button" tabindex="0">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/ec7d8f7a91a9617450f3bfa0e1272487f0779d104dc90d28001eef2a52a599eb?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+          class="add-icon"
+          alt="Add category icon"
+        />
+        <div>Add</div>
+      </button>
+    </div>
+    <div class="category-item">
+      <div>mineral</div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/718fc3bc8ad02cb2dae48e6114729ed3120f770834544423757d9537b19776c5?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+        class="category-icon"
+        alt="Mineral category icon"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/801679a2f279c093325f40ef876c6a2804665c0686fb63f1bdd792c4e77cba3d?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+      class="divider"
+      alt=""
+    />
+    <div class="category-item">
+      <div>mineral</div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/d5c62124d19fa1e5965dba33da3df33eb8982605f4bf4a797d60c073a7f86e59?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+        class="category-icon"
+        alt="Mineral category icon"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/801679a2f279c093325f40ef876c6a2804665c0686fb63f1bdd792c4e77cba3d?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+      class="divider"
+      alt=""
+    />
+    <div class="subcategory-wrapper">
+      <div class="subcategory-item">
+        <div class="subcategory-text">mineral 1</div>
+        <div class="action-buttons">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6eb1d799708d26385e31498b6daa3d0baeaaa186d0891ed88519ba874c72281a?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+            class="edit-icon"
+            alt="Edit icon"
+            tabindex="0"
+          />
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/178e09956159bd0369aee6f65cbd3bdb958f78fd0e46fb92f064d685a6345a15?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+            class="delete-icon"
+            alt="Delete icon"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div class="subcategory-item">
+        <div class="subcategory-text">mineral 1</div>
+        <div class="action-buttons">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6eb1d799708d26385e31498b6daa3d0baeaaa186d0891ed88519ba874c72281a?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+            class="edit-icon"
+            alt="Edit icon"
+            tabindex="0"
+          />
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/178e09956159bd0369aee6f65cbd3bdb958f78fd0e46fb92f064d685a6345a15?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+            class="delete-icon"
+            alt="Delete icon"
+            tabindex="0"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="selected-category">
+      <div class="selected-text">mineral 2</div>
+      <div class="action-buttons">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba6278f99021023722341fa735e25e95f0c92b8fae1b2e187c8fc303dcf88a2e?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+          class="edit-icon"
+          alt="Edit icon"
+          tabindex="0"
+        />
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c55b5dca3b8b4e0f6e672729f9f5c632bf8075131dba9e6d76980b219f4e2fd7?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+          class="delete-icon"
+          alt="Delete icon"
+          tabindex="0"
+        />
+      </div>
+    </div>
+    <div class="category-item">
+      <div>mineral</div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5533db1b342706612c6efb720f02fe3c3ae977ed1c9c84f7da15aae3baff5b58?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+        class="category-icon"
+        alt="Mineral category icon"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/801679a2f279c093325f40ef876c6a2804665c0686fb63f1bdd792c4e77cba3d?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+      class="divider"
+      alt=""
+    />
+    <div class="category-item">
+      <div>mineral</div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5533db1b342706612c6efb720f02fe3c3ae977ed1c9c84f7da15aae3baff5b58?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+        class="category-icon"
+        alt="Mineral category icon"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/801679a2f279c093325f40ef876c6a2804665c0686fb63f1bdd792c4e77cba3d?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+      class="divider"
+      alt=""
+    />
+    <div class="category-item">
+      <div>mineral</div>
+      <img
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5533db1b342706612c6efb720f02fe3c3ae977ed1c9c84f7da15aae3baff5b58?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+        class="category-icon"
+        alt="Mineral category icon"
+      />
+    </div>
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/801679a2f279c093325f40ef876c6a2804665c0686fb63f1bdd792c4e77cba3d?placeholderIfAbsent=true&apiKey=6a50279d460848599bc02138b8184a19"
+      class="divider"
+      alt=""
+    />
+  </div>
+</div>
