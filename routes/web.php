@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MultiStepRegisterController;
+
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
@@ -68,7 +71,20 @@ Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->nam
 
 
 // 認証ルートを有効化
-Auth::routes();
+//  Auth::routes();
+ Auth::routes(['register' => false]); 
+//  デフォルトの /register を無効化
+
+
+// Register
+Route::prefix('register')->group(function () {
+    Route::get('/step1', [MultiStepRegisterController::class, 'showStep1'])->name('register.step1');
+    Route::post('/step1', [MultiStepRegisterController::class, 'processStep1'])->name('register.step1.submit');
+    Route::get('/step2', [MultiStepRegisterController::class, 'showStep2'])->name('register.step2');
+    Route::patch('/step2', [MultiStepRegisterController::class, 'processStep2'])->name('register.step2.submit');
+});
+
+
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){

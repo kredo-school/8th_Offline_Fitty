@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -9,10 +10,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->longtext('avatar')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
@@ -20,13 +24,13 @@ return new class extends Migration
             $table->string('role')->default('U');
             $table->timestamps();
         });
-
+    
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
-
+    
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -36,14 +40,15 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('users'); // Drop users table
+        Schema::dropIfExists('password_reset_tokens'); // Drop password reset tokens table
+        Schema::dropIfExists('sessions'); // Drop sessions table
     }
 };
