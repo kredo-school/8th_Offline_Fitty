@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // usersテーブルとのリレーション
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('gender')->nullable();
             $table->date('birthday')->nullable();
             $table->integer('height')->nullable();
             $table->integer('activity_level')->nullable();
-            $table->longtext('avatar')->nullable();
+            // $table->longtext('avatar')->nullable();
             $table->longtext('profile_image')->nullable();
             $table->text('memo')->nullable();
             $table->text('nutritionist_memo')->nullable();

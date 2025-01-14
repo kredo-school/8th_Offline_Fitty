@@ -11,32 +11,12 @@ return new class extends Migration
      * Run the migrations.
      */
 
-    // public function up(): void
-    // {
-    //     Schema::create('users', function (Blueprint $table) {
-    //         $table->id();
-    //         $table->string('name'); 
-    //         $table->string('email')->unique();
-    //         $table->string('password');
-    //         $table->enum('gender', ['male', 'female', 'non_binary', 'other', 'prefer_not_to_say']);
-    //         $table->date('birthday');
-    //         $table->integer('height');
-    //         $table->string('avatar')->default('default_avatar.png');
-    //         $table->integer('activity_level')->default(0);
-    //         $table->text('nutritionist_memo')->nullable()->comment('Optional memo from the nutritionist');
-    //         $table->string('role')->default('user');
-    //         $table->foreignId('nutritionist_id')->nullable()->constrained('nutritionists')->nullOnDelete();
-    //         $table->json('health_conditions'); 
-    //         $table->json('dietary_preferences'); 
-    //         $table->text('food_allergies')->nullable(); 
-    //         $table->text('goals')->nullable(); 
-    //         $table->timestamps();
-    //     });
-
+    
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->longtext('avatar')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

@@ -6,29 +6,20 @@
         <h3 class="mb-4">1. Basic Information</h3>
         <form method="POST" action="{{ route('register.step1.submit') }}" enctype="multipart/form-data">
             @csrf
-            <!-- Profile Image -->
+            <!-- Avatar -->
             <div class="mb-3">
-                <label for="profile_image" class="form-label">Upload Profile Image</label>
-                <input type="file" id="profile_image" name="profile_image" class="form-control">
-                @error('profile_image')
+                <label for="avatar" class="form-label">Upload Avatar(Your picture)</label>
+                <input type="file" id="avatar" name="avatar" class="form-control">
+                @error('avatar')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
 
-            <!-- First Name -->
+            <!-- User Name -->
             <div class="mb-3">
-                <label for="first_name" class="form-label">First Name</label>
-                <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control">
-                @error('first_name')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-
-            <!-- Last Name -->
-            <div class="mb-3">
-                <label for="last_name" class="form-label">Last Name</label>
-                <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" class="form-control">
-                @error('last_name')
+                <label for="name" class="form-label">User Name</label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-control">
+                @error('name')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

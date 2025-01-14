@@ -26,24 +26,32 @@ class MultiStepRegisterController extends Controller
     public function processStep1(Request $request)
     {
         $validatedData = $request->validate([
-            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if ($request->hasFile('profile_image')) {
-            $filePath = $request->file('profile_image')->store('profile_images', 'public');
+        dd($validatedData['avatar']);
+
+        if ($request->hasFile('avatar')) {
+            $filePath = $request->file('avatar')->store('avatar', 'public');
             $validatedData['avatar'] = $filePath;
         }
 
         $user = User::create([
-            'name' => $validatedData['first_name'] . ' ' . $validatedData['last_name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
             'avatar' => $validatedData['avatar'] ?? 'default_avatar.png',
+            'name' => $validatedData['name'] ,
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),        
         ]);
+
+        // 空のプロファイルを作成
+        $user->profile()->create([
+            'first_name' => '', // 空文字またはデフォルト値
+            'last_name' => '',  // 空文字またはデフォルト値
+        ]);
+        
 
         Auth::login($user);
         
@@ -69,57 +77,41 @@ class MultiStepRegisterController extends Controller
             return redirect()->route('register.step1')->with('error', 'Step 1 is incomplete.');
         }
 
+        $user = User::find($userId);
         // dd($userId);
-        $validatedData = $request->validate([
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'gender' => 'required|string',
             'height' => 'required|numeric|min:120|max:220',
-            'exercise_frequency' => 'required|string',
+            'activity_level' => 'required|string',
             'health_conditions' => 'nullable|array',
             'dietary_preferences' => 'nullable|array',
             'food_allergies' => 'nullable|string',
             'goals' => 'nullable|string',
         ]);
 
-        //  // ユーザーを取得
-        // $user = User::find($userId);
-        // if (!$user) {
-        // return redirect()->route('register.step1')->with('error', 'User not found. Please restart registration.');
-        // }
+        // プロファイルを取得または新規作成
+        $profile = $user->profile()->firstOrNew([]);
+        $profile->user_id = $user->id;
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->birthday = $request->dob;
+        $profile->gender = $request->gender;
+        $profile->height = $request->height;
+        $profile->activity_level = $this->mapExerciseFrequency($request->activity_level);
+        $profile->health_conditions = json_encode($request->health_conditions ?? []);
+        $profile->dietary_preferences = json_encode($request->dietary_preferences ?? []);
+        $profile->food_allergies = $request->food_allergies ?? null;
+        $profile->goals = $request->goals ?? null;
 
-        // $userId = $request->session()->get('step1_user_id');
+        $profile->save();
 
-        $user = User::find($userId);
+        // セッションデータを削除してリダイレクト
+        $request->session()->forget('step1_user_id');
 
-        // dd($user);
-        // if ($user) {
-
-            // $user->update([
-            //     'birthday' => $validatedData['dob'],
-            //     'gender' => $validatedData['gender'],
-            //     'height' => $validatedData['height'],
-            //     'activity_level' => $this->mapExerciseFrequency($validatedData['exercise_frequency']),
-            //     'health_conditions' => json_encode($validatedData['health_conditions'] ?? []),
-            //     'dietary_preferences' => json_encode($validatedData['dietary_preferences'] ?? []),
-            //     'food_allergies' => $validatedData['food_allergies'] ?? null,
-            //     'goals' => $validatedData['goals'] ?? null,
-            // ]);
-            $user = $this->user->findOrFail(Auth::user()->id);
-            $user->birthday = $request->dob;
-            $user->gender = $request->gender;
-            $user->height = $request->height;
-            $user->exercise_frequency = $request->exercise_frequency;
-            $user->activity_level = $request->exercise_frequency;
-            $user->health_conditions = json_encode($request->health_conditions ?? []);
-            $user->dietary_preferences = json_encode($request->dietary_preferences ?? []);
-            $user->food_allergies = $request->food_allergies ?? null;
-            $user->goals = $request->goals ?? null;
-
-            $user->save();
-
-        // }
-
-        return redirect()->route('home')->with('success', 'Registration completed successfully!');
+        return redirect()->route('user.profile')->with('success', 'Registration completed successfully!');
     }
 
     // Exercise Frequencyをactivity_levelにマッピングする補助メソッド

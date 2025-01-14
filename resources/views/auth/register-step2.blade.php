@@ -15,6 +15,30 @@
     </div>
 @endif
 
+
+        <!-- Section 2: Health Information -->
+        <div class="form-section">
+            <div class="form-row ">
+                <h2>1. Basic Information</h2>
+            <!-- First Name -->
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control">
+                    @error('first_name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+            <!-- Last Name -->
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" class="form-control">
+                    @error('last_name')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
+
         <!-- Section 2: Health Information -->
             <div class="form-section">
                 <div class="form-row ">
@@ -36,6 +60,8 @@
                             <option value="prefer_not_to_say">Other</option>
                         </select>
                     </div>
+                </div>
+            </div>
 
                 </div>
                 <div class="form-row">
@@ -46,7 +72,7 @@
                     </div>
                     {{-- Exercise Frequency --}}
                     <div class="form-group mb-4 mt-4">
-                        <label for="exercise_frequency">Exercise Frequency</label>
+                        <label for="activity_level">Exercise Frequency</label>
                         <p class="text-muted">Select your level based on the description:</p>
                         <table class="table table-bordered">
                             <thead>
@@ -62,19 +88,19 @@
                                     <td>Level 1</td>
                                     <td>Less than once per week</td>
                                     <td>You rarely engage in physical activities. Examples include occasional walks or light stretching. This level is suitable if you're just starting or have a sedentary lifestyle.</td>
-                                    <td><input type="radio" name="exercise_frequency" value="Level_1"></td>
+                                    <td><input type="radio" name="activity_level" value="Level_1"></td>
                                 </tr>
                                 <tr>
                                     <td>Level 2</td>
                                     <td>2-3 times per week</td>
                                     <td>You exercise moderately on a weekly basis. Activities might include jogging, casual sports, or gym sessions. This level is ideal for maintaining general fitness.</td>
-                                    <td><input type="radio" name="exercise_frequency" value="Level_2"></td>
+                                    <td><input type="radio" name="activity_level" value="Level_2"></td>
                                 </tr>
                                 <tr>
                                     <td>Level 3</td>
                                     <td>4+ times per week</td>
                                     <td>You are highly active and exercise consistently. This may include structured workout plans, intensive sports, or frequent gym visits. This level reflects a well-established fitness routine.</td>
-                                    <td><input type="radio" name="exercise_frequency" value="Level_3"></td>
+                                    <td><input type="radio" name="activity_level" value="Level_3"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -201,8 +227,8 @@
                 </div>
 
             </div>
-
-            <button type="submit" class="btn-submit mt-3">
+ 
+            <button type="submit" class="btn-submit my-5">
                 REGISTER
             </button>
         </form>

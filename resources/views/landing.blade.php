@@ -39,7 +39,7 @@
                 beginners.
                 Start your journey today and unlock a healthier, happier version of yourself with <span>Fitty</span>.
             </p>
-            <a href="{{ route('register') }}" class="btn">Start Now</a>
+            <a href="{{ route('register.step1') }}" class="btn">Start Now</a>
         </div>
         <div class="image-section">
             <img src="{{ asset('images/fitty_logo.png') }}" alt="Fitty Logo">
