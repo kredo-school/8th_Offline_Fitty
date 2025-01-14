@@ -16,8 +16,8 @@
                         <img src="https://via.placeholder.com/120" alt="Profile Picture"
                             class="profile-picture profile-picture-view">
                         <div class="info info-view">
-                            <h2 class="profile-name profile-name-view">Emiko Imai</h2>
-                            <p class="profile-email profile-email-view">alexarawles@gmail.com</p>
+                            <h2 class="profile-name profile-name-view">{{$user->name}}</h2>
+                            <p class="profile-email profile-email-view">{{$user->email}}</p>
                         </div>
                     </div>
                     <div class="details details-view">

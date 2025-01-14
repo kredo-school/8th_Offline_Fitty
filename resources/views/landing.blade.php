@@ -26,7 +26,7 @@
         <a class="navbar-brand" href="#">FITTY</a>
         <div>
             <a class="nav-link login" href="{{ route('login') }}">Login</a>
-            <a class="nav-link" href="{{route('about')}}">About Us</a>
+            <a class="nav-link" href="{{ route('about') }}">About Us</a>
         </div>
     </nav>
 
@@ -39,7 +39,7 @@
                 beginners.
                 Start your journey today and unlock a healthier, happier version of yourself with <span>Fitty</span>.
             </p>
-            <a href="{{ route('register.step1') }}" class="btn">Start Now</a>
+            <a href="{{ route('register.step1 ') }}" class="btn">Start Now</a>
         </div>
         <div class="image-section">
             <img src="{{ asset('images/fitty_logo.png') }}" alt="Fitty Logo">
