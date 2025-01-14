@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
     //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+    // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
 
     // Categories関連のルート
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
