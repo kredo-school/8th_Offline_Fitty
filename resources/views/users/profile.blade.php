@@ -12,34 +12,38 @@
                 <!-- main content -->
                 <div class="profile-card profile-card-view">
                     <div class="profile-header profile-header-view">
-                        <img src="https://via.placeholder.com/120" alt="Profile Picture"
-                            class="profile-picture profile-picture-view">
+                        @if($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
+                        @else
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture profile-picture-view">
+                        @endif
                         <div class="info info-view">
                             <h2 class="profile-name profile-name-view">{{ $user->name }}</h2>
                             <p class="profile-email profile-email-view">{{ $user->email }}</p>
                         </div>
                     </div>
+
                     <div class="details details-view">
 
                         <div class="row">
                             <div class="detail-item detail-item-view col-6">
                                 <span class="detail-label detail-label-view">Gender</span>
-                                <span class="detail-value detail-value-view">{{ $user->gender }}</span>
+                                <span class="detail-value detail-value-view">{{ $user->profile->gender }}</span>
                             </div>
                             <div class="detail-item detail-item-view col-6">
                                 <span class="detail-label detail-label-view">Birthday</span>
                                 <span
-                                    class="detail-value detail-value-view">{{ \Carbon\Carbon::parse($user->birthday)->format('m-d-Y') }}</span>
+                                    class="detail-value detail-value-view">{{ \Carbon\Carbon::parse($user->profile->birthday)->format('m-d-Y') }}</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="detail-item detail-item-view col-6">
                                 <span class="detail-label detail-label-view">Height</span>
-                                <span class="detail-value detail-value-view">{{ $user->height }}</span>
+                                <span class="detail-value detail-value-view">{{ $user->profile->height }}</span>
                             </div>
                             <div class="detail-item detail-item-view col-6">
                                 <span class="detail-label detail-label-view">Acticity Level</span>
-                                <span class="detail-value detail-value-view">{{ $user->activity_level }}</span>
+                                <span class="detail-value detail-value-view">{{ $user->profile->activity_level }}</span>
                             </div>
                         </div>
                     </div>
@@ -52,4 +56,4 @@
         </div>
     </div>
 
-    @endsection
+@endsection
