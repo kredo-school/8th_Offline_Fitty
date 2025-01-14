@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,12 +12,12 @@ class MultiStepRegisterController extends Controller
 {
 
     private $user;
-    
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
-    
+
     public function showStep1()
     {
         return view('auth.register-step1');
@@ -32,7 +32,7 @@ class MultiStepRegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        dd($validatedData['avatar']);
+        // dd($validatedData['avatar']);
 
         if ($request->hasFile('avatar')) {
             $filePath = $request->file('avatar')->store('avatar', 'public');
@@ -43,7 +43,7 @@ class MultiStepRegisterController extends Controller
             'avatar' => $validatedData['avatar'] ?? 'default_avatar.png',
             'name' => $validatedData['name'] ,
             'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),        
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         // 空のプロファイルを作成
@@ -51,10 +51,10 @@ class MultiStepRegisterController extends Controller
             'first_name' => '', // 空文字またはデフォルト値
             'last_name' => '',  // 空文字またはデフォルト値
         ]);
-        
+
 
         Auth::login($user);
-        
+
         $request->session()->put('step1_user_id', $user->id);
 
         return redirect()->route('register.step2');
@@ -111,7 +111,7 @@ class MultiStepRegisterController extends Controller
         // セッションデータを削除してリダイレクト
         $request->session()->forget('step1_user_id');
 
-        return redirect()->route('user.profile')->with('success', 'Registration completed successfully!');
+        return redirect()->route('user.profile',$user->id );
     }
 
     // Exercise Frequencyをactivity_levelにマッピングする補助メソッド
