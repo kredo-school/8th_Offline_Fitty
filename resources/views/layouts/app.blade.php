@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
     @stack('styles')
 
 
@@ -31,21 +31,44 @@
 
 </head>
 <body>
-    <div id="app">
+    {{-- <div id="app">
+        @if(auth()->check())
+        <!-- サイドメニュー -->
+        <div class="sidemenu">
+            <a href="#" class="menu-item">
+                <span class="material-icons mt-3">assignment</span> Record
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">person</span> Profile
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">history</span> History
+            </a>
+            <a href="#" class="menu-item active">
+                <span class="material-icons">notifications</span> Notification
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">help_outline</span> Help
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">help</span> FAQ
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+        @endif --}}
 
-        <!-- ナビバー -->
+        <!-- ナビバー(header) -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-            <div class="container">
-                <a class="navbar-brand-logo" href="{{ url('/') }}">
+            <div class="container navbar-container">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button> -->
-
-
-
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -60,15 +83,15 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            @if (Route::has('register.step1'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register.step1') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="https://via.placeholder.com/50" class="nav-user-icon" alt="Avatar">
+                                    <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://via.placeholder.com/50' }}" class="nav-user-icon" alt="avatar">
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -89,10 +112,10 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="main-padding main-content">
+        <main class="py-4 main-content">
             @yield('content')
         </main>
-        
+
     </div>
 
     <!-- フッター -->

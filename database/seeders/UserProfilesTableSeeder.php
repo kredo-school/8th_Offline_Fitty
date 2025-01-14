@@ -35,6 +35,7 @@ class UserProfilesTableSeeder extends Seeder
                 'goals' => 'Lose weight and improve stamina.', // 仮の目標
                 'created_at' => now(),
                 'updated_at' => now(),
+                
             ];
         }
 
