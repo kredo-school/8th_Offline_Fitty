@@ -23,7 +23,7 @@
                     <div class="details details-view">
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Full Name</span>
-                            <span class="detail-value detail-value-view">Emiko Imai</span>
+                            <span class="detail-value detail-value-view">{{$user->profile->first_name}}{{$user->profile->last_name}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Description</span>

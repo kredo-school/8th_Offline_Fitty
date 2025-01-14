@@ -72,7 +72,7 @@ Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->nam
 
 // 認証ルートを有効化
 //  Auth::routes();
- Auth::routes(['register' => false]); 
+ Auth::routes(['register' => false]);
 //  デフォルトの /register を無効化
 
 
@@ -91,6 +91,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
+        Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });
