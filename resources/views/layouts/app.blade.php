@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
     @stack('styles')
 
 
@@ -115,49 +115,19 @@
         <main class="py-4 main-content">
             @yield('content')
         </main>
-        
+
     </div>
 
     <!-- フッター -->
-<footer class="footer" style="display: none;">
-    <p class="footer-p-1">Terms of Use | Privacy Policy | Help</p>
+<footer class="footer">
+    <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
     <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
 </footer>
 
- <!-- JavaScript -->
- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const footer = document.querySelector("footer");
-        const body = document.body; // ページ全体のボディ
-        const footerHeight = 60; // フッターの高さ (px)
-        let isFooterVisible = false; // フッターの表示状態を追跡
-
-        // フッターの高さ分、余白を確保
-        body.style.paddingBottom = `${footerHeight}px`;
-
-        window.addEventListener("scroll", function () {
-            const scrollTop = window.scrollY; // 現在のスクロール位置
-            const windowHeight = window.innerHeight; // ウィンドウの高さ
-            const documentHeight = document.documentElement.scrollHeight; // ページ全体の高さ
-
-            // スクロール位置が最下部に達したかをチェック
-            if (scrollTop + windowHeight >= documentHeight - 10) {
-                if (!isFooterVisible) { // フッターがまだ表示されていない場合のみ表示
-                    footer.style.display = "block"; // フッターを表示
-                    isFooterVisible = true;
-                }
-            } else {
-                if (isFooterVisible) { // フッターが表示されている場合のみ非表示
-                    footer.style.display = "none"; // フッターを非表示
-                    isFooterVisible = false;
-                }
-            }
-        });
-    });
-</script>
 
 
 
-    
+
+
 </body>
 </html>

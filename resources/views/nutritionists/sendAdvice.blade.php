@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Send Advice')
 @section('content')
-<div class="custom-left-right-container">
+<div class="custom-left-right-container" >
 
 <div class="custom-left-section">
     <!-- Back Button -->
