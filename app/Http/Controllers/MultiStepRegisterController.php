@@ -32,8 +32,6 @@ class MultiStepRegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // dd($validatedData['avatar']);
-
         if ($request->hasFile('avatar')) {
             $filePath = $request->file('avatar')->store('avatar', 'public');
             $validatedData['avatar'] = $filePath;
