@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\InquiriesController;
+// use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
+    //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
     // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
 
     // Categories関連のルート
