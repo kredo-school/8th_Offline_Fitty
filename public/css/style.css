@@ -575,7 +575,7 @@ footer {
 
   .unique-table th, .unique-table td {
     padding: 12px 15px;
-    text-align: center;
+    text-align: center;A¥¥¥¥
   }
 
   .unique-table th {
@@ -1014,10 +1014,11 @@ body.admin-users {
 }
 
 /* テーブル行ホバー時のスタイル */
-.admin-users .admin-users-table tbody tr:hover {
-  background-color: #ffa965 !important; /* オレンジ背景 */
-  color: white;
+.admin-users-table tr:hover td{
+  background-color: #ffa965 !important;
+  color: white !important;
 }
+
 
 /* テーブル行ホバー時にリンクとアイコンの色を白に変更 */
 .admin-users .admin-users-table tbody tr:hover a,
@@ -1116,53 +1117,72 @@ body.admin-users {
   color: #ffa965;
 }
 
-/* モーダルヘッダー */
-.admin-users .modal-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* modal header */
+.admin-users-modal-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
   border-bottom: 2px solid #00984F !important;
 }
 
-.admin-users .modal-icon {
-  font-size: 36px;
+.admin-users-modal-icon {
+  font-size: 30px !important;
   color: #00984F !important;
 }
 
-.admin-users .modal-title {
-  font-family: 'Shrikhand', sans-serif;
-  color: #00984F!important;
+.admin-users-modal-title {
+  font-family: 'Shrikhand', sans-serif !important;
+  color: #00984F !important;
+}
+/* モーダル本文のスタイル */
+.admin-users-modal-body {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 1rem;
+  color: #202F55;
 }
 
+/* モーダルフッターの上の横線を消す */
+.admin-users-modal-footer {
+  border-top: none !important;
+}
+
+/* モーダル右上の閉じるボタンを非表示にする */
+.admin-users-modal-header .btn-close {
+  display: none !important;
+}
+
+
+
 /* モーダルボタン */
-.admin-users .cancel-btn,
-.admin-users .delete-btn {
+.admin-users-cancel-btn,
+.admin-users-delete-btn {
   border-radius: 8px;
   padding: 6px 16px;
-  font-family: 'Shrikhand', sans-serif;
+  font-family: 'Shrikhand', sans-serif !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.admin-users .cancel-btn {
+.admin-users-cancel-btn {
   background-color: #fff;
-  color: #ffa965;
-  border: 2px solid #ffa965;
+  color: #ffa965 !important;
+  border: 2px solid #ffa965 !important;
 }
 
-.admin-users .cancel-btn:hover {
-  background-color: #ffa965;
-  color: #fff;
+.admin-users-cancel-btn:hover {
+  background-color: #ffa965 !important;
+  color: #fff !important;
 }
 
-.admin-users .delete-btn {
-  background-color: #ffa965;
-  color: #fff;
+.admin-users-delete-btn {
+  background-color: #ffa965 !important;
+  color: #fff !important;
   border: none;
 }
 
-.admin-users .delete-btn:hover {
-  background-color: #ff8c00;
+.admin-users-delete-btn:hover {
+  background-color: #ff8c00 !important;
 }
+
 
 /* ページネーション */
 .admin-users .admin-users-pagination {
@@ -1448,6 +1468,92 @@ body.admin-nutritionists {
 .search-form {
     margin-right: 10px; /* Addボタンとの間隔を少し調整 */
 }
+
+
+/* nutritionists profile */
+
+.admin-nutri-profile {
+  font-family: 'Arial', sans-serif;
+  background-color: #F7FCF1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.admin-nutri-profile-container {
+  max-width: 600px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-nutri-profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-nutri-profile-group {
+  margin-bottom: 15px;
+}
+
+.admin-nutri-profile-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.admin-nutri-profile-group input,
+.admin-nutri-profile-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.admin-nutri-profile-group textarea {
+  height: 100px;
+  resize: none;
+}
+
+.admin-nutri-profile-group input[type="file"] {
+  padding: 5px;
+}
+
+.admin-nutri-profile-submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #FFC107;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-nutri-profile-submit-btn:hover {
+  background-color: #FFA000;
+}
+
+.admin-nutri-profile-note {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.admin-nutri-profile-photo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  background-color: #ddd;
+}
+
 
 
 
