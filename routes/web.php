@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
     Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
 
-    Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+    // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
     Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
@@ -58,9 +58,6 @@ Route::get('/about', [App\Http\Controllers\Controller::class, 'about'])->name('a
 Route::get('/team', [App\Http\Controllers\Controller::class, 'team'])->name('team');
 Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->name('contact');
 
-
-// 認証ルートを有効化
-Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
