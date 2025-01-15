@@ -8,7 +8,7 @@
   background-color: #fff; /* 背景色 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   margin: 0;
-  padding: 0 15px; 
+  padding: 0 15px;
 }
 
 .navbar-brand {
@@ -159,6 +159,7 @@ footer {
   padding: 15px 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   font-size: 14px;
+  height: 10px;
 }
 
 .footer-p-1 {
@@ -184,7 +185,7 @@ body {
   padding: 25px;
   position:relative;
 }
-  
+
   .nutri-h2 {
     text-align: center !important;
     font-weight: bold !important;
@@ -1489,8 +1490,8 @@ footer a {
 /* 全体のフォント */
 body.admin-users {
   font-family: 'Shrikhand', sans-serif;
-}  
-/* 
+}
+/*
 タイトルスタイル */
 .admin-users h1.admin-users-title {
   font-family: 'Shrikhand', sans-serif;
