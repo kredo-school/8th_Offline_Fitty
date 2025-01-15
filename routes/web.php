@@ -87,10 +87,14 @@ Route::prefix('register')->group(function () {
 
 
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::post('store', [AdviceController::class, 'store'])->name('store');
+        Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
+        Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
+        Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
@@ -100,8 +104,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/nutri/profile', [NutritionistController::class, 'profile']);
-Route::get('/nutri/editprofile', [NutritionistController::class, 'editprofile']);
+
 
 
 

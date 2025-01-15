@@ -45,13 +45,15 @@ class NutritionistController extends Controller
 
 
 
-    
 
-    function profile(){
-        return view('nutritionists.profile');
+
+    function profile($id){
+        $user = $this->user->findOrFail($id);
+        return view('nutritionists.profile',compact('user'));
     }
-    function editprofile(){
-        return view('nutritionists.editprofile');
+    function editProfile($id){
+        $user = $this->user->findOrFail($id);
+        return view('nutritionists.editProfile',compact('user'));
     }
 
     /**
