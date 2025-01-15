@@ -31,8 +31,8 @@
 
 </head>
 <body>
-    {{-- <div id="app">
-        @if(auth()->check())
+    <div id="app">
+       {{-- @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
             <a href="#" class="menu-item">
@@ -66,9 +66,6 @@
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -91,8 +88,8 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://via.placeholder.com/50' }}" class="nav-user-icon" alt="avatar">
-                                    {{ Auth::user()->name }}
+                                    <img src="{{ $user->avatar ?? Auth::user()->avatar ?? asset('images/default_avatar.png') }}" class="nav-user-icon" alt="avatar"> {{ Auth::user()->name }}
+
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -112,7 +109,7 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="py-4 main-content">
+        <main class="main-padding">
             @yield('content')
         </main>
 

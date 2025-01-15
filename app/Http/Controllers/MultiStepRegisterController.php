@@ -20,51 +20,57 @@ class MultiStepRegisterController extends Controller
 
     public function showStep1()
     {
-        return view('auth.register-step1');
+        $user = Auth::user(); // ログイン中のユーザーを取得
+        return view('auth.register-step1', compact('user')); // ビューに渡す
     }
 
     public function processStep1(Request $request)
     {
+
         $validatedData = $request->validate([
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'avatar' => 'mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
+    
+        $user = new User(); // 新しいUserインスタンスを作成
 
         // dd($validatedData['avatar']);
 
-        if ($request->hasFile('avatar')) {
-            $filePath = $request->file('avatar')->store('avatar', 'public');
-            $validatedData['avatar'] = $filePath;
+        // If the user uploaded an avatar...
+        if ($request->avatar) {
+            $user->avatar = 'data:image/' . $request->avatar->extension() .
+                ';base64,' . base64_encode(file_get_contents($request->avatar));
         }
-
-        $user = User::create([
-            'avatar' => $validatedData['avatar'] ?? 'default_avatar.png',
-            'name' => $validatedData['name'] ,
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-        ]);
-
+    
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->avatar = $user->avatar ?? 'default_avatar.png'; // デフォルトアバター設定
+    
+        $user->save(); // ここで保存
+    
         // 空のプロファイルを作成
         $user->profile()->create([
             'first_name' => '', // 空文字またはデフォルト値
             'last_name' => '',  // 空文字またはデフォルト値
         ]);
-
-
+    
         Auth::login($user);
-
+    
         $request->session()->put('step1_user_id', $user->id);
-
+    
         return redirect()->route('register.step2');
-
+    
+        
     }
 
 
     public function showStep2()
     {
-        return view('auth.register-step2');
+        $user = Auth::user(); // ログイン中のユーザーを取得
+        return view('auth.register-step2', compact('user')); // ビューに渡す
     }
 
     public function processStep2(Request $request)
