@@ -31,8 +31,8 @@
 
 </head>
 <body>
-    {{-- <div id="app">
-        @if(auth()->check())
+    <div id="app">
+       {{-- @if(auth()->check())
         <!-- サイドメニュー -->
         <div class="sidemenu">
             <a href="#" class="menu-item">
@@ -112,7 +112,7 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="py-4 main-content">
+        <main class="main-padding">
             @yield('content')
         </main>
 
