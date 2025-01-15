@@ -112,7 +112,7 @@
 </div>
 
 <div class="custom-right-section">
-    <h4 class="text-center p-4">Send Advice</h4>
+    <h4 class="text-center p-1">Send Advice</h4>
     <form action="{{route('nutri.store')}}" method="post" class="w-75">
     @csrf
 

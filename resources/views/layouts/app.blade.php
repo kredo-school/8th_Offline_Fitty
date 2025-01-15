@@ -32,33 +32,6 @@
 </head>
 <body>
     <div id="app">
-       {{-- @if(auth()->check())
-        <!-- サイドメニュー -->
-        <div class="sidemenu">
-            <a href="#" class="menu-item">
-                <span class="material-icons mt-3">assignment</span> Record
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">person</span> Profile
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">history</span> History
-            </a>
-            <a href="#" class="menu-item active">
-                <span class="material-icons">notifications</span> Notification
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help_outline</span> Help
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help</span> FAQ
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">logout</span> Logout
-            </a>
-        </div>
-        @endif --}}
-
         <!-- ナビバー(header) -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container navbar-container">
@@ -113,18 +86,32 @@
             @yield('content')
         </main>
 
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
+            <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
+        </footer>
+
     </div>
 
-    <!-- フッター -->
-<footer class="footer">
-    <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
-    <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
-</footer>
 
 
 
+    <script>
+    document.addEventListener('scroll', function() {
+        var footer = document.querySelector('.footer');
+        var documentHeight = document.documentElement.scrollHeight;
+        var currentScroll = window.scrollY + window.innerHeight;
 
-
+        // スクロール位置がページの最下部に近づいたらフッターを表示
+        if (currentScroll < documentHeight - 60) {
+            footer.classList.add('show');
+        } else {
+            footer.classList.remove('show');
+        }
+    });
+</script>
 
 </body>
 </html>
