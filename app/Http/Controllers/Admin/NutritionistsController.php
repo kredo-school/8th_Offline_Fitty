@@ -10,10 +10,15 @@ class NutritionistsController extends Controller
 {
     public function index()
     {
-        // Nutritionistsをページネーション付きで取得
         $nutritionists = Nutritionist::paginate(10); // 1ページあたり10件
-
         return view('admin.nutritionists.index', compact('nutritionists'));
     }
+
+    public function create()
+    {
+        $user = auth()->user(); // 認証されたユーザーを取得
+        return view('admin.nutritionists.', compact('user'));
+    }
 }
+
 

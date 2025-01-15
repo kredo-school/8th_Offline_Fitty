@@ -30,10 +30,12 @@
                         </div>
 
                         <!-- Add Button -->
-                        <a href="#" class="add-button">
-                          <span class="material-symbols-outlined">add</span>
-                          <span>Add</span>
-                      </a>
+                        <!-- Add Button -->
+<a href="{{ route('admin.nutritionists.create') }}" class="add-button">
+    <span class="material-symbols-outlined">add</span>
+    <span>Add</span>
+</a>
+
                     </div>
 
                     <!-- Nutritionists Table -->

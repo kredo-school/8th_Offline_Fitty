@@ -31,9 +31,9 @@
                     </div>
 
                     <!-- Users Table -->
-                    <div class="table-responsive admin-users-table-container">
+                    {{-- <div class="table-responsive admin-users-table-container"> --}}
                         <table class="table table-hover align-middle admin-users-table">
-                            <thead class="table-light admin-users-table-head">
+                            <thead class="admin-users-table-head">
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
@@ -43,7 +43,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody">
                                 @foreach ($users as $user)
                                     <tr class="admin-users-row">
                                         <!-- ID -->
@@ -84,7 +84,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
+                    {{-- </div> --}}
 
                     <!-- Pagination -->
                     <div class="d-flex justify-content-between align-items-center admin-users-pagination">
@@ -97,35 +97,35 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    @foreach ($users as $user)
-        <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $user->id }}" tabindex="-1"
-             aria-labelledby="deleteModalLabel-{{ $user->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
-                <div class="modal-content admin-users-modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header admin-users-modal-header">
-                        <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
-                        <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $user->id }}">Delete User</h5>
-                        <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+@foreach ($users as $user)
+<div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $user->id }}" tabindex="-1"
+     aria-labelledby="deleteModalLabel-{{ $user->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+        <div class="modal-content admin-users-modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header admin-users-modal-header">
+                <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
+                <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $user->id }}">Delete User</h5>
+                <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                    <!-- Modal Body -->
-                    <div class="modal-body admin-users-modal-body">
-                        <p>Are you sure you want to delete the user?</p>
-                    </div>
+            <!-- Modal Body -->
+            <div class="modal-body admin-users-modal-body">
+                <p>Are you sure you want to delete the user?</p>
+            </div>
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer admin-users-modal-footer">
-                        <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-
-                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
-                        </form>
-                    </div>
-                </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer admin-users-modal-footer">
+                <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
+                </form>
             </div>
         </div>
-    @endforeach
+    </div>
+</div>
+@endforeach
+
 @endsection
