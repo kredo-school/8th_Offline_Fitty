@@ -29,7 +29,7 @@
 
                             <!-- Name -->
                             <div class="form-group mt-4">
-                                <label for="name" class="form-label fw-bold">Name</label>
+                                <label for="name" class="form-label fw-bold">User Name</label>
                                 <input type="text" name="name" id="name" value="{{ $user->name }}" class="form-control text-center" style="max-width: 300px; margin: 0 auto;" placeholder="Enter your name">
                             </div>
 

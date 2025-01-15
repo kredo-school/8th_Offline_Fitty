@@ -61,8 +61,8 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://via.placeholder.com/50' }}" class="nav-user-icon" alt="avatar">
-                                    {{ Auth::user()->name }}
+                                    <img src="{{ $user->avatar ?? Auth::user()->avatar ?? asset('images/default_avatar.png') }}" class="nav-user-icon" alt="avatar"> {{ Auth::user()->name }}
+
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
