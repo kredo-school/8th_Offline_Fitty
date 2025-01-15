@@ -23,7 +23,7 @@
                     <div class="details details-view">
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Full Name</span>
-                            <span class="detail-value detail-value-view">{{$user->profile->first_name}}{{$user->profile->last_name}}</span>
+                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->first_name}}{{$user->nutritionistsProfile->last_name}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Description</span>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="edit-button edit-button-view">
-                        <a href="#" class="edit-link edit-link-view">Edit Profile</a>
+                        <a href="{{route('nutri.editProfile',$user->id)}}" class="edit-link edit-link-view">Edit Profile</a>
                     </div>
                 </div>
             </div>

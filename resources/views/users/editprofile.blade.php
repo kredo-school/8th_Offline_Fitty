@@ -20,23 +20,32 @@
                             <!-- Avatar -->
                             <div class="avatar-wrapper">
                                 @if ($user->avatar)
-                                    <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                                    <img src="{{ $user->avatar }}" alt="Profile Picture"
+                                        class="profile-picture rounded-circle mb-3"
+                                        style="width: 120px; height: 120px; object-fit: cover;">
                                 @else
-                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture"
+                                        class="profile-picture rounded-circle mb-3"
+                                        style="width: 120px; height: 120px; object-fit: cover;">
                                 @endif
-                                <input type="file" name="avatar" id="avatar" class=" mt-2" style="max-width: 300px; margin: 0 auto;">
+                                <input type="file" name="avatar" id="avatar" class=" mt-2"
+                                    style="max-width: 300px; margin: 0 auto;">
                             </div>
 
                             <!-- Name -->
                             <div class="form-group mt-4">
                                 <label for="name" class="form-label fw-bold">User Name</label>
-                                <input type="text" name="name" id="name" value="{{ $user->name }}" class="form-control text-center" style="max-width: 300px; margin: 0 auto;" placeholder="Enter your name">
+                                <input type="text" name="name" id="name" value="{{ $user->name }}"
+                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                                    placeholder="Enter your name">
                             </div>
 
                             <!-- Email -->
                             <div class="form-group mt-4">
                                 <label for="email" class="form-label fw-bold">Email</label>
-                                <input type="email" name="email" id="email" value="{{ $user->email }}" class="form-control text-center" style="max-width: 300px; margin: 0 auto;" placeholder="Enter your email">
+                                <input type="email" name="email" id="email" value="{{ $user->email }}"
+                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                                    placeholder="Enter your email">
                             </div>
                         </div>
 
