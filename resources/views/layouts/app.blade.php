@@ -32,20 +32,40 @@
 </head>
 <body>
     <div id="app">
+       {{-- @if(auth()->check())
+        <!-- サイドメニュー -->
+        <div class="sidemenu">
+            <a href="#" class="menu-item">
+                <span class="material-icons mt-3">assignment</span> Record
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">person</span> Profile
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">history</span> History
+            </a>
+            <a href="#" class="menu-item active">
+                <span class="material-icons">notifications</span> Notification
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">help_outline</span> Help
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">help</span> FAQ
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">logout</span> Logout
+            </a>
+        </div>
+        @endif --}}
 
-        <!-- ナビバー -->
+        <!-- ナビバー(header) -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-            <div class="container">
-                <a class="navbar-brand-logo" href="{{ url('/') }}">
+            <div class="container navbar-container">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/fitty_logo.png') }}" width=60px;  alt="logo">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
-
-
-
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -60,16 +80,16 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register'))
+                            @if (Route::has('register.step1'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register.step1') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="https://via.placeholder.com/50" class="nav-user-icon" alt="Avatar">
-                                    {{ Auth::user()->name }}
+                                    <img src="{{ $user->avatar ?? Auth::user()->avatar ?? asset('images/default_avatar.png') }}" class="nav-user-icon" alt="avatar"> {{ Auth::user()->name }}
+
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -89,49 +109,19 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="main-padding main-content">
+        <main class="main-padding">
             @yield('content')
         </main>
-        
+
     </div>
 
     <!-- フッター -->
 <footer class="footer">
-    <p class="footer-p-1">Terms of Use | Privacy Policy | Help</p>
+    <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
     <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
 </footer>
 
- <!-- JavaScript -->
- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const footer = document.querySelector("footer");
-        const body = document.body; // ページ全体のボディ
-        const footerHeight = 60; // フッターの高さ (px)
-        let isFooterVisible = false; // フッターの表示状態を追跡
 
-        // フッターの高さ分、余白を確保
-        body.style.paddingBottom = `${footerHeight}px`;
-
-        window.addEventListener("scroll", function () {
-            const scrollTop = window.scrollY; // 現在のスクロール位置
-            const windowHeight = window.innerHeight; // ウィンドウの高さ
-            const documentHeight = document.documentElement.scrollHeight; // ページ全体の高さ
-
-            // スクロール位置が最下部に達したかをチェック
-            if (scrollTop + windowHeight >= documentHeight - 10) {
-                if (!isFooterVisible) { // フッターがまだ表示されていない場合のみ表示
-                    footer.style.display = "block"; // フッターを表示
-                    isFooterVisible = true;
-                }
-            } else {
-                if (isFooterVisible) { // フッターが表示されている場合のみ非表示
-                    footer.style.display = "none"; // フッターを非表示
-                    isFooterVisible = false;
-                }
-            }
-        });
-    });
-</script>
 
 
 

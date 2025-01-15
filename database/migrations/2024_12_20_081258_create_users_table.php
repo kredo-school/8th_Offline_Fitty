@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -9,6 +10,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -37,13 +40,14 @@ return new class extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('users'); // Drop users table
+        Schema::dropIfExists('password_reset_tokens'); // Drop password reset tokens table
+        Schema::dropIfExists('sessions'); // Drop sessions table
     }
 };

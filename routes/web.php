@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MultiStepRegisterController;
+
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +11,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\InquiriesController;
+// use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
@@ -42,6 +45,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
     Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
+    //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+    // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
 
     // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
@@ -49,7 +54,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 });
-
 
 Route::get('/about', function () {
     return view('about');
@@ -59,12 +63,32 @@ Route::get('/team', [App\Http\Controllers\Controller::class, 'team'])->name('tea
 Route::get('/contact', [App\Http\Controllers\Controller::class, 'contact'])->name('contact');
 
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
-        Route::get('index', [NutritionistController::class, 'index'])->name('index');
+// 認証ルートを有効化
+//  Auth::routes();
+ Auth::routes(['register' => false]);
+//  デフォルトの /register を無効化
+
+
+// Register
+Route::prefix('register')->group(function () {
+    Route::get('/step1', [MultiStepRegisterController::class, 'showStep1'])->name('register.step1');
+    Route::post('/step1', [MultiStepRegisterController::class, 'processStep1'])->name('register.step1.submit');
+    Route::get('/step2', [MultiStepRegisterController::class, 'showStep2'])->name('register.step2');
+    Route::patch('/step2', [MultiStepRegisterController::class, 'processStep2'])->name('register.step2.submit');
+});
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
+        Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::post('store', [AdviceController::class, 'store'])->name('store');
+        Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
+        Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
+        Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
-        Route::post('/updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
+        Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });
@@ -72,17 +96,16 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/nutri/profile', [NutritionistController::class, 'profile']);
-Route::get('/nutri/editprofile', [NutritionistController::class, 'editprofile']);
+
+
 
 
 
 //user dailylog
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
-Route::get('/user/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
+Route::get('/user/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
-Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'profileupdate'])->name('user.update');
+Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('user.update');
 Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
-

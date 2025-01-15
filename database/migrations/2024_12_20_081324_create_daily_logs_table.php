@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('weight')->nullable();
             $table->string('meal_type')->nullable();
+            $table->date('input_date')->nullable();
             $table->text('meal_content')->nullable();
             $table->longText('image')->nullable();
             $table->text('nutritions')->nullable();

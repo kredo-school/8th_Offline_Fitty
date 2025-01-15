@@ -1,20 +1,15 @@
-body {
-  background-color: #F7FCF1 !important; /* 背景色 */
-  font-family: 'lora', sans-serif !important;
-  color: #202F55  !important;
-  margin: 0;
-  padding: 0;
-}
+  body {
+    background-color: #F7FCF1 !important; /* 背景色 */
+    font-family: 'lora', sans-serif !important;
+    color: #202F55  !important;
+    margin: 0;
+    padding: 0;
+  }
 
-main.main-padding{
-  padding-top:6rem !important;
-}
+  main.main-padding{
+    padding-top:6rem !important;
+  }
 
-.navbar-brand{
-    font-family: "Shrikhand", serif !important;
-    color: #FFA965 !important;
-    font-size: 50px !important;
-}
 /* ナビバーのスタイル */
 .navbar {
   position: fixed;
@@ -29,12 +24,18 @@ main.main-padding{
 }
 
 .navbar-brand-logo {
+    font-family: "Shrikhand", serif !important;
+    color: #FFA965 !important;
+    font-size: 40px !important; /* ナビゲーションブランドのフォントサイズ */
+    display: flex; /* フレックスボックスで横並びにする */
+    align-items: center; /* 縦方向の中央揃え */
+    text-decoration: none;
+  }
+
+.navbar-brand {
   font-family: "Shrikhand", serif !important;
   color: #FFA965 !important;
-  font-size: 40px !important; /* ナビゲーションブランドのフォントサイズ */
-  display: flex; /* フレックスボックスで横並びにする */
-  align-items: center; /* 縦方向の中央揃え */
-  text-decoration: none;
+  font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
 }
 
 .nav-link.nav-username {
@@ -52,16 +53,17 @@ main.main-padding{
 
 /* サイドメニュー */
 .sidemenu {
-  width: 240px;
-  margin-top: 80px !important; /* ヘッダーの高さ分 */
-  position: fixed; /* サイドバーも固定 */
-  background-color: #d8efd1;
-  height: calc(100vh - 56px); /* ヘッダーを除いた高さ */
-  top: 0px;
-  left: 0;
-  padding: 20px 10px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
-}
+    width: 240px;
+    margin-top: 80px !important; /* ヘッダーの高さ分 */
+    position: fixed; /* サイドバーも固定 */
+    background-color: #d8efd1;
+    height: calc(100vh - 56px); /* ヘッダーを除いた高さ */
+    top: 0px;
+    left: 0;
+    padding: 20px 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  }
+
 
 .sidemenu h1 {
   font-size: 24px;
@@ -75,6 +77,8 @@ main.main-padding{
   height: 40px;
   margin-right: 10px;
 }
+
+
 
 .menu-item {
   display: flex;
@@ -107,96 +111,96 @@ main.main-padding{
 
 /* responsive sidebar omori start */
 .hamburger-btn {
-  display:none;
-}
-@media (max-width: 768px) {
-  .sidemenu {
-      position: fixed;
-      padding-top: 80px !important; /* ヘッダーの高さ分 */
-      z-index: 10;
-      width: 100%;
-      display: none;
-      background-color: #f8f9fa; /* 背景色を追加 */
-      height: 100vh; /* サイドバー全体を覆う */
-      top: -56px; /* ヘッダーの高さを考慮 */
-      width: 100%; /* サイドバーを全幅に変更 */
+    display:none;
+  }
+  @media (max-width: 768px) {
+    .sidemenu {
+        position: fixed;
+        padding-top: 80px !important; /* ヘッダーの高さ分 */
+        z-index: 10;
+        width: 100%;
+        display: none;
+        background-color: #f8f9fa; /* 背景色を追加 */
+        height: 100vh; /* サイドバー全体を覆う */
+        top: -56px; /* ヘッダーの高さを考慮 */
+        width: 100%; /* サイドバーを全幅に変更 */
+
+    }
+
+    .sidemenu.show {
+        display: block;
+    }
+
+    /* ハンバーガーボタン */
+    .hamburger-btn {
+        border: 2px solid #c0c0c0; /* グレーの枠線 */
+        background-color: #ffffff; /* 白背景 */
+        border-radius: 10px; /* 四隅を角丸にする */
+        padding: 10px; /* 内側の余白を調整 */
+        width: 50px; /* ボタンの幅 */
+        height: 50px; /* ボタンの高さ */
+        display: flex;
+        justify-content: center; /* 中央揃え */
+        align-items: center; /* 中央揃え */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
+        cursor: pointer; /* マウスカーソルをポインターに変更 */
+        z-index: 1050; /* 他の要素より前面に配置 */
+        transition: all 0.3s ease; /* ホバー時のアニメーション */
+        float:right;
+    }
+    #sidebar{
+        background-color: #d8efd1;
+    }
+
+    /* ホバー時のエフェクト */
+    .hamburger-btn:hover {
+        background-color: #f8f9fa; /* ホバー時の背景色 */
+        transform: scale(1.05); /* 少し拡大 */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
+    }
+
+    .hamburger-btn {
+      position: fixed; /* 画面全体で位置を固定 */
+      top: 10px; /* 上から10pxの余白を確保 */
+      right: 10px; /* 右から10pxの余白を確保 */
+        z-index: 1050; /* 他の要素より前面に表示 */
+        width: 60px; /* ボタン全体を大きく */
+        height: 60px; /* ボタン全体を大きく */
+    }
+
+    .hamburger-icon span {
+        height: 3px; /* 線の高さを増やす */
+        background-color: #6c757d;
+    }
+
+    /* ハンバーガーアイコン */
+    .hamburger-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 20px; /* 線の幅 */
+        height: 15px; /* 線全体の高さ */
+        pointer-events: none; /* アイコン内部の要素はクリックを受け付けない */
+    }
+
+    .hamburger-icon span {
+        display: block;
+        height: 2px; /* 線の高さ */
+        background-color: #6c757d; /* グレーの線 */
+        border-radius: 1px; /* 角を少し丸める */
+    }
 
   }
 
-  .sidemenu.show {
-      display: block;
-  }
+  /* responsive sidebar omori end */
 
-  /* ハンバーガーボタン */
-  .hamburger-btn {
-      border: 2px solid #c0c0c0; /* グレーの枠線 */
-      background-color: #ffffff; /* 白背景 */
-      border-radius: 10px; /* 四隅を角丸にする */
-      padding: 10px; /* 内側の余白を調整 */
-      width: 50px; /* ボタンの幅 */
-      height: 50px; /* ボタンの高さ */
-      display: flex;
-      justify-content: center; /* 中央揃え */
-      align-items: center; /* 中央揃え */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
-      cursor: pointer; /* マウスカーソルをポインターに変更 */
-      z-index: 1050; /* 他の要素より前面に配置 */
-      transition: all 0.3s ease; /* ホバー時のアニメーション */
-      float:right;
-  }
-  #sidebar{
-      background-color: #d8efd1;
-  }
 
-  /* ホバー時のエフェクト */
-  .hamburger-btn:hover {
-      background-color: #f8f9fa; /* ホバー時の背景色 */
-      transform: scale(1.05); /* 少し拡大 */
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
-  }
-
-  .hamburger-btn {
-    position: fixed; /* 画面全体で位置を固定 */
-    top: 10px; /* 上から10pxの余白を確保 */
-    right: 10px; /* 右から10pxの余白を確保 */
-      z-index: 1050; /* 他の要素より前面に表示 */
-      width: 60px; /* ボタン全体を大きく */
-      height: 60px; /* ボタン全体を大きく */
-  }
-
-  .hamburger-icon span {
-      height: 3px; /* 線の高さを増やす */
-      background-color: #6c757d;
-  }
-
-  /* ハンバーガーアイコン */
-  .hamburger-icon {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 20px; /* 線の幅 */
-      height: 15px; /* 線全体の高さ */
-      pointer-events: none; /* アイコン内部の要素はクリックを受け付けない */
-  }
-
-  .hamburger-icon span {
-      display: block;
-      height: 2px; /* 線の高さ */
-      background-color: #6c757d; /* グレーの線 */
-      border-radius: 1px; /* 角を少し丸める */
-  }
-
-}
-
-/* responsive sidebar omori end */
 
 /* nutri系のスタイル */
 .nutri-h2 {
   text-align: center !important; /* 見出しを中央揃え */
   font-weight: bold !important; /* 太字に設定 */
-  margin-bottom: 50px !important; /* 下に余白を追加 */
-  /* margin-top: 50px !important; 下に余白を追加 */
-
+  margin-bottom: 30px !important; /* 下に余白を追加 */
 }
 
 .nutri-card {
@@ -266,7 +270,7 @@ footer {
   padding: 15px 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   font-size: 14px;
-
+  height: 10px;
 }
 
 .footer-p-1 {
@@ -282,6 +286,467 @@ footer {
   color: #dcdcdc;
   margin-top: 5px;
 }
+
+
+.container {
+  padding: 25px;
+  position:relative;
+}
+
+  .nutri-h2 {
+    text-align: center !important;
+    font-weight: bold !important;
+    margin-bottom: 30px !important;
+  }
+  .nutri-card {
+    width: 70%;  /* 幅を80%に設定して細長くする */
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .nutri-card-img-top {
+    border-radius: 50% ; /* 丸い写真 */
+    width: 80px ;
+    height: 80px ;
+    object-fit: cover ;
+    margin: 20px auto 10px ;
+  }
+  .nutri-card-title {
+    font-size: 16px ;
+    font-weight: bold ;
+    color: #333 ;
+  }
+  .nutri-btn {
+    background-color: #FFEDD5 ;
+    color: #FF7F50 ;
+    font-weight: bold ;
+    border: none ;
+  }
+  .nutri-btn:hover {
+    background-color: #FFDBB1 ;
+  }
+
+.fixed-back-button {
+    position: fixed;
+    top: 120px; /* Align with header */
+    left: 10px;
+    z-index: 1000;
+    width: 50px; /* ボタンの幅を指定（例: 50px） */
+}
+
+.custom-left-section {
+    width: calc(48% - 50px);  /* 幅を48%からボタンの幅分引く */
+    height: calc(100vh - 135px); /* ビューポートの高さからヘッダー部分を引く */
+    overflow-y: auto; /* 垂直方向にスクロール可能にする */
+    background-color: #F7FCF1;
+    padding-left: 50px;
+    margin-right: 2%; /* 右側との間に余白を作る */
+    float: left; /* 左側に配置 */
+}
+
+.custom-right-section {
+    width: 48%;  /* 幅を48%に設定 */
+    padding: 2rem;
+    background-color: #FFFFFF;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: 2%; /* 左側との間に余白を作る */
+    margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
+    float: left; /* 右側に配置 */
+}
+
+.custom-blank-card {
+    height: 200px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.custom-right-section form {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #DDD;
+    margin: 0 auto;
+}
+
+.custom-right-section form textarea {
+    padding: 15px;
+}
+/* アイコンを丸くしてY軸の中央に配置 */
+.user-photo {
+    width: 100px; /* アイコンの幅 */
+    height: 100px; /* アイコンの高さ */
+    border-radius: 50%; /* 丸くする */
+    object-fit: cover; /* 画像が歪まないように */
+    margin-right: 15px; /* テキストとの間に余白を作る */
+    align-self: center; /* Y軸の中央に配置 */
+}
+
+/* 行間を狭くする */
+.user-info p {
+    margin-bottom: 5px; /* pタグの下の余白を狭くする */
+    line-height: 1.2; /* 行間を調整 */
+}
+
+/* 通常状態のスタイル */
+.see-previous-btn {
+    background-color: #D4E7BA !important; /* 背景色 */
+    color: #00984F !important; /* 文字色 */
+    border: none; /* 枠線をなくす */
+    padding: 10px 20px; /* パディング調整 */
+    border-radius: 5px; /* 角丸 */
+    font-size: 16px; /* フォントサイズ */
+    transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
+}
+
+.see-previous-btn:hover {
+    background-color: #4DAF4A !important; /* ホバー時の背景色 */
+    color: #FFFFFF !important; /* ホバー時の文字色 */
+}
+
+.send-btn {
+    background-color: rgba(255, 169, 101, 0.4) !important; /* 背景色 40%透明度 */
+    color: #FFA965 !important; /* 文字色 */
+    border: none; /* 枠線をなくす */
+    padding: 10px 20px; /* パディング調整 */
+    border-radius: 5px; /* 角丸 */
+    font-size: 16px; /* フォントサイズ */
+    transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
+}
+
+/* Sendボタンがホバーされた時 */
+.send-btn:hover {
+    background-color: #FFA965 !important; /* ホバー時の背景色 */
+    color: #FFFFFF !important; /* ホバー時の文字色 */
+}
+
+.custom-back-button {
+    background-color: #D4E7BA !important; /* ボタンの背景色 */
+    color: #202F55 !important; /* 矢印の色 */
+    border: none !important; /* ボーダーを削除 */
+}
+
+.user-dailylog {
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.user-dailylog-header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.user-dailylog-header h1 {
+    font-size: 32px;
+    margin: 0;
+    color: #333;
+}
+
+.user-dailylog-header p {
+    font-size: 18px;
+    margin: 5px 0 0;
+    color: #555;
+}
+
+.user-dailylog .meal-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.user-dailylog .meal-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.user-dailylog .accordion-button {
+    font-weight: bold;
+    color: #555;
+}
+/* アコーディオンボタンの色変更 */
+.user-dailylog .accordion-button {
+    background-color: #91CF98; /* 緑色 */
+    color: #ffffff; /* 白色 */
+    font-weight: bold;
+}
+
+.user-dailylog .accordion-button:not(.collapsed) {
+    background-color: #91CF98; /* 展開時の背景色 */
+    color: #ffffff; /* 展開時のテキスト色 */
+}
+
+.user-dailylog .accordion-button:focus {
+    box-shadow: none; /* フォーカス時の枠線を無効に */
+}
+
+.user-dailylog .accordion-body {
+    background-color: #f8f9fa;
+}
+
+
+.inputmeal {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff; /* White background for the form */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.inputmeal .btn-submit {
+  background-color: #ffcc80; /* Orange submit button */
+  color: #ffffff;
+  border: none;
+}
+.inputmeal .btn-submit:hover {
+  background-color: #ffa726; /* Darker orange on hover */
+}
+.inputmeal .textarea-border {
+  border: 2px dashed #9575cd; /* Purple dashed border */
+  border-radius: 5px;
+}
+
+/* omori add end */
+
+
+/* テーブルのスタイル */
+.unique-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: 'lora', sans-serif;
+  }
+
+  .unique-table th, .unique-table td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+
+  .unique-table th {
+    background-color: #4DAF4A;
+    color: white;
+    font-weight: bold;
+  }
+
+  .unique-table td {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+  }
+
+  /* リンクのスタイル */
+  .unique-table a {
+    text-decoration: none;
+    color: #202F55;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .unique-table a:hover {
+    color: #FFA965;
+  }
+
+  /* 行にホバー効果 */
+  .unique-table tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 600px) {
+    .unique-table {
+      font-size: 14px;
+    }
+  }
+
+
+/* カード全体をスタイルする */
+.card.card-login {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* カードの背景画像 */
+.card.card-login::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0.2; /* 背景画像を薄くする */
+  z-index: -1;
+  filter: brightness(80%);
+}
+
+/* カードヘッダーのスタイル */
+.card-header.card-header-login {
+  position: absolute;
+  line-height: 1.7; /* 行間をリセット */
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* カードのコンテンツ */
+.card-body-login {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
+  color: #202F55; /* テキストの色を黒に設定 */
+  border-radius: 0 0 8px 8px;
+  margin-top: 70px;
+}
+
+/* ログインページ全体のスタイル */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* nutri系のスタイル */
+.nutri-h2 {
+  text-align: center !important; /* 見出しを中央揃え */
+  font-weight: bold !important; /* 太字に設定 */
+  margin-bottom: 50px !important; /* 下に余白を追加 */
+  /* margin-top: 50px !important; 下に余白を追加 */
+
+}
+
+.nutri-card {
+  width: 70%; /* 幅を70%に設定して細長く */
+  border: none;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックス影を追加 */
+}
+
+.nutri-card-img-top {
+  border-radius: 50%; /* 丸い写真 */
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* 中央揃えで拡大縮小 */
+  margin: 20px auto 10px; /* 上・下の余白 */
+}
+
+.nutri-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.nutri-btn {
+  background-color: #FFEDD5; /* ボタンの背景色 */
+  color: #FF7F50; /* テキストの色 */
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nutri-btn:hover {
+  background-color: #FFDBB1; /* ホバー時の背景色 */
+}
+
+/* ボタンのスタイル */
+.btn-submit {
+  background-color: #00984f;
+  color: white;
+  padding: 10px 20px; /* ボタン内のテキストの余白 */
+  margin: 20px auto; /* ボタン周囲の余白 */
+  display: block;
+  border: none;
+  border-radius: 5px; /* 角を丸める */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  width: auto; /* ボタンの幅を自動調整 */
+}
+
+.btn-submit:hover {
+  background-color: #087722; /* ホバー時の色 */
+}
+
+footer {
+    display: flex; /* フレックスボックスを有効化 */
+    flex-direction: column; /* 縦方向に配置 */
+    justify-content: center; /* 縦方向の中央揃え */
+    align-items: center; /* 横方向の中央揃え */
+    height: 100px; /* フッターの高さを設定 */
+    background-color: #00984f; /* 背景色 */
+    color: white; /* テキスト色 */
+    text-align: center;
+    padding: 15px 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+    font-size: 14px;
+    margin-top: 15px; /* 上部に余白を追加 */
+}
+
+.footer-p-1 {
+    font-size: 14px;
+    color: #f0f0f0;
+    margin: 0; /* マージンをリセット */
+}
+
+.footer-p-2 {
+    font-size: 12px;
+    color: #202F55;
+    margin: 0; /* マージンをリセット */
+    margin-top: 5px; /* 適度な間隔を追加 */
+}
+
+footer a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+
 
 
 
@@ -378,9 +843,10 @@ footer {
 .custom-left-right-container {
     display: flex;
     gap: 2%; /* 左右セクションの間隔を設定 */
-    height: calc(100vh - 135px); /* ビューポートの高さからヘッダー部分を引く */
+    height: calc(100vh - 110px); /* ビューポートの高さからヘッダー部分を引く */
+    padding-top: 5px; /* 上部の隙間を調整 */
+    padding-bottom: 5px; /* 下部の隙間を調整 */
 }
-
 .custom-right-section form {
     padding: 1rem;
     border-radius: 8px;
@@ -960,8 +1426,8 @@ footer {
 /* 全体のフォント */
 body.admin-users {
   font-family: 'Shrikhand', sans-serif;
-}  
-/* 
+}
+/*
 タイトルスタイル */
 .admin-users h1.admin-users-title {
   font-family: 'Shrikhand', sans-serif;

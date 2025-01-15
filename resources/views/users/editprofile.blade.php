@@ -10,21 +10,42 @@
             @include('sidebar.user-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
                 <!-- main content -->
-                <form action="{{ route('user.update', $user->id) }}" method="POST">
+                <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
                     <div class="profile-card profile-card-edit">
-                        <div class="profile-header profile-header-edit">
-                            {{-- 後ほど画像 --}}
-                            <img src="{{ $user->avatar }}" alt="https://via.placeholder.com/120"
-                                class="profile-picture profile-picture-edit">
-                            <div class="info info-edit">
 
-                                <input type="text" name="name" value="{{ $user->name }}"
-                                    class="form-control form-control-edit">
-                                <input type="email" name="email" value="{{ $user->email }}"
-                                    class="form-control form-control-edit">
+                        <div class="profile-header profile-header-edit text-center">
+                            <!-- Avatar -->
+                            <div class="avatar-wrapper">
+                                @if ($user->avatar)
+                                    <img src="{{ $user->avatar }}" alt="Profile Picture"
+                                        class="profile-picture rounded-circle mb-3"
+                                        style="width: 120px; height: 120px; object-fit: cover;">
+                                @else
+                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture"
+                                        class="profile-picture rounded-circle mb-3"
+                                        style="width: 120px; height: 120px; object-fit: cover;">
+                                @endif
+                                <input type="file" name="avatar" id="avatar" class=" mt-2"
+                                    style="max-width: 300px; margin: 0 auto;">
+                            </div>
+
+                            <!-- Name -->
+                            <div class="form-group mt-4">
+                                <label for="name" class="form-label fw-bold">User Name</label>
+                                <input type="text" name="name" id="name" value="{{ $user->name }}"
+                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                                    placeholder="Enter your name">
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group mt-4">
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input type="email" name="email" id="email" value="{{ $user->email }}"
+                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                                    placeholder="Enter your email">
                             </div>
                         </div>
 
@@ -34,8 +55,10 @@
                                 <div class="detail-item detail-item-edit col-6">
                                     <span class="detail-label detail-label-edit">Gender</span>
                                     <select name="gender" class="form-select form-select-edit">
-                                        <option value="male" {{ $user->gender == 'male' ? 'selected' : '' }}>Male</option>
-                                        <option value="female" {{ $user->gender == 'female' ? 'selected' : '' }}>Female
+                                        <option value="male" {{ $user->profile->gender == 'male' ? 'selected' : '' }}>Male
+                                        </option>
+                                        <option value="female" {{ $user->profile->gender == 'female' ? 'selected' : '' }}>
+                                            Female
                                         </option>
 
                                     </select>
@@ -43,7 +66,7 @@
                                 </div>
                                 <div class="detail-item detail-item-edit col-6">
                                     <span class="detail-label detail-label-edit">Birthday</span>
-                                    <input type="date" name="birthday" value="{{ $user->birthday }}"
+                                    <input type="date" name="birthday" value="{{ $user->profile->birthday }}"
                                         class="detail-input detail-input-edit">
                                 </div>
                             </div>
@@ -51,18 +74,21 @@
                             <div class="row">
                                 <div class="detail-item detail-item-edit col-6">
                                     <span class="detail-label detail-label-edit">Height(cm)</span>
-                                    <input type="number" name="height" value="{{ $user->height }}"
+                                    <input type="number" name="height" value="{{ $user->profile->height }}"
                                         class="detail-input detail-input-edit">
                                 </div>
                                 <div class="detail-item detail-item-edit col-6">
                                     <span class="detail-label detail-label-edit">Activity Level</span>
                                     <select name="activity_level" class="form-select form-select-edit">
-                                        <option value="1" {{ $user->activity_level == 1 ? 'selected' : '' }}>1 - Low
+                                        <option value="1" {{ $user->profile->activity_level == 1 ? 'selected' : '' }}>1
+                                            - Low
                                             Activity</option>
-                                        <option value="2" {{ $user->activity_level == 2 ? 'selected' : '' }}>2 -
+                                        <option value="2" {{ $user->profile->activity_level == 2 ? 'selected' : '' }}>
+                                            2 -
                                             Moderate
                                             Activity</option>
-                                        <option value="3" {{ $user->activity_level == 3 ? 'selected' : '' }}>3 - High
+                                        <option value="3" {{ $user->profile->activity_level == 3 ? 'selected' : '' }}>
+                                            3 - High
                                             Activity</option>
                                     </select>
 
