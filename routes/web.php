@@ -39,24 +39,16 @@ Auth::routes();
 
 // Adminルート
 Route::prefix('admin')->name('admin.')->group(function () {
-
-    // // 認証関連のルート
-    // Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    // Route::post('login', [AuthController::class, 'login']);
-    // Route::get('password/request', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
-
-    // Admin Index
     Route::get('/index', [AdminController::class, 'index'])->name('index');
-
-    // リソース別ルート
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
+    Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
     //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
     // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
 
-    // Categories関連のルート
+    // Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
     Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
@@ -87,10 +79,15 @@ Route::prefix('register')->group(function () {
 
 
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function(){
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::post('store', [AdviceController::class, 'store'])->name('store');
+        Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
+        Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
+        Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
+        Route::patch('/{id}/update', [NutritionistController::class, 'nutriUpdate'])->name('update');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
@@ -100,8 +97,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/nutri/profile', [NutritionistController::class, 'profile']);
-Route::get('/nutri/editprofile', [NutritionistController::class, 'editprofile']);
+
 
 
 
@@ -114,4 +110,3 @@ Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class
 Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('user.update');
 Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
 Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
-

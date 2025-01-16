@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         NutritionistsProfilesTableSeeder::class,
         CategoriesTableSeeder::class,
         SubCategoriesTableSeeder::class,
+        DailyLogSeeder::class,
     ]);
 
 }

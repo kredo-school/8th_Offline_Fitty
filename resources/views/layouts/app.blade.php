@@ -19,9 +19,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-    @stack('styles')
-
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
@@ -32,6 +29,10 @@
 </head>
 <body>
     <div id="app">
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         <!-- ナビバー(header) -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container navbar-container">
