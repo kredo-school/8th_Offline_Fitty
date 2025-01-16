@@ -270,7 +270,6 @@ footer {
   padding: 15px 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
   font-size: 14px;
-  height: 10px;
 }
 
 .footer-p-1 {
@@ -569,16 +568,23 @@ footer {
 
 
 /* カード全体をスタイルする */
+.login-container{
+  display: flex; /* Flexboxを有効化 */
+  justify-content: center; /* 横方向の中央揃え */
+  align-items: center; /* 縦方向の中央揃え */
+  min-height: 100vh; /* ビューポートの高さを基準に全体を中央揃え */
+  padding: 0 15px; /* サイドの余白 */
+}
+
 .card.card-login {
   width: 100%;
-  max-width: 600px;
+  max-width: 600x;
   height: 300px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 /* カードの背景画像 */
 .card.card-login::before {
   content: '';
@@ -718,7 +724,7 @@ footer {
     flex-direction: column; /* 縦方向に配置 */
     justify-content: center; /* 縦方向の中央揃え */
     align-items: center; /* 横方向の中央揃え */
-    height: 100px; /* フッターの高さを設定 */
+    height: 50px; /* フッターの高さを設定 */
     background-color: #00984f; /* 背景色 */
     color: white; /* テキスト色 */
     text-align: center;
