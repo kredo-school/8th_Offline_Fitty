@@ -13,8 +13,11 @@
 
                 <div class="profile-card profile-card-view">
                     <div class="profile-header profile-header-view">
-                        <img src="https://via.placeholder.com/120" alt="Profile Picture"
-                            class="profile-picture profile-picture-view">
+                        @if($user->avatar)
+                        <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
+                    @else
+                        <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture profile-picture-view">
+                    @endif
                         <div class="info info-view">
                             <h2 class="profile-name profile-name-view">{{$user->name}}</h2>
                             <p class="profile-email profile-email-view">{{$user->email}}</p>
@@ -23,13 +26,11 @@
                     <div class="details details-view">
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Full Name</span>
-                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->first_name}}{{$user->nutritionistsProfile->last_name}}</span>
+                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->first_name}} {{$user->nutritionistsProfile->last_name}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Description</span>
-                            <span class="detail-value detail-value-view">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                                Curabitur auctor nisi a erat tristique, nec gravida justo bibendum.</span>
+                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->memo}}</span>
                         </div>
                     </div>
                     <div class="edit-button edit-button-view">
