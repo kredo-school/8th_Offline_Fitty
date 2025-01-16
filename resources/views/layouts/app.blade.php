@@ -82,7 +82,7 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="main-padding">
+        <main>
             @yield('content')
         </main>
 
@@ -94,24 +94,5 @@
         </footer>
 
     </div>
-
-
-
-
-    <script>
-    document.addEventListener('scroll', function() {
-        var footer = document.querySelector('.footer');
-        var documentHeight = document.documentElement.scrollHeight;
-        var currentScroll = window.scrollY + window.innerHeight;
-
-        // スクロール位置がページの最下部に近づいたらフッターを表示
-        if (currentScroll < documentHeight - 60) {
-            footer.classList.add('show');
-        } else {
-            footer.classList.remove('show');
-        }
-    });
-</script>
-
 </body>
 </html>
