@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
         Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
         Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
+        Route::patch('/{id}/update', [NutritionistController::class, 'nutriUpdate'])->name('update');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 

@@ -6,7 +6,7 @@
 @include('sidebar.humburger')
 
 <div class="container w-75">
-    <div class="row">
+    <div class="row w-100">
         @include('sidebar.nutri-sidebar')
         <div class="col-md-9 ms-sm-auto col-lg-10">
 
