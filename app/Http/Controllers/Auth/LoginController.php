@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -24,7 +25,8 @@ class LoginController extends Controller
             case 'N':
                 return '/nutri/index'; // 栄養士のリダイレクト先
             case 'U':
-                return '/user/profile'; // 一般ユーザーのリダイレクト先
+                $userId = Auth::user()->id;
+                return "/user/{$userId}/profile";
             default:
                 return '/home'; // デフォルトのリダイレクト先
         }

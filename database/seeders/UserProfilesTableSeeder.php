@@ -28,14 +28,14 @@ class UserProfilesTableSeeder extends Seeder
                 'memo' => $user->nutritionist_memo, // usersテーブルからコピー
                 'nutritionist_memo' => $user->nutritionist_memo,
                 'advice_sent_date' => now()->subDays(rand(0, 30)), // 過去30日以内の日付をランダム設定
-                'nutritionist_id' => User::where('role', 'N')->inRandomOrder()->value('id'), // usersテーブルのnutritionist_idを使用
+                'nutritionist_id' => rand(52,61), // usersテーブルのnutritionist_idを使用
                 'health_conditions' => json_encode(['Pregnant', 'Mental Health Issues']), // 仮の健康状態
                 'dietary_preferences' => json_encode(['Vegetarian', 'Vegan']), // 仮の食事制限
                 'food_allergies' => 'peanuts, dairy', // 仮の食物アレルギー
                 'goals' => 'Lose weight and improve stamina.', // 仮の目標
                 'created_at' => now(),
                 'updated_at' => now(),
-                
+
             ];
         }
 
