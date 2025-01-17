@@ -107,10 +107,27 @@
                 <div class="card-body">
                     <h5 class="card-title">Radar Chart</h5>
                     <div class="text-center">
-                        <img src="https://via.placeholder.com/300x200" alt="Radar Chart" class="img-fluid">
+                        @if (!empty($satisfactionRates))
+                            <canvas id="nutritionRadarChart" width="400" height="400"></canvas>
+                        @else
+                            <p>No data available for the last 7 days.</p>
+                        @endif
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Radar Chart</h5>
+                    @include('radarchart', [
+                        'satisfactionRates' => $satisfactionRates,
+                        'user' => $user,
+                        'message' => $message ?? 'No data available.'
+                    ])
+                </div>
+            </div>
+
+
 
             <!-- Blank Cards -->
             <div class="custom-blank-card"></div>
