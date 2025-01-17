@@ -9,7 +9,7 @@
 @section('content')
 
     @include('sidebar.humburger')
-    <div class="bg-light d-flex justify-content-center vh-100 admin-home">
+    <div class="d-flex justify-content-center admin-home">
 
         <div class="row">
             @include('sidebar.user-sidebar')
@@ -42,7 +42,7 @@
                                 </a>
                             </div>
                             <div class="col-md-5 col-sm-6 d-flex justify-content-start">
-                                <a href="{{ route('admin.inquiries.index') }}" class="card orange">
+                                <a href="#" class="card orange">
                                     <span class="material-symbols-outlined">mail</span>
                                     <span>Inquiries</span>
                                 </a>
