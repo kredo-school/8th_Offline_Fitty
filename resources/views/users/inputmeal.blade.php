@@ -59,6 +59,12 @@
             <textarea class="form-control textarea-border" id="comment" rows="3" placeholder="Write here"></textarea>
         </div>
 
+        <!-- Weight Input -->
+        <div class="mb-3">
+            <label for="weight" class="form-label">Weight (kg)</label>
+            <input type="number" class="form-control" id="weight" name="weight" placeholder="Enter your weight" step="0.1">
+        </div>
+
         <!-- Image Upload -->
         <div class="mb-3">
             <label for="mealImage" class="form-label">Upload Image</label>

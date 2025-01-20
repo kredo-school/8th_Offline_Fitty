@@ -43,6 +43,7 @@ class DailyLogController extends Controller
             'input_date' => 'required|date',
             'meal_type' => 'required|string',
             'meal_content' => 'nullable|string',
+            'weight' => 'nullable|numeric|min:0', // 体重は任意
             'comment' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -54,6 +55,7 @@ class DailyLogController extends Controller
         $this->dailylog->input_date = $request->input('input_date');
         $this->dailylog->meal_type = $request->input('meal_type');
         $this->dailylog->meal_content = $request->input('meal_content');
+        $this->dailylog->weight = $request->input('weight');
         $this->dailylog->comment = $request->input('comment');
         
         $this->dailylog->nutritions = $request->input('nutritions');
