@@ -71,13 +71,6 @@ public function updateMemo(Request $request, $id)
 
         return view('nutritionists.history')->with('user', $user);
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Advice $advice)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -102,4 +95,23 @@ public function updateMemo(Request $request, $id)
     {
         //
     }
+
+    public function index($id)
+    {
+        // 指定されたユーザーIDに関連するアドバイスを取得
+        $user = $this->user->findOrFail($id);
+        $adviceList = $this->advice->where('user_id', $id)->get();
+
+        return view('users.advice_index', compact('user', 'adviceList'));
+    }
+
+    public function show($id, $adviceId)
+    {
+        // 指定されたアドバイスを取得
+        $user = $this->user->findOrFail($id);
+        $advice = $this->advice->where('id', $adviceId)->where('user_id', $id)->firstOrFail();
+
+        return view('users.advice.show', compact('user', 'advice'));
+    }
+
 }

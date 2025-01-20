@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\MultiStepRegisterController;
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
+use App\Http\Controllers\MultiStepRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
@@ -87,18 +85,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
         Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
         Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
-        Route::post('store',[AdviceController::class, 'store'])->name('store');
-        Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
-
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
     });
 });
 
+    
+
+//Users get advices
+// Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('user.advice.show');
+    });
+// });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-
 
 
 //user dailylog
