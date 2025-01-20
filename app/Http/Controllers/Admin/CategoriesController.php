@@ -16,39 +16,42 @@ class CategoriesController extends Controller
     }
 
     public function index()
+{
+        
+        $category = $this->category->get();
+
+        return view('admin.categories.index', compact('categories', 'Categories'));
+    }
+    
+
+    public function store(Request $request)
     {
-        return view('admin.categories.index');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:categories,id'
+        ]);
+
+        Category::create($request->all());
+        return redirect()->route('admin.categories.index');
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return redirect()->route('admin.categories.index');
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'parent_id' => 'nullable|exists:categories,id'
-    //     ]);
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('admin.categories.index');
+    }
 
-    //     Category::create($request->all());
-    //     return redirect()->route('admin.categories.index');
-    // }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //     ]);
-
-    //     $category = Category::findOrFail($id);
-    //     $category->update($request->all());
-    //     return redirect()->route('admin.categories.index');
-    // }
-
-    // public function destroy($id)
-    // {
-    //     $category = Category::findOrFail($id);
-    //     $category->delete();
-    //     return redirect()->route('admin.categories.index');
-    // }
-
-
+}
 

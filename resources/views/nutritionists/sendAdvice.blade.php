@@ -15,8 +15,8 @@
                     <div class="d-flex align-items-center">
                         <!-- アイコン部分 -->
                         <div class="user-photo-container">
-                            @if ($user->profile_image)
-                                <img src="{{ $user->profile_image }}" class="user-photo" alt="Avatar">
+                            @if ($user_profile->profile_image)
+                                <img src="{{ $user_profile->profile_image }}" class="user-photo" alt="Avatar">
                             @else
                                 <span class="material-symbols-outlined nutri-material-symbols-outlined-user-photo"
                                     style="font-size:80px;">account_circle</span>
@@ -28,39 +28,42 @@
                             <table class="table table-borderless custom-table-text-color">
                                 <tr>
                                     <td><strong>Name:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->name }}</td>
+                                    <td class="text-start custom-data">{{$user_profile->first_name}} {{$user_profile->last_name}}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Age:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->age }}</td>
+                                    <td><strong>Birthday:</strong></td>
+                                    <td class="text-start custom-data">
+                                        {{$user_profile->birthday}}
+                                        ({{ \Carbon\Carbon::parse($user_profile->birthday)->age }})
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Gender:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->gender }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->gender }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Height(cm):</strong></td>
-                                    <td class="text-start custom-data">{{ $user->height }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->height }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Exercise Frequency:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->activity_level }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->activity_level }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Current Health Conditions:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->health_conditions }}</td>
+                                    <td class="text-start custom-data">{{ implode(", ",json_decode($user_profile->health_conditions)) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Dietary Preferences:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->dietary_preferences }}</td>
+                                    <td class="text-start custom-data">{{ implode(", ",json_decode($user_profile->dietary_preferences)) }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Food Allergies:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->allergies }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->allergies }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Goals:</strong></td>
-                                    <td class="text-start custom-data">{{ $user->goal }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->goal }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="">
@@ -91,8 +94,8 @@
                                 <!-- Memo Content -->
                                 <tr>
                                     <td colspan="2"
-                                        class="memo-container @if (empty($user->nutritionist_memo)) no-border @else" style="border: 1px solid #202F55; @endif">
-                                        {!! nl2br(e($user->nutritionist_memo)) !!}
+                                        class="memo-container @if (empty($user_profile->nutritionist_memo)) no-border @else" style="border: 1px solid #202F55; @endif">
+                                        {!! nl2br(e($user_profile->nutritionist_memo)) !!}
                                     </td>
 
                                 </tr>
@@ -119,14 +122,14 @@
         </div>
 
         <div class="custom-right-section">
-            <h4 class="text-center p-4">Send Advice</h4>
+            <h4 class="text-center p-1">Send Advice</h4>
             <form action="{{ route('nutri.store') }}" method="post" class="w-75">
                 @csrf
 
                 <!-- Overall Rating -->
                 <div class="">
-                    <label for="overall" class="form-label">Overall Rating</label>
-                    <div id="overall" class="d-flex justify-content-start gap-4">
+                    <label for="overall" class="form-label mb-0">Overall Rating</label>
+                    <div id="overall" class="d-flex justify-content-start gap-4 mt-0">
                         <span
                             class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 5) selected @endif"
                             data-value="5">sentiment_excited</span>
@@ -159,12 +162,12 @@
                 </div>
 
                 <!-- User ID -->
-                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn send-btn">Send Advice</button>
-                    <a href="{{ route('nutri.history', $user->id) }}" class="btn see-previous-btn">Previous Advice</a>
+                    <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn">Previous Advice</a>
 
                 </div>
             </form>
