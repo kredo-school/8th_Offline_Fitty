@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\ChatGptController;
 // use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
@@ -100,8 +101,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-
-
+//acess chatgpt api
+Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
 //user dailylog
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');

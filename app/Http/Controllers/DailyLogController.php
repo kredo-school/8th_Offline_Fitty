@@ -55,6 +55,8 @@ class DailyLogController extends Controller
         $this->dailylog->meal_type = $request->input('meal_type');
         $this->dailylog->meal_content = $request->input('meal_content');
         $this->dailylog->comment = $request->input('comment');
+        
+        $this->dailylog->nutritions = $request->input('nutritions');
 
         if($request->image){
             $this->dailylog->image = 'data:image/' . $request->image->extension() .
