@@ -72,6 +72,4 @@ class DailyLogController extends Controller
     {
         //
     }
-
-   
 }

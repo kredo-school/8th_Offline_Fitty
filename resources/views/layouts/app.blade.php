@@ -10,6 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-    @stack('styles')
 
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
 
     <!-- Scripts -->
@@ -32,32 +32,6 @@
 </head>
 <body>
     <div id="app">
-       {{-- @if(auth()->check())
-        <!-- サイドメニュー -->
-        <div class="sidemenu">
-            <a href="#" class="menu-item">
-                <span class="material-icons mt-3">assignment</span> Record
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">person</span> Profile
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">history</span> History
-            </a>
-            <a href="#" class="menu-item active">
-                <span class="material-icons">notifications</span> Notification
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help_outline</span> Help
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">help</span> FAQ
-            </a>
-            <a href="#" class="menu-item">
-                <span class="material-icons">logout</span> Logout
-            </a>
-        </div>
-        @endif --}}
 
         <!-- ナビバー(header) -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
@@ -109,22 +83,17 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="main-padding">
+        <main>
             @yield('content')
         </main>
 
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
+            <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
+        </footer>
+
     </div>
-
-    <!-- フッター -->
-<footer class="footer">
-    <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
-    <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
-</footer>
-
-
-
-
-
-
 </body>
 </html>

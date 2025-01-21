@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Nutritionist;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserProfile;
+use App\Models\DailyLog;
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,166 +15,127 @@ use Illuminate\Support\Facades\Auth;
 class NutritionistController extends Controller
 {
     private $user;
-    private $nutritionist;
+    private $user_profile;
+    private $dailylog;
 
-    public function __construct(Nutritionist $nutritionist, User $user)
+    public function __construct(User $user, UserProfile $user_profile, DailyLog $dailylog)
     {
-        $this->nutritionist = $nutritionist;
         $this->user = $user;
+        $this->user_profile = $user_profile;
+        $this->dailylog = $dailylog;
+
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // 現在の栄養士（ログイン中の栄養士）を取得
-        $nutritionist = $this->nutritionist->where('id', 1)->first();
 
         // 栄養士に関連するユーザー情報を取得
-        $users = $this->user->where('nutritionist_id', 3)->get();
+        $user_profiles = $this->user_profile->where('nutritionist_id', Auth::user()->id)->get();
 
         // 栄養士とその関連ユーザー情報をビューに渡す
-        return view('nutritionists.index', compact('nutritionist', 'users'));
+        return view('nutritionists.index', compact('user_profiles'));
     }
 
 
     function sendAdvice($id)
     {
-        $user = $this->user->findOrFail($id);
+
+        $user_profile = $this->user_profile->where('user_id', $id)->first();
+        $dailylog = $this->dailylog->where('user_id', $id)->first();
+
+        $radarChartData = $this->showpfcvm($id);
+
+        // 必要に応じて radarChartData のデータを加工
+        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
+        $message = $radarChartData['message'] ?? null;
 
 
-        return view('nutritionists.sendAdvice', compact('user'));
+        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'message'));
     }
 
-
-
-
-
-
-    function profile($id)
+    public function showpfcvm($id)
     {
-        $user = $this->user->findOrFail($id);
-        return view('nutritionists.profile', compact('user'));
-    }
-    function editProfile($id)
-    {
-        $user = $this->user->findOrFail($id);
-        return view('nutritionists.editProfile', compact('user'));
-    }
+        $user_prolile = User::find($id);
 
-    public function nutriUpdate(Request $request, $id)
-    {
-        // 対象ユーザーを取得
-        $user = $this->user->findOrFail($id);
-
-        // バリデーションルール
-        $request->validate([
-            'name' => 'required|min:1|max:255',
-            'email' => 'required|email|min:1|max:255|unique:users,email,' . $user->id,
-            'avatar' => 'mimes:jpeg,png,jpg|max:2048',
-            'first_name' => 'required|min:1|max:255',
-            'last_name' => 'required|min:1|max:255',
-            'memo' => 'nullable|min:1|max:1080',
-            // 性別は"male"または"female"のみ許可
-
-        ]);
-
-        // データを更新
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->avatar = $user->avatar ?? 'default_avatar.png';
-
-        if ($request->avatar) {
-            $user->avatar = 'data:image/' . $request->avatar->extension() .
-                ';base64,' . base64_encode(file_get_contents($request->avatar));
+        if (!$user_prolile) {
+            return [
+                'satisfactionRates' => [],
+                'message' => 'User not found.',
+            ];
         }
 
+        $endDate = Carbon::yesterday();
+        $startDate = $endDate->copy()->subDays(6);
+        $dailyLogs = DailyLog::where('user_id', $id)
+            ->whereBetween('input_date', [$startDate, $endDate])
+            ->get();
 
+        if ($dailyLogs->isEmpty()) {
+            return [
+                'satisfactionRates' => [],
+                'message' => 'No data available for the last 7 days for this user.',
+            ];
+        }
 
-        // プロファイルの更新
-        $nutritionistsProfile = $user->nutritionistsProfile;
-        $nutritionistsProfile->first_name = $request->first_name;
-        $nutritionistsProfile->last_name = $request->last_name;
-        $nutritionistsProfile->memo = $request->memo;
-        $nutritionistsProfile->save();
+        $weight = $dailyLogs->first()->weight;
+        $recommendedValues = [
+            "Carbohydrates" => $weight * 5 * 7,
+            "Fats" => $weight * 1.0 * 7,
+            "Proteins" => $weight * 1.2 * 7,
+            "Vitamins" => $weight * 2 * 7,
+            "Minerals" => $weight * 10 * 7,
+        ];
 
-        // ユーザー情報を保存
-        $user->save();
+        $actualValues = [];
+        foreach ($dailyLogs as $log) {
+            $nutritions = json_decode($log->nutritions, true);
+            foreach ($nutritions as $key => $value) {
+                $numericValue = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+                $actualValues[$key] = ($actualValues[$key] ?? 0) + $numericValue;
+            }
+        }
 
-        // プロフィールページへリダイレクト
-        return redirect()->route('nutri.profile', $user->id);
+        // キー名を統一する処理を追加
+        $actualValues = [
+            "Proteins" => $actualValues["Protein"] ?? 0,
+            "Fats" => $actualValues["Fat"] ?? 0,
+            "Carbohydrates" => $actualValues["Carbohydrates"] ?? 0,
+            "Vitamins" => $actualValues["Vitamins"] ?? 0,
+            "Minerals" => $actualValues["Minerals"] ?? 0,
+        ];
+
+        $satisfactionRates = [];
+        foreach ($recommendedValues as $key => $recommended) {
+            $actual = $actualValues[$key] ?? 0;
+            $satisfactionRates[$key] = round(($actual / $recommended) * 100, 1);
+        }
+
+        return [
+            'satisfactionRates' => $satisfactionRates,
+            'message' => null,
+            'user_profile' => $user_prolile
+        ];
     }
 
-    public function changePassword(Request $request, $id)
+
+
+
+
+
+
+    function profile()
     {
-        // バリデーション
-        $validator = Validator::make($request->all(), [
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed', // confirmedでnew_passwordとconfirm_passwordを一致させる
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        // ユーザーの取得
-        $user = $this->user->findOrFail($id);
-
-        // 現在のパスワードが正しいか確認
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'The current password is incorrect.'])->withInput();
-        }
-
-        // 新しいパスワードを保存
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        // 成功メッセージを設定
-        return back()->with('success', 'Password updated successfully.');
+        return view('nutritionists.profile');
     }
-
+    function editprofile()
+    {
+        return view('nutritionists.editprofile');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Nutritionist $nutritionist)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Nutritionist $nutritionist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Nutritionist $nutritionist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Nutritionist $nutritionist)
-    {
-        //
-    }
 }

@@ -7,9 +7,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="memoForm" action="{{ route('nutri.updateMemo', $user->id) }}" method="POST">
+        <form id="memoForm" action="{{ route('nutri.updateMemo', $user_profile->id) }}" method="POST">
           @csrf
-          <textarea class="form-control" id="memoText" name="memo" rows="5" placeholder="Add memo...">{{ old('memo', $user->nutritionist_memo) }}</textarea>
+          <textarea class="form-control" id="memoText" name="memo" rows="5" placeholder="Add memo...">{{ old('memo', $user_profile->nutritionist_memo) }}</textarea>
           @error('memo')
             <div class="text-danger mt-2">{{ $message }}</div>
           @enderror
