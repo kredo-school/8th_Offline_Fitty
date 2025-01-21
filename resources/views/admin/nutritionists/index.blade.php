@@ -3,13 +3,13 @@
 @section('content')
     @include('sidebar.humburger')
 
-    <div class="bg-light d-flex vh-100 admin-nutritionists">
+    <div class="d-flex vh-100 admin-nutritionists">
         <div class="row w-100">
             @include('sidebar.user-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- Main Content -->
-                <div class="container my-5 admin-nutritionists">
+                <div class="container  my-5 mx-1 admin-nutritionists">
                     <!-- Header Section -->
                     <div class="d-flex justify-content-between align-items-center mb-3 admin-nutritionists-header">
                         <h1 class="text-success admin-nutritionists-title">
@@ -29,7 +29,6 @@
                             </form>
                         </div>
 
-                        <!-- Add Button -->
                         <!-- Add Button -->
 <a href="{{ route('admin.nutritionists.create') }}" class="add-button">
     <span class="material-symbols-outlined">add</span>

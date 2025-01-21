@@ -872,25 +872,24 @@ footer a {
 
 /* 今井cssスタート */
 /* Admin Home Styles
-
 /* 全体のスタイル */
 .admin-home {
-  font-family: 'Shrikhand', sans-serif;
-  background-color: #F7FCF1;
+  font-family: 'Shrikhand', sans-serif!important;
+  color: rgba(247, 252, 241, 1) !important;
   margin: 0;
   padding: 0;
-  color: #F7FCF1;
-  min-height: 100vh;
+  min-height: 100vh!important;/* ビューポート全体の高さを確保 */
+  display: flex!important;/* 必要に応じて子要素を整列 */
 }
 
 /* タイトルのスタイル */
 .admin-home .title {
-  font-size: 2rem;
-  color: #00984F;
-  text-align: left;
+  font-size: 2rem!important; 
+  color: #00984F!important; 
+  text-align: left!important; 
   margin-bottom: 20px!important;  /* 間隔を狭めるために margin をなくす */
-  margin-left: 15px;
-  position: relative;
+  margin-left: 15px!important; 
+  position: relative!important; 
   top: 40px!important; /* 下に20px移動 */
 }
 
@@ -899,68 +898,60 @@ footer a {
   width: 400px!important;
   height: 200px!important;
   display: flex!important;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #00984F;
-  border-radius: 15px;
-  text-decoration: none;
-  color: #00984F;
-  font-weight: bold;
-  background-color: #fff;
-  transition: transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease;
-  margin: 12px!important;
+  border: 2px solid #00984F!important; 
+  border-radius: 15px!important; 
+  text-decoration: none!important; 
+  background-color: rgba(247, 252, 241, 1) !important;
+  color: #00984F!important;
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease!important;
+  margin: 15px!important;
 }
 
 
 /* カードのホバー時 */
 .admin-home .card:hover {
-  background-color: #ffa965;
-  border-color: #ffa965;
-  color: #fff;
-  transform: scale(1.05);
+  background-color: #ffa965!important;
+  border-color: #ffa965!important;
+  color: #fff!important;
+  transform: scale(1.05)!important;
 }
 
 /* アイコンのホバー時 */
 .admin-home .card:hover .material-symbols-outlined {
-  color: #fff;
+  color: #fff!important;
 }
 
 /* カード内のアイコン */
 .admin-home .card .material-symbols-outlined {
-  font-size: 150px !important;
-  color: #00984F;
+  font-size: 140px !important;
+  color: #00984F!important;
 }
 
 /* カード内の文字 */
 .admin-home .card span {
-  font-size: 1.8rem!important;
-  margin-top: 2px!important;
-}
-
-/* カードの外側余白 */
-.admin-home .row {
-  margin-left: 5px;
-  margin-right: 5px;
+  font-size: 1.7rem!important;
+  margin-top: 1.0px!important;
 }
 
 /* メディアクエリ：スマホ対応 */
 @media (max-width: 768px) {
   .admin-home .card {
-      width: 100%;
-      height: auto;
-      margin: 10px 0;
+      width: 100%!important;
+      height: auto!important;
+      margin: 10px 0!important;
   }
 
   .admin-home .card .material-symbols-outlined {
-      font-size: 120px;
+      font-size: 120px!important;
   }
 
   .admin-home .card span {
-      font-size: 1.2rem;
+      font-size: 1.2rem!important;
   }
 
   .admin-home .title {
-      font-size: 1.8rem;
+      font-size: 1.8rem!important;
+      color: rgba(247, 252, 241, 1) !important;
   }
 }
 
@@ -968,59 +959,51 @@ footer a {
 /* /Admin Users Index Styles */
 
 /* 全体のフォント */
-body.admin-users {
-  font-family: 'Shrikhand', sans-serif;
+.admin-users {
+  font-family: 'Shrikhand', sans-serif!important;
+  background-color: rgba(247, 252, 241, 1) !important;
 }
 /*
 タイトルスタイル */
-.admin-users h1.admin-users-title {
-  font-family: 'Shrikhand', sans-serif;
-  font-size: 2rem;
-  margin-top: 20px;
+.admin-users-title {
+  font-family: 'Shrikhand', sans-serif!important;
+  font-size: 2rem!important;
+  color: #00984f!important;
 }
 
 /* 検索ボックスのカスタムスタイル */
-.admin-users .admin-users-search-box .input-group {
-  max-width: 300px; /* 幅を細く調整 */
-  border: 2px solid #00984F;
-  border-radius: 8px;
-  overflow: hidden;
+.admin-users-search-box .input-group {
+  font-family: 'Poppins', sans-serif!important;
+  max-width: 300px!important; /* 幅を細く調整 */
+  border: 2px solid #00984F!important;
+  border-radius: 8px!important;
+  overflow: hidden!important;
 }
 
 /* 検索ボタンのスタイル */
-.admin-users .admin-users-search-btn {
-  background-color: #00984F;
-  border: none;
-  color: white;
-  padding: 4px 10px; /* 少し小さく調整 */
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-}
-
-.admin-users .admin-users-search-btn:hover {
-  background-color: #007b3a;
+.admin-users-search-btn {
+  background-color: #00984F!important;
+  border: none!important;
+  color: white!important;
+  padding: 4px 10px!important; /* 少し小さく調整 */
+  display: flex!important;
+  align-items: center!important;
 }
 
 /* テーブルスタイル */
-.admin-users .admin-users-table {
-  font-family: 'Poppins', sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+.admin-users-table {
+  font-family: 'Poppins', sans-serif!important;
+  border-collapse: collapse!important;
 }
-
-.admin-users .admin-users-table th,
-.admin-users .admin-users-table td {
-  text-align: left;
-  padding: 8px; /* 行間隔を狭める */
-  border-bottom: 1px solid #ddd;
+.admin-users-table th {
+  background-color: rgba(247, 252, 241, 1) !important;
+  color: #6c757d!important;
 }
-
-.admin-users .admin-users-table th {
-  background-color: #f9f9f9;
-  color: #6c757d;
+.admin-users-table td {
+  text-align: left!important;
+  padding: 8px!important; /* 行間隔を狭める */
+  /* border-bottom: 1px solid #ddd; */
+  background-color: rgba(247, 252, 241, 1) !important;
 }
 
 /* テーブル行ホバー時のスタイル */
@@ -1029,30 +1012,29 @@ body.admin-users {
   color: white !important;
 }
 
-
 /* テーブル行ホバー時にリンクとアイコンの色を白に変更 */
-.admin-users .admin-users-table tbody tr:hover a,
-.admin-users .admin-users-table tbody tr:hover .material-symbols-outlined {
-  color: white;
+.admin-users-table tbody tr:hover a,
+.admin-users-table tbody tr:hover .material-symbols-outlined {
+  color: white!important;
 }
 
 /* テーブル行ホバー時の "Name" と "Registration Date" の文字を白に */
-.admin-users .admin-users-table tbody tr:hover td {
-  color: white;
+.admin-users-table tbody tr:hover td {
+  color: white!important;
 }
 
 /* ステータスバッジのホバー時のスタイル */
-.admin-users .admin-users-table tbody tr:hover .status-badge {
-  background-color: transparent;
-  color: white;
-  border-color: white;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+.admin-users-table tbody tr:hover .status-badge {
+  background-color: transparent!important;
+  color: white!important;
+  border-color: white!important;
+  /* transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease!important; */
 }
 
 /* テーブルのIDリンクのスタイル */
 .admin-users .admin-users-id-link {
-  color: #000;
-  text-decoration: none;
+  color: #000!important;
+  text-decoration: none!important;
 }
 
 .admin-users .admin-users-id-link:hover {
@@ -1079,7 +1061,7 @@ body.admin-users {
 }
 
 .admin-users .status-active .status-dot {
-  background-color: #28a745;
+  background-color: #28a745 !important;
 }
 
 /* Inactiveステータス */
@@ -1200,6 +1182,7 @@ body.admin-users {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px; /* 余白を狭める */
+  font-family: 'Poppins', sans-serif!important;
 }
 
 .admin-users .admin-users-pagination p {
@@ -1229,16 +1212,14 @@ body.admin-users {
 /* Admin Nutritionists Index Styles */
 
 /* 全体のフォント */
-Admin Nutritionists Styles
-
-/* 全体のフォント */
-body.admin-nutritionists {
-  font-family: 'Shrikhand', sans-serif;
+.admin-nutritionists {
+  background-color: rgba(247, 252, 241, 1) !important;
+  font-family: 'Poppins', sans-serif!important;
 }
 
 /* タイトルスタイル */
 .admin-nutritionists h1.admin-nutritionists-title {
-  font-family: 'Shrikhand', sans-serif;
+  font-family: 'Shrikhand', sans-serif!important;
   font-size: 2rem;
   margin-top: 20px;
 }
@@ -1481,9 +1462,8 @@ body.admin-nutritionists {
 
 
 /* nutritionists profile */
-
 .admin-nutri-profile {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
   background-color: #F7FCF1;
   margin: 0;
   padding: 0;
@@ -1495,13 +1475,15 @@ body.admin-nutritionists {
 
 .admin-nutri-profile-container {
   max-width: 600px;
-  background-color: white;
-  padding: 20px;
+  /* background-color: white; */
+  padding: 50px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .admin-nutri-profile-title {
+  font-family: 'Shrikhand', sans-serif !important;
+  color: #00984F !important;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -1533,20 +1515,46 @@ body.admin-nutritionists {
   padding: 5px;
 }
 
-.admin-nutri-profile-submit-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #FFC107;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* ボタンコンテナ */
+.admin-nutri-profile-button-container {
+  font-size: 1.3rem!important; 
+  display: flex;
+  justify-content: center!important; /* ボタンを中央揃え */
+  gap: 8px!important;  /* ボタン間の間隔 */
 }
 
-.admin-nutri-profile-submit-btn:hover {
-  background-color: #FFA000;
+/* Cancel Button */
+.admin-nutri-profile-cancel-btn {
+  background-color: #fff !important;
+  color: #ffa965 !important;
+  border: 2px solid #ffa965 !important;
+  border-radius: 8px !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  width: 130px; /* 横幅を固定 */
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+  text-align: center;
+  text-decoration: none;
+}
+
+.admin-nutri-profile-cancel-btn:hover {
+  background-color: #ffa965 !important;
+  color: #fff !important;
+}
+
+/* Add Button */
+.admin-nutri-profile-add-btn {
+  background-color: #ffa965 !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 8px !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  width: 130px; /* 横幅を固定 */
+  transition: background-color 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.admin-nutri-profile-add-btn:hover {
+  background-color: #ff8c00 !important;
 }
 
 .admin-nutri-profile-note {
@@ -1562,6 +1570,266 @@ body.admin-nutritionists {
   border-radius: 50%;
   margin: 0 auto 20px;
   background-color: #ddd;
+}
+.admin-nutri-profile .material-icons-outlined {
+  font-size: 180px !important; /* アイコンのサイズを大きく */
+  color: #757575 !important;
+}
+
+/* admin categories*/
+/* 全体のスタイル */
+.admin-categories-container {
+  background-color: rgba(247, 252, 241, 1) !important;
+  padding: 87px 80px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.admin-categories-content-wrapper {
+  max-width: 819px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* ヘッダーセクション */
+.admin-categories-header-section {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+.admin-categories-title {
+  font-family: 'Shrikhand', sans-serif !important;
+  color: rgba(0, 152, 79, 1) !important;
+  font-size: 32px !important;
+  margin: auto 0 !important;
+}
+
+.admin-categories-add-button {
+  font-family: 'Shrikhand'!important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 28px !important;
+  background-color: rgba(255, 169, 101, 1) !important;
+  border: none !important;
+  border-radius: 5px !important;
+  color: white !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.admin-categories-add-button:hover {
+  background-color: rgba(255, 140, 0, 1) !important;
+}
+
+.admin-categories-add-icon {
+  font-size: 24px !important;
+}
+
+/* カテゴリーアイテム */
+.admin-categories-item {
+  margin-top: 18px !important;
+  color: rgba(0, 152, 79, 1) !important;
+  font-size: 24px !important;
+}
+.admin-categories-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 15px 20px !important;
+  background-color: white !important;
+  border: 1px solid rgba(0, 152, 79, 0.2) !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.admin-categories-row:hover {
+  background-color: rgba(0, 152, 79, 0.1) !important;
+}
+
+.admin-categories-toggle-icon {
+  font-size: 24px !important;
+  color: rgba(0, 152, 79, 1) !important;
+  transition: transform 0.3s ease !important;
+}
+
+.admin-categories-toggle-icon.open {
+  transform: rotate(180deg) !important;
+}
+
+/* サブカテゴリーリスト */
+.admin-categories-sublist {
+  padding-left: 40px !important;
+  margin-top: 10px !important;
+  background-color: rgba(247, 252, 241, 1) !important;
+  border-left: 3px solid rgba(0, 152, 79, 0.5) !important;
+}
+
+.admin-categories-subitem {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 5px 0 !important;
+  border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
+}
+
+.admin-categories-subcategory-name {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 18px !important;
+  color: rgba(0, 152, 79, 1) !important;
+}
+
+.admin-categories-action-buttons {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+/* サブカテゴリーのアクションボタン */
+.admin-categories-edit-btn,
+.admin-categories-delete-btn {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.admin-categories-edit-icon,
+.admin-categories-delete-icon {
+  font-size:  22px !important;
+  color: rgba(0, 152, 79, 1) !important; /* 緑色に設定 */
+  transition: color 0.3s ease !important;
+}
+
+/* ホバー時のスタイル */
+.admin-categories-edit-btn:hover .admin-categories-edit-icon {
+  color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
+}
+
+.admin-categories-delete-btn:hover .admin-categories-delete-icon {
+  color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
+}
+
+
+
+/* モーダルスタイル */
+/* モーダル全体のスタイル */
+.admin-categories-modal-content {
+  border-radius: 10px !important;
+  padding: 20px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* モーダルヘッダー */
+.admin-categories-modal-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  font-size: 24px !important;
+  color: rgba(0, 152, 79, 1) !important;
+  border: none !important;
+}
+
+.admin-categories-modal-icon {
+  font-size: 28px !important;
+  color: rgba(0, 152, 79, 1) !important;
+}
+
+.admin-categories-btn-close {
+  background: none !important;
+  border: none !important;
+}
+
+/* モーダルボディ */
+.admin-categories-modal-body {
+  padding: 20px 0 !important;
+}
+
+/* モーダルフッター */
+.admin-categories-modal-footer {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 15px !important;
+  border: none !important;
+}
+
+.admin-categories-cancel-btn {
+  background-color: white !important;
+  border: 2px solid rgba(255, 169, 101, 1) !important;
+  color: rgba(255, 169, 101, 1) !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  padding: 8px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.admin-categories-cancel-btn:hover {
+  background-color: rgba(255, 169, 101, 1) !important;
+  color: white !important;
+}
+
+.admin-categories-submit-btn {
+  background-color: rgba(255, 169, 101, 1) !important;
+  border: none !important;
+  color: white !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  padding: 8px 20px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.admin-categories-submit-btn:hover {
+  background-color: rgba(255, 140, 0, 1) !important;
+}
+/* 緑の横線 */
+.admin-categories-modal-divider {
+  border: none !important;
+  border-top: 2px solid rgba(0, 152, 79, 1) !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+
+/* メディアクエリ（レスポンシブ対応） */
+@media (max-width: 768px) {
+  .admin-categories-container {
+      padding: 20px !important;
+  }
+
+  .admin-categories-add-button {
+      padding: 8px 16px !important;
+      font-size: 16px !important;
+  }
+
+  .admin-categories-title {
+      font-size: 24px !important;
+  }
+
+  .admin-categories-sublist {
+      padding-left: 20px !important;
+  }
+
+  .admin-categories-form-input,
+  .admin-categories-form-select {
+      font-size: 14px !important;
+  }
+
+  .admin-categories-modal-content {
+      padding: 15px !important;
+  }
+
+  .admin-categories-modal-footer .btn {
+      padding: 6px 12px !important;
+      font-size: 14px !important;
+  }
 }
 
 

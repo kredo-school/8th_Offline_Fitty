@@ -83,14 +83,23 @@
             </div>
 
             <!-- Radar Chart Placeholder -->
+
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Radar Chart</h5>
-                    <div class="text-center">
-                        <img src="https://via.placeholder.com/300x200" alt="Radar Chart" class="img-fluid">
-                    </div>
+                    @include('nutritionists.charts.radarchartSendAdvice', [
+                        'satisfactionRates' => $satisfactionRates,
+                        'user' => $user_profile,
+                        'message' => $message ?? 'No data available.'
+                    ])
                 </div>
             </div>
+
+
+
+            <!-- Blank Cards -->
+            <div class="custom-blank-card"></div>
+            <div class="custom-blank-card"></div>
+            <div class="custom-blank-card"></div>
         </div>
 
         <div class="custom-right-section">
