@@ -45,20 +45,36 @@ class AdviceController extends Controller
     }
 
 
-public function updateMemo(Request $request, $id)
+    public function updateMemo(Request $request, $id)
     {
-        // メモが空でないかを検証
+        // バリデーション：メモが1000文字以内であることを検証
         $request->validate([
-            'memo' => 'max:1000',
+            'memo' => 'nullable|string|max:1000',
         ]);
 
-        // ユーザーのメモを更新
-        $user_profile = $this->user_profile->findOrFail($id);
-        $user_profile->nutritionist_memo = $request->memo;
-        $user_profile->save();
+        try {
+            // ユーザーのメモを更新
+            $user_profile = $this->user_profile->findOrFail($id);
+            $user_profile->nutritionist_memo = $request->memo;
+            $user_profile->save();
 
-        return redirect()->back()->with('success', 'Memo updated successfully!');
+            // JSON形式のレスポンスを返す
+            return response()->json([
+                'success' => true,
+                'message' => 'Memo updated successfully!',
+                'memo' => $user_profile->nutritionist_memo,
+            ]);
+        } catch (\Exception $e) {
+
+
+            // エラーレスポンスを返す
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update memo. Please try again.',
+            ], 500);
+        }
     }
+
 
 
 
