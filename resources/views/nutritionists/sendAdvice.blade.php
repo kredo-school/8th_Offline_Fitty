@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Send Advice')
 @section('content')
-    <div class="custom-left-right-container">
-
+    <div class="container send-container">
         <div class="custom-left-section">
             <!-- Back Button -->
             <div class="fixed-back-button">
@@ -13,7 +12,6 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <!-- アイコン部分 -->
                         <div class="user-photo-container">
                             @if ($user_profile->profile_image)
                                 <img src="{{ $user_profile->profile_image }}" class="user-photo" alt="Avatar">
@@ -22,8 +20,6 @@
                                     style="font-size:80px;">account_circle</span>
                             @endif
                         </div>
-
-                        <!-- ユーザー情報部分 -->
                         <div class="user-info-custom ms-4">
                             <table class="table table-borderless custom-table-text-color">
                                 <tr>
@@ -51,53 +47,34 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Current Health Conditions:</strong></td>
-                                    <td class="text-start custom-data">{{ implode(", ",json_decode($user_profile->health_conditions)) }}</td>
+                                    <td class="text-start custom-data">{!! implode('<br>', json_decode($user_profile->health_conditions)) !!}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Dietary Preferences:</strong></td>
-                                    <td class="text-start custom-data">{{ implode(", ",json_decode($user_profile->dietary_preferences)) }}</td>
+                                    <td class="text-start custom-data">{!! implode('<br>', json_decode($user_profile->dietary_preferences)) !!}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Food Allergies:</strong></td>
-                                    <td class="text-start custom-data">{{ $user_profile->allergies }}</td>
+                                    <td class="text-start custom-data">{{ $user_profile->food_allergies }}</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Goals:</strong></td>
                                     <td class="text-start custom-data">{{ $user_profile->goal }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" class="">
+                                    <td colspan="2">
                                         <strong>Memo</strong>
-                                        <span class="material-symbols-outlined memo-icon" data-bs-toggle="modal"
-                                            data-bs-target="#memoModal">
+                                        <span class="material-symbols-outlined memo-icon" data-bs-toggle="modal" data-bs-target="#memoModal">
                                             edit
                                         </span>
-
-                                        <style>
-                                            .memo-icon {
-                                                transition: transform 0.3s ease, color 0.3s ease;
-                                                /* トランジションでスムーズな変化 */
-                                                cursor: pointer;
-                                                /* カーソルを指のマークに変更 */
-                                            }
-
-                                            .memo-icon:hover {
-                                                transform: scale(1.2);
-                                                /* アイコンを少し大きくする */
-                                                color: #202F55;
-                                                /* ホバー時に色を変更 */
-                                            }
-                                        </style>
+                                        @include('nutritionists.modals.memo')
                                     </td>
-                                    @include('nutritionists.modals.memo')
                                 </tr>
-                                <!-- Memo Content -->
                                 <tr>
-                                    <td colspan="2"
-                                        class="memo-container @if (empty($user_profile->nutritionist_memo)) no-border @else" style="border: 1px solid #202F55; @endif">
+                                    <td colspan="2" class="memo-container"
+                                        style="border: {{ empty($user_profile->nutritionist_memo) ? 'none' : '1px solid #202F55' }};">
                                         {!! nl2br(e($user_profile->nutritionist_memo)) !!}
                                     </td>
-
                                 </tr>
                             </table>
                         </div>
@@ -127,10 +104,8 @@
 
         <div class="custom-right-section">
             <h4 class="text-center p-1">Send Advice</h4>
-            <form action="{{ route('nutri.store') }}" method="post" class="w-75">
+            <form action="{{ route('nutri.store') }}" method="post" id="advice-form">
                 @csrf
-
-                <!-- Overall Rating -->
                 <div class="">
                     <label for="overall" class="form-label mb-0">Overall Rating</label>
                     <div id="overall" class="d-flex justify-content-start gap-4 mt-0">
@@ -159,7 +134,7 @@
                 <!-- Comment -->
                 <div class="mb-3">
                     <label for="message" class="form-label">Comment</label>
-                    <textarea class="form-control" id="message" name="message" rows="18" style="padding: 12px;">{{ old('message') }}</textarea>
+                    <textarea class="form-control" id="message" name="message" rows="20">{{ old('message') }}</textarea>
                     @error('message')
                         <p class="text-danger small">{{ $message }}</p>
                     @enderror
@@ -172,34 +147,32 @@
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn send-btn">Send Advice</button>
                     <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn">Previous Advice</a>
-
                 </div>
             </form>
-
-
-
         </div>
     </div>
 
+    <script src="{{ asset('js/memo.js') }}"></script>
     <script>
-        const overallContainer = document.getElementById('overall');
-        const overallInput = document.getElementById('overall-input');
+        document.addEventListener('DOMContentLoaded', () => {
+            const overallContainer = document.getElementById('overall');
+            const overallInput = document.getElementById('overall-input');
 
-        overallContainer.addEventListener('click', (event) => {
-            if (event.target.classList.contains('material-symbols-outlined')) {
-                const value = event.target.getAttribute('data-value');
-                overallInput.value = value;
+            if (overallContainer && overallInput) {
+                overallContainer.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('material-symbols-outlined')) {
+                        const value = event.target.getAttribute('data-value');
+                        overallInput.value = value;
 
-                // 選択された状態のスタイルを付与
-                Array.from(overallContainer.children).forEach(icon => icon.classList.remove('selected'));
-                event.target.classList.add('selected');
+                        Array.from(overallContainer.children).forEach(icon => icon.classList.remove('selected'));
+                        event.target.classList.add('selected');
+                    }
+                });
             }
         });
     </script>
 
-
     <style>
-        /* 選択されたアイコンのスタイル */
         .selected {
             color: #FFA965;
             font-weight: bold;
@@ -214,5 +187,4 @@
             color: #4DAF4A;
         }
     </style>
-
 @endsection

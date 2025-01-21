@@ -20,8 +20,8 @@
                                 <img src="{{ $user_profile->user->avatar }}" class="nutri-card-img-top" alt="Avatar">
                             @else
                                 <span class="material-symbols-outlined nutri-material-symbols-outlined">
-                                account_circle
-                            </span>
+                                    account_circle
+                                </span>
                             @endif
                             <div class="card-body">
                                 <!-- ユーザー名 -->
