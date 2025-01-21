@@ -111,7 +111,8 @@ public function updateMemo(Request $request, $id)
         $user = $this->user->findOrFail($id);
         $advice = $this->advice->where('id', $adviceId)->where('user_id', $id)->firstOrFail();
 
-        return view('users.advice.show', compact('user', 'advice'));
+        return view('users.advice_show', compact('user', 'advice'));
     }
+    
 
 }
