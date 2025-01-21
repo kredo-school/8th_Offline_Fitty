@@ -5,6 +5,7 @@ use App\Http\Controllers\MultiStepRegisterController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
+use App\Http\Controllers\DailyLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
 
+use App\Http\Controllers\ChatGptController;
 // use App\Http\Controllers\Admin\InquiriesController;
 
 use Illuminate\Support\Facades\Auth;
@@ -99,12 +101,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-
-
+//acess chatgpt api
+Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
 //user dailylog
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
+Route::post('/user/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('user.inputmeal.store');
 Route::get('/user/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
 Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('user.update');

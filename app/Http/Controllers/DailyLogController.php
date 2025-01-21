@@ -8,14 +8,21 @@ use Carbon\Carbon;
 use App\Models\Nutritionist;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Auth;
+
 class DailyLogController extends Controller
 {
+    private $dailylog;
 
-    public function __construct(Nutritionist $nutritionist, User $user)
+    public function __construct(Nutritionist $nutritionist, User $user ,dailylog $dailylog)
     {
         $this->nutritionist = $nutritionist;
         $this->user = $user;
+        $this->dailylog = $dailylog;
     }
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -38,7 +45,38 @@ class DailyLogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // バリデーション
+        $request->validate([
+            'input_date' => 'required|date',
+            'meal_type' => 'required|string',
+            'meal_content' => 'nullable|string',
+            'weight' => 'nullable|numeric|min:0', // 体重は任意
+            'comment' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // 現在の認証ユーザーのIDを取得して設定
+        $this->dailylog->user_id = Auth::id();
+
+        // データを設定
+        $this->dailylog->input_date = $request->input('input_date');
+        $this->dailylog->meal_type = $request->input('meal_type');
+        $this->dailylog->meal_content = $request->input('meal_content');
+        $this->dailylog->weight = $request->input('weight');
+        $this->dailylog->comment = $request->input('comment');
+
+        $this->dailylog->nutritions = $request->input('nutritions');
+
+        if($request->image){
+            $this->dailylog->image = 'data:image/' . $request->image->extension() .
+            ';base64,' . base64_encode(file_get_contents($request->image));
+        }
+
+        // データベースに保存
+        $this->dailylog->save();
+
+        // リダイレクト
+        return redirect()->route('user.profile',Auth::id());
     }
 
     /**
