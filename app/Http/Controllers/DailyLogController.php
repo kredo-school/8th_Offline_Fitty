@@ -4,18 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\DailyLog;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Nutritionist;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 
 class DailyLogController extends Controller
 {
-
     private $dailylog;
 
-    public function __construct(dailylog $dailylog)
+    public function __construct(Nutritionist $nutritionist, User $user ,dailylog $dailylog)
     {
+        $this->nutritionist = $nutritionist;
+        $this->user = $user;
         $this->dailylog = $dailylog;
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -24,6 +30,7 @@ class DailyLogController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +64,7 @@ class DailyLogController extends Controller
         $this->dailylog->meal_content = $request->input('meal_content');
         $this->dailylog->weight = $request->input('weight');
         $this->dailylog->comment = $request->input('comment');
-        
+
         $this->dailylog->nutritions = $request->input('nutritions');
 
         if($request->image){

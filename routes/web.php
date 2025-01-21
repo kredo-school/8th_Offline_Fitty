@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
+
 use App\Http\Controllers\ChatGptController;
 // use App\Http\Controllers\Admin\InquiriesController;
 

@@ -12,7 +12,8 @@ class UsersTableSeeder extends Seeder
 {
     private $user;
 
-    public function __construct(User $user){
+    public function __construct(User $user)
+    {
         $this->user = $user;
     }
     /**
@@ -23,14 +24,14 @@ class UsersTableSeeder extends Seeder
         $users = [];
 
         for ($i = 1; $i <= 101; $i++) {
-            if($i == 1){
+            if ($i == 1) {
                 $user_name = "admin";
                 $role = "A";
-            }elseif($i <= 51){
-                $user_name = "test".($i-1);
+            } elseif ($i <= 51) {
+                $user_name = "test" . ($i - 1);
                 $role = "U";
-            }else{
-                $user_name = "nutri".($i-51);
+            } else {
+                $user_name = "nutri" . ($i - 51);
                 $role = "N";
             }
 
