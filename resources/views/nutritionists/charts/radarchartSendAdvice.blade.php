@@ -1,5 +1,4 @@
-<div class="card">
-    <div class="card-body">
+
         <h5 class="card-title">5 Major Nutrients</h5>
         <div class="text-center">
             @if (!empty($satisfactionRates))
@@ -8,8 +7,6 @@
                 <p>{{ $message ?? 'No data available.' }}</p>
             @endif
         </div>
-    </div>
-</div>
 
 @if (!empty($satisfactionRates))
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

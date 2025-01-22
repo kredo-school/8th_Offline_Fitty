@@ -107,7 +107,7 @@
 
             <!-- Radar Chart Placeholder -->
 
-            <div class="card">
+            <div class="card m-2">
                 <div class="card-body">
                     @include('nutritionists.charts.radarchartSendAdvice', [
                         'satisfactionRates' => $satisfactionRates,
@@ -118,11 +118,56 @@
             </div>
 
 
+            @foreach ($categoryData as $category => $data)
+            <div class="card m-2">
+                <div class="card-body">
+                    <h5>{{ $category }} Subcategories</h5>
+                    <div class="text-center">
+                        @if (!empty($data['subCategoryRates']))
+                            <canvas id="subcategoryChart_{{ $category }}" width="200" height="200"></canvas>
+                        @else
+                            <p class="text-danger">{{ $data['message'] ?? 'No data available.' }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
 
-            <!-- Blank Cards -->
-            <div class="custom-blank-card"></div>
-            <div class="custom-blank-card"></div>
-            <div class="custom-blank-card"></div>
+            @if (!empty($data['subCategoryRates']))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const ctx = document.getElementById('subcategoryChart_{{ $category }}').getContext('2d');
+                    const subCategoryRates = @json($data['subCategoryRates']);
+
+                    const labels = Object.keys(subCategoryRates);
+                    const values = Object.values(subCategoryRates);
+
+                    new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '{{ $category }} Subcategories (%)',
+                                data: values,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                r: {
+                                    suggestedMin: 0,
+                                    suggestedMax: 150
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+            @endif
+        @endforeach
+
+
         </div>
 
         <div class="custom-right-section">
