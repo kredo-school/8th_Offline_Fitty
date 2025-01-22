@@ -10,8 +10,8 @@ class Category extends Model
     use HasFactory;
 
     // 子カテゴリを取得するリレーション
-    public function children()
+    public function subcategory()
     {
-        return $this->hasMany(Category::class, 'parent_id'); // parent_id を使った自己結合
+        return $this->hasMany(SubCategory::class, 'category_id');
     }
 }

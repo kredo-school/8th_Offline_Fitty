@@ -16,22 +16,21 @@ class CategoriesController extends Controller
     }
 
     public function index()
-{
-        
-        $category = $this->category->get();
-
-        return view('admin.categories.index', compact('categories', 'Categories'));
+    {
+        // データを取得 (子カテゴリも含む)
+        $categories = $this->category->get();
+        return view('admin.categories.index')->with('categories', $categories);
     }
-    
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id' 
         ]);
 
-        Category::create($request->all());
+        // カテゴリを作成
+        // Category::create($request->all());
         return redirect()->route('admin.categories.index');
     }
 
@@ -41,6 +40,7 @@ class CategoriesController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
+        // 指定したカテゴリを更新
         $category = Category::findOrFail($id);
         $category->update($request->all());
         return redirect()->route('admin.categories.index');
@@ -48,10 +48,9 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
+        // 指定したカテゴリを削除
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->route('admin.categories.index');
     }
-
 }
-
