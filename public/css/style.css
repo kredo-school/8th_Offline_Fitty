@@ -328,7 +328,11 @@ footer a {
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: left; /* 右側に配置 */
+    height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
+    overflow-y: auto; /* 縦スクロールを有効化 */
+
 }
+
 
 .custom-blank-card {
     height: 200px;
@@ -494,12 +498,15 @@ footer a {
   }
 
   /* リンクのスタイル */
-  .unique-table a {
-    text-decoration: none;
-    color: #202F55;
-    font-weight: bold;
-    transition: color 0.3s ease;
-  }
+
+  .unique-table td a {
+    display: flex; /* アイコンと日付を横並びに */
+    align-items: center; /* 縦方向の中央揃え */
+    text-decoration: none; /* リンクの下線を削除 */
+    color: #333; /* 必要に応じてテキストの色を変更 */
+    justify-content: center; /* 横方向の中央揃え */
+
+}
 
   .unique-table a:hover {
     color: #FFA965;
@@ -510,7 +517,34 @@ footer a {
     background-color: #f1f1f1;
   }
 
+  .custom-textarea {
+    flex: 1; /* 残りの高さを自動で占有 */
+    overflow-y: auto; /* スクロールを有効化 */
+    background-color: #f9f9f9;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
+
+
+
+.nutri-material-symbols-outlined.selected {
+    color: #FFA965; /* 選択されたアイコンの色 */
+    font-size: 32px; /* 必要に応じてサイズを調整 */
+}
+
+.history-right{
+    border-radius: 8px;
+    border: 1px solid #DDD;
+    padding: 1rem;
+}
+
+.history-icon{
+    font-size: 18px;
+}
 
 
 
@@ -884,12 +918,12 @@ footer a {
 
 /* タイトルのスタイル */
 .admin-home .title {
-  font-size: 2rem!important; 
-  color: #00984F!important; 
-  text-align: left!important; 
+  font-size: 2rem!important;
+  color: #00984F!important;
+  text-align: left!important;
   margin-bottom: 20px!important;  /* 間隔を狭めるために margin をなくす */
-  margin-left: 15px!important; 
-  position: relative!important; 
+  margin-left: 15px!important;
+  position: relative!important;
   top: 40px!important; /* 下に20px移動 */
 }
 
@@ -898,9 +932,9 @@ footer a {
   width: 400px!important;
   height: 200px!important;
   display: flex!important;
-  border: 2px solid #00984F!important; 
-  border-radius: 15px!important; 
-  text-decoration: none!important; 
+  border: 2px solid #00984F!important;
+  border-radius: 15px!important;
+  text-decoration: none!important;
   background-color: rgba(247, 252, 241, 1) !important;
   color: #00984F!important;
   transition: transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease!important;
@@ -1517,7 +1551,7 @@ footer a {
 
 /* ボタンコンテナ */
 .admin-nutri-profile-button-container {
-  font-size: 1.3rem!important; 
+  font-size: 1.3rem!important;
   display: flex;
   justify-content: center!important; /* ボタンを中央揃え */
   gap: 8px!important;  /* ボタン間の間隔 */

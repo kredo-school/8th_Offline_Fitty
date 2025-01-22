@@ -191,7 +191,7 @@
                 <!-- Buttons -->
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn send-btn">Send Advice</button>
-                    <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn" target="_blank">Previous Advice</a>
+                    <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn">Previous Advice</a>
                 </div>
             </form>
         </div>
