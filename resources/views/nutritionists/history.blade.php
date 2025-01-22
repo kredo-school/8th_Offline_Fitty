@@ -3,42 +3,24 @@
 @section('content')
 
 <div class="d-flex justify-content-center">
-<table class="unique-table ">
+<table class="unique-table">
   <thead>
     <tr>
       <th>History of {{$user_profile->first_name}} {{$user_profile->last_name}}</th>
     </tr>
   </thead>
   <tbody>
-
-  @foreach ($ as )
-
-  @endforeach
-    <!-- <tr>
-      <td><a href="page8.html">2024/02/16</a></td>
-    </tr>
+    @forelse ($adviceList as $advice)
     <tr>
-      <td><a href="page7.html">2024/02/09</a></td>
+      <td><a href="{{route('nutri.showHistory', $user_profile->id)}}">{{ $advice->created_at->format('Y/m/d') }}</a></td>
     </tr>
+    @empty
     <tr>
-      <td><a href="page6.html">2024/02/02</a></td>
+      <td>No previous advice yet</td>
     </tr>
-    <tr>
-      <td><a href="page5.html">2024/01/26</a></td>
-    </tr>
-    <tr>
-      <td><a href="page4.html">2024/01/19</a></td>
-    </tr>
-    <tr>
-      <td><a href="page3.html">2024/01/12</a></td>
-    </tr>
-    <tr>
-      <td><a href="page2.html">2024/01/05</a></td>
-    </tr>
-    <tr>
-      <td><a href="page1.html">2023/12/29</a></td>
-    </tr> -->
+    @endforelse
   </tbody>
 </table>
 </div>
+
 @endsection

@@ -148,7 +148,7 @@
         </div>
 
         <div class="custom-right-section">
-            <h4 class="text-center p-1">Send Advice</h4>
+            <h4 class="text-center p-1">Advice</h4>
             <form action="{{ route('nutri.store') }}" method="post" id="advice-form">
                 @csrf
                 <div class="">
@@ -197,39 +197,5 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/memo.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const overallContainer = document.getElementById('overall');
-            const overallInput = document.getElementById('overall-input');
 
-            if (overallContainer && overallInput) {
-                overallContainer.addEventListener('click', (event) => {
-                    if (event.target.classList.contains('material-symbols-outlined')) {
-                        const value = event.target.getAttribute('data-value');
-                        overallInput.value = value;
-
-                        Array.from(overallContainer.children).forEach(icon => icon.classList.remove('selected'));
-                        event.target.classList.add('selected');
-                    }
-                });
-            }
-        });
-    </script>
-
-    <style>
-        .selected {
-            color: #FFA965;
-            font-weight: bold;
-        }
-
-        .nutri-material-symbols-outlined {
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nutri-material-symbols-outlined:hover {
-            color: #4DAF4A;
-        }
-    </style>
 @endsection
