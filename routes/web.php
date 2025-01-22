@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
+        Route::get('{id}/showHistory', [AdviceController::class, 'showHistory'])->name('showHistory');
     });
 });
 
