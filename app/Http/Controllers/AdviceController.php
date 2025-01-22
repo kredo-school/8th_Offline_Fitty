@@ -105,14 +105,27 @@ public function updateMemo(Request $request, $id)
         return view('users.advice_index', compact('user', 'adviceList'));
     }
 
-    public function show($id, $adviceId)
-    {
-        // 指定されたアドバイスを取得
-        $user = $this->user->findOrFail($id);
-        $advice = $this->advice->where('id', $adviceId)->where('user_id', $id)->firstOrFail();
+    // public function show($id)
+    // {
+    //     // 指定されたアドバイスを取得
+    //     // $user = $this->user->findOrFail($id);
+    //     $advice = $this->advice->findOrFail($id);
+    //     $this->advice->where('id', $id)->firstOrFail();
 
-        return view('users.advice_show', compact('user', 'advice'));
-    }
+    //     return view('users.advice_show', compact('advice'));
+    // }
+
+    public function show($id, $adviceId)
+{
+    $advice = $this->advice
+        ->where('id', $adviceId)
+        ->where('user_id', $id)
+        ->firstOrFail();
+    
+
+    return view('users.advice_show', compact('advice'));
+}
+
     
 
 }
