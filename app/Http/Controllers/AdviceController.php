@@ -80,6 +80,7 @@ class AdviceController extends Controller
 
     function history($id){
         $user_profile = $this->user_profile->findOrFail($id);
+        
 
         return view('nutritionists.history')->with('user_profile', $user_profile);
     }

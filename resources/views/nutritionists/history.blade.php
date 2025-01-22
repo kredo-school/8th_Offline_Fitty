@@ -10,7 +10,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+
+  @foreach ($ as )
+
+  @endforeach
+    <!-- <tr>
       <td><a href="page8.html">2024/02/16</a></td>
     </tr>
     <tr>
@@ -33,7 +37,7 @@
     </tr>
     <tr>
       <td><a href="page1.html">2023/12/29</a></td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
 </div>
