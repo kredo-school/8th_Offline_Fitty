@@ -148,52 +148,37 @@
         </div>
 
         <div class="custom-right-section">
-            <h4 class="text-center p-1">Advice</h4>
-            <form action="{{ route('nutri.store') }}" method="post" id="advice-form">
-                @csrf
-                <div class="">
-                    <label for="overall" class="form-label mb-0">Overall Rating</label>
-                    <div id="overall" class="d-flex justify-content-start gap-4 mt-0">
-                        <span
-                            class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                            data-value="5">sentiment_excited</span>
-                        <span
-                            class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 4) selected @endif"
-                            data-value="4">sentiment_satisfied</span>
-                        <span
-                            class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 3) selected @endif"
-                            data-value="3">sentiment_content</span>
-                        <span
-                            class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 2) selected @endif"
-                            data-value="2">sentiment_neutral</span>
-                        <span
-                            class="material-symbols-outlined nutri-material-symbols-outlined @if (old('overall') == 1) selected @endif"
-                            data-value="1">sentiment_sad</span>
-                    </div>
-                    <input type="hidden" name="overall" id="overall-input" value="{{ old('overall') }}">
-                    @error('overall')
-                        <p class="text-danger small">{{ $message }}</p>
-                    @enderror
+            <h4 class="text-center p-1">{{ $advice->created_at->format('Y/m/d') }}  Advice</h4>
+            <div class="history-right">
+                <label for="overall" class="form-label mb-0">Overall Rating</label>
+                <div id="overall" class="d-flex justify-content-start gap-4 mt-0">
+                    <span
+                        class="material-symbols-outlined nutri-material-symbols-outlined @if ($advice->overall == 5) selected @endif"
+                        data-value="5">sentiment_excited</span>
+                    <span
+                        class="material-symbols-outlined nutri-material-symbols-outlined @if ($advice->overall == 4) selected @endif"
+                        data-value="4">sentiment_satisfied</span>
+                    <span
+                        class="material-symbols-outlined nutri-material-symbols-outlined @if ($advice->overall == 3) selected @endif"
+                        data-value="3">sentiment_content</span>
+                    <span
+                        class="material-symbols-outlined nutri-material-symbols-outlined @if ($advice->overall == 2) selected @endif"
+                        data-value="2">sentiment_neutral</span>
+                    <span
+                        class="material-symbols-outlined nutri-material-symbols-outlined @if ($advice->overall == 1) selected @endif"
+                        data-value="1">sentiment_sad</span>
                 </div>
 
-                <!-- Comment -->
+
+
+                <!-- Comment Display -->
                 <div class="mb-3">
-                    <label for="message" class="form-label">Comment</label>
-                    <textarea class="form-control" id="message" name="message" rows="20">{{ old('message') }}</textarea>
-                    @error('message')
-                        <p class="text-danger small">{{ $message }}</p>
-                    @enderror
+                    <label for="advice-message" class="form-label">Advice</label>
+                    <div id="advice-message" class="custom-textarea">
+                       <p>{{ $advice->message }}</p>
+                    </div>
                 </div>
-
-                <!-- User ID -->
-                <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
-
-                <!-- Buttons -->
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn send-btn">Send Advice</button>
-                    <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn" target="_blank">Previous Advice</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 

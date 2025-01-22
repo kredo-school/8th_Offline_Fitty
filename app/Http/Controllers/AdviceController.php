@@ -95,25 +95,40 @@ class AdviceController extends Controller
         ->with('adviceList', $adviceList);
 }
 
-public function showHistory($id){
+public function showHistory($id, Request $request)
+{
     $user_profile = $this->user_profile->findOrFail($id);
 
     $dailylog = $this->dailylog->where('user_id', $id)->first();
 
-        $radarChartData = $this->showpfcvm($id);
+    $radarChartData = $this->showpfcvm($id);
 
-        // 必要に応じて radarChartData のデータを加工
-        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
-        $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats','Vitamins','Minerals'];
-        $categoryData = [];
+    // 必要に応じて radarChartData のデータを加工
+    $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
+    $message = $radarChartData['message'] ?? null;
+    $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
+    $categoryData = [];
 
-        foreach ($categories as $category) {
-            $categoryData[$category] = $this->showCategory($id, $category);
-        }
+    foreach ($categories as $category) {
+        $categoryData[$category] = $this->showCategory($id, $category);
+    }
 
-        return view('nutritionists.showHistory', compact('user_profile', 'satisfactionRates', 'categoryData', 'message','category', 'dailylog'));
+    // リクエストの日付でアドバイスを取得
+    $adviceDate = $request->input('date');
+    $advice = $this->advice->where('user_id', $id)
+                           ->whereDate('created_at', $adviceDate)
+                           ->first();
+
+    return view('nutritionists.showHistory', compact(
+        'user_profile',
+        'satisfactionRates',
+        'categoryData',
+        'message',
+        'dailylog',
+        'advice'
+    ));
 }
+
 
 
 public function showpfcvm($id)
