@@ -358,7 +358,7 @@ background-color: #087722; /* ホバー時の色 */
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   margin-left: 2%; /* 左側との間に余白を作る */
   margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
-  float: left; /* 右側に配置 */
+  float: right; /* 右側に配置 */
 }
 
 .custom-blank-card {
