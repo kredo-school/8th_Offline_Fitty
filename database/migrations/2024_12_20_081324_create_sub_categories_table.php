@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('requirement')->default(0); // 非負の整数で、デフォルト値は 0
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
         });
