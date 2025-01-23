@@ -2,11 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
-<<<<<<< HEAD
 use App\Http\Controllers\MultiStepRegisterController;
-=======
 use App\Http\Controllers\DailyLogController;
->>>>>>> main
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
@@ -90,13 +87,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
         Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
         Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
-<<<<<<< HEAD
-=======
         Route::patch('/{id}/update', [NutritionistController::class, 'nutriUpdate'])->name('update');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
 
->>>>>>> main
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
         Route::get('{id}/showHistory', [AdviceController::class, 'showHistory'])->name('showHistory');
     });
@@ -119,13 +113,10 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-<<<<<<< HEAD
-=======
 
 //acess chatgpt api
 Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
->>>>>>> main
 //user dailylog
 Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
 Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');

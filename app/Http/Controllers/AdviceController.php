@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
@@ -12,19 +13,22 @@ use Carbon\Carbon;
 
 
 
+
 class AdviceController extends Controller
 {
     private $advice;
     private $user_profile;
     private $dailylog;
+    private $user;
 
 
-    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog)
+
+    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog, User $user)
     {
         $this->advice = $advice;
         $this->user_profile = $user_profile;
         $this->dailylog = $dailylog;
-
+        $this->user = $user; // $userを初期化
     }
 
 
@@ -377,15 +381,6 @@ public function showpfcvm($id)
         return view('users.advice_index', compact('user', 'adviceList'));
     }
 
-    // public function show($id)
-    // {
-    //     // 指定されたアドバイスを取得
-    //     // $user = $this->user->findOrFail($id);
-    //     $advice = $this->advice->findOrFail($id);
-    //     $this->advice->where('id', $id)->firstOrFail();
-
-    //     return view('users.advice_show', compact('advice'));
-    // }
 
     public function show($id, $adviceId)
 {
