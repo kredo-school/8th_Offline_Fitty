@@ -329,7 +329,6 @@ footer a {
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: left; /* 右側に配置 */
     height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
-    overflow-y: auto; /* 縦スクロールを有効化 */
 
 }
 
@@ -369,7 +368,7 @@ footer a {
 }
 
 /* 通常状態のスタイル */
-.see-previous-btn {
+.send-btn {
     background-color: #D4E7BA !important; /* 背景色 */
     color: #00984F !important; /* 文字色 */
     border: none; /* 枠線をなくす */
@@ -379,26 +378,19 @@ footer a {
     transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
 }
 
-.see-previous-btn:hover {
+.send-btn:hover {
     background-color: #4DAF4A !important; /* ホバー時の背景色 */
     color: #FFFFFF !important; /* ホバー時の文字色 */
 }
-
-.send-btn {
-    background-color: rgba(255, 169, 101, 0.4) !important; /* 背景色 40%透明度 */
-    color: #FFA965 !important; /* 文字色 */
-    border: none; /* 枠線をなくす */
-    padding: 10px 20px; /* パディング調整 */
-    border-radius: 5px; /* 角丸 */
-    font-size: 16px; /* フォントサイズ */
-    transition: background-color 0.3s, color 0.3s; /* 背景色と文字色のスムーズな遷移 */
+.previous {
+    color: #202F55; /* 通常時の色 */
 }
 
-/* Sendボタンがホバーされた時 */
-.send-btn:hover {
-    background-color: #FFA965 !important; /* ホバー時の背景色 */
-    color: #FFFFFF !important; /* ホバー時の文字色 */
+.previous:hover {
+    color: #000000; /* ホバー時の色（黒） */
 }
+
+
 
 .custom-back-button {
     background-color: #D4E7BA !important; /* ボタンの背景色 */

@@ -25,7 +25,7 @@
                             @endif
                             <div class="card-body">
                                 <!-- ユーザー名 -->
-                                <h5 class="nutri-card-title">{{ $user_profile->user->name }}</h5>
+                                <h5 class="nutri-card-title">{{ $user_profile->first_name }} {{ $user_profile->last_name }}</h5>
 
                                 <!-- Send Advice Button with Form for Submission -->
                                 <form action="{{ route('nutri.sendAdvice', $user_profile->user_id) }}" method="GET">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 @empty
-                    <div>No Task</div>
+                    <div><h5>No tasks yet</h5></div>
                 @endforelse
             </div>
         </div>

@@ -147,7 +147,7 @@
 
         </div>
 
-        <div class="custom-right-section">
+        <div class="custom-right-section" style="overflow-y: auto;">
             <h4 class="text-center p-1">{{ $advice->created_at->format('Y/m/d') }}  Advice</h4>
             <div class="history-right">
                 <label for="overall" class="form-label mb-0">Overall Rating</label>
