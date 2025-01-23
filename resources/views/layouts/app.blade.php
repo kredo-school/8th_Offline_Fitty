@@ -10,6 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,9 +25,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 
+<<<<<<< HEAD
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/regular.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+=======
+>>>>>>> main
 
 
     <!-- Scripts -->
@@ -85,22 +92,17 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main class="main-padding">
+        <main>
             @yield('content')
         </main>
 
+
+        <!-- フッター -->
+        <footer class="footer">
+            <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
+            <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
+        </footer>
+
     </div>
-
-    <!-- フッター -->
-<footer class="footer">
-    <p class="footer-p-1"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
-    <p class="footer-p-2">© 2024 Kredo Tech. All rights reserved.</p>
-</footer>
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

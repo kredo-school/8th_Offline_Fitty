@@ -69,6 +69,7 @@ class DailyLogSeeder extends Seeder
                         'weight' => rand(50, 100), // 体重
                         'meal_type' => $mealType, // ランダムなmeal_type
                         'meal_content' => "Sample content for {$mealType}",
+                        'comment' => 'happy meal',
                         'image' => null, // 画像は今回はnull
                         'nutritions' => json_encode([
                             "Protein" => rand(20, 60) . "g",

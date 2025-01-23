@@ -3,16 +3,16 @@
 @section('content')
     @include('sidebar.humburger')
 
-    <div class="bg-light d-flex vh-100 admin-users">
+    <div class="d-flex admin-users">
         <div class="row w-100">
             @include('sidebar.user-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- Main Content -->
-                <div class="container my-5 admin-users">
+                <div class="container my-5 mx-1 admin-users">
                     <!-- Header Section -->
                     <div class="d-flex justify-content-between align-items-center mb-3 admin-users-header">
-                        <h1 class="text-success admin-users-title">
+                        <h1 class="admin-users-title">
                             Users <span class="text-muted">({{ $users->total() }})</span>
                         </h1>
 
