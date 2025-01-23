@@ -30,13 +30,22 @@ class NutritionistController extends Controller
      */
     public function index()
     {
+        // 現在の日時から一週間前の日付を計算
+        $one_week_ago = now()->subWeek();
 
-        // 栄養士に関連するユーザー情報を取得
-        $user_profiles = $this->user_profile->where('nutritionist_id', Auth::user()->id)->get();
+        // 栄養士に関連するユーザー情報を取得（advice_sent_dateが一週間前よりも前のデータを取得）
+        $user_profiles = $this->user_profile
+            ->where('nutritionist_id', Auth::user()->id)
+            ->where(function ($query) use ($one_week_ago) {
+                $query->where('advice_sent_date', '<', $one_week_ago)
+                      ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
+            })
+            ->get();
 
         // 栄養士とその関連ユーザー情報をビューに渡す
         return view('nutritionists.index', compact('user_profiles'));
     }
+
 
 
     function sendAdvice($id)

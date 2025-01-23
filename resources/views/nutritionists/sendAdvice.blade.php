@@ -148,7 +148,8 @@
         </div>
 
         <div class="custom-right-section">
-            <h4 class="text-center p-1">Send Advice</h4>
+            <h4 class="text-center p-1 ">Send Advice</h4>
+
             <form action="{{ route('nutri.store') }}" method="post" id="advice-form">
                 @csrf
                 <div class="">
@@ -186,12 +187,13 @@
                 </div>
 
                 <!-- User ID -->
-                <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
+                <input type="hidden" name="user_id" value="{{ $user_profile->user_id }}">
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-between">
+                <a href="{{ route('nutri.history', $user_profile->id) }}" target="_blank" rel="noopener noreferrer" class="previous">See Previous Advice</a>
+
                     <button type="submit" class="btn send-btn">Send Advice</button>
-                    <a href="{{ route('nutri.history', $user_profile->id) }}" class="btn see-previous-btn">Previous Advice</a>
                 </div>
             </form>
         </div>
