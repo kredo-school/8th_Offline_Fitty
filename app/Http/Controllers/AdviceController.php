@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
@@ -12,19 +13,22 @@ use Carbon\Carbon;
 
 
 
+
 class AdviceController extends Controller
 {
     private $advice;
     private $user_profile;
     private $dailylog;
+    private $user;
 
 
-    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog)
+
+    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog, User $user)
     {
         $this->advice = $advice;
         $this->user_profile = $user_profile;
         $this->dailylog = $dailylog;
-
+        $this->user = $user; // $userを初期化
     }
 
 
@@ -343,13 +347,6 @@ public function showpfcvm($id)
 
         return in_array($subCategory, $categoryMapping[$category] ?? []);
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Advice $advice)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -374,6 +371,30 @@ public function showpfcvm($id)
     {
         //
     }
+
+    public function index($id)
+    {
+        // 指定されたユーザーIDに関連するアドバイスを取得
+        $user = $this->user->findOrFail($id);
+        $adviceList = $this->advice->where('user_id', $id)->get();
+
+        return view('users.advice_index', compact('user', 'adviceList'));
+    }
+
+
+    public function show($id, $adviceId)
+{
+    $advice = $this->advice
+        ->where('id', $adviceId)
+        ->where('user_id', $id)
+        ->firstOrFail();
+    
+
+    return view('users.advice_show', compact('advice'));
+}
+
+    
+
 }
 
 
