@@ -168,7 +168,7 @@ class NutritionistController extends Controller
         foreach ($dailyLogs as $log) {
             // JSONデータを正規化
             $nutritions = json_decode($log->nutritions, true);
-            dd($nutritions);
+            // dd($nutritions);
             $normalizedNutritions = $this->normalizeToMg($nutritions);
             // dd($normalizedNutritions);
 
