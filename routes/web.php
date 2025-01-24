@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\MultiStepRegisterController;
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NutritionistController;
+use App\Http\Controllers\MultiStepRegisterController;
 use App\Http\Controllers\DailyLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
@@ -12,6 +10,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
+
 use App\Http\Controllers\ChatGptController;
 // use App\Http\Controllers\Admin\InquiriesController;
 
@@ -79,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
+        Route::get('{id}/showHistory', [AdviceController::class, 'showHistory'])->name('showHistory');
     });
 
     //any login user can access
@@ -101,6 +101,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
+
+        //Users get advices
+        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
+        Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
     });
     
     //any login user can access
@@ -135,7 +140,12 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 
+    
 
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 

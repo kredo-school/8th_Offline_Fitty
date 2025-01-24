@@ -20,12 +20,12 @@
                                 <img src="{{ $user_profile->user->avatar }}" class="nutri-card-img-top" alt="Avatar">
                             @else
                                 <span class="material-symbols-outlined nutri-material-symbols-outlined">
-                                account_circle
-                            </span>
+                                    account_circle
+                                </span>
                             @endif
                             <div class="card-body">
                                 <!-- ユーザー名 -->
-                                <h5 class="nutri-card-title">{{ $user_profile->user->name }}</h5>
+                                <h5 class="nutri-card-title">{{ $user_profile->first_name }} {{ $user_profile->last_name }}</h5>
 
                                 <!-- Send Advice Button with Form for Submission -->
                                 <form action="{{ route('nutri.sendAdvice', $user_profile->user_id) }}" method="GET">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 @empty
-                    <div>No Task</div>
+                    <div><h5>No tasks yet</h5></div>
                 @endforelse
             </div>
         </div>

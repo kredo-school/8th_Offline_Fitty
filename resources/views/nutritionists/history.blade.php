@@ -3,38 +3,42 @@
 @section('content')
 
 <div class="d-flex justify-content-center">
-<table class="unique-table ">
-  <thead>
-    <tr>
-      <th>History of {{$user_profile->first_name}} {{$user_profile->last_name}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="page8.html">2024/02/16</a></td>
-    </tr>
-    <tr>
-      <td><a href="page7.html">2024/02/09</a></td>
-    </tr>
-    <tr>
-      <td><a href="page6.html">2024/02/02</a></td>
-    </tr>
-    <tr>
-      <td><a href="page5.html">2024/01/26</a></td>
-    </tr>
-    <tr>
-      <td><a href="page4.html">2024/01/19</a></td>
-    </tr>
-    <tr>
-      <td><a href="page3.html">2024/01/12</a></td>
-    </tr>
-    <tr>
-      <td><a href="page2.html">2024/01/05</a></td>
-    </tr>
-    <tr>
-      <td><a href="page1.html">2023/12/29</a></td>
-    </tr>
-  </tbody>
-</table>
+    <table class="unique-table">
+        <thead>
+            <tr>
+                <th>History of {{$user_profile->first_name}} {{$user_profile->last_name}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($adviceList as $advice)
+            <tr>
+                <td>
+                    <a href="{{ route('nutri.showHistory', ['id' => $user_profile->id, 'date' => $advice->created_at->toDateString()]) }}" class="d-flex align-items-center">
+                        <span class="me-2">{{ $advice->created_at->format('Y/m/d') }}</span>
+                        <!-- 顔文字の表示 -->
+                        @if ($advice->overall == 5)
+                            <span class="material-symbols-outlined history-icon">sentiment_excited</span>
+                        @elseif ($advice->overall == 4)
+                            <span class="material-symbols-outlined history-icon">sentiment_satisfied</span>
+                        @elseif ($advice->overall == 3)
+                            <span class="material-symbols-outlined history-icon">sentiment_content</span>
+                        @elseif ($advice->overall == 2)
+                            <span class="material-symbols-outlined history-icon">sentiment_neutral</span>
+                        @elseif ($advice->overall == 1)
+                            <span class="material-symbols-outlined history-icon">sentiment_sad</span>
+                        @endif
+                    </a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td>No previous advice yet</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
 </div>
+
+
+
 @endsection
