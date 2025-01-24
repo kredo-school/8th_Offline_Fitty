@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserProfile;
@@ -12,19 +13,22 @@ use Carbon\Carbon;
 
 
 
+
 class AdviceController extends Controller
 {
     private $advice;
     private $user_profile;
     private $dailylog;
+    private $user;
 
 
-    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog)
+
+    public function __construct(Advice $advice, UserProfile $user_profile, DailyLog $dailylog, User $user)
     {
         $this->advice = $advice;
         $this->user_profile = $user_profile;
         $this->dailylog = $dailylog;
-
+        $this->user = $user; // $userを初期化
     }
 
 
@@ -32,24 +36,42 @@ class AdviceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    function store(Request $request){
-        // dd('test');
-        $request->validate([
-            'overall'      => 'required',
-            'message'     => 'required',
-            'user_id'   => 'required|exists:users,id'
 
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'overall'   => 'required',
+        'message'   => 'required',
+        'user_id'   => 'required|exists:users,id'
+    ]);
 
-        $this->advice->nutritionist_id = Auth::user()->id;
-        $this->advice->user_id = $request->user_id;
-        $this->advice->overall = $request->overall;
-        $this->advice->message = $request->message;
+    // 保存するアドバイスのデータを設定
+    $this->advice->nutritionist_id = Auth::user()->id;
+    $this->advice->user_id = $request->user_id;
+    $this->advice->overall = $request->overall;
+    $this->advice->message = $request->message;
 
-        $this->advice->save();
+    // アドバイスを保存
+    $this->advice->save();
 
-        return redirect()->route('nutri.index')->with('success', 'Advice sent successfully!');
-    }
+    // user_profiles テーブルから該当するレコードを取得
+    $userProfile = $this->user_profile->where('user_id', $request->user_id)->first();
+
+
+        // 現在の日付をadvice_dateに保存
+            $currentDate = Carbon::now()->toDateString(); // 'Y-m-d'形式で取得
+
+            $userProfile->advice_sent_date = $currentDate;
+
+            $userProfile->save();
+
+
+
+
+    return redirect()->route('nutri.index')->with('success', 'Advice sent successfully!');
+}
+
+
 
 
     public function updateMemo(Request $request, $id)
@@ -343,13 +365,6 @@ public function showpfcvm($id)
 
         return in_array($subCategory, $categoryMapping[$category] ?? []);
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Advice $advice)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -374,6 +389,30 @@ public function showpfcvm($id)
     {
         //
     }
+
+    public function index($id)
+    {
+        // 指定されたユーザーIDに関連するアドバイスを取得
+        $user = $this->user->findOrFail($id);
+        $adviceList = $this->advice->where('user_id', $id)->get();
+
+        return view('users.advice_index', compact('user', 'adviceList'));
+    }
+
+
+    public function show($id, $adviceId)
+{
+    $advice = $this->advice
+        ->where('id', $adviceId)
+        ->where('user_id', $id)
+        ->firstOrFail();
+    
+
+    return view('users.advice_show', compact('advice'));
+}
+
+    
+
 }
 
 
