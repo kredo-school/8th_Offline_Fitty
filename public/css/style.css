@@ -391,7 +391,7 @@ background-color: #087722; /* ホバー時の色 */
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
-    float: left; /* 右側に配置 */
+    float: right; /* 右側に配置 */
     height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
 
 }
@@ -757,7 +757,8 @@ padding: 0 15px; /* サイドの余白 */
 }
 
 .card.card-login {
-width: 100%;
+width: 50%; 
+/* Lingping fixed 2025.1.23  */
 max-width: 600x;
 height: 300px;
 position: relative;

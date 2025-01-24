@@ -102,9 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
         Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
-
     });
 
     
