@@ -29,7 +29,7 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog()
+    public function showdailylog($user_id)
     {
         return view('users.dailylog');
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
         $user = $this->user->findOrFail($id);
         return view('users.editprofile', compact('user'));
     }
-    public function showhistory()
+    public function showhistory($user_id)
     {
         return view('users.history');
     }
@@ -99,18 +99,21 @@ class UserController extends Controller
             'name' => 'required|min:1|max:255',
             'email' => 'required|email|min:1|max:255|unique:users,email,' . $user->id,
             'avatar' => 'mimes:jpeg,png,jpg|max:2048',
-            'gender' => 'required|in:male,female', // 性別は"male"または"female"のみ許可
-            'birthday' => 'nullable|date|before:today', // 誕生日は過去の日付で任意
-            'height' => 'nullable|numeric|min:50|max:300', // 身長は50〜300cmの範囲
-            'activity_level' => 'required|integer|in:1,2,3', // アクティビティレベルは1, 2, 3のいずれか
+            'birthday' => 'nullable|date|before:today',
+            'gender' => 'required|in:male,female,non-binary,prefer_not_to_say,other',
+            'height' => 'nullable|numeric|min:120|max:220', 
+            'activity_level' => 'required|integer|in:1,2,3',
+            'health_conditions' => 'nullable|array',
+            'dietary_preferences' => 'nullable|array',
+            'food_allergies' => 'nullable|string|max:255',
+            'goals' => 'nullable|string|max:255',
         ]);
 
         // データを更新
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->avatar = $user->avatar ?? 'default_avatar.png';
 
-        if ($request->avatar) {
+        if ($request->hasFile('avatar')) {
             $user->avatar = 'data:image/' . $request->avatar->extension() .
                 ';base64,' . base64_encode(file_get_contents($request->avatar));
         }
@@ -119,11 +122,18 @@ class UserController extends Controller
 
         // プロファイルの更新
         $profile = $user->profile;
-        $profile->gender = $request->gender;
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
         $profile->birthday = $request->birthday;
+        $profile->gender = $request->gender;
         $profile->height = $request->height;
         $profile->activity_level = $request->activity_level;
+        $profile->health_conditions = json_encode($request->health_conditions ?? []); // JSONにエンコード
+        $profile->dietary_preferences = json_encode($request->dietary_preferences ?? []); // JSONにエンコード
+        $profile->food_allergies = $request->food_allergies;
+        $profile->goals = $request->goals;
         $profile->save();
+    
 
         // ユーザー情報を保存
         $user->save();

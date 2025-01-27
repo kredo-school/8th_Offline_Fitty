@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         switch ($role) {
             case 'A':
-                return '/admin/home'; // 管理者のリダイレクト先
+                return '/admin/index'; // 管理者のリダイレクト先
             case 'N':
                 return '/nutri/index'; // 栄養士のリダイレクト先
             case 'U':
