@@ -13,6 +13,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
 
+use App\Http\Controllers\ChatGptController;
+
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
