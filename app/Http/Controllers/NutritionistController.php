@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 
 
 class NutritionistController extends Controller
-
 {
     private $user;
     private $user_profile;
@@ -43,7 +42,7 @@ class NutritionistController extends Controller
             ->where('nutritionist_id', Auth::user()->id)
             ->where(function ($query) use ($one_week_ago) {
                 $query->where('advice_sent_date', '<', $one_week_ago)
-                      ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
+                    ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
             })
             ->get();
         return view('nutritionists.index', compact('user_profiles'));
@@ -244,12 +243,12 @@ class NutritionistController extends Controller
 
 
     private function getSubcategoryRequirementFromDB($subCategoryName)
-{
-    // サブカテゴリーの`requirement`を取得し、float型に変換
-    $requirement = (float) SubCategory::where('name', $subCategoryName)->value('requirement');
+    {
+        // サブカテゴリーの`requirement`を取得し、float型に変換
+        $requirement = (float) SubCategory::where('name', $subCategoryName)->value('requirement');
 
-    return $requirement;
-}
+        return $requirement;
+    }
 
 
     private function normalizeToMg($nutritions)
@@ -294,13 +293,17 @@ class NutritionistController extends Controller
 
 
 
-    function profile()
+    function profile($id)
     {
-        return view('nutritionists.profile');
+
+        $user = User::find($id);
+        return view('nutritionists.profile', compact('user'));
     }
 
-    function editprofile()
+    function editprofile($id)
     {
-        return view('nutritionists.editprofile');
+
+        $user = User::find($id);
+        return view('nutritionists.editprofile', compact('user'));
     }
 }
