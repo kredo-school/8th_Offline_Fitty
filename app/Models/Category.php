@@ -12,6 +12,6 @@ class Category extends Model
     // 子カテゴリを取得するリレーション
     public function subcategory()
     {
-        return $this->hasMany(SubCategory::class, 'category_id');
+        return $this->hasMany(SubCategory::class);
     }
 }

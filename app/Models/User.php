@@ -16,12 +16,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
-    
+
     public function dailyLogs()
     {
         return $this->hasMany(DailyLog::class);
     }
-    
+
     public function advice()
     {
         return $this->hasMany(Advice::class);

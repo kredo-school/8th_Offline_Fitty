@@ -24,10 +24,12 @@ class UserProfile extends Model
         'goals',
         'user_id', // リレーション用
     ];
-    
+
     // リレーション: Userモデルに属する
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+
 }
