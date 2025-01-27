@@ -29,7 +29,7 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog()
+    public function showdailylog($user_id)
     {
         return view('users.dailylog');
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
         $user = $this->user->findOrFail($id);
         return view('users.editprofile', compact('user'));
     }
-    public function showhistory()
+    public function showhistory($user_id)
     {
         return view('users.history');
     }
