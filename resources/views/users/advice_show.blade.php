@@ -13,12 +13,12 @@
 @include('sidebar.humburger')
     <div class="container">
 
-        
-        <div class="row">
-            @include('sidebar.user-sidebar') 
 
-            
-            <div class="col-md-9 ms-sm-auto col-lg-10"> 
+        <div class="row">
+            @include('sidebar.user-sidebar')
+
+
+            <div class="col-md-9 ms-sm-auto col-lg-10">
                 {{-- Right Section start--}}
                 <div class="custom-right-section">
                     <h4 class="text-center p-4">Advice</h4>
@@ -62,31 +62,33 @@
 
                 </div>
                 {{-- Right Section end --}}
-                
+
                 {{-- Left Section start--}}
                 <!-- Radar Chart Placeholder -->
-                <div class="card mb-3">
+                <div class="card m-2">
                     <div class="card-body">
-                        <h5 class="card-title">Radar Chart(Weekly Sufficiency of the Five Core Nutrients)</h5>
-                        <div class="text-center">
-                            <img src="https://via.placeholder.com/300x200" alt="Radar Chart" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Radar Chart Placeholder -->
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Radar Chart(Weight Change History
-                            )</h5>
-                        <div class="text-center">
-                            <img src="https://via.placeholder.com/300x200" alt="Radar Chart" class="img-fluid">
-                        </div>
+                        @include('nutritionists.charts.radarchartSendAdvice', [
+                            'satisfactionRates' => $satisfactionRates,
+                            'user' => $user_profile,
+                            'message' => $message ?? 'No data available.'
+                        ])
                     </div>
                 </div>
 
+                <!-- Radar Chart Placeholder -->
+                <div class="card m-2">
+                    <div class="card-body">
+                        @include('nutritionists.charts.lineGraph', [
+                            'dates' => $weightData['dates'],
+                            'weights' => $weightData['weights'],
+                            'message' => $weightData['message']
+                        ])
+                    </div>
+                </div>
+
+
                 {{-- Left Section end --}}
-            
+
             </div>
         </div>
     </div>
