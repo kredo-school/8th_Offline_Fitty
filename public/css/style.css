@@ -654,7 +654,7 @@ padding: 0 15px; /* サイドの余白 */
 }
 
 .card.card-login {
-width: 100%;
+width: 50%;
 max-width: 600x;
 height: 300px;
 position: relative;

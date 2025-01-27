@@ -57,7 +57,7 @@
                             <option value="female">Female</option>
                             <option value="non_binary">Non-binary</option>
                             <option value="prefer_not_to_say">Prefer not to say</option>
-                            <option value="prefer_not_to_say">Other</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                             <label><input type="checkbox" name="health_conditions[]" value="breastfeeding"> Breastfeeding</label><br>
                             <label><input type="checkbox" name="health_conditions[]" value="chronic_disease"> Chronic Disease</label><br>
                             <label><input type="checkbox" name="health_conditions[]" value="mental_health"> Mental Health Issues</label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="other"> Other (please specify in comments)</label>
+                            <label><input type="checkbox" name="health_conditions[]" value="other"> Other </label>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
         <!-- Section 3: Lifestyle -->
             <div class="form-section">
                 <h2>3. Lifestyle</h2>
-                {{-- Current Health Conditions --}}
+                {{-- Dietary Preferences --}}
                 <div class="form-group mb-4 mt-4">
                     <label for="dietary_preferences">Dietary Preferences</label>
                     <div id="dietary_preferences" class="" style="height: auto;">
