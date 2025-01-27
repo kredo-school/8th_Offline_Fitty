@@ -8,18 +8,19 @@
 <!-- ハンバーガーメニューボタン -->
 @include('sidebar.humburger')
 
-<div class="container user-dailylog">
 
 
-    <div class="row">
+    <div class="row main-row">
     @include('sidebar.user-sidebar')
-        <div class="col-md-9 ms-sm-auto col-lg-10"> 
+        <div class="col-md-9 ms-sm-auto col-lg-10">
+        <div class=" user-dailylog">
+
                 <!-- Header Section -->
             <div class="user-dailylog-header">
                 <h1>Daily Log (Thu Dec 26)</h1>
                 <p>Weight: 64.5Kg</p>
             </div>
-        
+
             <!-- 朝食 -->
             <div class="meal-card">
                 <div class="meal-title">🍳 Breakfast</div>
@@ -45,7 +46,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <!-- 昼食 -->
             <div class="meal-card">
                 <div class="meal-title">🥗 Lunch</div>
@@ -68,7 +69,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <!-- 夕食 -->
             <div class="meal-card">
                 <div class="meal-title">🍲 Dinner</div>
@@ -91,7 +92,7 @@
                     </div>
                 </div>
             </div>
-    
+
         </div>
     </div>
 

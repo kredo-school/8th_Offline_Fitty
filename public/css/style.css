@@ -27,6 +27,18 @@ main {
   padding-bottom: 15px;
 }
 
+.main-row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.container {
+    padding: 0 !important; /* パディングをリセット */
+    margin: 0 auto !important; /* 左右中央寄せ、余分なマージンを削除 */
+    width: 100% !important; /* 余白をなくし、幅を全体に拡張 */
+}
+
+
 
 
 /* ナビバーのスタイル */
@@ -62,60 +74,122 @@ margin-right: 10px;
 }
 
 /* サイドメニュー */
+#sidebar {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* はみ出た部分を隠す */
 
-.sidemenu {
-  position: fixed;
-  top: 80px;
-  left: 0;
-  width: 240px;
-  height: calc(100vh - 80px); /* ヘッダー部分を除いた高さ */
-  background-color: #d8efd1;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+}
+.sidemenu{
+    position: fixed;
+    top: 80px;
+    left: 0;
+    background-color: #D4E7BA;
+    height: calc(100vh - 80px);
+    margin: 0 !important;
 }
 
 
-.sidemenu h1 {
-font-size: 24px;
-color: #f68b1e;
-margin-bottom: 30px;
-display: flex;
-align-items: center;
+.sidemenu h1{
+    text-align: center;
+    color: #4DAF4A;
+    font-family: "Shrikhand", serif !important;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 30px;
+}
+.nav{
+
+    margin-left: 40px;
 }
 
-.sidemenu h1 img {
-height: 40px;
-margin-right: 10px;
+.nav li{
+    height: 65px; /* liの高さを固定 */
+width: 100%;
+
+}
+
+.nav li:hover{
+    background-color: #91CF98;
+    border-radius: 27px;
+    z-index: 0;
+    width: 95%;
+}
+.nav li:hover a{
+    color: white;
+    padding-left: 10px;
+
+
+}
+
+.nav .active:hover {
+    background-color: #4DAF4A; /* ホバー時の背景色を変更しない */
+    cursor: default; /* ホバー時のカーソルをデフォルト状態にする */
+    border-top-right-radius: 0; /* 左上の角を丸くする */
+    border-bottom-right-radius: 0; /* 左下の角を丸くする */
+    width: 100%;
+}
+
+.nav li a{
+    color: #202F55;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    padding-left: 10px;
+
+}
+.side-material-icons{
+    margin-right: 10px;
+
+}
+
+.sidemenu .title {
+    white-space: nowrap;
+  }
+
+.nav .active{
+    background-color: #4DAF4A;
+    border-top-left-radius: 27px; /* 左上の角を丸くする */
+    border-bottom-left-radius: 27px; /* 左下の角を丸くする */    position: relative;
+    z-index: 2;
+}
+
+.nav .active a{
+    color: #FFFFFF;
+    padding-left: 10px;
+
+
+}
+
+.nav .active::before, .nav .active::after{
+    content: "";
+    position: absolute;
+    z-index: 0;
+}
+
+.nav .active::before{
+    top: -80px;
+    right: -2px;
+    height: 80px;
+    width: 53px;
+    border-bottom-right-radius: 80px;
+    box-shadow: 0 40px 0 0 #4DAF4A;
+    /* background: #202F55; */
+
 }
 
 
+.nav .active::after{
+    top: 65px;
+    right: -2px;
+    height: 80px;
+    width: 53px;
+    border-top-right-radius: 80px;
+    box-shadow: 0 -40px 0 0 #4DAF4A;
 
-.menu-item {
-display: flex;
-align-items: center;
-padding: 10px 15px;
-font-size: 16px;
-color: #333;
-text-decoration: none;
-border-radius: 8px;
-margin-bottom: 10px;
-transition: background-color 0.3s;
-}
+    /* background: #202F55; */
 
-.menu-item:hover {
-background-color: #a4d4a2;
-color: #000;
-}
 
-.menu-item.active {
-background-color: #54b76a;
-color: white;
-font-weight: bold;
-}
-
-.menu-item .material-icons {
-margin-right: 10px;
-font-size: 20px;
 }
 
 
@@ -135,6 +209,11 @@ font-size: 20px;
       top: -56px; /* ヘッダーの高さを考慮 */
       width: 100%; /* サイドバーを全幅に変更 */
 
+  }
+
+  .sidemenu h1{
+    margin-top: 70px;
+margin-bottom: 0;
   }
 
   .sidemenu.show {
@@ -235,6 +314,13 @@ footer a {
   text-decoration: none;
   color: #FFFFFF;
 }
+
+/* logout modal */
+.custom-outline {
+    border-color: #202F55 !important;
+    color: #202F55 !important;
+  }
+
 
 
 
