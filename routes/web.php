@@ -38,22 +38,7 @@ Route::get('/', function () {
 // Laravelのデフォルト認証ルート
 Auth::routes();
 
-// Adminルート
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/index', [AdminController::class, 'index'])->name('index');
-    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 
-    Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
-    Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
-
-    //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
-
-    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
-    Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
-    Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
-    Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
-});
 
 Route::get('/about', function () {
     return view('about');
@@ -80,49 +65,91 @@ Route::prefix('register')->group(function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
+    // *********************************************
+    // *** nutritionists ***
+    // *********************************************
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.', 'middleware' => 'nutri'], function () {
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
         Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
         Route::post('store', [AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
-        Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
         Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
         Route::patch('/{id}/update', [NutritionistController::class, 'nutriUpdate'])->name('update');
         Route::post('store',[AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}',[AdviceController::class, 'updateMemo'])->name('updateMemo');
-
         Route::get('history/{id}', [AdviceController::class, 'history'])->name('history');
         Route::get('{id}/showHistory', [AdviceController::class, 'showHistory'])->name('showHistory');
     });
-});
 
-    
+    //any login user can access
+    Route::group(['prefix' => 'nutri', 'as' => 'nutri.'], function () {
+        Route::get('/{id}/profile', [NutritionistController::class, 'profile'])->name('profile');
+    });
 
-//Users get advices
-// Route::group(['middleware' => 'auth'], function () {
-    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+
+    // *********************************************
+    // *** users ***
+    // *********************************************
+
+    //acess chatgpt api
+    Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
+
+    Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
+
+        Route::get('/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('inputmeal');
+        Route::post('/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('inputmeal.store');
+        Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
+        Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
+        Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
+
+        //Users get advices
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
         // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
         Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
-
     });
 
-    
-// });
+    //any login user can access
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+        Route::get('/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
+    });
+
+    // *********************************************
+    // *** admin ***
+    // *********************************************
+
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
+        Route::get('/index', [AdminController::class, 'index'])->name('index');
+        Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+        Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+
+        Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
+        Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
+
+        //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+
+        Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+        Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+        Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+        Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+    });
+
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+});
+
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
-//acess chatgpt api
-Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
-
-//user dailylog
-Route::get('/user/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('user.dailylog');
-Route::get('/user/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('user.inputmeal');
-Route::post('/user/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('user.inputmeal.store');
-Route::get('/user/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
-Route::get('/user/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('user.editprofile');
-Route::patch('/user/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('user.update');
-Route::patch('/user/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('user.change_password');
-Route::get('/user/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('user.history');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
