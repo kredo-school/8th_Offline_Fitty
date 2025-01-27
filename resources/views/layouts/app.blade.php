@@ -83,7 +83,7 @@
         </nav>
 
         <!-- メインコンテンツ -->
-        <main>
+        <main class="main-content">
             @yield('content')
         </main>
 

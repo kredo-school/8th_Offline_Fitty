@@ -5,7 +5,7 @@
 
     <div class="d-flex vh-100 admin-nutritionists">
         <div class="row w-100">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.admin-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- Main Content -->
@@ -13,7 +13,7 @@
                     <!-- Header Section -->
                     <div class="d-flex justify-content-between align-items-center mb-3 admin-nutritionists-header">
                         <h1 class="text-success admin-nutritionists-title">
-                            Nutritionists <span class="text-muted">({{ $nutritionists->total() }})</span>
+                            Nutritionists <span class="text-muted">({{ $nutritionists_profiles->total() }})</span>
                         </h1>
 
                         <!-- Search Box -->
@@ -30,11 +30,10 @@
                         </div>
 
                         <!-- Add Button -->
-<a href="{{ route('admin.nutritionists.create') }}" class="add-button">
-    <span class="material-symbols-outlined">add</span>
-    <span>Add</span>
-</a>
-
+                        <a href="{{ route('admin.nutritionists.create') }}" class="add-button">
+                            <span class="material-symbols-outlined">add</span>
+                            <span>Add</span>
+                        </a>
                     </div>
 
                     <!-- Nutritionists Table -->
@@ -51,22 +50,22 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($nutritionists as $nutritionist)
+                                @foreach ($nutritionists_profiles as $nutritionist_profile)
                                     <tr class="admin-nutritionists-row">
                                         <!-- ID -->
                                         <td>
-                                            <a href="#" class="admin-nutritionists-id-link">{{ $nutritionist->id }}</a>
+                                            <a href="#" class="admin-nutritionists-id-link">{{ $nutritionist_profile->id }}</a>
                                         </td>
 
                                         <!-- Name -->
-                                        <td>{{ $nutritionist->name }}</td>
+                                        <td>{{ $nutritionist_profile->first_name }} {{ $nutritionist_profile->last_name }}</td>
 
                                         <!-- Last Login -->
-                                        <td>{{ $nutritionist->last_login->format('m/d/Y') }}</td>
+                                        <td>{{ $nutritionist_profile->last_login ? $nutritionist_profile->last_login->format('m/d/Y') : 'N/A' }}</td>
 
                                         <!-- Status -->
                                         <td>
-                                            @if ($nutritionist->is_active)
+                                            @if ($nutritionist_profile->is_active)
                                                 <span class="status-badge status-active admin-nutritionists-status">
                                                     <span class="status-dot admin-nutritionists-status-dot"></span> Active
                                                 </span>
@@ -83,7 +82,7 @@
                                                 <span class="material-symbols-outlined">person</span>
                                             </a>
                                             <a href="#" class="admin-nutritionists-action-button" data-bs-toggle="modal"
-                                               data-bs-target="#deleteModal-{{ $nutritionist->id }}">
+                                               data-bs-target="#deleteModal-{{ $nutritionist_profile->id }}">
                                                 <span class="material-symbols-outlined">delete</span>
                                             </a>
                                         </td>
@@ -94,9 +93,8 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="d-flex justify-content-between align-items-center admin-nutritionists-pagination">
-                        <p>Showing {{ $nutritionists->firstItem() }} to {{ $nutritionists->lastItem() }} of {{ $nutritionists->total() }} nutritionists</p>
-                        {{ $nutritionists->links('pagination::bootstrap-5') }}
+                    <div class="d-flex justify-content-center mt-4">
+                        {{ $nutritionists_profiles->links('admin.pagination') }}
                     </div>
                 </div>
             </div>
@@ -104,15 +102,15 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    @foreach ($nutritionists as $nutritionist)
-        <div class="modal fade admin-nutritionists-delete-modal" id="deleteModal-{{ $nutritionist->id }}" tabindex="-1"
-             aria-labelledby="deleteModalLabel-{{ $nutritionist->id }}" aria-hidden="true">
+    @foreach ($nutritionists_profiles as $nutritionist_profile)
+        <div class="modal fade admin-nutritionists-delete-modal" id="deleteModal-{{ $nutritionist_profile->id }}" tabindex="-1"
+             aria-labelledby="deleteModalLabel-{{ $nutritionist_profile->id }}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered admin-nutritionists-modal-dialog">
                 <div class="modal-content admin-nutritionists-modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header admin-nutritionists-modal-header">
                         <span class="material-symbols-outlined modal-icon admin-nutritionists-modal-icon">delete</span>
-                        <h5 class="modal-title admin-nutritionists-modal-title" id="deleteModalLabel-{{ $nutritionist->id }}">Delete Nutritionist</h5>
+                        <h5 class="modal-title admin-nutritionists-modal-title" id="deleteModalLabel-{{ $nutritionist_profile->id }}">Delete Nutritionist</h5>
                         <button type="button" class="btn-close admin-nutritionists-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -125,7 +123,7 @@
                     <div class="modal-footer admin-nutritionists-modal-footer">
                         <button type="button" class="btn cancel-btn admin-nutritionists-cancel-btn" data-bs-dismiss="modal">Cancel</button>
 
-                        <form action="{{ route('admin.nutritionists.destroy', $nutritionist->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('admin.nutritionists.destroy', $nutritionist_profile->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn delete-btn admin-nutritionists-delete-btn">Delete</button>

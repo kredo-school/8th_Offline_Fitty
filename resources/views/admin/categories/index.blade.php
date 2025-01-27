@@ -3,11 +3,12 @@
 @section('title', 'Admin Categories')
 
 @section('content')
+
 @include('sidebar.humburger')
 
 <div class="bg-light d-flex vh-100 admin-nutritionists">
     <div class="row w-100">
-        @include('sidebar.user-sidebar')
+        @include('sidebar.admin-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10">
             <div class="admin-categories-container">
@@ -42,7 +43,7 @@
                                 <div id="collapse-{{ $category->id }}" class="accordion-collapse collapse admin-categories-accordion-collapse" aria-labelledby="heading-{{ $category->id }}" data-bs-parent="#categoriesAccordion">
                                     <div class="accordion-body admin-categories-accordion-body">
                                         @foreach ($category->subcategory as $subcategory)
-                                            <div class="admin-categories-subitem d-flex justify-content-between align-items-center">
+                                            <div class="admin-categories-subitem d-flex justify-content-between align-items-center ">
                                                 <span class="admin-categories-subcategory-name">{{ $subcategory->name }}</span>
                                                 <div class="admin-categories-action-buttons">
                                                     <!-- Edit Button -->
@@ -92,46 +93,46 @@
                         @endforeach
                     </div>
 
-
                     <!-- Add Category Modal -->
-                    <div class="modal fade admin-users-delete-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
-                            <div class="modal-content admin-users-modal-content">
-                                <form action="{{ route('admin.categories.store') }}" method="POST">
-                                    @csrf
-                                    <!-- Modal Header -->
-                                    <div class="modal-header admin-users-modal-header border-0">
-                                        <span class="material-symbols-outlined modal-icon admin-users-modal-icon">add_circle</span>
-                                        <h5 class="modal-title admin-users-modal-title" id="addCategoryModalLabel">Add Category</h5>
-                                        <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
+<div class="modal fade admin-users-delete-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+        <div class="modal-content admin-users-modal-content">
+            <form action="{{ route('admin.categories.store') }}" method="POST">
+                @csrf
+                <!-- Modal Header -->
+                <div class="modal-header admin-users-modal-header border-0">
+                    <span class="material-symbols-outlined modal-icon admin-users-modal-icon">add_circle</span>
+                    <h5 class="modal-title admin-users-modal-title" id="addCategoryModalLabel">Add Subcategory</h5>
+                    <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                                    <!-- Modal Body -->
-                                    <div class="modal-body admin-users-modal-body">
-                                        <div class="mb-3">
-                                            <label for="categoryName" class="form-label admin-categories-form-label">Sub Category</label>
-                                            <input type="text" name="name" id="categoryName" class="form-control admin-categories-form-input" placeholder="Enter category name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="parentCategory" class="form-label admin-categories-form-label">Main Category</label>
-                                            <select name="category_id" id="parentCategory" class="form-select admin-categories-form-select">
-                                                <option value="" disabled selected>Select main category</option>
-                                                @foreach ($categories as $mainCategory)
-                                                    <option value="{{ $mainCategory->id }}">{{ $mainCategory->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal Footer -->
-                                    <div class="modal-footer admin-users-modal-footer">
-                                        <button type="button" class="btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn admin-users-delete-btn">Add</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                <!-- Modal Body -->
+                <div class="modal-body admin-users-modal-body">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label admin-categories-form-label">Subcategory Name</label>
+                        <input type="text" name="name" id="categoryName" class="form-control admin-categories-form-input" placeholder="Enter subcategory name" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="parentCategory" class="form-label admin-categories-form-label">Main Category</label>
+                        <select name="category_id" id="parentCategory" class="form-select admin-categories-form-select" required>
+                            <option value="" disabled selected>Select main category</option>
+                            @foreach ($categories as $mainCategory)
+                                <option value="{{ $mainCategory->id }}">{{ $mainCategory->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer admin-users-modal-footer">
+                    <button type="button" class="btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn admin-users-delete-btn">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
                     <!-- Edit Category Modals -->
                     @foreach ($categories as $category)
@@ -141,7 +142,7 @@
                                     <div class="modal-content admin-users-modal-content">
                                         <form action="{{ route('admin.categories.update', $subcategory->id) }}" method="POST">
                                             @csrf
-                                            @method('PUT')
+                                            @method('PATCH') 
                                             <!-- Modal Header -->
                                             <div class="modal-header admin-users-modal-header border-0">
                                                 <span class="material-symbols-outlined modal-icon admin-users-modal-icon">edit</span>
@@ -177,6 +178,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const toggleIcons = document.querySelectorAll('.admin-categories-toggle-icon .accordion-icon');
+        const footer = document.querySelector('footer');
+        const mainContent = document.querySelector('.main-content');
 
         toggleIcons.forEach(icon => {
             const chevronDown = icon.querySelector('.icon-chevron-down');
@@ -185,6 +188,7 @@
             icon.closest('.accordion-button').addEventListener('click', function () {
                 const isCollapsed = this.classList.contains('collapsed');
 
+                // アイコンの表示切り替え
                 if (isCollapsed) {
                     chevronDown.style.display = 'block';
                     chevronUp.style.display = 'none';
@@ -192,9 +196,18 @@
                     chevronDown.style.display = 'none';
                     chevronUp.style.display = 'block';
                 }
+
+                // 高さ調整処理
+                setTimeout(() => {
+                    if (mainContent && footer) {
+                        const contentHeight = mainContent.scrollHeight;
+                        footer.style.marginTop = `${contentHeight - mainContent.offsetHeight}px`;
+                    }
+                }, 300); // アニメーションの完了タイミングに合わせる
             });
         });
     });
 </script>
+
 
 @endsection

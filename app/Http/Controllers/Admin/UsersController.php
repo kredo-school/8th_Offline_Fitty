@@ -20,7 +20,7 @@ class UsersController extends Controller
         $this->user = $user;
     }
 
-    /**
+    /*
      * ユーザー一覧の表示（検索機能付き）
      */
     public function index(Request $request)
