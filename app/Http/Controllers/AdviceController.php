@@ -425,10 +425,6 @@ class AdviceController extends Controller
         $dailylog = $this->dailylog->where('user_id', $id)->first();
 
 
-
-
-
-
         // リクエストの日付でアドバイスを取得
         $adviceDate = $advice->created_at->input('date');
 
