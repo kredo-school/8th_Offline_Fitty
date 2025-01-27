@@ -4,10 +4,13 @@
 
 @section('content')
 
-<div class="container user-dailylog">
+@include('sidebar.humburger')
+<div class="row main-row">
     <!-- Header Section -->
-    <div class="user-dailylog-header">
-        <h1>History</h1>
+    @include('sidebar.user-sidebar') 
+    <div class="col-md-9 ms-sm-auto col-lg-10 user-history"> 
+        <!-- main content -->
+        <h1 class="text-center">History</h1>             
     </div>
 </div>
 

@@ -126,15 +126,6 @@ class AdviceController extends Controller
         $dailylog = $this->dailylog->where('user_id', $id)->first();
 
 
-
-        // 必要に応じて radarChartData のデータを加工
-        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
-        $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
-        $categoryData = [];
-
-
-
         // リクエストの日付でアドバイスを取得
         $adviceDate = $request->input('date');
         $advice = $this->advice->where('user_id', $id)
@@ -142,6 +133,12 @@ class AdviceController extends Controller
             ->first();
 
         $radarChartData = $this->showpfcvm($id, $adviceDate);
+
+        // 必要に応じて radarChartData のデータを加工
+        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
+        $message = $radarChartData['message'] ?? null;
+        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
+        $categoryData = [];
 
         foreach ($categories as $category) {
             $categoryData[$category] = $this->showCategory($id, $category, $adviceDate);
@@ -214,6 +211,7 @@ class AdviceController extends Controller
             $actual = $actualValues[$key] ?? 0;
             $satisfactionRates[$key] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
+
 
         return [
             'satisfactionRates' => $satisfactionRates,
@@ -427,6 +425,8 @@ class AdviceController extends Controller
         $dailylog = $this->dailylog->where('user_id', $id)->first();
 
 
+        // リクエストの日付でアドバイスを取得
+        $adviceDate = $advice->created_at->input('date');
 
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
@@ -434,10 +434,6 @@ class AdviceController extends Controller
         $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
         $categoryData = [];
 
-
-
-        // リクエストの日付でアドバイスを取得
-        $adviceDate = $advice->created_at->input('date');
 
         // showWeightメソッドを呼び出してグラフ用データを取得
         $weightData = $this->showWeight($id, $adviceDate);
