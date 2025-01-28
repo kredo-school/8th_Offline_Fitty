@@ -7,7 +7,7 @@
     @include('sidebar.humburger')
     <div class="container user-dailylog">
         <div class="row">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.nutri-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
                 <!-- main content -->
 
