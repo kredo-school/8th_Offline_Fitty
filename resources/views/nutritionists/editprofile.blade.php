@@ -7,12 +7,12 @@
     @include('sidebar.humburger')
     <div class="container user-dailylog">
         <div class="row">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.nutri-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
                 <!-- main content -->
 
                 <body>
-                    <form action="{{ route('nutri.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('nutri.updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
 
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="detail-item detail-item-edit">
                                     <span class="detail-label detail-label-edit">Description</span>
-                                    <textarea name="description" class="detail-textarea detail-textarea-edit">{{ $user->nutritionistsProfile->memo }}</textarea>
+                                    <textarea name="memo" class="detail-textarea detail-textarea-edit">{{ $user->nutritionistsProfile->memo }}</textarea>
                                 </div>
                             </div>
                             <div class="edit-button edit-button-edit">
