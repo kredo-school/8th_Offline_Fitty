@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>テストメール</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リマインダーメール</title>
 </head>
 <body>
-    <h1>{{ $name }}さん、こんにちは！</h1>
-    <p>{{ $messageContent }}</p>
-    <p>Laravelのメール送信機能をテストしています。</p>
+    <h1>Daily Reminder</h1>
+    <p>{{ $data['message'] }}</p>
 </body>
 </html>

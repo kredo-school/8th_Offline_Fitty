@@ -12,4 +12,5 @@ class NutritionistsProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }

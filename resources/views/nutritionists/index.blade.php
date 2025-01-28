@@ -5,10 +5,10 @@
 @section('content')
 @include('sidebar.humburger')
 
-<div class="container w-75">
     <div class="row w-100">
         @include('sidebar.nutri-sidebar')
         <div class="col-md-9 ms-sm-auto col-lg-10">
+        <div class="container w-75">
 
             <h3 class=" nutri-h2">Send Feedback to</h3>
             <div class="row g-4 mb-5">

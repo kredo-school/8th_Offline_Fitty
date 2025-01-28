@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\DailyLog;
+use App\Models\SubCategory;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +27,14 @@ class NutritionistController extends Controller
         $this->user = $user;
         $this->user_profile = $user_profile;
         $this->dailylog = $dailylog;
-
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // 現在の日時から一週間前の日付を計算
+        $user_profiles = $this->user_profile->where('nutritionist_id', Auth::user()->id)->get();
         $one_week_ago = now()->subWeek();
 
         // 栄養士に関連するユーザー情報を取得（advice_sent_dateが一週間前よりも前のデータを取得）
@@ -38,11 +42,9 @@ class NutritionistController extends Controller
             ->where('nutritionist_id', Auth::user()->id)
             ->where(function ($query) use ($one_week_ago) {
                 $query->where('advice_sent_date', '<', $one_week_ago)
-                      ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
+                    ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
             })
             ->get();
-
-        // 栄養士とその関連ユーザー情報をビューに渡す
         return view('nutritionists.index', compact('user_profiles'));
     }
 
@@ -50,30 +52,27 @@ class NutritionistController extends Controller
 
     function sendAdvice($id)
     {
-
         $user_profile = $this->user_profile->where('user_id', $id)->first();
         $dailylog = $this->dailylog->where('user_id', $id)->first();
-
         $radarChartData = $this->showpfcvm($id);
 
-        // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats','Vitamins','Minerals'];
+        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
         $categoryData = [];
 
         foreach ($categories as $category) {
             $categoryData[$category] = $this->showCategory($id, $category);
         }
 
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message','category'));
+        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories'));
     }
 
     public function showpfcvm($id)
     {
-        $user_prolile = User::find($id);
+        $user_profile = User::find($id);
 
-        if (!$user_prolile) {
+        if (!$user_profile) {
             return [
                 'satisfactionRates' => [],
                 'message' => 'User not found.',
@@ -111,7 +110,6 @@ class NutritionistController extends Controller
             }
         }
 
-        // キー名を統一する処理を追加
         $actualValues = [
             "Proteins" => $actualValues["Protein"] ?? 0,
             "Fats" => $actualValues["Fat"] ?? 0,
@@ -119,24 +117,24 @@ class NutritionistController extends Controller
             "Vitamins" => $actualValues["Vitamins"] ?? 0,
             "Minerals" => $actualValues["Minerals"] ?? 0,
         ];
-        // dd($actualValues);
 
         $satisfactionRates = [];
         foreach ($recommendedValues as $key => $recommended) {
             $actual = $actualValues[$key] ?? 0;
-            $satisfactionRates[$key] = round(($actual / $recommended) * 100, 1);
+            $satisfactionRates[$key] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
 
         return [
             'satisfactionRates' => $satisfactionRates,
             'message' => null,
-            'user_profile' => $user_prolile
+            'user_profile' => $user_profile,
         ];
     }
 
     public function showCategory($id, $category)
     {
-        $user_profile = User::find($id);
+        // ユーザー情報を取得
+        $user_profile = $this->user_profile->findOrFail($id);
 
         if (!$user_profile) {
             return [
@@ -145,8 +143,10 @@ class NutritionistController extends Controller
             ];
         }
 
+        // 1週間分のデータを取得
         $endDate = Carbon::yesterday();
         $startDate = $endDate->copy()->subDays(6);
+
         $dailyLogs = DailyLog::where('user_id', $id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->get();
@@ -158,47 +158,81 @@ class NutritionistController extends Controller
             ];
         }
 
-        // ユーザーの体重を取得（デフォルト: 70kg）
-        $weight = $dailyLogs->first()->weight ?? 70;
+        $weight = (float) $dailyLogs->first()->weight ?? 70; // デフォルト体重もfloatに
+
+
+        // 指定されたカテゴリーのサブカテゴリを取得
+        $categoryModel = Category::with('subcategory')->where('name', $category)->first();
+
+        if (!$categoryModel) {
+            return [
+                'subCategoryRates' => [],
+                'message' => 'Category not found.',
+            ];
+        }
+
+        $subcategories = $categoryModel->subcategory;
 
         $subCategoryTotals = [];
         $subCategoryRecommended = [];
 
         foreach ($dailyLogs as $log) {
+            // JSONデータを正規化
             $nutritions = json_decode($log->nutritions, true);
+            // dd($nutritions);
+            $normalizedNutritions = $this->normalizeToMg($nutritions);
+            // dd($normalizedNutritions);
 
-            // サブカテゴリーが存在しない場合をスキップ
-            if (!isset($nutritions['Subcategories'])) {
+            if (!isset($normalizedNutritions['Subcategories'])) {
                 continue;
             }
 
-            // `$category` に基づいて該当サブカテゴリーを選別
-            $subcategories = $nutritions['Subcategories'];
-            $filteredSubcategories = [];
-            foreach ($subcategories as $subCategory => $value) {
-                if ($this->isCategoryMatch($subCategory, $category)) {
-                    $filteredSubcategories[$subCategory] = $value;
+            $subCategoryRecommended = []; // 初期化
+
+
+            // JSON内のSubcategoriesキーに基づいてデータを処理
+            foreach ($subcategories as $subcategory) {
+                $subCategoryName = $subcategory->name;
+
+                // 実際の値がJSONに存在するか確認
+                if (!isset($normalizedNutritions['Subcategories'][$subCategoryName])) {
+                    continue;
                 }
+
+                $numericValue = $normalizedNutritions['Subcategories'][$subCategoryName];
+
+                // 実績値を加算
+                $subCategoryTotals[$subCategoryName] = ($subCategoryTotals[$subCategoryName] ?? 0) + $numericValue;
+
+                // 推奨値を取得
+                $requirement = (float) $this->getSubcategoryRequirementFromDB($subCategoryName);
+
+                // 推奨値を単純に設定 (繰り返し加算しない)
+                $subCategoryRecommended[$subCategoryName] = $requirement * $weight * 7;
             }
 
-            // フィルタリングされたサブカテゴリーで計算
-            foreach ($filteredSubcategories as $subCategory => $value) {
-                $numericValue = (float) filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-
-                // 合計値を計算
-                $subCategoryTotals[$subCategory] = ($subCategoryTotals[$subCategory] ?? 0) + $numericValue;
-
-                // 推奨値を計算
-                $subCategoryRecommended[$subCategory] = ($subCategoryRecommended[$subCategory] ?? 0) + $this->getSubcategoryRequirement($subCategory, $weight);
-            }
         }
 
-        // サブカテゴリー充足率を計算
+        // サブカテゴリーごとの充足率を計算
         $subCategoryRates = [];
-        foreach ($subCategoryRecommended as $subCategory => $recommended) {
-            $actual = $subCategoryTotals[$subCategory] ?? 0;
-            $subCategoryRates[$subCategory] = round(($actual / $recommended) * 100, 1);
+        foreach ($subCategoryRecommended as $subCategoryName => $recommended) {
+            $actual = $subCategoryTotals[$subCategoryName] ?? 0;
+            $subCategoryRates[$subCategoryName] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
+        // dd([
+        //     'Subcategory' => $subCategoryName,
+        //     'Requirement per Day (mg/kg)' => $requirement,
+        //     'Weight (kg)' => $weight,
+        //     'Weekly Requirement (mg)' => $requirement * $weight * 7,
+        //     'subCategoryRecommended' => $subCategoryRecommended, // 現在の全体状況
+        // ]);
+
+        // dd([
+        //     'Subcategory' => $subCategoryName,
+        //     'Actual Value (mg)' => $actual, // 実績値
+        //     'Recommended Value (mg)' => $recommended, // 推奨値
+        //     'Satisfaction Rate (%)' => $subCategoryRates[$subCategoryName] // 充足率
+        // ]);
 
         return [
             'subCategoryRates' => $subCategoryRates,
@@ -208,91 +242,68 @@ class NutritionistController extends Controller
 
 
 
-
-    private function getSubcategoryRequirement($subCategory, $weight)
+    private function getSubcategoryRequirementFromDB($subCategoryName)
     {
-        $requirements = [
-            // Carbohydrates サブカテゴリー
-            "Simple Sugars" => 5, // 1kgあたり5g
-            "Complex Carbohydrates" => 10,
-            "Fiber" => 1,
-            "Starches" => 3,
-            "Polysaccharides" => 0.5,
+        // サブカテゴリーの`requirement`を取得し、float型に変換
+        $requirement = (float) SubCategory::where('name', $subCategoryName)->value('requirement');
 
-            // Proteins サブカテゴリー
-            "Lysine" => 0.03,
-            "Leucine" => 0.04,
-            "Isoleucine" => 0.03,
-            "Valine" => 0.03,
-            "Threonine" => 0.02,
-            "Methionine" => 0.01,
-            "Phenylalanine" => 0.015,
-            "Histidine" => 0.01,
-            "Arginine" => 0.015,
-
-            // Fats サブカテゴリー
-            "Saturated Fats" => 0.8,
-            "Unsaturated Fats" => 1.2,
-            "Omega-3 Fatty Acids" => 0.1,
-            "Omega-6 Fatty Acids" => 0.2,
-            "Trans Fats" => 0.05,
-
-            // Vitamins サブカテゴリー
-            "Vitamin A" => 10, // 1kgあたり10µg
-            "Vitamin B1 (Thiamine)" => 0.02,
-            "Vitamin B2 (Riboflavin)" => 0.02,
-            "Vitamin B6 (Pyridoxine)" => 0.03,
-            "Vitamin B12 (Cobalamin)" => 0.002,
-            "Vitamin C" => 1.5,
-            "Vitamin D" => 0.01,
-            "Vitamin E" => 0.2,
-            "Vitamin K" => 2,
-
-            // Minerals サブカテゴリー
-            "Calcium" => 15, // 1kgあたり15mg
-            "Iron" => 0.3,
-            "Magnesium" => 5,
-            "Potassium" => 50,
-            "Sodium" => 30,
-            "Zinc" => 0.2,
-            "Phosphorus" => 10,
-            "Copper" => 0.02,
-            "Manganese" => 0.04,
-            "Fluoride" => 0.1,
-        ];
-
-        $requirementPerKg = $requirements[$subCategory] ?? 1; // デフォルト値: 1単位/1kg
-        return $requirementPerKg * $weight;
-    }
-
-    /**
-     * サブカテゴリーが指定されたカテゴリーに属しているか確認
-     */
-    private function isCategoryMatch($subCategory, $category)
-    {
-        $categoryMapping = [
-            'Carbohydrates' => ['Simple Sugars', 'Complex Carbohydrates', 'Fiber', 'Starches', 'Polysaccharides'],
-            'Proteins' => ['Lysine', 'Leucine', 'Isoleucine', 'Valine', 'Threonine', 'Methionine', 'Phenylalanine', 'Histidine', 'Arginine'],
-            'Fats' => ['Saturated Fats', 'Unsaturated Fats', 'Omega-3 Fatty Acids', 'Omega-6 Fatty Acids', 'Trans Fats'],
-            'Vitamins' => ['Vitamin A', 'Vitamin B1 (Thiamine)', 'Vitamin B2 (Riboflavin)', 'Vitamin B6 (Pyridoxine)', 'Vitamin B12 (Cobalamin)', 'Vitamin C', 'Vitamin D', 'Vitamin E', 'Vitamin K'],
-            'Minerals' => ['Calcium', 'Iron', 'Magnesium', 'Potassium', 'Sodium', 'Zinc', 'Phosphorus', 'Copper', 'Manganese', 'Fluoride']
-        ];
-
-        return in_array($subCategory, $categoryMapping[$category] ?? []);
+        return $requirement;
     }
 
 
-    function profile()
+    private function normalizeToMg($nutritions)
     {
-        return view('nutritionists.profile');
-    }
-    function editprofile()
-    {
-        return view('nutritionists.editprofile');
+        $normalized = [];
+
+        foreach ($nutritions as $key => $value) {
+            // Subcategoriesの処理を分ける
+            if ($key === 'Subcategories' && is_array($value)) {
+                $normalized['Subcategories'] = $this->normalizeToMg($value);
+                continue;
+            }
+
+            // 数値部分を取得
+            $numericValue = (float) filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
+            // 単位を取得（g, µg, mg）
+            $unit = strtolower(preg_replace('/[0-9\.\s]+/', '', $value)); // 数値部分を取り除く
+
+            // 単位に応じた変換
+            switch ($unit) {
+                case 'g': // グラムをmgに変換
+                    $normalized[$key] = $numericValue * 1000;
+                    break;
+                case 'µg': // マイクログラムをmgに変換
+                    $normalized[$key] = $numericValue / 1000;
+                    break;
+                case 'mg': // mgはそのまま
+                default:
+                    $normalized[$key] = $numericValue;
+                    break;
+            }
+
+
+
+        }
+
+        return $normalized;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
 
+
+
+
+    function profile($id)
+    {
+
+        $user = User::find($id);
+        return view('nutritionists.profile', compact('user'));
+    }
+
+    function editprofile($id)
+    {
+
+        $user = User::find($id);
+        return view('nutritionists.editprofile', compact('user'));
+    }
 }

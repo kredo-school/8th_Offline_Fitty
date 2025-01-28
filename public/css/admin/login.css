@@ -3,7 +3,6 @@ body {
   background-color: #f8f9fa; /* 薄い緑色 */
 }
 
-
 /* 緑色のライン */
 .green-line {
   border: none;
@@ -27,7 +26,6 @@ body {
     border-radius: 8px; /* 角丸を統一 */
     margin: 0 auto; /* 中央揃え */
 }
-
 
 /* ラベルのスタイル */
 .form-label {

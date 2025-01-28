@@ -101,48 +101,71 @@
                     <h5>{{ $category }} Subcategories</h5>
                     <div class="text-center">
                         @if (!empty($data['subCategoryRates']))
-                            <canvas id="subcategoryChart_{{ $category }}" width="200" height="200"></canvas>
+                            <canvas id="subcategoryChart_{{ Str::slug($category) }}" width="200" height="200"></canvas>
                         @else
-                            <p class="text-danger">{{ $data['message'] ?? 'No data available.' }}</p>
+                            <p class="text-danger">{{ $data['message'] ?? 'No data available for this category.' }}</p>
                         @endif
                     </div>
                 </div>
             </div>
 
             @if (!empty($data['subCategoryRates']))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const ctx = document.getElementById('subcategoryChart_{{ $category }}').getContext('2d');
-                    const subCategoryRates = @json($data['subCategoryRates']);
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const ctx = document.getElementById('subcategoryChart_{{ Str::slug($category) }}').getContext('2d');
+                        const subCategoryRates = @json($data['subCategoryRates']);
 
-                    const labels = Object.keys(subCategoryRates);
-                    const values = Object.values(subCategoryRates);
+                        const labels = Object.keys(subCategoryRates);
+                        const values = Object.values(subCategoryRates);
 
-                    new Chart(ctx, {
-                        type: 'radar',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: '{{ $category }} Subcategories (%)',
-                                data: values,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                r: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 150
+                        new Chart(ctx, {
+                            type: 'radar',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: '{{ $category }} Subcategories (%)',
+                                    data: values,
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    r: {
+                                        suggestedMin: 0,
+                                        suggestedMax: 140,
+                                        ticks: {
+                                            stepSize: 20,
+                                            backdropColor: 'rgba(255, 255, 255, 0.8)',
+                                            color: 'rgba(0, 0, 0, 0.8)',
+                                            font: {
+                                                size: 12
+                                            }
+                                        },
+                                        grid: {
+                                            color: function (context) {
+                                                return context.index === 5 ? 'green' : 'rgba(0, 0, 0, 0.1)';
+                                            },
+                                            lineWidth: 1
+                                        },
+                                        pointLabels: {
+                                            font: {
+                                                size: 14,
+                                                weight: 'bold'
+                                            },
+                                            color: 'rgba(0, 0, 0, 0.8)'
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        });
                     });
-                });
-            </script>
+                </script>
             @endif
         @endforeach
+
+
 
 
         </div>
