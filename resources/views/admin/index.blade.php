@@ -2,17 +2,13 @@
 
 @section('title', 'Admin index')
 
-@push('styles')
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-@endpush
-
 @section('content')
 
     @include('sidebar.humburger')
     <div class="d-flex justify-content-center admin-home">
 
         <div class="row">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.admin-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- main content -->
 
@@ -42,7 +38,7 @@
                                 </a>
                             </div>
                             <div class="col-md-5 col-sm-6 d-flex justify-content-start">
-                                <a href="#" class="card orange">
+                                <a href="{{ route('admin.inquiries.index') }}" class="card orange">
                                     <span class="material-symbols-outlined">mail</span>
                                     <span>Inquiries</span>
                                 </a>

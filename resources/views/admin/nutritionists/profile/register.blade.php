@@ -5,7 +5,7 @@
 
     <div class="d-flex vh-100 ">
         <div class="row w-100">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.admin-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <div class="admin-nutri-profile">
                     <div class="col-8">

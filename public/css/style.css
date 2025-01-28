@@ -1689,6 +1689,8 @@ color: #757575 !important;
 
 /* admin categories*/
 /* 全体のスタイル */
+/* admin categories*/
+/* 全体のスタイル */
 .admin-categories-container {
 background-color: rgba(247, 252, 241, 1) !important;
 padding: 87px 80px !important;
@@ -1706,18 +1708,22 @@ margin: 0 auto !important;
 
 /* ヘッダーセクション */
 .admin-categories-header-section {
-display: flex !important;
-justify-content: space-between !important;
-align-items: center !important;
-gap: 20px !important;
-width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important; /* 要素を下揃えにする */
+  gap: 20px !important;
+  width: 100% !important;
 }
 
 .admin-categories-title {
-font-family: 'Shrikhand', sans-serif !important;
-color: rgba(0, 152, 79, 1) !important;
-font-size: 32px !important;
-margin: auto 0 !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  color: rgba(0, 152, 79, 1) !important;
+  font-size: 32px !important;
+  margin: auto 0 !important;
+  display: inline-block !important;
+  vertical-align: bottom !important; /* 下部に寄せる */
+  /* margin-bottom: 0 !important; /* 必要に応じて調整 */
+  /* line-height: normal !important; テキストの高さを通常に戻す */ 
 }
 
 .admin-categories-add-button {
@@ -1749,6 +1755,7 @@ margin-top: 18px !important;
 color: rgba(0, 152, 79, 1) !important;
 font-size: 24px !important;
 }
+
 .admin-categories-row {
 display: flex !important;
 justify-content: space-between !important;
@@ -1765,6 +1772,13 @@ transition: background-color 0.3s ease !important;
 background-color: rgba(0, 152, 79, 0.1) !important;
 }
 
+.admin-categories-row h2 {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 18px !important;
+  color: rgba(0, 152, 79, 1) !important;
+  margin: 0 !important;
+}
+
 .admin-categories-toggle-icon {
 font-size: 24px !important;
 color: rgba(0, 152, 79, 1) !important;
@@ -1777,18 +1791,21 @@ transform: rotate(180deg) !important;
 
 /* サブカテゴリーリスト */
 .admin-categories-sublist {
-padding-left: 40px !important;
-margin-top: 10px !important;
-background-color: rgba(247, 252, 241, 1) !important;
-border-left: 3px solid rgba(0, 152, 79, 0.5) !important;
+  padding-left: 40px !important;
+  margin-top: 10px !important;
+  background-color: rgba(247, 252, 241, 1) !important;
+  border-left: 3px solid rgba(0, 152, 79, 0.5) !important;
+  z-index:9999 !important;
+  position: relative; /* 必要に応じてabsoluteに変更可能 */
 }
 
 .admin-categories-subitem {
-display: flex !important;
-justify-content: space-between !important;
-align-items: center !important;
-padding: 5px 0 !important;
-border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 5px 0 !important;
+  border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
+  z-index:9999 !important;
 }
 
 .admin-categories-subcategory-name {
@@ -1824,10 +1841,6 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 
 .admin-categories-delete-btn:hover .admin-categories-delete-icon {
 color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
-}
-.admin-nutri-profile .material-icons-outlined {
-  font-size: 180px !important; /* アイコンのサイズを大きく */
-  color: #757575 !important;
 }
 
 /* モーダルスタイル */
@@ -1910,43 +1923,176 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   width: 100% !important;
 }
 
+.admin-categories-header-section {
+  margin-bottom: 20px !important; /* ヘッダーとリストの間にスペースを追加 */
+}
+
+/* アコーディオン */
+/* アコーディオンボタンの背景色をカスタマイズ */
+/* アコーディオンアイテムのスタイル */
+.accordion-item.admin-categories-accordion-item {
+  /* background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important; */
+  margin-bottom: 20px !important; /* アイテム間の余白を設定 */
+  background-color: transparent !important; /* デフォルト背景色を透明に */
+  padding: 0 !important;
+  border: none !important;
+}
+
+.accordion-button.admin-categories-accordion-button {
+  background-color: transparent !important;
+  padding: 15px 20px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important; /* フォーカスの青いラインを削除 */
+  color: black !important; /* デフォルトのテキスト色を設定 */
+}
+
+/* 開いているアコーディオンのスタイル */
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed) {
+  background-color: rgba(0, 152, 79, 1) !important; /* 背景色を適用 */
+  color: white !important; /* テキスト色を白に変更 */
+}
+
+/* ホバー時のスタイル */
+.accordion-button.admin-categories-accordion-button:hover {
+  background-color: rgba(0, 152, 79, 1) !important; /* ホバー時の背景色 */
+  color: white !important; /* ホバー時のテキスト色 */
+}
+
+/* アコーディオンアイコンのスタイル */
+.accordion-button .admin-categories-toggle-icon svg {
+  stroke: black !important; /* デフォルトアイコン色 */
+}
+
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed) .admin-categories-toggle-icon svg,
+.accordion-button.admin-categories-accordion-button:hover .admin-categories-toggle-icon svg {
+  stroke: white !important; /* 開いている時とホバー時のアイコン色を白に変更 */
+}
+
+/* 展開部分の内容のスタイル */
+.accordion-body.admin-categories-accordion-body {
+  padding: 15px !important;
+  background-color: #FFFFFF !important;
+  color: #333333 !important;
+  border-top: 1px solid rgba(0, 152, 79, 1) !important;
+}
+/* アコーディオンボタンのデフォルト矢印を非表示 */
+.accordion-button::after {
+  display: none !important; /* 矢印アイコンを非表示にする */
+}
+.accordion-button:focus {
+  outline: none !important; /* フォーカス時の青いアウトラインを非表示 */
+  box-shadow: none !important; /* ボックスシャドウも消す */
+}
+
 
 /* メディアクエリ（レスポンシブ対応） */
 @media (max-width: 768px) {
   .admin-categories-container {
-      padding: 20px !important;
+    padding: 20px !important;
   }
 
   .admin-categories-add-button {
-      padding: 8px 16px !important;
-      font-size: 16px !important;
+    padding: 8px 16px !important;
+    font-size: 16px !important;
   }
 
   .admin-categories-title {
-      font-size: 24px !important;
+    font-size: 24px !important;
   }
 
   .admin-categories-sublist {
-      padding-left: 20px !important;
+    padding-left: 20px !important;
   }
 
   .admin-categories-form-input,
   .admin-categories-form-select {
-      font-size: 14px !important;
+    font-size: 14px !important;
   }
 
-
+  .admin-categories-modal-content {
+    padding: 15px !important;
+  }
 
   .admin-categories-modal-footer .btn {
-      padding: 6px 12px !important;
-      font-size: 14px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
   }
 }
 
 
-.user-material-symbols-outlined {
-  font-size: 50px  !important; /* アイコンのサイズを80pxに設定 */
-  margin: 20px auto 10px; /* アイコンの余白を調整 */
-  color: #202F55;
+/* adminパジネーション */
+.admin-pagination {
+  display: flex !important;
+  gap: 5px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-family: 'Poppins', sans-serif !important; /* フォントをPoppinsに設定 */
 }
+
+.admin-pagination-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+  border-radius: 4px !important;
+  border: 1px solid #ddd !important;
+  background-color: white !important;
+  color: #333 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+.admin-pagination-item a {
+  text-decoration: none !important;
+  color: inherit !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+.admin-pagination-item.active {
+  background-color: rgba(255, 169, 101, 1) !important;
+  color: white !important;
+  border-color: rgba(255, 169, 101, 1) !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+}
+
+.admin-pagination-item.disabled {
+  cursor: not-allowed !important;
+  color: #ccc !important;
+  background-color: #f9f9f9 !important;
+  border-color: #ccc !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+}
+
+.admin-pagination-ellipsis {
+  color: #333 !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+
+
+
+
+
+
+
+
+/* 今井cssエンド*/
+
+
 
