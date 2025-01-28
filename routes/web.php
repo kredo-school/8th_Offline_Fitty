@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\InquiriesController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\Admin\CategoriesController;
 
 use App\Http\Controllers\ChatGptController;
-// use App\Http\Controllers\Admin\InquiriesController;
+
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
@@ -37,8 +39,6 @@ Route::get('/', function () {
 
 // Laravelのデフォルト認証ルート
 Auth::routes();
-
-
 
 Route::get('/about', function () {
     return view('about');
@@ -133,6 +133,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
         Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+    // Inquiries関連のルートグループ
+    Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index'); // 一覧表示
+    Route::delete('/inquiries/{id}', [InquiriesController::class, 'destroy'])->name('inquiries.destroy'); // 削除
+
     });
 
 
