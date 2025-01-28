@@ -409,17 +409,18 @@ class AdviceController extends Controller
     {
         // 指定されたユーザーIDに関連するアドバイスを取得
         $user = $this->user->findOrFail($id);
-        $adviceList = $this->advice->where('user_id', $id)->get();
+        $adviceList = $this->advice->where('user_id', $id)
+        ->orderBy('created_at', 'desc')
+        ->paginate(10); 
 
         return view('users.advice_index', compact('user', 'adviceList'));
     }
 
 
-    public function show($id, $adviceId)
+    public function showAdvice($id)
     {
         $advice = $this->advice
-            ->where('id', $adviceId)
-            ->where('user_id', $id)
+            ->where('id', $id)
             ->firstOrFail();
 
         $user_profile = $this->user_profile->findOrFail($id);
@@ -437,7 +438,7 @@ class AdviceController extends Controller
 
 
         // リクエストの日付でアドバイスを取得
-        $adviceDate = $advice->created_at->input('date');
+        $adviceDate = $advice->created_at->format('Y-m-d');
 
         // showWeightメソッドを呼び出してグラフ用データを取得
         $weightData = $this->showWeight($id, $adviceDate);

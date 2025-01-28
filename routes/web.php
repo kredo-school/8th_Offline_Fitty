@@ -104,7 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         //Users get advices
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
+        Route::get('/{id}/showAdvice', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
     });
     
     //any login user can access

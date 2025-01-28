@@ -523,6 +523,49 @@ background-color: #087722; /* ホバー時の色 */
 }
 
 
+/* テーブルのスタイル */
+.unique-table-2 {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'lora', sans-serif;
+}
+
+.unique-table-2 th, .unique-table-2 td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.unique-table-2 th {
+  background-color: #4DAF4A;
+  color: white;
+  font-weight: bold;
+}
+
+.unique-table-2 td {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+/* リンクのスタイル */
+
+.unique-table-2 td a {
+  /* display: flex; アイコンと日付を横並びに */
+  align-items: center; /* 縦方向の中央揃え */
+  text-decoration: none; /* リンクの下線を削除 */
+  color: #333; /* 必要に応じてテキストの色を変更 */
+  justify-content: center; /* 横方向の中央揃え */
+
+}
+
+.unique-table-2 a:hover {
+  color: #FFA965;
+}
+
+/* 行にホバー効果 */
+.unique-table-2 tr:hover {
+  background-color: #f1f1f1;
+}
 
 
 .nutri-material-symbols-outlined.selected {
@@ -655,7 +698,12 @@ padding: 0 15px; /* サイドの余白 */
 }
 
 .card.card-login {
+<<<<<<< HEAD
+width: 50%; 
+/* Lingping fixed 2025.1.23  */
+=======
 width: 50%;
+>>>>>>> main
 max-width: 600x;
 height: 300px;
 position: relative;
