@@ -306,4 +306,45 @@ class NutritionistController extends Controller
         $user = User::find($id);
         return view('nutritionists.editprofile', compact('user'));
     }
+
+    function updateProfile($id, Request $request)
+    {
+        // 対象ユーザーを取得
+        $user = $this->user->findOrFail($id);
+
+        // バリデーションルール
+        $request->validate([
+            'name' => 'required|min:1|max:255',
+            'email' => 'required|email|min:1|max:255|unique:users,email,' . $user->id,
+            'avatar' => 'mimes:jpeg,png,jpg|max:2048',
+            'first_name' => 'required|min:1|max:255',
+            'last_name' => 'required|min:1|max:255',
+            'memo' => 'required|min:1|max:255',
+        ]);
+
+        // データを更新
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->hasFile('avatar')) {
+            $user->avatar = 'data:image/' . $request->avatar->extension() .
+                ';base64,' . base64_encode(file_get_contents($request->avatar));
+        }
+
+
+        // プロファイルの更新
+        $profile = $user->nutritionistsProfile;
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->memo = $request->memo;
+
+        $profile->save();
+
+
+        // ユーザー情報を保存
+        $user->save();
+
+        // プロフィールページへリダイレクト
+        return redirect()->route('nutri.profile', $user->id);
+    }
 }
