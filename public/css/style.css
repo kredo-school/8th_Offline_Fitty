@@ -698,12 +698,8 @@ padding: 0 15px; /* サイドの余白 */
 }
 
 .card.card-login {
-<<<<<<< HEAD
-width: 50%; 
 /* Lingping fixed 2025.1.23  */
-=======
 width: 50%;
->>>>>>> main
 max-width: 600x;
 height: 300px;
 position: relative;

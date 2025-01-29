@@ -417,12 +417,12 @@ class AdviceController extends Controller
     }
 
 
-    public function showAdvice($id)
+    public function showAdvice($id,$date)
     {
-        $advice = $this->advice
-            ->where('id', $id)
-            ->firstOrFail();
-
+        $user = User::findOrFail($id);
+        $advice = Advice::where('user_id', $id)
+                    ->whereDate('created_at', $date)
+                    ->firstOrFail();
         $user_profile = $this->user_profile->findOrFail($id);
 
         $dailylog = $this->dailylog->where('user_id', $id)->first();
