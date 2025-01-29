@@ -11,29 +11,32 @@
           <table class="unique-table-2">
               <thead>
                   <tr>
-                    <th style="width: 100%;">History of {{$user->name}}</th>
+                    <th colspan="4">History of {{$user->name}}</th>
                   </tr>
               </thead>
               <tbody>
                   @forelse ($adviceList as $advice)
                   <tr>
-                    <td>
+                    <td style="width: 10%;">
                       @if ($advice->is_read)
                           <span class="material-symbols-outlined" title="Read">mark_email_read</span>
                       @else
                           <span class="material-symbols-outlined" title="Unread">mark_email_unread</span>
                       @endif
                     </td>
-                    <td>
+                    <td  style="width: 10%;">
                       @if ($advice->is_liked)
                           <i class="material-icons" style="color: yellow;" title="Liked">star</i>
                       @else
                           <i class="material-icons" title="Not Liked">star_border</i>
                       @endif
                     </td>
-                    <td>
+                    <td style="width: 40%;">
                           <a href="{{ route('user.advice.showAdvice', ['id' => $user->id, 'date' => $advice->created_at->toDateString()]) }}" class="d-flex align-items-center">
                               <span class="me-2">{{ $advice->created_at->format('Y/m/d') }}</span>
+                    </td>
+                    <td style="width: 10%;">
+                            
                               <!-- 顔文字の表示 -->
                               @if ($advice->overall == 5)
                                   <span class="material-symbols-outlined history-icon">sentiment_excited</span>

@@ -525,7 +525,7 @@ background-color: #087722; /* ホバー時の色 */
 
 /* テーブルのスタイル */
 .unique-table-2 {
-  width: 100%;
+  width: 50%;
   border-collapse: collapse;
   margin: 20px 0;
   font-family: 'lora', sans-serif;
