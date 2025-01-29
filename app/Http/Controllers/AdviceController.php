@@ -109,30 +109,30 @@ class AdviceController extends Controller
 
 
 
-    public function history($id)
+    public function history($user_id)
     {
-        $user_profile = $this->user_profile->findOrFail($id);
-        $adviceList = $this->advice->where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+        $adviceList = $this->advice->where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
 
         return view('nutritionists.history')
             ->with('user_profile', $user_profile)
             ->with('adviceList', $adviceList);
     }
 
-    public function showHistory($id, Request $request)
+    public function showHistory($user_id, Request $request)
     {
-        $user_profile = $this->user_profile->findOrFail($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
-        $dailylog = $this->dailylog->where('user_id', $id)->first();
+        $dailylog = $this->dailylog->where('user_id', $user_id)->first();
 
 
         // リクエストの日付でアドバイスを取得
         $adviceDate = $request->input('date');
-        $advice = $this->advice->where('user_id', $id)
+        $advice = $this->advice->where('user_id', operator: $user_id)
             ->whereDate('created_at', $adviceDate)
             ->first();
 
-        $radarChartData = $this->showpfcvm($id, $adviceDate);
+        $radarChartData = $this->showpfcvm($user_id, $adviceDate);
 
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
@@ -141,7 +141,7 @@ class AdviceController extends Controller
         $categoryData = [];
 
         foreach ($categories as $category) {
-            $categoryData[$category] = $this->showCategory($id, $category, $adviceDate);
+            $categoryData[$category] = $this->showCategory($user_id, $category, $adviceDate);
         }
 
         return view('nutritionists.showHistory', compact(
@@ -156,9 +156,9 @@ class AdviceController extends Controller
 
 
 
-    public function showpfcvm($id, $adviceDate)
+    public function showpfcvm($user_id, $adviceDate)
     {
-        $user_profile = User::find($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
         if (!$user_profile) {
             return [
@@ -169,7 +169,7 @@ class AdviceController extends Controller
 
         $endDate = Carbon::parse($adviceDate)->subDay();
         $startDate = $endDate->copy()->subDays(6);
-        $dailyLogs = DailyLog::where('user_id', $id)
+        $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->get();
 
@@ -220,10 +220,11 @@ class AdviceController extends Controller
         ];
     }
 
-    public function showCategory($id, $category, $adviceDate)
+    public function showCategory($user_id, $category, $adviceDate)
     {
         // ユーザー情報を取得
-        $user_profile = $this->user_profile->findOrFail($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+
 
         if (!$user_profile) {
             return [
@@ -236,7 +237,7 @@ class AdviceController extends Controller
         $endDate = Carbon::parse($adviceDate)->subDay();
         $startDate = $endDate->copy()->subDays(6);
 
-        $dailyLogs = DailyLog::where('user_id', $id)
+        $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->get();
 
@@ -403,11 +404,11 @@ class AdviceController extends Controller
         //
     }
 
-    public function index($id)
+    public function index($user_id)
     {
         // 指定されたユーザーIDに関連するアドバイスを取得
-        $user = $this->user->findOrFail($id);
-        $adviceList = $this->advice->where('user_id', $id)->get();
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+        $adviceList = $this->advice->where('user_id', $user_id)->get();
 
         return view('users.advice_index', compact('user', 'adviceList'));
     }
@@ -452,14 +453,14 @@ class AdviceController extends Controller
         ));
     }
 
-    public function showWeight($id, $adviceDate)
+    public function showWeight($user_id, $adviceDate)
     {
 
         $endDate = Carbon::parse($adviceDate)->subDay();
         $startDate = $endDate->copy()->subDays(6);
 
         // データを取得
-        $dailyLogs = DailyLog::where('user_id', $id)
+        $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->orderBy('input_date', 'asc')
             ->get();

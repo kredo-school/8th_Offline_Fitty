@@ -50,11 +50,11 @@ class NutritionistController extends Controller
 
 
 
-    function sendAdvice($id)
+    function sendAdvice($user_id)
     {
-        $user_profile = $this->user_profile->where('user_id', $id)->first();
-        $dailylog = $this->dailylog->where('user_id', $id)->first();
-        $radarChartData = $this->showpfcvm($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+        $dailylog = $this->dailylog->where('user_id', $user_id)->first();
+        $radarChartData = $this->showpfcvm($user_id);
 
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
@@ -62,15 +62,15 @@ class NutritionistController extends Controller
         $categoryData = [];
 
         foreach ($categories as $category) {
-            $categoryData[$category] = $this->showCategory($id, $category);
+            $categoryData[$category] = $this->showCategory($user_id, $category);
         }
 
         return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories'));
     }
 
-    public function showpfcvm($id)
+    public function showpfcvm($user_id)
     {
-        $user_profile = User::find($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
         if (!$user_profile) {
             return [
@@ -81,7 +81,7 @@ class NutritionistController extends Controller
 
         $endDate = Carbon::yesterday();
         $startDate = $endDate->copy()->subDays(6);
-        $dailyLogs = DailyLog::where('user_id', $id)
+        $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->get();
 
@@ -131,10 +131,10 @@ class NutritionistController extends Controller
         ];
     }
 
-    public function showCategory($id, $category)
+    public function showCategory($user_id, $category)
     {
         // ユーザー情報を取得
-        $user_profile = $this->user_profile->findOrFail($id);
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
         if (!$user_profile) {
             return [
@@ -147,7 +147,7 @@ class NutritionistController extends Controller
         $endDate = Carbon::yesterday();
         $startDate = $endDate->copy()->subDays(6);
 
-        $dailyLogs = DailyLog::where('user_id', $id)
+        $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->get();
 
@@ -305,5 +305,46 @@ class NutritionistController extends Controller
 
         $user = User::find($id);
         return view('nutritionists.editprofile', compact('user'));
+    }
+
+    function updateProfile($id, Request $request)
+    {
+        // 対象ユーザーを取得
+        $user = $this->user->findOrFail($id);
+
+        // バリデーションルール
+        $request->validate([
+            'name' => 'required|min:1|max:255',
+            'email' => 'required|email|min:1|max:255|unique:users,email,' . $user->id,
+            'avatar' => 'mimes:jpeg,png,jpg|max:2048',
+            'first_name' => 'required|min:1|max:255',
+            'last_name' => 'required|min:1|max:255',
+            'memo' => 'required|min:1|max:255',
+        ]);
+
+        // データを更新
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->hasFile('avatar')) {
+            $user->avatar = 'data:image/' . $request->avatar->extension() .
+                ';base64,' . base64_encode(file_get_contents($request->avatar));
+        }
+
+
+        // プロファイルの更新
+        $profile = $user->nutritionistsProfile;
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->memo = $request->memo;
+
+        $profile->save();
+
+
+        // ユーザー情報を保存
+        $user->save();
+
+        // プロフィールページへリダイレクト
+        return redirect()->route('nutri.profile', $user->id);
     }
 }
