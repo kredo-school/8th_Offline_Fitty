@@ -1337,6 +1337,7 @@ margin-top: 20px;
 
 /* 検索ボックスのカスタムスタイル */
 .admin-nutritionists .admin-nutritionists-search-box .input-group {
+  font-family: 'Poppins', sans-serif!important;
 max-width: 300px; /* 幅を細く調整 */
 border: 2px solid #00984F;
 border-radius: 8px;
@@ -1345,6 +1346,7 @@ overflow: hidden;
 
 /* 検索ボタンのスタイル */
 .admin-nutritionists .admin-nutritionists-search-btn {
+font-family: 'Poppins', sans-serif!important;
 background-color: #00984F;
 border: none;
 color: white;
@@ -1358,6 +1360,7 @@ transition: background-color 0.3s ease;
 
 .admin-nutritionists .admin-nutritionists-search-btn:hover {
 background-color: #007b3a;
+font-family: 'Poppins', sans-serif!important;
 }
 
 /* テーブルスタイル */
@@ -1543,7 +1546,7 @@ margin: 0;
   padding: 6px;
 }
 }
-.admin-nutritionists .add-button {
+.admin-nutritionists-add-button {
 display: inline-flex;
 align-items: center;
 justify-content: center;
@@ -1951,7 +1954,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 }
 
 /* 開いているアコーディオンのスタイル */
-.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed) {
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed),.accordion-button[aria-expanded="true"] {
   background-color: rgba(0, 152, 79, 1) !important; /* 背景色を適用 */
   color: white !important; /* テキスト色を白に変更 */
 }
