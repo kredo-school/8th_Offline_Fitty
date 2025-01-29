@@ -17,7 +17,7 @@ class UserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         // ユーザーが認証されていて、roleが'N'でない場合
-        if (Auth::check() && Auth::user()->role !== 'U') {
+        if (Auth::check() && Auth::user()->role == 'N') {
             // ログインページにリダイレクト
             return redirect()->route('login');
         }

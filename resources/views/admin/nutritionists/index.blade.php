@@ -68,7 +68,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href={{ route('nutri.profile', ['id' => $nutri_profile->$nutri_id]) }} class="admin-users-action-button">
+                                            <a href={{ route('nutri.profile', ['id' => $nutritionist_profile->user_id]) }} class="admin-users-action-button">
                                                 <span class="material-symbols-outlined">person</span>
                                             </a>
                                             <a href="#" class="admin-users-action-button" data-bs-toggle="modal"
