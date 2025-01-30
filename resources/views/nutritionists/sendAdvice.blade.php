@@ -214,7 +214,7 @@
 
                 <!-- Buttons -->
                 <div class="d-flex justify-content-between">
-                <a href="{{ route('nutri.history', $user_profile->id) }}" target="_blank" rel="noopener noreferrer" class="previous">See Previous Advice</a>
+                <a href="{{ route('nutri.history', $user_profile->user->id) }}" target="_blank" rel="noopener noreferrer" class="previous">See Previous Advice</a>
 
                     <button type="submit" class="btn send-btn">Send Advice</button>
                 </div>
