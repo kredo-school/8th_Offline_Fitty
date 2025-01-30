@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Nutritionist;
 use App\Models\User;
+use App\Models\DailyLog;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,9 +30,17 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog($user_id)
+    public function showdailylog($user_id, $date)
     {
-        return view('users.dailylog');
+        $user = $this->user->findOrFail($user_id);
+
+
+        // 例: 指定された日付の履歴を取得（適宜モデルの構造に合わせる）
+        $dailylog = Dailylog::where('user_id', $user_id)
+            ->whereDate('created_at', $date)
+            ->get();
+
+        return view('users.dailylog', compact('user', 'dailylog', 'date'));
     }
 
     public function showinputmeal()
@@ -54,7 +63,7 @@ class UserController extends Controller
     public function showhistory($user_id)
     {
         $user = $this->user->findOrFail($user_id);
-        return view('users.history',compact('user'));
+        return view('users.history', compact('user'));
     }
 
 

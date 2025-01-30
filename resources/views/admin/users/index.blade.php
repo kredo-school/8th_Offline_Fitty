@@ -62,7 +62,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="#" class="admin-users-action-button">
+                                            <a href="{{ route('user.profile', ['id' => $user_profile->user_id]) }}" class="admin-users-action-button">
                                                 <span class="material-symbols-outlined">person</span>
                                             </a>
                                             <a href="#" class="admin-users-action-button" data-bs-toggle="modal"

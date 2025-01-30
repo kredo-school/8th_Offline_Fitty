@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-        Route::get('/{id}/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });
 
@@ -127,17 +127,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
         Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
-
-        //Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index');
+        Route::delete('/nutritionists/{id}', [NutritionistsController::class, 'destroy'])->name('nutritionists.destroy');
 
         Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
         Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
-        Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+        Route::patch('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
-    // Inquiries関連のルートグループ
-    Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index'); // 一覧表示
-    Route::delete('/inquiries/{id}', [InquiriesController::class, 'destroy'])->name('inquiries.destroy'); // 削除
+        Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index'); // 一覧表示
+        Route::delete('/inquiries/{id}', [InquiriesController::class, 'destroy'])->name('inquiries.destroy'); // 削除
 
     });
 
