@@ -17,7 +17,10 @@
     </div>
 </div>
 
+@endsection
+
 <!-- FullCalendar Styles -->
+@push('styles')
 <style>
     #calendar {
         max-width: 100%;
@@ -41,6 +44,7 @@
         cursor: pointer;
     }
 </style>
+@endpush
 
 <!-- FullCalendar Script -->
 @push('scripts')
@@ -76,4 +80,3 @@
     });
 </script>
 @endpush
-@endsection
