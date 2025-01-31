@@ -63,7 +63,7 @@ class DailyLogSeeder extends Seeder
         for ($i = 1; $i <= 50; $i++) {
             $currentDate = $today->copy()->subDays($i); // 昨日から50日前までの日付を計算
 
-            for ($userId = 2; $userId <= 11; $userId++) {
+            for ($userId = 2; $userId <= 3; $userId++) {
                 foreach ($mealTypes as $mealType) {
                     $data[] = [
                         'weight' => rand(50, 100), // 体重

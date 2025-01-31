@@ -27,13 +27,13 @@
                         @foreach ($categories as $category)
                             <div class="accordion-item admin-categories-accordion-item">
                                 <h2 class="accordion-header admin-categories-accordion-header" id="heading-{{ $category->id }}">
-                                    <button class="accordion-button admin-categories-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $category->id }}" aria-expanded="false" aria-controls="collapse-{{ $category->id }}">
+                                    <button class="accordion-button admin-categories-accordion-button collapsed" type="button"  data-bs-target="#collapse-{{ $category->id }}" aria-expanded="false" aria-controls="collapse-{{ $category->id }}">
                                         <div class="d-flex justify-content-between align-items-center w-100">
                                             <span class="admin-categories-item-name" style="font-size: 20px;">{{ $category->name }}</span>
                                             <span class="admin-categories-toggle-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00804F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <circle cx="12" cy="12" r="10" fill="none"></circle>
-                                                    <polyline points="8 10 12 14 16 10" class="icon-chevron-down"></polyline>
+                                                    <polyline points="8 10 12 14 16 10" class="icon-chevron-down" style="display: block;"></polyline>
                                                     <polyline points="8 14 12 10 16 14" class="icon-chevron-up" style="display: none;"></polyline>
                                                 </svg>
                                             </span>
@@ -176,38 +176,77 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleIcons = document.querySelectorAll('.admin-categories-toggle-icon .accordion-icon');
-        const footer = document.querySelector('footer');
-        const mainContent = document.querySelector('.main-content');
+document.addEventListener('DOMContentLoaded', function () {
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    const footer = document.querySelector('footer'); // フッターを取得
+    const mainContent = document.querySelector('.main-content'); // メインコンテンツ
 
-        toggleIcons.forEach(icon => {
-            const chevronDown = icon.querySelector('.icon-chevron-down');
-            const chevronUp = icon.querySelector('.icon-chevron-up');
+    function updateFooterPosition() {
+        if (mainContent && footer) {
+            const contentHeight = mainContent.scrollHeight;
+            footer.style.marginTop = `${contentHeight - mainContent.offsetHeight}px`;
+        }
+    }
 
-            icon.closest('.accordion-button').addEventListener('click', function () {
-                const isCollapsed = this.classList.contains('collapsed');
+    accordionButtons.forEach(button => {
+        const targetId = button.getAttribute('data-bs-target');
+        const target = document.querySelector(targetId);
+        const chevronDown = button.querySelector('.icon-chevron-down');
+        const chevronUp = button.querySelector('.icon-chevron-up');
 
-                // アイコンの表示切り替え
-                if (isCollapsed) {
-                    chevronDown.style.display = 'block';
-                    chevronUp.style.display = 'none';
-                } else {
-                    chevronDown.style.display = 'none';
-                    chevronUp.style.display = 'block';
-                }
+        // **🔹 初期アイコンの設定**
+        if (target.classList.contains('show')) {
+            chevronDown.style.display = 'none';
+            chevronUp.style.display = 'block';
+        } else {
+            chevronDown.style.display = 'block';
+            chevronUp.style.display = 'none';
+        }
 
-                // 高さ調整処理
-                setTimeout(() => {
-                    if (mainContent && footer) {
-                        const contentHeight = mainContent.scrollHeight;
-                        footer.style.marginTop = `${contentHeight - mainContent.offsetHeight}px`;
-                    }
-                }, 300); // アニメーションの完了タイミングに合わせる
-            });
+        // **🔹 Bootstrap の開閉イベントを利用してアイコンを変更 & フッターを即更新**
+        target.addEventListener('show.bs.collapse', function () {
+            chevronDown.style.display = 'none';
+            chevronUp.style.display = 'block';
+            updateFooterPosition(); // **アニメーション開始時に更新**
+        });
+
+        target.addEventListener('shown.bs.collapse', function () {
+            updateFooterPosition(); // **開いた後も確認**
+        });
+
+        target.addEventListener('hide.bs.collapse', function () {
+            chevronDown.style.display = 'block';
+            chevronUp.style.display = 'none';
+            updateFooterPosition(); // **アニメーション開始時に更新**
+        });
+
+        target.addEventListener('hidden.bs.collapse', function () {
+            updateFooterPosition(); // **閉じた後も確認**
+        });
+
+        // **🔹 クリック時にアコーディオンを開閉**
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const isOpen = target.classList.contains('show');
+
+            if (isOpen) {
+                bootstrap.Collapse.getOrCreateInstance(target).hide();
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                bootstrap.Collapse.getOrCreateInstance(target).show();
+                button.setAttribute('aria-expanded', 'true');
+            }
         });
     });
+
+    // **🔹 初回ロード時にフッターの位置を調整**
+    updateFooterPosition();
+});
+
+
+
 </script>
+
 
 
 @endsection

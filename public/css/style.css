@@ -295,7 +295,7 @@ footer {
   padding: 10px 0;
   height: 80px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: sticky;
 }
 
 .footer-p-1 {
@@ -730,72 +730,31 @@ border-radius: 5px;
 }
 
 
-/* カード全体をスタイルする */
-.login-container{
-display: flex; /* Flexboxを有効化 */
-justify-content: center; /* 横方向の中央揃え */
-align-items: center; /* 縦方向の中央揃え */
-min-height: 100vh; /* ビューポートの高さを基準に全体を中央揃え */
-padding: 0 15px; /* サイドの余白 */
-}
 
-.card.card-login {
-width: 50%;
-max-width: 600x;
-height: 300px;
-position: relative;
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-/* カードの背景画像 */
-.card.card-login::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
-opacity: 0.2; /* 背景画像を薄くする */
-z-index: -1;
-filter: brightness(80%);
-}
-
-/* カードヘッダーのスタイル */
+/* カードヘッダー */
 .card-header.card-header-login {
-position: absolute;
-line-height: 1.7; /* 行間をリセット */
-left: 0;
-width: 100%;
-text-align: center;
-background-color: rgba(0, 0, 0, 0.5);
-color: white;
-font-size: 2rem;
-font-weight: bold;
-z-index: 10;
+    position: absolute;
+    line-height: 1.7;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 10;
 }
 
-/* カードのコンテンツ */
+/* カードコンテンツ */
 .card-body-login {
-position: relative;
-z-index: 2;
-padding: 20px;
-background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
-color: #202F55; /* テキストの色を黒に設定 */
-border-radius: 0 0 8px 8px;
-margin-top: 70px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #202F55;
+    border-radius: 0 0 8px 8px;
+    margin-top: 70px;
 }
-
-/* ログインページ全体のスタイル */
-.login-page {
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-position: relative;
-}
-
 
 /* 共通カードスタイル */
 /*　Edit Profile用*/
@@ -1337,6 +1296,7 @@ margin-top: 20px;
 
 /* 検索ボックスのカスタムスタイル */
 .admin-nutritionists .admin-nutritionists-search-box .input-group {
+  font-family: 'Poppins', sans-serif!important;
 max-width: 300px; /* 幅を細く調整 */
 border: 2px solid #00984F;
 border-radius: 8px;
@@ -1345,6 +1305,7 @@ overflow: hidden;
 
 /* 検索ボタンのスタイル */
 .admin-nutritionists .admin-nutritionists-search-btn {
+font-family: 'Poppins', sans-serif!important;
 background-color: #00984F;
 border: none;
 color: white;
@@ -1358,6 +1319,7 @@ transition: background-color 0.3s ease;
 
 .admin-nutritionists .admin-nutritionists-search-btn:hover {
 background-color: #007b3a;
+font-family: 'Poppins', sans-serif!important;
 }
 
 /* テーブルスタイル */
@@ -1543,7 +1505,7 @@ margin: 0;
   padding: 6px;
 }
 }
-.admin-nutritionists .add-button {
+.admin-nutritionists-add-button {
 display: inline-flex;
 align-items: center;
 justify-content: center;
@@ -1723,7 +1685,7 @@ margin: 0 auto !important;
   display: inline-block !important;
   vertical-align: bottom !important; /* 下部に寄せる */
   /* margin-bottom: 0 !important; /* 必要に応じて調整 */
-  /* line-height: normal !important; テキストの高さを通常に戻す */ 
+  /* line-height: normal !important; テキストの高さを通常に戻す */
 }
 
 .admin-categories-add-button {
@@ -1951,7 +1913,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 }
 
 /* 開いているアコーディオンのスタイル */
-.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed) {
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed),.accordion-button[aria-expanded="true"] {
   background-color: rgba(0, 152, 79, 1) !important; /* 背景色を適用 */
   color: white !important; /* テキスト色を白に変更 */
 }
