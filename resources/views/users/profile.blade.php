@@ -5,8 +5,37 @@
 @section('content')
 
     @include('sidebar.humburger')
-    <div class="row row-main">
-        @include('sidebar.user-sidebar')
+        <div class="row row-main">
+            @include('sidebar.user-sidebar')
+            <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
+
+                @if(Auth::user()->role === 'A'){
+                    <form action="{{route('user.allocateNutritionist',$user->user_profile->nutritionist_id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                    <select name="nutritionist_id" id="allocate">
+
+                        <option value="{{ $user->user_profile->nutritionist_id}}" selected>{{$nutritionist_in_charge->first_name}}{{$nutritionist_in_charge->last_name}}</option>
+                        @foreach($nutritionists as $nutritionist)
+                        <option value="{{ $nutritionist->user_id }}">{{ $nutritionist->first_name }}{{ $nutritionist->last_name }}</option>
+                    @endforeach
+                    </select>
+                </form>
+                }@endif
+
+                <!-- main content -->
+                <div class="profile-card profile-card-view">
+                    <div class="profile-header profile-header-view">
+                        @if($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
+                        @else
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture profile-picture-view">
+                        @endif
+                        <div class="info info-view">
+                            <h2 class="profile-name profile-name-view">{{ $user->name }}</h2>
+                            <p class="profile-email profile-email-view">{{ $user->email }}</p>
+                        </div>
+                    </div>
 
         <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
             <!-- main content -->

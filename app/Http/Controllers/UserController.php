@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Nutritionist;
+use App\Models\NutritionistsProfile;
 use App\Models\User;
 use App\Models\DailyLog;
 
@@ -51,8 +52,16 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->user->findOrFail($id);
+        $nutritionists = NutritionistsProfile::all();
+        $nutritionist_in_charge = NutritionistsProfile::whereIn(
+            'id',
+            NutritionistsProfile::where('user_id', $user->user_profile->nutritionist_id)
+                ->pluck('nutritionist_id')
+        )->get();
 
-        return view('users.profile', compact('user'));
+
+
+        return view('users.profile', compact('user','nutritionists','nutritionist_in_charge'));
     }
 
     public function editprofile($id)
@@ -151,6 +160,8 @@ class UserController extends Controller
         // プロフィールページへリダイレクト
         return redirect()->route('user.profile', $user->id);
     }
+
+
 
     public function changePassword(Request $request, $id)
     {
