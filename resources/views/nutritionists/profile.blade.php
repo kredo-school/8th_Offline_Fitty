@@ -8,10 +8,10 @@
 
         <div class="row row-main">
             @include('sidebar.nutri-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
+            <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
                 <!-- main content -->
 
-                <div class="profile-card profile-card-view">
+                <div class="profile-card profile-card-view" style="width: 60%;">
                     <div class="profile-header profile-header-view">
                         @if($user->avatar)
                         <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
@@ -39,5 +39,5 @@
                 </div>
             </div>
         </div>
-
+h1oi
 @endsection

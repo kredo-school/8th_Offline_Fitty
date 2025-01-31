@@ -7,7 +7,7 @@
     @include('sidebar.humburger')
         <div class="row row-main">
             @include('sidebar.user-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
+            <div class="col-md-9 ms-sm-auto col-lg-10  d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
 
                 @if(Auth::user()->role === 'A'){
                     <form action="{{route('user.allocateNutritionist',$user->user_profile->nutritionist_id)}}" method="post">
@@ -24,7 +24,7 @@
                 }@endif
 
                 <!-- main content -->
-                <div class="profile-card profile-card-view">
+                <div class="profile-card profile-card-view" style="width: 60%;">
                     <div class="profile-header profile-header-view">
                         @if($user->avatar)
                             <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">

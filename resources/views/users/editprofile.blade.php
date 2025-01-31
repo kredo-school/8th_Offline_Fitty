@@ -9,7 +9,7 @@
 <div class="row row-main">
     @include('sidebar.user-sidebar')
 
-    <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center">
+    <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
         <!-- main content -->
         <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data" style="width: 60%;">
             @csrf
