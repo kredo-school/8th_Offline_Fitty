@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\ChatGptController;
 
 
+use App\Http\Controllers\MailController;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
 
@@ -95,6 +97,11 @@ Route::group(['middleware' => 'auth'], function () {
     //acess chatgpt api
     Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
+    
+    //mail test
+    Route::get('/send-test-mail', [MailController::class, 'sendTestMail']);
+
+    
     Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
 
         Route::get('/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('inputmeal');
