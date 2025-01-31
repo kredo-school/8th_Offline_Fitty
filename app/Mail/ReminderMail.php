@@ -6,21 +6,28 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\User;
+
 class ReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $user;
+    public $missingMeals;
 
-    public function __construct($data)
+    public function __construct(User $user, $missingMeals)
     {
-        $this->data = $data;
+        $this->user = $user;
+        $this->missingMeals = $missingMeals;
     }
 
     public function build()
     {
-        return $this->subject('Daily Reminder')
+        return $this->subject('【リマインダー】昨日の食事ログが未入力です')
                     ->view('emails.reminder')
-                    ->with('data', $this->data);
+                    ->with([
+                        'user' => $this->user,
+                        'missingMeals' => $this->missingMeals
+                    ]);
     }
 }
