@@ -410,7 +410,7 @@ class AdviceController extends Controller
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        return view('users.advice_index', compact('user', 'adviceList'));
+        return view('users.advice_index', compact('user_profile', 'adviceList'));
     }
 
 
