@@ -108,6 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('inputmeal.store');
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
+        Route::patch('/{id}/allocateNutritionist', [App\Http\Controllers\UserController::class, 'allocateNutritionist'])->name('allocateNutritionist');
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
 
         //Users get advices
