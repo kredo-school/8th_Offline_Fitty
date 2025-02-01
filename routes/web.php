@@ -101,13 +101,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
-
-        //Users get advices
-        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        // Route::get('/{id}/showAdvice', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
-        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
-
     });
+
+
+    //Users get advices
+    Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
+        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
+        Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
+        Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
+        Route::patch('/{id}/advice/{advice}/like', [AdviceController::class, 'likeToggle'])->name('advice.like');
+        Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
+    });
+    
     
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

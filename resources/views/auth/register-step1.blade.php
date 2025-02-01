@@ -2,8 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container register-page d-flex align-items-center justify-content-center bg-light">
-    <div class="form-box p-5 shadow-lg rounded bg-white" style="width: 500px; margin-top: 100px;">
+<div class="container register-page d-flex align-items-center justify-content-center">
+    <div class="form-box p-5 shadow-lg rounded bg-white" style="width: 500px;">
         <h3 class="mb-4">1. Basic Information</h3>
         <form method="POST" action="{{ route('register.step1.submit') }}" enctype="multipart/form-data">
             @csrf

@@ -18,17 +18,41 @@
                   @forelse ($adviceList as $advice)
                   <tr>
                     <td style="width: 10%;">
-                      @if ($advice->is_read)
-                          <span class="material-symbols-outlined" title="Read">mark_email_read</span>
-                      @else
-                          <span class="material-symbols-outlined" title="Unread">mark_email_unread</span>
+                      @if ($advice->is_read == 1)
+                        <form action="{{ route('user.advice.unread',['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm shadow-none p-0">
+                          <i class="material-symbols-outlined" title="Read">mark_email_read</i>
+                        </button>
+                        </form>
+                      @elseif($advice->is_read == 0)
+                        <form action="{{ route('user.advice.read',['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm shadow-none p-0">
+                          <i class="material-symbols-outlined" title="Read">mark_email_unread</i>
+                        </button>
                       @endif
                     </td>
+
                     <td  style="width: 10%;">
-                      @if ($advice->is_liked)
-                          <i class="material-icons" style="color: yellow;" title="Liked">star</i>
-                      @else
-                          <i class="material-icons" title="Not Liked">star_border</i>
+                      @if ($advice->is_liked == 1)
+                      <form action="{{ route('user.advice.unlike', ['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                          @csrf
+                          @method('PATCH')
+                          <button class="btn btn-sm shadow-none p-0">
+                              <i class="material-icons" style="color: yellow;" title="Liked">star</i>
+                          </button>
+                      </form>
+                      @elseif ($advice->is_liked == 0)
+                          <form action="{{ route('user.advice.like', ['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                              @csrf
+                              @method('PATCH')
+                              <button class="btn btn-sm shadow-none p-0">
+                                  <i class="material-icons" title="Not Liked">star_border</i>
+                              </button>
+                          </form>
                       @endif
                     </td>
                     <td style="width: 40%;">
@@ -38,12 +62,12 @@
                               </span>
                           </a>
                           @else
-                          <span class="text-muted">No Date</span> <!-- `created_at` がない場合のフォールバック -->
+                          <span class="text-muted">No Date</span> 
                            @endif
                     </td>
                     <td style="width: 10%;">
                             
-                              <!-- 顔文字の表示 -->
+                              <!-- Rate Face Here -->
                               @if ($advice->overall == 5)
                                   <span class="material-symbols-outlined history-icon">sentiment_excited</span>
                               @elseif ($advice->overall == 4)
@@ -55,7 +79,6 @@
                               @elseif ($advice->overall == 1)
                                   <span class="material-symbols-outlined history-icon">sentiment_sad</span>
                               @endif
-                          </a>
                     </td>
                   </tr>
                   @empty
