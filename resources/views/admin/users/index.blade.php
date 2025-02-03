@@ -2,11 +2,11 @@
 
 @section('content')
     @include('sidebar.humburger')
-    <div class="row row-main">
+    <div class="row main-row">
         @include('sidebar.admin-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10 admin-users" style="height: calc(100vh - 190px); ">
-    <div class=" w-75 mx-auto">
+    <div class="mx-auto" style="width: 60%;">
         <!-- Main Content -->
 
         <!-- Header Section -->
@@ -17,8 +17,8 @@
 
             <!-- Search Box -->
             <div class="admin-users-search-box">
-                <form action="{{ route('admin.users.index') }}" method="GET">
-                    <div class="input-group admin-users-input-group">
+                <form action="{{ route('admin.users.index') }}" method="GET" class="w-100">
+                    <div class="input-group admin-users-input-group w-100">
                         <input type="text" name="search" class="form-control admin-users-search-input"
                                placeholder="Search" value="{{ old('search', $search) }}">
                         <button class="btn admin-users-search-btn" type="submit">

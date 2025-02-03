@@ -36,13 +36,6 @@
             </a>
         </li>
 
-        <li class="menu-item d-flex align-items-center py-2">
-            <a href="#" class="d-flex align-items-center w-100">
-                <span class="material-icons side-material-icons me-2">help</span>
-                <span class="title">FAQ</span>
-            </a>
-        </li>
-
 
         <li class="menu-item d-flex align-items-center py-2">
             <a href="#" class="d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#logoutModal">

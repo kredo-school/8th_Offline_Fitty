@@ -30,6 +30,7 @@ main {
 .main-row{
     margin-right: 0 !important;
     margin-left: 0 !important;
+    width: 100%;
 }
 
 .container {
@@ -295,7 +296,7 @@ footer {
   padding: 10px 0;
   height: 80px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: relative;
 }
 
 
@@ -819,7 +820,6 @@ border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: auto;
   margin-top: 0px;
-  width: 60%;
 }
 
 /* 編集用カード */
