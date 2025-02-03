@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リマインダーメール</title>
+    <title>リマインダー</title>
 </head>
 <body>
-    <p>{{ $name }}さん,</p>
-    <p>24時間以上、ログが記録されていません。</p>
-    <p>忘れずに記録を追加してください。</p>
+    <h1>{{ $user->name }} さん、こんにちは！</h1>
+    <p>昨日（{{ \Carbon\Carbon::yesterday()->format('Y-m-d') }}）の食事ログが一部未入力です。</p>
+    <p>以下の食事が記録されていません：</p>
+    <ul>
+        @foreach ($missingMeals as $meal)
+            <li>{{ ucfirst($meal) }}</li>
+        @endforeach
+    </ul>
+    <p>忘れずにログを記録してください！</p>
 </body>
 </html>

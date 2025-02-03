@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="register-page" style="padding-top: 70px;">
+<div class="register-page mt-5" >
 
     <div class="container d-flex justify-content-center w-50">
         <form method="POST" action="{{ route('register.step2.submit') }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-            
+
         @if(session('step1.profile_image_path'))
     <div class="mb-4">
         <p>Uploaded Profile Image:</p>
@@ -132,7 +132,7 @@
                             <input class="form-check-input" type="checkbox" id="no_restrictions" name="dietary_preferences[]" value="no_restrictions">
                             <label class="form-check-label" for="no_restrictions">No Dietary Restrictions</label>
                         </div>
-                
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="lactose_free" name="dietary_preferences[]" value="lactose_free">
                             <label class="form-check-label" for="lactose_free">Lactose-Free</label>
@@ -153,7 +153,7 @@
                             <input class="form-check-input" type="checkbox" id="gluten_free" name="dietary_preferences[]" value="gluten_free">
                             <label class="form-check-label" for="gluten_free">Gluten-Free</label>
                         </div>
-                
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="vegetarian" name="dietary_preferences[]" value="vegetarian">
                             <label class="form-check-label" for="vegetarian">Vegetarian</label>
@@ -182,7 +182,7 @@
                             <input class="form-check-input" type="checkbox" id="intermittent_fasting" name="dietary_preferences[]" value="intermittent_fasting">
                             <label class="form-check-label" for="intermittent_fasting">Intermittent Fasting</label>
                         </div>
-                
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="organic" name="dietary_preferences[]" value="organic">
                             <label class="form-check-label" for="organic">Organic Only</label>
@@ -195,14 +195,14 @@
                             <input class="form-check-input" type="checkbox" id="flexitarian" name="dietary_preferences[]" value="flexitarian">
                             <label class="form-check-label" for="flexitarian">Flexitarian</label>
                         </div>
-                
+
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="other" name="dietary_preferences[]" value="other">
                             <label class="form-check-label" for="other">Other</label>
                         </div>
                     </div>
                 </div>
-                
+
 
                 {{-- Food Allergies --}}
                 <div class="form-group mb-2">
@@ -217,7 +217,7 @@
                 {{-- Goals --}}
                 <div class="form-group mb-2">
                     <label for="goals">
-                        What is your primary goal for using this service? 
+                        What is your primary goal for using this service?
                         <br>
                         <small class="text-muted">
                             (e.g., Maintain health, manage weight, improve nutrition, enhance athletic performance, or prepare for a specific event)
@@ -227,7 +227,7 @@
                 </div>
 
             </div>
- 
+
             <button type="submit" class="btn-submit my-5">
                 REGISTER
             </button>

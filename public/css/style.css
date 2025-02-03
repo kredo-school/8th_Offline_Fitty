@@ -27,6 +27,18 @@ main {
   padding-bottom: 15px;
 }
 
+.main-row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.container {
+    padding: 0 !important; /* パディングをリセット */
+    margin: 0 auto !important; /* 左右中央寄せ、余分なマージンを削除 */
+    width: 100% !important; /* 余白をなくし、幅を全体に拡張 */
+}
+
+
 
 
 /* ナビバーのスタイル */
@@ -62,60 +74,122 @@ margin-right: 10px;
 }
 
 /* サイドメニュー */
+#sidebar {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* はみ出た部分を隠す */
 
-.sidemenu {
-  position: fixed;
-  top: 80px;
-  left: 0;
-  width: 240px;
-  height: calc(100vh - 80px); /* ヘッダー部分を除いた高さ */
-  background-color: #d8efd1;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+}
+.sidemenu{
+    position: fixed;
+    top: 80px;
+    left: 0;
+    background-color: #D4E7BA;
+    height: calc(100vh - 80px);
+    margin: 0 !important;
 }
 
 
-.sidemenu h1 {
-font-size: 24px;
-color: #f68b1e;
-margin-bottom: 30px;
-display: flex;
-align-items: center;
+.sidemenu h1{
+    text-align: center;
+    color: #4DAF4A;
+    font-family: "Shrikhand", serif !important;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 30px;
+}
+.nav{
+
+    margin-left: 40px;
 }
 
-.sidemenu h1 img {
-height: 40px;
-margin-right: 10px;
+.nav li{
+    height: 65px; /* liの高さを固定 */
+width: 100%;
+
+}
+
+.nav li:hover{
+    background-color: #91CF98;
+    border-radius: 27px;
+    z-index: 0;
+    width: 95%;
+}
+.nav li:hover a{
+    color: white;
+    padding-left: 10px;
+
+
+}
+
+.nav .active:hover {
+    background-color: #4DAF4A; /* ホバー時の背景色を変更しない */
+    cursor: default; /* ホバー時のカーソルをデフォルト状態にする */
+    border-top-right-radius: 0; /* 左上の角を丸くする */
+    border-bottom-right-radius: 0; /* 左下の角を丸くする */
+    width: 100%;
+}
+
+.nav li a{
+    color: #202F55;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    padding-left: 10px;
+
+}
+.side-material-icons{
+    margin-right: 10px;
+
+}
+
+.sidemenu .title {
+    white-space: nowrap;
+  }
+
+.nav .active{
+    background-color: #4DAF4A;
+    border-top-left-radius: 27px; /* 左上の角を丸くする */
+    border-bottom-left-radius: 27px; /* 左下の角を丸くする */    position: relative;
+    z-index: 2;
+}
+
+.nav .active a{
+    color: #FFFFFF;
+    padding-left: 10px;
+
+
+}
+
+.nav .active::before, .nav .active::after{
+    content: "";
+    position: absolute;
+    z-index: 0;
+}
+
+.nav .active::before{
+    top: -80px;
+    right: -2px;
+    height: 80px;
+    width: 53px;
+    border-bottom-right-radius: 80px;
+    box-shadow: 0 40px 0 0 #4DAF4A;
+    /* background: #202F55; */
+
 }
 
 
+.nav .active::after{
+    top: 65px;
+    right: -2px;
+    height: 80px;
+    width: 53px;
+    border-top-right-radius: 80px;
+    box-shadow: 0 -40px 0 0 #4DAF4A;
 
-.menu-item {
-display: flex;
-align-items: center;
-padding: 10px 15px;
-font-size: 16px;
-color: #333;
-text-decoration: none;
-border-radius: 8px;
-margin-bottom: 10px;
-transition: background-color 0.3s;
-}
+    /* background: #202F55; */
 
-.menu-item:hover {
-background-color: #a4d4a2;
-color: #000;
-}
 
-.menu-item.active {
-background-color: #54b76a;
-color: white;
-font-weight: bold;
-}
-
-.menu-item .material-icons {
-margin-right: 10px;
-font-size: 20px;
 }
 
 
@@ -135,6 +209,11 @@ font-size: 20px;
       top: -56px; /* ヘッダーの高さを考慮 */
       width: 100%; /* サイドバーを全幅に変更 */
 
+  }
+
+  .sidemenu h1{
+    margin-top: 70px;
+margin-bottom: 0;
   }
 
   .sidemenu.show {
@@ -216,7 +295,7 @@ footer {
   padding: 10px 0;
   height: 80px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: sticky;
 }
 
 
@@ -236,6 +315,13 @@ footer a {
   text-decoration: none;
   color: #FFFFFF;
 }
+
+/* logout modal */
+.custom-outline {
+    border-color: #202F55 !important;
+    color: #202F55 !important;
+  }
+
 
 
 
@@ -688,86 +774,52 @@ border-radius: 5px;
 }
 
 
-/* カード全体をスタイルする */
-.login-container{
-display: flex; /* Flexboxを有効化 */
-justify-content: center; /* 横方向の中央揃え */
-align-items: center; /* 縦方向の中央揃え */
-min-height: 100vh; /* ビューポートの高さを基準に全体を中央揃え */
-padding: 0 15px; /* サイドの余白 */
-}
 
-.card.card-login {
-/* Lingping fixed 2025.1.23  */
-width: 50%;
-max-width: 600x;
-height: 300px;
-position: relative;
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-/* カードの背景画像 */
-.card.card-login::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
-opacity: 0.2; /* 背景画像を薄くする */
-z-index: -1;
-filter: brightness(80%);
-}
-
-/* カードヘッダーのスタイル */
+/* カードヘッダー */
 .card-header.card-header-login {
-position: absolute;
-line-height: 1.7; /* 行間をリセット */
-left: 0;
-width: 100%;
-text-align: center;
-background-color: rgba(0, 0, 0, 0.5);
-color: white;
-font-size: 2rem;
-font-weight: bold;
-z-index: 10;
+    position: absolute;
+    line-height: 1.7;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 10;
 }
 
-/* カードのコンテンツ */
+/* カードコンテンツ */
 .card-body-login {
-position: relative;
-z-index: 2;
-padding: 20px;
-background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
-color: #202F55; /* テキストの色を黒に設定 */
-border-radius: 0 0 8px 8px;
-margin-top: 70px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #202F55;
+    border-radius: 0 0 8px 8px;
+    margin-top: 70px;
 }
-
-/* ログインページ全体のスタイル */
-.login-page {
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-position: relative;
-}
-
 
 /* 共通カードスタイル */
 /*　Edit Profile用*/
 /* 共通カードスタイル */
 /* UserProfile用 */
+.profile-main {
+    display: flex;
+    justify-content: center; /* 水平方向の中央配置 */
+    align-items: center; /* 垂直方向の中央配置 */
+    height: 100%; /* 全体の高さを指定 */
+  }
+
+
 .profile-card {
   background-color: white;
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
   margin: auto;
   margin-top: 0px;
+  width: 60%;
 }
 
 /* 編集用カード */
@@ -775,7 +827,7 @@ position: relative;
 
 /* 表示用カード */
 .profile-card-view {
-  justify-content: center;
+  margin: 0;
 }
 
 /* 表示用カード */
@@ -1296,6 +1348,7 @@ margin-top: 20px;
 
 /* 検索ボックスのカスタムスタイル */
 .admin-nutritionists .admin-nutritionists-search-box .input-group {
+  font-family: 'Poppins', sans-serif!important;
 max-width: 300px; /* 幅を細く調整 */
 border: 2px solid #00984F;
 border-radius: 8px;
@@ -1304,6 +1357,7 @@ overflow: hidden;
 
 /* 検索ボタンのスタイル */
 .admin-nutritionists .admin-nutritionists-search-btn {
+font-family: 'Poppins', sans-serif!important;
 background-color: #00984F;
 border: none;
 color: white;
@@ -1317,6 +1371,7 @@ transition: background-color 0.3s ease;
 
 .admin-nutritionists .admin-nutritionists-search-btn:hover {
 background-color: #007b3a;
+font-family: 'Poppins', sans-serif!important;
 }
 
 /* テーブルスタイル */
@@ -1502,7 +1557,7 @@ margin: 0;
   padding: 6px;
 }
 }
-.admin-nutritionists .add-button {
+.admin-nutritionists-add-button {
 display: inline-flex;
 align-items: center;
 justify-content: center;
@@ -1648,6 +1703,8 @@ color: #757575 !important;
 
 /* admin categories*/
 /* 全体のスタイル */
+/* admin categories*/
+/* 全体のスタイル */
 .admin-categories-container {
 background-color: rgba(247, 252, 241, 1) !important;
 padding: 87px 80px !important;
@@ -1665,18 +1722,22 @@ margin: 0 auto !important;
 
 /* ヘッダーセクション */
 .admin-categories-header-section {
-display: flex !important;
-justify-content: space-between !important;
-align-items: center !important;
-gap: 20px !important;
-width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important; /* 要素を下揃えにする */
+  gap: 20px !important;
+  width: 100% !important;
 }
 
 .admin-categories-title {
-font-family: 'Shrikhand', sans-serif !important;
-color: rgba(0, 152, 79, 1) !important;
-font-size: 32px !important;
-margin: auto 0 !important;
+  font-family: 'Shrikhand', sans-serif !important;
+  color: rgba(0, 152, 79, 1) !important;
+  font-size: 32px !important;
+  margin: auto 0 !important;
+  display: inline-block !important;
+  vertical-align: bottom !important; /* 下部に寄せる */
+  /* margin-bottom: 0 !important; /* 必要に応じて調整 */
+  /* line-height: normal !important; テキストの高さを通常に戻す */
 }
 
 .admin-categories-add-button {
@@ -1708,6 +1769,7 @@ margin-top: 18px !important;
 color: rgba(0, 152, 79, 1) !important;
 font-size: 24px !important;
 }
+
 .admin-categories-row {
 display: flex !important;
 justify-content: space-between !important;
@@ -1724,6 +1786,13 @@ transition: background-color 0.3s ease !important;
 background-color: rgba(0, 152, 79, 0.1) !important;
 }
 
+.admin-categories-row h2 {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 18px !important;
+  color: rgba(0, 152, 79, 1) !important;
+  margin: 0 !important;
+}
+
 .admin-categories-toggle-icon {
 font-size: 24px !important;
 color: rgba(0, 152, 79, 1) !important;
@@ -1736,18 +1805,21 @@ transform: rotate(180deg) !important;
 
 /* サブカテゴリーリスト */
 .admin-categories-sublist {
-padding-left: 40px !important;
-margin-top: 10px !important;
-background-color: rgba(247, 252, 241, 1) !important;
-border-left: 3px solid rgba(0, 152, 79, 0.5) !important;
+  padding-left: 40px !important;
+  margin-top: 10px !important;
+  background-color: rgba(247, 252, 241, 1) !important;
+  border-left: 3px solid rgba(0, 152, 79, 0.5) !important;
+  z-index:9999 !important;
+  position: relative; /* 必要に応じてabsoluteに変更可能 */
 }
 
 .admin-categories-subitem {
-display: flex !important;
-justify-content: space-between !important;
-align-items: center !important;
-padding: 5px 0 !important;
-border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 5px 0 !important;
+  border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
+  z-index:9999 !important;
 }
 
 .admin-categories-subcategory-name {
@@ -1783,10 +1855,6 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 
 .admin-categories-delete-btn:hover .admin-categories-delete-icon {
 color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
-}
-.admin-nutri-profile .material-icons-outlined {
-  font-size: 180px !important; /* アイコンのサイズを大きく */
-  color: #757575 !important;
 }
 
 /* モーダルスタイル */
@@ -1869,43 +1937,176 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   width: 100% !important;
 }
 
+.admin-categories-header-section {
+  margin-bottom: 20px !important; /* ヘッダーとリストの間にスペースを追加 */
+}
+
+/* アコーディオン */
+/* アコーディオンボタンの背景色をカスタマイズ */
+/* アコーディオンアイテムのスタイル */
+.accordion-item.admin-categories-accordion-item {
+  /* background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important; */
+  margin-bottom: 20px !important; /* アイテム間の余白を設定 */
+  background-color: transparent !important; /* デフォルト背景色を透明に */
+  padding: 0 !important;
+  border: none !important;
+}
+
+.accordion-button.admin-categories-accordion-button {
+  background-color: transparent !important;
+  padding: 15px 20px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important; /* フォーカスの青いラインを削除 */
+  color: black !important; /* デフォルトのテキスト色を設定 */
+}
+
+/* 開いているアコーディオンのスタイル */
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed),.accordion-button[aria-expanded="true"] {
+  background-color: rgba(0, 152, 79, 1) !important; /* 背景色を適用 */
+  color: white !important; /* テキスト色を白に変更 */
+}
+
+/* ホバー時のスタイル */
+.accordion-button.admin-categories-accordion-button:hover {
+  background-color: rgba(0, 152, 79, 1) !important; /* ホバー時の背景色 */
+  color: white !important; /* ホバー時のテキスト色 */
+}
+
+/* アコーディオンアイコンのスタイル */
+.accordion-button .admin-categories-toggle-icon svg {
+  stroke: black !important; /* デフォルトアイコン色 */
+}
+
+.accordion-item.admin-categories-accordion-item .accordion-button:not(.collapsed) .admin-categories-toggle-icon svg,
+.accordion-button.admin-categories-accordion-button:hover .admin-categories-toggle-icon svg {
+  stroke: white !important; /* 開いている時とホバー時のアイコン色を白に変更 */
+}
+
+/* 展開部分の内容のスタイル */
+.accordion-body.admin-categories-accordion-body {
+  padding: 15px !important;
+  background-color: #FFFFFF !important;
+  color: #333333 !important;
+  border-top: 1px solid rgba(0, 152, 79, 1) !important;
+}
+/* アコーディオンボタンのデフォルト矢印を非表示 */
+.accordion-button::after {
+  display: none !important; /* 矢印アイコンを非表示にする */
+}
+.accordion-button:focus {
+  outline: none !important; /* フォーカス時の青いアウトラインを非表示 */
+  box-shadow: none !important; /* ボックスシャドウも消す */
+}
+
 
 /* メディアクエリ（レスポンシブ対応） */
 @media (max-width: 768px) {
   .admin-categories-container {
-      padding: 20px !important;
+    padding: 20px !important;
   }
 
   .admin-categories-add-button {
-      padding: 8px 16px !important;
-      font-size: 16px !important;
+    padding: 8px 16px !important;
+    font-size: 16px !important;
   }
 
   .admin-categories-title {
-      font-size: 24px !important;
+    font-size: 24px !important;
   }
 
   .admin-categories-sublist {
-      padding-left: 20px !important;
+    padding-left: 20px !important;
   }
 
   .admin-categories-form-input,
   .admin-categories-form-select {
-      font-size: 14px !important;
+    font-size: 14px !important;
   }
 
-
+  .admin-categories-modal-content {
+    padding: 15px !important;
+  }
 
   .admin-categories-modal-footer .btn {
-      padding: 6px 12px !important;
-      font-size: 14px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
   }
 }
 
 
-.user-material-symbols-outlined {
-  font-size: 50px  !important; /* アイコンのサイズを80pxに設定 */
-  margin: 20px auto 10px; /* アイコンの余白を調整 */
-  color: #202F55;
+/* adminパジネーション */
+.admin-pagination {
+  display: flex !important;
+  gap: 5px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-family: 'Poppins', sans-serif !important; /* フォントをPoppinsに設定 */
 }
+
+.admin-pagination-item {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+  border-radius: 4px !important;
+  border: 1px solid #ddd !important;
+  background-color: white !important;
+  color: #333 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+.admin-pagination-item a {
+  text-decoration: none !important;
+  color: inherit !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+.admin-pagination-item.active {
+  background-color: rgba(255, 169, 101, 1) !important;
+  color: white !important;
+  border-color: rgba(255, 169, 101, 1) !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+}
+
+.admin-pagination-item.disabled {
+  cursor: not-allowed !important;
+  color: #ccc !important;
+  background-color: #f9f9f9 !important;
+  border-color: #ccc !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+}
+
+.admin-pagination-ellipsis {
+  color: #333 !important;
+  font-weight: 400 !important; /* 太さを標準に設定 */
+  font-family: inherit !important; /* 親要素のフォントを引き継ぐ */
+}
+
+
+
+
+
+
+
+
+
+/* 今井cssエンド*/
+
+
 

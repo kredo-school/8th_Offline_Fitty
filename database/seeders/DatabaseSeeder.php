@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
 {
     // 他のシーダーも必要に応じて追加
     $this->call([
-        UsersTableSeeder::class,  // ユーザーのシーダー 
+        UsersTableSeeder::class,  // ユーザーのシーダー
         UserProfilesTableSeeder::class,
         NutritionistsProfilesTableSeeder::class,
         CategoriesTableSeeder::class,
         SubCategoriesTableSeeder::class,
         DailyLogSeeder::class,
-        AdviceSeeder::class, 
+        InquirySeeder::class,
+        // AdviceSeeder::class,
 
     ]);
 

@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Nutritionist;
+use App\Models\NutritionistsProfile;
 use App\Models\User;
+use App\Models\DailyLog;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,9 +31,17 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog($user_id)
+    public function showdailylog($user_id, $date)
     {
-        return view('users.dailylog');
+        $user = $this->user->findOrFail($user_id);
+
+
+        // 例: 指定された日付の履歴を取得（適宜モデルの構造に合わせる）
+        $dailylog = Dailylog::where('user_id', $user_id)
+            ->whereDate('created_at', $date)
+            ->get();
+
+        return view('users.dailylog', compact('user', 'dailylog', 'date'));
     }
 
     public function showinputmeal()
@@ -42,9 +52,22 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->user->findOrFail($id);
+        $nutritionists = NutritionistsProfile::all();
+        // dd($user->profile);
 
-        return view('users.profile', compact('user'));
+        $nutritionist_id = $user->profile->nutritionist_id;
+
+
+        $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+        $allocated = $nutritionist_in_charge->nutritionistsProfile;
+        // dd($allocated);
+
+// dd($nutritionist_in_charge);
+
+        return view('users.profile', compact('user','nutritionists','allocated'));
     }
+
+
 
     public function editprofile($id)
     {
@@ -53,7 +76,8 @@ class UserController extends Controller
     }
     public function showhistory($user_id)
     {
-        return view('users.history');
+        $user = $this->user->findOrFail($user_id);
+        return view('users.history', compact('user'));
     }
 
 
@@ -101,7 +125,7 @@ class UserController extends Controller
             'avatar' => 'mimes:jpeg,png,jpg|max:2048',
             'birthday' => 'nullable|date|before:today',
             'gender' => 'required|in:male,female,non-binary,prefer_not_to_say,other',
-            'height' => 'nullable|numeric|min:120|max:220', 
+            'height' => 'nullable|numeric|min:120|max:220',
             'activity_level' => 'required|integer|in:1,2,3',
             'health_conditions' => 'nullable|array',
             'dietary_preferences' => 'nullable|array',
@@ -133,7 +157,7 @@ class UserController extends Controller
         $profile->food_allergies = $request->food_allergies;
         $profile->goals = $request->goals;
         $profile->save();
-    
+
 
         // ユーザー情報を保存
         $user->save();
@@ -141,6 +165,8 @@ class UserController extends Controller
         // プロフィールページへリダイレクト
         return redirect()->route('user.profile', $user->id);
     }
+
+
 
     public function changePassword(Request $request, $id)
     {

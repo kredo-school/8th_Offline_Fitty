@@ -3,11 +3,12 @@
 @section('title', 'Admin Categories')
 
 @section('content')
+
 @include('sidebar.humburger')
 
 <div class="bg-light d-flex vh-100 admin-nutritionists">
     <div class="row w-100">
-        @include('sidebar.user-sidebar')
+        @include('sidebar.admin-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10">
             <div class="admin-categories-container">
@@ -22,149 +23,230 @@
                     </div>
 
                     <!-- Category List -->
-                    <!-- Subcategories (Accordion) -->
-<div id="subcategory-{{ $category->id }}" class="collapse admin-categories-sublist">
-    @foreach ($category->children as $child)
-        <div class="admin-categories-subitem">
-            <span class="admin-categories-subcategory-name">{{ $child->name }}</span>
-            <div class="admin-categories-action-buttons">
-                <!-- Edit Button -->
-                <button class="btn admin-categories-edit-btn" data-bs-toggle="modal" data-bs-target="#editCategoryModal-{{ $child->id }}">
-                    <span class="material-icons-outlined admin-categories-edit-icon">edit</span>
-                </button>
-                <!-- Delete Button -->
-                <button class="btn admin-categories-delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $child->id }}">
-                    <span class="material-icons-outlined admin-categories-delete-icon">delete</span>
-                </button>
-            </div>
-        </div>
+                    <div class="accordion admin-categories-accordion" id="categoriesAccordion">
+                        @foreach ($categories as $category)
+                            <div class="accordion-item admin-categories-accordion-item">
+                                <h2 class="accordion-header admin-categories-accordion-header" id="heading-{{ $category->id }}">
+                                    <button class="accordion-button admin-categories-accordion-button collapsed" type="button"  data-bs-target="#collapse-{{ $category->id }}" aria-expanded="false" aria-controls="collapse-{{ $category->id }}">
+                                        <div class="d-flex justify-content-between align-items-center w-100">
+                                            <span class="admin-categories-item-name" style="font-size: 20px;">{{ $category->name }}</span>
+                                            <span class="admin-categories-toggle-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="accordion-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00804F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10" fill="none"></circle>
+                                                    <polyline points="8 10 12 14 16 10" class="icon-chevron-down" style="display: block;"></polyline>
+                                                    <polyline points="8 14 12 10 16 14" class="icon-chevron-up" style="display: none;"></polyline>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="collapse-{{ $category->id }}" class="accordion-collapse collapse admin-categories-accordion-collapse" aria-labelledby="heading-{{ $category->id }}" data-bs-parent="#categoriesAccordion">
+                                    <div class="accordion-body admin-categories-accordion-body">
+                                        @foreach ($category->subcategory as $subcategory)
+                                            <div class="admin-categories-subitem d-flex justify-content-between align-items-center ">
+                                                <span class="admin-categories-subcategory-name">{{ $subcategory->name }}</span>
+                                                <div class="admin-categories-action-buttons">
+                                                    <!-- Edit Button -->
+                                                    <button class="btn admin-categories-edit-btn" data-bs-toggle="modal" data-bs-target="#editCategoryModal-{{ $subcategory->id }}">
+                                                        <span class="material-icons-outlined admin-categories-edit-icon">edit</span>
+                                                    </button>
+                                                    <!-- Delete Button -->
+                                                    <button class="btn admin-categories-delete-btn" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $subcategory->id }}">
+                                                        <span class="material-icons-outlined admin-categories-delete-icon">delete</span>
+                                                    </button>
+                                                </div>
+                                            </div>
 
-        <!-- Delete Confirmation Modal -->
-        <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $child->id }}" tabindex="-1"
-             aria-labelledby="deleteModalLabel-{{ $child->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
-                <div class="modal-content admin-users-modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header admin-users-modal-header">
-                        <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
-                        <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $child->id }}">Delete Subcategory</h5>
-                        <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <!-- Delete Confirmation Modal -->
+                                            <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $subcategory->id }}" tabindex="-1"
+                                                 aria-labelledby="deleteModalLabel-{{ $subcategory->id }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+                                                    <div class="modal-content admin-users-modal-content">
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header admin-users-modal-header">
+                                                            <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
+                                                            <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $subcategory->id }}">Delete Subcategory</h5>
+                                                            <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <!-- Modal Body -->
+                                                        <div class="modal-body admin-users-modal-body">
+                                                            <p>Are you sure you want to delete the subcategory "{{ $subcategory->name }}"?</p>
+                                                        </div>
+
+                                                        <!-- Modal Footer -->
+                                                        <div class="modal-footer admin-users-modal-footer">
+                                                            <button type="button" class="btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                                            <form action="{{ route('admin.categories.destroy', $subcategory->id) }}" method="POST" style="display: inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn admin-users-delete-btn">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
 
-                    <!-- Modal Body -->
-                    <div class="modal-body admin-users-modal-body">
-                        <p>Are you sure you want to delete the subcategory "{{ $child->name }}"?</p>
-                    </div>
+                    <!-- Add Category Modal -->
+<div class="modal fade admin-users-delete-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+        <div class="modal-content admin-users-modal-content">
+            <form action="{{ route('admin.categories.store') }}" method="POST">
+                @csrf
+                <!-- Modal Header -->
+                <div class="modal-header admin-users-modal-header border-0">
+                    <span class="material-symbols-outlined modal-icon admin-users-modal-icon">add_circle</span>
+                    <h5 class="modal-title admin-users-modal-title" id="addCategoryModalLabel">Add Subcategory</h5>
+                    <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer admin-users-modal-footer">
-                        <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                        <form action="{{ route('admin.categories.destroy', $child->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
-                        </form>
+                <!-- Modal Body -->
+                <div class="modal-body admin-users-modal-body">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label admin-categories-form-label">Subcategory Name</label>
+                        <input type="text" name="name" id="categoryName" class="form-control admin-categories-form-input" placeholder="Enter subcategory name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="parentCategory" class="form-label admin-categories-form-label">Main Category</label>
+                        <select name="category_id" id="parentCategory" class="form-select admin-categories-form-select" required>
+                            <option value="" disabled selected>Select main category</option>
+                            @foreach ($categories as $mainCategory)
+                                <option value="{{ $mainCategory->id }}">{{ $mainCategory->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-            </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer admin-users-modal-footer">
+                    <button type="button" class="btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn admin-users-delete-btn">Add</button>
+                </div>
+            </form>
         </div>
-    @endforeach
+    </div>
 </div>
 
-            </div>
 
-            <!-- Add Category Modal -->
-            <div class="modal fade admin-categories-modal" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered admin-categories-modal-dialog">
-                    <div class="modal-content admin-categories-modal-content">
-                        <form action="{{ route('admin.categories.store') }}" method="POST">
-                            @csrf
-                            <div class="modal-header admin-categories-modal-header border-0">
-                                <h5 class="modal-title admin-categories-modal-title" id="addCategoryModalLabel">Add Category</h5>
-                                <button type="button" class="btn-close admin-categories-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <hr class="admin-categories-modal-divider">
-                            <div class="modal-body admin-categories-modal-body">
-                                <div class="mb-3">
-                                    <label for="categoryName" class="form-label admin-categories-form-label">Category Name</label>
-                                    <input type="text" name="name" id="categoryName" class="form-control admin-categories-form-input" placeholder="Enter category name" required>
+                    <!-- Edit Category Modals -->
+                    @foreach ($categories as $category)
+                        @foreach ($category->subcategory as $subcategory)
+                            <div class="modal fade admin-users-delete-modal" id="editCategoryModal-{{ $subcategory->id }}" tabindex="-1" aria-labelledby="editCategoryModalLabel-{{ $subcategory->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+                                    <div class="modal-content admin-users-modal-content">
+                                        <form action="{{ route('admin.categories.update', $subcategory->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH') 
+                                            <!-- Modal Header -->
+                                            <div class="modal-header admin-users-modal-header border-0">
+                                                <span class="material-symbols-outlined modal-icon admin-users-modal-icon">edit</span>
+                                                <h5 class="modal-title admin-users-modal-title" id="editCategoryModalLabel-{{ $subcategory->id }}">Edit Subcategory</h5>
+                                                <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+
+                                            <!-- Modal Body -->
+                                            <div class="modal-body admin-users-modal-body">
+                                                <div class="mb-3">
+                                                    <label for="editCategoryName-{{ $subcategory->id }}" class="form-label admin-categories-form-label">Category Name</label>
+                                                    <input type="text" name="name" id="editCategoryName-{{ $subcategory->id }}" class="form-control admin-categories-form-input" value="{{ $subcategory->name }}" required>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal Footer -->
+                                            <div class="modal-footer admin-users-modal-footer">
+                                                <button type="button" class="btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn admin-users-delete-btn">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="parentCategory" class="form-label admin-categories-form-label">Main Category</label>
-                                    <select name="parent_id" id="parentCategory" class="form-select admin-categories-form-select">
-                                        <option value="" disabled selected>Select main category</option>
-                                        @foreach ($mainCategories as $mainCategory)
-                                            <option value="{{ $mainCategory->id }}">{{ $mainCategory->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
-                            <div class="modal-footer admin-categories-modal-footer">
-                                <button type="button" class="btn admin-categories-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn admin-categories-submit-btn">Add</button>
-                            </div>
-                        </form>
-                    </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </div>
-
-            <!-- Edit Category Modals -->
-            @foreach ($categories as $category)
-                @foreach ($category->children as $child)
-                    <div class="modal fade admin-categories-modal" id="editCategoryModal-{{ $child->id }}" tabindex="-1" aria-labelledby="editCategoryModalLabel-{{ $child->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered admin-categories-modal-dialog">
-                            <div class="modal-content admin-categories-modal-content">
-                                <form action="{{ route('admin.categories.update', $child->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-header admin-categories-modal-header border-0">
-                                        <h5 class="modal-title admin-categories-modal-title" id="editCategoryModalLabel-{{ $child->id }}">Edit Category</h5>
-                                        <button type="button" class="btn-close admin-categories-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <hr class="admin-categories-modal-divider">
-                                    <div class="modal-body admin-categories-modal-body">
-                                        <div class="mb-3">
-                                            <label for="editCategoryName-{{ $child->id }}" class="form-label admin-categories-form-label">Category Name</label>
-                                            <input type="text" name="name" id="editCategoryName-{{ $child->id }}" class="form-control admin-categories-form-input" value="{{ $child->name }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer admin-categories-modal-footer">
-                                        <button type="button" class="btn admin-categories-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn admin-categories-submit-btn">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endforeach
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const categoryRows = document.querySelectorAll('.admin-categories-row');
+document.addEventListener('DOMContentLoaded', function () {
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    const footer = document.querySelector('footer'); // フッターを取得
+    const mainContent = document.querySelector('.main-content'); // メインコンテンツ
 
-        categoryRows.forEach(row => {
-            row.addEventListener('click', function (event) {
-                event.preventDefault(); // デフォルトの挙動を防ぐ（Bootstrapのデフォルト挙動と競合を避ける）
+    function updateFooterPosition() {
+        if (mainContent && footer) {
+            const contentHeight = mainContent.scrollHeight;
+            footer.style.marginTop = `${contentHeight - mainContent.offsetHeight}px`;
+        }
+    }
 
-                const icon = this.querySelector('.admin-categories-toggle-icon');
-                const targetId = this.getAttribute('data-bs-target');
-                const target = document.querySelector(targetId);
+    accordionButtons.forEach(button => {
+        const targetId = button.getAttribute('data-bs-target');
+        const target = document.querySelector(targetId);
+        const chevronDown = button.querySelector('.icon-chevron-down');
+        const chevronUp = button.querySelector('.icon-chevron-up');
 
-                // アコーディオンを閉じたり開いたりする
-                if (target.classList.contains('show')) {
-                    target.classList.remove('show'); // 閉じる
-                    icon.classList.remove('open');  // アイコンの回転を元に戻す
-                } else {
-                    target.classList.add('show');  // 開く
-                    icon.classList.add('open');    // アイコンを回転
-                }
-            });
+        // **🔹 初期アイコンの設定**
+        if (target.classList.contains('show')) {
+            chevronDown.style.display = 'none';
+            chevronUp.style.display = 'block';
+        } else {
+            chevronDown.style.display = 'block';
+            chevronUp.style.display = 'none';
+        }
+
+        // **🔹 Bootstrap の開閉イベントを利用してアイコンを変更 & フッターを即更新**
+        target.addEventListener('show.bs.collapse', function () {
+            chevronDown.style.display = 'none';
+            chevronUp.style.display = 'block';
+            updateFooterPosition(); // **アニメーション開始時に更新**
+        });
+
+        target.addEventListener('shown.bs.collapse', function () {
+            updateFooterPosition(); // **開いた後も確認**
+        });
+
+        target.addEventListener('hide.bs.collapse', function () {
+            chevronDown.style.display = 'block';
+            chevronUp.style.display = 'none';
+            updateFooterPosition(); // **アニメーション開始時に更新**
+        });
+
+        target.addEventListener('hidden.bs.collapse', function () {
+            updateFooterPosition(); // **閉じた後も確認**
+        });
+
+        // **🔹 クリック時にアコーディオンを開閉**
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const isOpen = target.classList.contains('show');
+
+            if (isOpen) {
+                bootstrap.Collapse.getOrCreateInstance(target).hide();
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                bootstrap.Collapse.getOrCreateInstance(target).show();
+                button.setAttribute('aria-expanded', 'true');
+            }
         });
     });
+
+    // **🔹 初回ロード時にフッターの位置を調整**
+    updateFooterPosition();
+});
+
+
+
 </script>
+
+
 
 @endsection
