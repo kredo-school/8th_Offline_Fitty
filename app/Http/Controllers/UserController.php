@@ -31,18 +31,7 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog($user_id, $date)
-    {
-        $user = $this->user->findOrFail($user_id);
-
-
-        // 例: 指定された日付の履歴を取得（適宜モデルの構造に合わせる）
-        $dailylog = Dailylog::where('user_id', $user_id)
-            ->whereDate('created_at', $date)
-            ->get();
-
-        return view('users.dailylog', compact('user', 'dailylog', 'date'));
-    }
+  
 
     public function showinputmeal()
     {

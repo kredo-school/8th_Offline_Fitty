@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Nutritionist;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\SubCategory;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -82,10 +84,23 @@ class DailyLogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DailyLog $dailyLog)
-    {
-        //
-    }
+
+     public function showdailylog($user_id, $date)
+     {
+         $user = $this->user->findOrFail($user_id);
+     
+         // 指定された日付の履歴を取得（単一レコードを取得）
+         $dailylogs = Dailylog::where('user_id', $user_id)
+             ->whereDate('input_date', $date)
+             ->get(); // get() ではなく firstOrFail() に変更し、単一のデータを取得
+     
+         // 栄養カテゴリとサブカテゴリを取得
+         $categories = Category::all(); // 例: 全カテゴリ取得
+         $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
+         //dd($dailylogs);
+     
+         return view('users.dailylog', compact('user', 'dailylogs', 'date', 'categories', 'sub_categories'));
+     }
 
     /**
      * Show the form for editing the specified resource.
