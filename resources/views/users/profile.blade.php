@@ -10,19 +10,24 @@
             @include('sidebar.user-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
 
-                @if(Auth::user()->role === 'A'){
-                    <form action="{{route('user.allocateNutritionist',$user->user_profile->nutritionist_id)}}" method="post">
+                @if(Auth::user()->role === 'A')
+                    <form action="{{route('admin.users.allocateNutritionist',$user->id)}}" method="post">
                         @csrf
                         @method('PATCH')
-                    <select name="nutritionist_id" id="allocate">
+                    <label for="allocate" class="fw-bold">Nutritionist In Charge</label>
+                    <br>
 
-                        <option value="{{ $user->user_profile->nutritionist_id}}" selected>{{$nutritionist_in_charge->first_name}}{{$nutritionist_in_charge->last_name}}</option>
+                    <select name="nutritionist_id" id="allocate" class="my-3 form-select-sm">
+
+                        <option value="{{ $allocated->id}}">{{$allocated->first_name}} {{$allocated->last_name}}</option>
                         @foreach($nutritionists as $nutritionist)
-                        <option value="{{ $nutritionist->user_id }}">{{ $nutritionist->first_name }}{{ $nutritionist->last_name }}</option>
+                        <option value="{{ $nutritionist->user_id }}">{{$nutritionist->first_name}} {{$nutritionist->last_name}}</option>
                     @endforeach
                     </select>
+
+                    <button class="btn btn-sm btn-success text-white">allocate</button>
                 </form>
-                }@endif
+                @endif
 
                 <!-- main content -->
                 <div class="profile-card profile-card-view">

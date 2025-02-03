@@ -30,12 +30,12 @@ class UsersController extends Controller
 
         // ユーザープロファイルを検索
         $query = $this->user_profile->query(); // user_profile にアクセスする
-        
+
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('email', 'like', '%' . $search . '%'); // 必要に応じて検索フィールドを追加
+                ->orWhere('email', 'like', '%' . $search . '%'); // 必要に応じて検索フィールドを追加
         }
-        
+
         // ページネーションで10件ずつ表示
         $user_profiles = $query->paginate(10);
 
@@ -51,5 +51,20 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
+    }
+
+    public function allocateNutritionist($user_id, Request $request)
+    {
+        $user = $this->user->findOrFail($user_id);
+
+        $request->validate([
+            'nutritionist_id' => 'required',
+        ]);
+
+        $profile = $user->profile;
+        $profile->nutritionist_id = $request->nutritionist_id;
+        $profile->save();
+
+        return redirect()->route('user.profile', $user->id);
     }
 }
