@@ -97,18 +97,18 @@ Route::group(['middleware' => 'auth'], function () {
     //acess chatgpt api
     Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
-    
+
     //mail test
     Route::get('/send-test-mail', [MailController::class, 'sendTestMail']);
 
-    
+
     Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
 
         Route::get('/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('inputmeal');
         Route::post('/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('inputmeal.store');
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
-        Route::patch('/{id}/allocateNutritionist', [App\Http\Controllers\UserController::class, 'allocateNutritionist'])->name('allocateNutritionist');
+
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
 
         //Users get advices
@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });
 
@@ -132,6 +132,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/index', [AdminController::class, 'index'])->name('index');
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+        Route::patch('/{id}/allocateNutritionist', [UsersController::class, 'allocateNutritionist'])->name('users.allocateNutritionist');
 
         Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
         Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
@@ -151,7 +152,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 });
-
 
 
 
