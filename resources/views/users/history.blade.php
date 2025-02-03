@@ -8,10 +8,10 @@
 <div class="row main-row">
     <!-- Header Section -->
     @include('sidebar.user-sidebar')
-    <div class="col-md-9 ms-sm-auto col-lg-10 user-history">
+    <div class="col-md-9 ms-sm-auto col-lg-10 user-history " style="min-height: calc(100vh - 190px);">
         <!-- main content -->
         <!-- FullCalendar Section -->
-        <div id="calendar" class="mt-4"></div>
+        <div id="calendar" class="h-100"></div>
     </div>
 </div>
 
