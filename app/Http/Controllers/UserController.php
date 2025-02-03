@@ -47,13 +47,16 @@ class UserController extends Controller
         $nutritionist_id = $user->profile->nutritionist_id;
 
 
-        $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
-        $allocated = $nutritionist_in_charge->nutritionistsProfile;
+        // エラーが出るため一時的にコメント
+        // $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+        // $allocated = $nutritionist_in_charge->nutritionistsProfile;
         // dd($allocated);
 
 // dd($nutritionist_in_charge);
 
-        return view('users.profile', compact('user','nutritionists','allocated'));
+        return view('users.profile', compact('user','nutritionists'
+        // ,'allocated'
+    ));
     }
 
 
