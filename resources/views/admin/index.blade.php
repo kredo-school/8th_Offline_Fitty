@@ -5,11 +5,11 @@
 @section('content')
 
     @include('sidebar.humburger')
-    <div class="d-flex justify-content-center admin-home">
+    <div class="row row-main">
+    @include('sidebar.admin-sidebar')
 
-        <div class="row">
-            @include('sidebar.admin-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10">
+    <div class="col-md-9 ms-sm-auto col-lg-10 admin-home">
+
                 <!-- main content -->
 
                     <div class="text-center">
