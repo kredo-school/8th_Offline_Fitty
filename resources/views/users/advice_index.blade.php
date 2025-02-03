@@ -1,94 +1,93 @@
 @extends('layouts.app')
 
-@section('title', 'advice index')
+@section('title', 'Advice List')
 
 @section('content')
 @include('sidebar.humburger')
-    <div class="container">
-      <div class="row">
-        @include('sidebar.user-sidebar') 
-        <div class="col-md-9 ms-sm-auto col-lg-10"> 
 
-          <div class="d-flex justify-content-center">
-              <table class="unique-table">
-                <thead class="">
+<div class="container">
+        @include('sidebar.user-sidebar') 
+        <div class="d-flex justify-content-center">
+          <table class="unique-table-2">
+              <thead>
                   <tr>
-                    <th></th>
-                    <th></th>
-                    <th>History of {{$user->name}} Advices</th>
-                    <th></th>
+                    <th colspan="4">History of {{$user->name}}</th>
                   </tr>
-                </thead>
-                <tbody>
+              </thead>
+              <tbody>
+                  @forelse ($adviceList as $advice)
                   <tr>
-                    <td><span class="material-symbols-outlined" title="is_read">mark_email_read</span></td>
-                    <td>
-                      <i class="material-icons star-ico" title="favorite" style="color: yellow;">star</i></td>
-                    <td><a href="page8.html">2024/02/16</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 4) selected @endif"
-                      data-value="4">sentiment_satisfied</span></td>
+                    <td style="width: 10%;">
+                      @if ($advice->is_read == 1)
+                        <form action="{{ route('user.advice.unread',['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm shadow-none p-0">
+                          <i class="material-symbols-outlined" title="Read">mark_email_read</i>
+                        </button>
+                        </form>
+                      @elseif($advice->is_read == 0)
+                        <form action="{{ route('user.advice.read',['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="btn btn-sm shadow-none p-0">
+                          <i class="material-symbols-outlined" title="Read">mark_email_unread</i>
+                        </button>
+                      @endif
+                    </td>
+
+                    <td  style="width: 10%;">
+                      @if ($advice->is_liked == 1)
+                      <form action="{{ route('user.advice.unlike', ['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                          @csrf
+                          @method('PATCH')
+                          <button class="btn btn-sm shadow-none p-0">
+                              <i class="material-icons" style="color: yellow;" title="Liked">star</i>
+                          </button>
+                      </form>
+                      @elseif ($advice->is_liked == 0)
+                          <form action="{{ route('user.advice.like', ['id' => $user->id, 'advice' => $advice->id]) }}" method="post">
+                              @csrf
+                              @method('PATCH')
+                              <button class="btn btn-sm shadow-none p-0">
+                                  <i class="material-icons" title="Not Liked">star_border</i>
+                              </button>
+                          </form>
+                      @endif
+                    </td>
+                    <td style="width: 40%;">
+                      @if ($advice->created_at)
+                          <a href="{{ route('user.advice.showAdvice', ['id' => $user->id, 'date' => $advice->created_at->format('Y-m-d')]) }}" class="d-flex align-items-center">
+                              <span class="me-2">{{ $advice->created_at->format('Y/m/d') }}
+                              </span>
+                          </a>
+                          @else
+                          <span class="text-muted">No Date</span> 
+                           @endif
+                    </td>
+                    <td style="width: 10%;">
+                            
+                              <!-- Rate Face Here -->
+                              @if ($advice->overall == 5)
+                                  <span class="material-symbols-outlined history-icon">sentiment_excited</span>
+                              @elseif ($advice->overall == 4)
+                                  <span class="material-symbols-outlined history-icon">sentiment_satisfied</span>
+                              @elseif ($advice->overall == 3)
+                                  <span class="material-symbols-outlined history-icon">sentiment_content</span>
+                              @elseif ($advice->overall == 2)
+                                  <span class="material-symbols-outlined history-icon">sentiment_neutral</span>
+                              @elseif ($advice->overall == 1)
+                                  <span class="material-symbols-outlined history-icon">sentiment_sad</span>
+                              @endif
+                    </td>
                   </tr>
+                  @empty
                   <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page7.html">2024/02/09</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
+                      <td>No previous advice yet</td>
                   </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page6.html">2024/02/02</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page5.html">2024/01/26</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page4.html">2024/01/19</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page3.html">2024/01/12</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page2.html">2024/01/05</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                  <tr>
-                    <td><span class="material-symbols-outlined" title="is_unread">mark_email_unread</span></td>
-                    <td><span class="material-symbols-outlined" title="not_favorite">star</span></td>
-                    <td><a href="page1.html">2023/12/29</a></td>
-                    <td><span
-                      class="material-symbols-outlined @if (old('overall') == 5) selected @endif"
-                      data-value="5">sentiment_excited</span></td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
+                  @endforelse
+              </tbody>
+          </table>
         </div>
-    </div>
-  </div>
+
 @endsection

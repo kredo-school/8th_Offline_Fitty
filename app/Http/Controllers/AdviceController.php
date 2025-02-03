@@ -11,6 +11,7 @@ use App\Models\DailyLog;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -168,6 +169,7 @@ class AdviceController extends Controller
         }
 
         $endDate = Carbon::parse($adviceDate)->subDay();
+        // dd($endDate);
         $startDate = $endDate->copy()->subDays(6);
         $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
@@ -181,6 +183,7 @@ class AdviceController extends Controller
         }
 
         $weight = $dailyLogs->first()->weight;
+        // dd($weight);
         $recommendedValues = [
             "Carbohydrates" => $weight * 5 * 7,
             "Fats" => $weight * 1.0 * 7,
@@ -211,7 +214,7 @@ class AdviceController extends Controller
             $actual = $actualValues[$key] ?? 0;
             $satisfactionRates[$key] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
-
+        // dd($user_profile);
 
         return [
             'satisfactionRates' => $satisfactionRates,
@@ -407,41 +410,35 @@ class AdviceController extends Controller
     public function index($user_id)
     {
         // 指定されたユーザーIDに関連するアドバイスを取得
-        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+        $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        return view('users.advice_index', compact('user_profile', 'adviceList'));
+        return view('users.advice_index', compact('user', 'adviceList'));
     }
 
 
-    public function show($id, $adviceId)
+    public function showAdvice($id, $date)
     {
         $advice = $this->advice
-            ->where('id', $adviceId)
-            ->where('user_id', $id)
+            ->where('id', $id)
             ->firstOrFail();
 
+        $user_profile = $advice->user->where('id', $advice->user_id)->first();
+        // dd($user_profile);
 
+        $dailylog = $this->dailylog->where('user_id', $advice->user_id)->first();
+        // dd($dailylog);
 
-        $user_profile = $this->user_profile->where('user_id',$id);
+        // showWeightメソッドを呼び出してグラフ用データを取得
+        $weightData = $this->showWeight($advice->user_id, $date);
 
-        $dailylog = $this->dailylog->where('user_id', $id)->first();
-
-
-        // リクエストの日付でアドバイスを取得
-        $adviceDate = $advice->created_at->input('date');
+        $radarChartData = $this->showpfcvm($advice->user_id, $date);
 
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
         $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
         $categoryData = [];
-
-
-        // showWeightメソッドを呼び出してグラフ用データを取得
-        $weightData = $this->showWeight($id, $adviceDate);
-
-        $radarChartData = $this->showpfcvm($id, $adviceDate);
 
 
         return view('users.advice_show', compact(
@@ -451,18 +448,28 @@ class AdviceController extends Controller
             'message',
             'dailylog',
             'weightData',
-            'user_profile'
+            'user_profile',
+
         ));
     }
 
-    public function showWeight($user_id, $adviceDate)
+    public function showWeight($id, $date)
     {
+        // dd($adviceDate);
 
-        $endDate = Carbon::parse($adviceDate)->subDay();
+        $endDate = Carbon::parse($date)->subDay();
+        // dd($endDate);
+
+        // dd($endDate);
+
         $startDate = $endDate->copy()->subDays(6);
 
+
+
+        // dd($startDate);
+
         // データを取得
-        $dailyLogs = DailyLog::where('user_id', $user_id)
+        $dailyLogs = DailyLog::where('user_id', $id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->orderBy('input_date', 'asc')
             ->get();
@@ -472,7 +479,7 @@ class AdviceController extends Controller
         $weights = [];
 
         foreach ($dailyLogs as $log) {
-            $dates[] = $log->input_date->format('Y-m-d');
+            $dates[] = Carbon::parse($log->input_date)->format('Y-m-d');
             $weights[] = $log->weight;
         }
 
@@ -485,7 +492,60 @@ class AdviceController extends Controller
     }
 
 
+    public function readToggle($id, $adviceId)
+    {
+        \Log::info("readToggle method called with id: {$id}, adviceId: {$adviceId}");
+
+        $advice = Advice::findOrFail($adviceId);
+
+        $advice->is_read = 1;
+        $advice->save();
+
+        \Log::info("Advice read status changed", ['advice_id' => $adviceId, 'new_status' => $advice->is_read]);
+
+        return redirect()->back()->with('success', 'Read status updated');
+    }
+
+    public function unread($id, $adviceId)
+    {
+        \Log::info("unread method called with id: {$id}, adviceId: {$adviceId}");
+
+        $advice = Advice::findOrFail($adviceId);
+
+        $advice->is_read = 0;
+        $advice->save();
+
+        \Log::info("Advice read status removed", ['advice_id' => $adviceId]);
+
+        return redirect()->back()->with('success', 'Read status removed');
+    }
+
+    public function likeToggle($id, $adviceId)
+    {
+        \Log::info("likeToggle method called with id: {$id}, adviceId: {$adviceId}");
+
+        $advice = Advice::findOrFail($adviceId);
+
+        $advice->is_liked = 1;
+        $advice->save();
+
+        \Log::info("Advice like status changed", ['advice_id' => $adviceId, 'new_status' => $advice->is_liked]);
+
+        return redirect()->back()->with('success', 'Like status updated');
+    }
+
+    public function unlike($id, $adviceId)
+    {
+        \Log::info("unlike method called with id: {$id}, adviceId: {$adviceId}");
+
+        $advice = Advice::findOrFail($adviceId);
+
+        $advice->is_liked = 0;
+        $advice->save();
+
+        \Log::info("Advice like status removed", ['advice_id' => $adviceId]);
+
+        return redirect()->back()->with('success', 'Like status removed');
+    }
 
 }
-
-
