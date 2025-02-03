@@ -10,7 +10,7 @@
 <div class="row main-row">
     @include('sidebar.user-sidebar')
 
-    <div class="col-md-9 ms-sm-auto col-lg-10">
+    <div class="col-md-9 ms-sm-auto col-lg-10" style="min-height: calc(100vh - 190px);">
         <div class="user-dailylog">
 
             <!-- Header Section -->
@@ -35,30 +35,30 @@
                         <div class="accordion" id="accordion{{ $mealType }}">
 
                             @foreach ($categories as $category)
-                                @if (isset($nutritions[$category->name])) 
+                                @if (isset($nutritions[$category->name]))
                                     @php
                                         $categoryData = $nutritions[$category->name];
                                         $subCategoryData = $nutritions["Subcategories"];
                                     @endphp
-                                    
+
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading{{ $mealType }}{{ $category->id }}">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse{{ $mealType }}{{ $category->id }}" 
-                                                aria-expanded="true" 
+                                                data-bs-target="#collapse{{ $mealType }}{{ $category->id }}"
+                                                aria-expanded="true"
                                                 aria-controls="collapse{{ $mealType }}{{ $category->id }}">
                                                 {{ $category->name }}: {{ $categoryData  }}
                                             </button>
                                         </h2>
                                         <div id="collapse{{ $mealType }}{{ $category->id }}" class="accordion-collapse collapse"
-                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}" 
+                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}"
                                             data-bs-parent="#accordion{{ $mealType }}">
                                             <div class="accordion-body">
                                                 <ul>
                                                     @foreach ($category->subcategory as $sub_category)
                                                         @if (isset($subCategoryData[$sub_category->name]))
                                                             <li>
-                                                                {{ $sub_category->name }}: 
+                                                                {{ $sub_category->name }}:
                                                                 {{ $subCategoryData[$sub_category->name] }}
                                                             </li>
                                                         @endif
