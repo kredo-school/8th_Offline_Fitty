@@ -22,25 +22,25 @@
                             <div class="col-md-5 col-sm-6 d-flex justify-content-end">
                                 <a href="{{ route('admin.users.index') }}" class="card">
                                     <span class="material-symbols-outlined">person</span>
-                                    <span>Users</span>
+                                    <span>Users List</span>
                                 </a>
                             </div>
                             <div class="col-md-5 col-sm-6 d-flex justify-content-start">
                                 <a href="{{ route('admin.nutritionists.index') }}" class="card">
                                     <span class="material-symbols-outlined">spa</span>
-                                    <span>Nutritionists</span>
+                                    <span>Nutritionists List</span>
                                 </a>
                             </div>
                             <div class="col-md-5 col-sm-6 d-flex justify-content-end">
                                 <a href="{{ route('admin.categories.index') }}" class="card">
                                     <span class="material-symbols-outlined">category</span>
-                                    <span>Categories</span>
+                                    <span>Categories List</span>
                                 </a>
                             </div>
                             <div class="col-md-5 col-sm-6 d-flex justify-content-start">
                                 <a href="{{ route('admin.inquiries.index') }}" class="card orange">
                                     <span class="material-symbols-outlined">mail</span>
-                                    <span>Inquiries</span>
+                                    <span>Inquiries List</span>
                                 </a>
                             </div>
                         </div>

@@ -9,9 +9,10 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\InquiriesController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\NutritionistsController;
-use App\Http\Controllers\Admin\CategoriesController;
+
 
 use App\Http\Controllers\ChatGptController;
 
@@ -135,8 +136,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
         Route::get('/inquiries', [InquiriesController::class, 'index'])->name('inquiries.index'); // 一覧表示
-        Route::delete('/inquiries/{id}', [InquiriesController::class, 'destroy'])->name('inquiries.destroy'); // 削除
-
+        Route::delete('/inquiries/{id}/delete', [InquiriesController::class, 'destroy'])->name('inquiries.destroy'); // 削除
+        Route::get('inquiries/{id}', [InquiriesController::class, 'show'])->name('inquiries.show');
+        Route::patch('inquiries/{id}', [InquiriesController::class, 'update'])->name('inquiries.update');
     });
 
 

@@ -55,7 +55,7 @@
                                     <tr class="admin-users-row">
                                         <td><a href="#" class="admin-users-id-link">{{ $nutritionist_profile->id }}</a></td>
                                         <td>{{ $nutritionist_profile->first_name }} {{ $nutritionist_profile->last_name }}</td>
-                                        <td>{{ $nutritionist_profile->last_login ? $nutritionist_profile->last_login->format('m/d/Y') : 'N/A' }}</td>
+                                        <td>{{ $nutritionist_profile->updated_at ? $nutritionist_profile->updated_at->format('m/d/Y') : 'N/A' }}</td>
                                         <td>
                                             @if ($nutritionist_profile->is_active)
                                                 <span class="status-badge status-active admin-users-status">
@@ -93,33 +93,34 @@
 
     <!-- Delete Confirmation Modal -->
     @foreach ($nutritionists_profiles as $nutritionist_profile)
-        <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $nutritionist_profile->id }}" tabindex="-1"
-             aria-labelledby="deleteModalLabel-{{ $nutritionist_profile->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
-                <div class="modal-content admin-users-modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header admin-users-modal-header">
-                        <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
-                        <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $nutritionist_profile->id }}">Delete Nutritionist</h5>
-                        <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $nutritionist_profile->id }}" tabindex="-1"
+         aria-labelledby="deleteModalLabel-{{ $nutritionist_profile->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+            <div class="modal-content admin-users-modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header admin-users-modal-header pb-2">
+                    <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
+                    <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $nutritionist_profile->id }}">Delete Nutritionist</h5>
+                    <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                    <!-- Modal Body -->
-                    <div class="modal-body admin-users-modal-body">
-                        <p>Are you sure you want to delete this nutritionist?</p>
-                    </div>
+                <!-- Modal Body -->
+                <div class="modal-body admin-users-modal-body">
+                    <p>Are you sure you want to delete this nutritionist?</p>
+                </div>
 
-                    <!-- Modal Footer -->
-                    <div class="modal-footer admin-users-modal-footer">
-                        <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                        <form action="{{ route('admin.nutritionists.destroy', $nutritionist_profile->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
-                        </form>
-                    </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer admin-users-modal-footer">
+                    <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{ route('admin.nutritionists.destroy', $nutritionist_profile->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
-    @endforeach
+    </div>
+@endforeach
+
 @endsection

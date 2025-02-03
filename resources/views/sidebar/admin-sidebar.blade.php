@@ -8,13 +8,30 @@
             </a>
         </li>
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.users'}}" class="d-flex align-items-center w-100">
+            <a href="{{route('admin.users.index')}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">person</span>
                 <span class="title">Users List</span>
             </a>
         </li>
-        
-
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('admin.nutritionists.index')}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">spa</span>
+                <span class="title">Nutritionists List</span>
+            </a>
+        </li>
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('admin.categories.index')}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">category</span>
+                <span class="title">Categories List</span>
+            </a>
+        </li>
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('admin.inquiries.index')}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">mail</span>
+                <span class="title">Inquires List</span>
+            </a>
+        </li>
+        <hr style="border-color: black; border-width: 1px;">
         <li class="menu-item d-flex align-items-center py-2">
             <a href="#" class="d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <span class="material-icons side-material-icons me-2">logout</span>
@@ -61,49 +78,3 @@
 
 
 
-
-
-{{-- 
-<div id="sidebar" class="sidemenu col-md-3 col-lg-2">
-    <a href="#" class="menu-item">
-        <span class="material-icons">home</span> Top
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">person</span> Users
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">spa</span> Nutritionists
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">category</span> Categories
-    </a>
-    <a href="#" class="menu-item active">
-        <span class="material-icons">mail</span> Inquires
-    </a>
-    <hr style="border-color: black; border-width: 1px;">
-    <a href="#" class="menu-item">
-        <span class="material-icons">logout</span> Logout
-    </a>
-</div>
-
-<script>
-        // Handle active menu state
-        document.querySelectorAll('.menu-item').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-
-
-        // サイドバーとハンバーガーボタンのトグル機能
-        const sidebar = document.getElementById('sidebar');
-        const hamburgerButton = document.getElementById('hamburgerButton');
-
-        // ハンバーガーボタンをクリックしたらサイドバーを開閉
-        hamburgerButton.addEventListener('click', () => {
-            sidebar.classList.toggle('show');
-        });
-
-    </script> --}}

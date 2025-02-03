@@ -8,6 +8,8 @@ class SubCategory extends Model
 {
     protected $fillable = [
         'name',
+        'requirement',
+        'category_id', 
         // 他に許可したいフィールドがあればここに追加
     ];
     public function category()
