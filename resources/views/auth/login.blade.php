@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px); overflow: hidden">
-    <div class="container w-50 login-container" style="max-width: 500px;">
+    <div class=" login-container" style="width:40%;">
         <div class="card card-login" style="background: url('{{ asset('images/healthy_food.jpg') }}') no-repeat center center; background-size: cover;">
             <!-- カードの上に文字を配置 -->
             <div class="card-header card-header-login text-center">

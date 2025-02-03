@@ -11,6 +11,7 @@ use App\Models\DailyLog;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -410,17 +411,16 @@ class AdviceController extends Controller
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        return view('users.advice_index', compact('user', 'adviceList'));
+        return view('users.advice_index', compact('user_profile', 'adviceList'));
     }
 
 
-    public function show($id, $adviceId)
+    public function showAdvice($id,$date)
     {
-        $advice = $this->advice
-            ->where('id', $adviceId)
-            ->where('user_id', $id)
-            ->firstOrFail();
-
+        $user = User::findOrFail($id);
+        $advice = Advice::where('user_id', $id)
+                    ->whereDate('created_at', $date)
+                    ->firstOrFail();
         $user_profile = $this->user_profile->findOrFail($id);
 
         $dailylog = $this->dailylog->where('user_id', $id)->first();
@@ -482,8 +482,61 @@ class AdviceController extends Controller
         ];
     }
 
+        
+        public function readToggle($id, $adviceId)
+        {
+            \Log::info("readToggle method called with id: {$id}, adviceId: {$adviceId}");
 
+            $advice = Advice::findOrFail($adviceId);
 
-}
+            $advice->is_read = 1;
+            $advice->save();
 
+            \Log::info("Advice read status changed", ['advice_id' => $adviceId, 'new_status' => $advice->is_read]);
 
+            return redirect()->back()->with('success', 'Read status updated');
+        }
+
+        public function unread($id, $adviceId)
+        {
+            \Log::info("unread method called with id: {$id}, adviceId: {$adviceId}");
+
+            $advice = Advice::findOrFail($adviceId);
+
+            $advice->is_read = 0;
+            $advice->save();
+
+            \Log::info("Advice read status removed", ['advice_id' => $adviceId]);
+
+            return redirect()->back()->with('success', 'Read status removed');
+        }
+
+        public function likeToggle($id, $adviceId)
+        {
+            \Log::info("likeToggle method called with id: {$id}, adviceId: {$adviceId}");
+
+            $advice = Advice::findOrFail($adviceId);
+
+            $advice->is_liked = 1;
+            $advice->save();
+
+            \Log::info("Advice like status changed", ['advice_id' => $adviceId, 'new_status' => $advice->is_liked]);
+
+            return redirect()->back()->with('success', 'Like status updated');
+        }
+
+        public function unlike($id, $adviceId)
+        {
+            \Log::info("unlike method called with id: {$id}, adviceId: {$adviceId}");
+
+            $advice = Advice::findOrFail($adviceId);
+
+            $advice->is_liked = 0;
+            $advice->save();
+            
+            \Log::info("Advice like status removed", ['advice_id' => $adviceId]);
+
+            return redirect()->back()->with('success', 'Like status removed');
+        }
+
+    }

@@ -298,6 +298,7 @@ footer {
   position: sticky;
 }
 
+
 .footer-p-1 {
 margin: 0; /* マージンをリセット */
 font-size: 14px;
@@ -414,7 +415,7 @@ background-color: #087722; /* ホバー時の色 */
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
-    float: left; /* 右側に配置 */
+    float: right; /* 右側に配置 */
     height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
 
 }
@@ -608,6 +609,49 @@ background-color: #087722; /* ホバー時の色 */
 }
 
 
+/* テーブルのスタイル */
+.unique-table-2 {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'lora', sans-serif;
+}
+
+.unique-table-2 th, .unique-table-2 td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.unique-table-2 th {
+  background-color: #4DAF4A;
+  color: white;
+  font-weight: bold;
+}
+
+.unique-table-2 td {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+/* リンクのスタイル */
+
+.unique-table-2 td a {
+  /* display: flex; アイコンと日付を横並びに */
+  align-items: center; /* 縦方向の中央揃え */
+  text-decoration: none; /* リンクの下線を削除 */
+  color: #333; /* 必要に応じてテキストの色を変更 */
+  justify-content: center; /* 横方向の中央揃え */
+
+}
+
+.unique-table-2 a:hover {
+  color: #FFA965;
+}
+
+/* 行にホバー効果 */
+.unique-table-2 tr:hover {
+  background-color: #f1f1f1;
+}
 
 
 .nutri-material-symbols-outlined.selected {
@@ -760,14 +804,22 @@ border-radius: 5px;
 /*　Edit Profile用*/
 /* 共通カードスタイル */
 /* UserProfile用 */
+.profile-main {
+    display: flex;
+    justify-content: center; /* 水平方向の中央配置 */
+    align-items: center; /* 垂直方向の中央配置 */
+    height: 100%; /* 全体の高さを指定 */
+  }
+
+
 .profile-card {
   background-color: white;
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
   margin: auto;
   margin-top: 0px;
+  width: 60%;
 }
 
 /* 編集用カード */
@@ -775,7 +827,7 @@ border-radius: 5px;
 
 /* 表示用カード */
 .profile-card-view {
-  justify-content: center;
+  margin: 0;
 }
 
 /* 表示用カード */

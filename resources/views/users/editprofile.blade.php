@@ -4,262 +4,230 @@
 
 @section('content')
 
-    @include('sidebar.humburger')
-    <div class="container user-dailylog">
-        <div class="row">
-            @include('sidebar.user-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
-                <!-- main content -->
-                <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PATCH')
+@include('sidebar.humburger')
 
-                    <div class="profile-card profile-card-edit">
+<div class="row row-main">
+    @include('sidebar.user-sidebar')
 
-                        <div class="profile-header profile-header-edit text-center">
-                            <!-- Avatar -->
-                            <div class="avatar-wrapper">
-                                @if ($user->avatar)
-                                    <img src="{{ $user->avatar }}" alt="Profile Picture"
-                                        class="profile-picture rounded-circle mb-3"
-                                        style="width: 120px; height: 120px; object-fit: cover;">
-                                @else
-                                    <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture"
-                                        class="profile-picture rounded-circle mb-3"
-                                        style="width: 120px; height: 120px; object-fit: cover;">
-                                @endif
-                                <input type="file" name="avatar" id="avatar" class=" mt-2"
-                                    style="max-width: 300px; margin: 0 auto;">
-                            </div>
+    <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
+        <!-- main content -->
+        <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data" style="width: 60%;">
+            @csrf
+            @method('PATCH')
 
-                            <!-- Name -->
-                            <div class="form-group mt-4">
-                                <label for="name" class="form-label fw-bold">User Name</label>
-                                <input type="text" name="name" id="name" value="{{ $user->name }}"
-                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
-                                    placeholder="Enter your name">
-                            </div>
+            <div class="profile-card profile-card-edit">
 
-                            <!-- Email -->
-                            <div class="form-group mt-4">
-                                <label for="email" class="form-label fw-bold">Email</label>
-                                <input type="email" name="email" id="email" value="{{ $user->email }}"
-                                    class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
-                                    placeholder="Enter your email">
-                            </div>
+                <div class="profile-header profile-header-edit text-center">
+                    <!-- Avatar -->
+                    <div class="avatar-wrapper">
+                        @if ($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="Profile Picture"
+                                class="profile-picture rounded-circle mb-3"
+                                style="width: 120px; height: 120px; object-fit: cover;">
+                        @else
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture"
+                                class="profile-picture rounded-circle mb-3"
+                                style="width: 120px; height: 120px; object-fit: cover;">
+                        @endif
+                        <input type="file" name="avatar" id="avatar" class="mt-2"
+                               style="max-width: 300px; margin: 0 auto;">
+                    </div>
+
+                    <!-- Name -->
+                    <div class="form-group mt-4">
+                        <label for="name" class="form-label fw-bold">User Name</label>
+                        <input type="text" name="name" id="name" value="{{ $user->name }}"
+                               class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                               placeholder="Enter your name">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group mt-4">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" name="email" id="email" value="{{ $user->email }}"
+                               class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                               placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div class="details details-edit">
+                    <div class="row">
+                        {{-- First Name --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">First Name</span>
+                            <input type="text" name="first_name" id="first_name" value="{{ $user->profile->first_name }}"
+                                   class="form-control">
                         </div>
 
-
-                        <div class="details details-edit">
-                            <div class="row">
-
-                                {{-- First Name --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">First Name</span>                                
-                                    <input type="text" name="first_name" id="first_name" value="{{ $user->profile->first_name }}"
-                                        class="form-control">
-                                </div>
-
-                                {{-- Last Name --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Last Name</span>                                
-                                    <input type="text" name="last_name" id="last_name" value="{{ $user->profile->last_name }}"
-                                        class="form-control">
-                                </div>
-
-                                
-                            </div>
-                            
-                            <div class="row">
-                                {{-- Gender --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Gender</span>
-                                    <select name="gender" class="form-select form-select-edit">
-                                        <option value="male" {{ $user->profile->gender == 'male' ? 'selected' : '' }}>Male
-                                        </option>
-                                        <option value="female" {{ $user->profile->gender == 'female' ? 'selected' : '' }}>
-                                            Female
-                                        </option>
-                                        <option value="non-binary" {{ $user->profile->gender == 'non-binary' ? 'selected' : '' }}>Non-binary
-                                        </option>
-                                        <option value="prefer_not_to_say" {{ $user->profile->gender == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer-not-to-say
-                                        </option>
-                                        <option value="other" {{ $user->profile->gender == 'other' ? 'selected' : '' }}>
-                                            Other
-                                        </option>
-                                    </select>
-                                </div>
-
-                                {{-- Birthday --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Birthday</span>
-                                    <input type="date" name="birthday" value="{{ $user->profile->birthday }}"
-                                        class="detail-input detail-input-edit">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                {{-- Height --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Height(cm)</span>
-                                    <input type="number" name="height" value="{{ $user->profile->height }}"
-                                        class="detail-input detail-input-edit">
-                                </div>
-                                {{-- Activity Level --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Activity Level</span>
-                                    <select name="activity_level" class="form-select form-select-edit">
-                                        <option value="1" title="Frequency:Less than once per week. You rarely engage in physical activities. Examples include occasional walks or light stretching. This level is suitable if you're just starting or have a sedentary lifestyle." {{ $user->profile->activity_level == 1 ? 'selected' : '' }}>1
-                                            - Low
-                                            Activity</option>
-                                        <option value="2" title="Frequency:2-3 times per week. You exercise moderately on a weekly basis. Activities might include jogging, casual sports, or gym sessions. This level is ideal for maintaining general fitness." {{ $user->profile->activity_level == 2 ? 'selected' : '' }}>
-                                            2 -
-                                            Moderate
-                                            Activity</option>
-                                        <option value="3" title="Frequency:4+ times per week. You are highly active and exercise consistently. This may include structured workout plans, intensive sports, or frequent gym visits. This level reflects a well-established fitness routine."{{ $user->profile->activity_level == 3 ? 'selected' : '' }}>
-                                            3 - High
-                                            Activity</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                {{-- Health Conditions --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Health Conditions</span>
-                                    @php
-                                        $healthConditions = json_decode($user->profile->health_conditions ?? '[]', true);
-                                        $healthOptions = [  'none' => 'None',
-                                                            'pregnant' => 'Pregnant',
-                                                            'breastfeeding' => 'Breastfeeding',
-                                                            'chronic_disease' => 'Chronic Disease',
-                                                            'mental_health' => 'Mental Health Issues',
-                                                            'other' => 'Other (please specify in comments'
-                                                        ];
-                                    @endphp
-                                    <div>
-                                        @foreach ($healthOptions as $key => $label)
-                                            <div class="form-check mb-2">
-                                                <input type="checkbox" 
-                                                    name="health_conditions[]" 
-                                                    id="health_condition_{{ $key }}" 
-                                                    value="{{ $key }}" 
-                                                    class="form-check-input"
-                                                    {{ is_array($healthConditions) && in_array($key, $healthConditions) ? 'checked' : '' }}>
-                                                <label for="health_condition_{{ $key }}" class="form-check-label">
-                                                    {{ $label }}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                        
-                                {{-- Dietary Preferences --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Health Conditions</span>
-                                    @php
-                                        $dietaryPreferences = json_decode($user->profile->dietary_preferences ?? '[]', true);
-                                        $dietaryOptions = [
-                                            'no_restrictions' => 'No Dietary Restrictions',
-                                            'lactose_free' => 'Lactose-Free',
-                                            'nut_free' => 'Nut-Free',
-                                            'dairy_free' => 'Dairy-Free',
-                                            'soy_free' => 'Soy-Free',
-                                            'gluten_free' => 'Gluten-Free',
-                                            'vegetarian' => 'Vegetarian',
-                                            'vegan' => 'Vegan',
-                                            'pescatarian' => 'Pescatarian',
-                                            'low_carb' => 'Low Carb',
-                                            'keto' => 'Ketogenic',
-                                            'paleo' => 'Paleo',                                                'intermittent_fasting' => 'Intermittent Fasting',
-                                            'organic' => 'Organic Only',
-                                            'locavore' => 'Locavore',
-                                            'flexitarian' => 'Flexitarian',
-                                            'other' => 'Other',
-                                        ];
-                                    @endphp
-                                    <div id="dietary_preferences">
-                                        @foreach ($dietaryOptions as $key => $label)
-                                            <div class="form-check">
-                                                <input class="form-check-input" 
-                                                       type="checkbox" 
-                                                       id="dietary_preference_{{ $key }}" 
-                                                       name="dietary_preferences[]" 
-                                                       value="{{ $key }}" 
-                                                       {{ is_array($dietaryPreferences) && in_array($key,$dietaryPreferences) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="dietary_preference_{{ $key }}">
-                                                    {{ $label }}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>   
-
-                            <div class="row">
-
-                                {{-- Food Allergies --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Food Allergies</span>                                
-                                    <input type="text" name="food_allergies" id="food_allergies" value="{{ $user->profile->food_allergies }}"
-                                        class="form-control">
-                                </div>
-
-                                {{-- Goals --}}
-                                <div class="detail-item detail-item-edit col-6">
-                                    <span class="detail-label detail-label-edit">Goals</span>                                
-                                    <input type="text" name="goals" id="goals" value="{{ $user->profile->goals }}"
-                                        class="form-control">
-                                </div>
-
-                                
-                            </div>
-
-                        </div>
-                        <div class="edit-button edit-button-edit">
-                            <button type="submit" class="save-button save-button-edit">Save Changes</button>
-                        </div>
-                        <div class="edit-button edit-button-edit mt-2 text-end">
-                            <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal">Change
-                                Password</a>
+                        {{-- Last Name --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Last Name</span>
+                            <input type="text" name="last_name" id="last_name" value="{{ $user->profile->last_name }}"
+                                   class="form-control">
                         </div>
                     </div>
+
+                    <div class="row">
+                        {{-- Gender --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Gender</span>
+                            <select name="gender" class="form-select form-select-edit">
+                                <option value="male" {{ $user->profile->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ $user->profile->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                <option value="non-binary" {{ $user->profile->gender == 'non-binary' ? 'selected' : '' }}>Non-binary</option>
+                                <option value="prefer_not_to_say" {{ $user->profile->gender == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer-not-to-say</option>
+                                <option value="other" {{ $user->profile->gender == 'other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                        </div>
+
+                        {{-- Birthday --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Birthday</span>
+                            <input type="date" name="birthday" value="{{ $user->profile->birthday }}"
+                                   class="detail-input detail-input-edit">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {{-- Height --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Height(cm)</span>
+                            <input type="number" name="height" value="{{ $user->profile->height }}"
+                                   class="detail-input detail-input-edit">
+                        </div>
+
+                        {{-- Activity Level --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Activity Level</span>
+                            <select name="activity_level" class="form-select form-select-edit">
+                                <option value="1" title="Low activity" {{ $user->profile->activity_level == 1 ? 'selected' : '' }}>1 - Low Activity</option>
+                                <option value="2" title="Moderate activity" {{ $user->profile->activity_level == 2 ? 'selected' : '' }}>2 - Moderate Activity</option>
+                                <option value="3" title="High activity" {{ $user->profile->activity_level == 3 ? 'selected' : '' }}>3 - High Activity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {{-- Health Conditions --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Health Conditions</span>
+                            @php
+                                $healthConditions = json_decode($user->profile->health_conditions ?? '[]', true);
+                                $healthOptions = [
+                                    'none' => 'None',
+                                    'pregnant' => 'Pregnant',
+                                    'breastfeeding' => 'Breastfeeding',
+                                    'chronic_disease' => 'Chronic Disease',
+                                    'mental_health' => 'Mental Health Issues',
+                                    'other' => 'Other (please specify in comments)'
+                                ];
+                            @endphp
+                            <div>
+                                @foreach ($healthOptions as $key => $label)
+                                    <div class="form-check mb-2">
+                                        <input type="checkbox" name="health_conditions[]" id="health_condition_{{ $key }}" value="{{ $key }}"
+                                               class="form-check-input" {{ is_array($healthConditions) && in_array($key, $healthConditions) ? 'checked' : '' }}>
+                                        <label for="health_condition_{{ $key }}" class="form-check-label">{{ $label }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        {{-- Dietary Preferences --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Dietary Preferences</span>
+                            @php
+                                $dietaryPreferences = json_decode($user->profile->dietary_preferences ?? '[]', true);
+                                $dietaryOptions = [
+                                    'no_restrictions' => 'No Dietary Restrictions',
+                                    'lactose_free' => 'Lactose-Free',
+                                    'nut_free' => 'Nut-Free',
+                                    'dairy_free' => 'Dairy-Free',
+                                    'soy_free' => 'Soy-Free',
+                                    'gluten_free' => 'Gluten-Free',
+                                    'vegetarian' => 'Vegetarian',
+                                    'vegan' => 'Vegan',
+                                    'pescatarian' => 'Pescatarian',
+                                    'low_carb' => 'Low Carb',
+                                    'keto' => 'Ketogenic',
+                                    'paleo' => 'Paleo',
+                                    'intermittent_fasting' => 'Intermittent Fasting',
+                                    'organic' => 'Organic Only',
+                                    'locavore' => 'Locavore',
+                                    'flexitarian' => 'Flexitarian',
+                                    'other' => 'Other'
+                                ];
+                            @endphp
+                            <div id="dietary_preferences">
+                                @foreach ($dietaryOptions as $key => $label)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="dietary_preference_{{ $key }}" name="dietary_preferences[]"
+                                               value="{{ $key }}" {{ is_array($dietaryPreferences) && in_array($key, $dietaryPreferences) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="dietary_preference_{{ $key }}">{{ $label }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {{-- Food Allergies --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Food Allergies</span>
+                            <input type="text" name="food_allergies" id="food_allergies" value="{{ $user->profile->food_allergies }}"
+                                   class="form-control">
+                        </div>
+
+                        {{-- Goals --}}
+                        <div class="detail-item detail-item-edit col-6">
+                            <span class="detail-label detail-label-edit">Goals</span>
+                            <input type="text" name="goals" id="goals" value="{{ $user->profile->goals }}"
+                                   class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-button edit-button-edit">
+                    <button type="submit" class="save-button save-button-edit">Save Changes</button>
+                </div>
+
+                <div class="edit-button edit-button-edit mt-2 text-end">
+                    <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="passwordModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.change_password', $user->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" name="current_password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-success" id="passwordModalLabel">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('user.change_password', $user->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <div class="mb-3">
-                            <label for="currentPassword" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" id="currentPassword" name="current_password"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newPassword" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="newPassword" name="new_password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-success">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+</div>
 
 @endsection
