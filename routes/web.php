@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });
 
