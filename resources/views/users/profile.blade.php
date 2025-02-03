@@ -41,7 +41,7 @@
                             <p class="profile-email profile-email-view">{{ $user->email }}</p>
                         </div>
                     </div>
-                </div>
+                {{-- </div> --}}
 
                 <div class="details details-view">
                     <div class="row">
