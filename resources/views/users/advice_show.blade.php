@@ -64,7 +64,7 @@
                         <a href="{{ route('user.advice.index', ['id' => $user_profile->id]) }}" class="btn btn-secondary">
                             ← Back to Advice List
                         </a>
-                        
+
                         <!-- User ID -->
                         <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
                 </div>
