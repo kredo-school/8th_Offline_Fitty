@@ -1040,6 +1040,10 @@ margin-top: 1.0px!important;
 .admin-users {
 font-family: 'Shrikhand', sans-serif!important;
 background-color: rgba(247, 252, 241, 1) !important;
+display: flex;
+    justify-content: center; /* 横中央配置 */
+    align-items: center; /* 縦中央配置 */
+    height: calc(100vh - 190px);
 }
 /*
 タイトルスタイル */
@@ -2003,6 +2007,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   justify-content: center !important;
   align-items: center !important;
   font-family: 'Poppins', sans-serif !important; /* フォントをPoppinsに設定 */
+  margin-bottom: 0;
 }
 
 .admin-pagination-item {
