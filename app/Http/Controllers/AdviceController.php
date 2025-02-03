@@ -421,7 +421,9 @@ class AdviceController extends Controller
             ->where('user_id', $id)
             ->firstOrFail();
 
-        $user_profile = $this->user_profile->findOrFail($id);
+
+
+        $user_profile = $this->user_profile->where('user_id',$id);
 
         $dailylog = $this->dailylog->where('user_id', $id)->first();
 
