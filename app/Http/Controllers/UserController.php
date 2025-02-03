@@ -53,16 +53,21 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($id);
         $nutritionists = NutritionistsProfile::all();
-        $nutritionist_in_charge = NutritionistsProfile::whereIn(
-            'id',
-            NutritionistsProfile::where('user_id', $user->user_profile->nutritionist_id)
-                ->pluck('nutritionist_id')
-        )->get();
+        // dd($user->profile);
+
+        $nutritionist_id = $user->profile->nutritionist_id;
 
 
+        $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+        $allocated = $nutritionist_in_charge->nutritionistsProfile;
+        // dd($allocated);
 
-        return view('users.profile', compact('user','nutritionists','nutritionist_in_charge'));
+// dd($nutritionist_in_charge);
+
+        return view('users.profile', compact('user','nutritionists','allocated'));
     }
+
+
 
     public function editprofile($id)
     {
