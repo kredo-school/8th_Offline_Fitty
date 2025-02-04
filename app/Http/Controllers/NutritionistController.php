@@ -34,7 +34,6 @@ class NutritionistController extends Controller
      */
     public function index()
     {
-        $user_profiles = $this->user_profile->where('nutritionist_id', Auth::user()->id)->get();
         $one_week_ago = now()->subWeek();
 
         // 栄養士に関連するユーザー情報を取得（advice_sent_dateが一週間前よりも前のデータを取得）

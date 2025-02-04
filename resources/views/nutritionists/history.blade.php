@@ -13,7 +13,7 @@
             @forelse ($adviceList as $advice)
             <tr>
                 <td>
-                    <a href="{{ route('nutri.showHistory', ['id' => $user_profile->id, 'date' => $advice->created_at->toDateString()]) }}" class="d-flex align-items-center">
+                    <a href="{{ route('nutri.showHistory', ['id' => $user_profile->user->id, 'date' => $advice->created_at->toDateString()]) }}" class="d-flex align-items-center">
                         <span class="me-2">{{ $advice->created_at->format('Y/m/d') }}</span>
                         <!-- 顔文字の表示 -->
                         @if ($advice->overall == 5)

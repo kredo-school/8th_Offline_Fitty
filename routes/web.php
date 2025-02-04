@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\NutritionistsController;
 use App\Http\Controllers\ChatGptController;
 
 
+use App\Http\Controllers\MailController;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdviceController;
 
@@ -96,24 +98,36 @@ Route::group(['middleware' => 'auth'], function () {
     //acess chatgpt api
     Route::post('/api/chatgpt', [ChatGptController::class, 'handleRequest']);
 
+
+    //mail test
+    Route::get('/send-test-mail', [MailController::class, 'sendTestMail']);
+
+
     Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
 
         Route::get('/inputmeal', [App\Http\Controllers\UserController::class, 'showinputmeal'])->name('inputmeal');
         Route::post('/inputmeal/store', [App\Http\Controllers\DailyLogController::class, 'store'])->name('inputmeal.store');
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
+
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
 
         //Users get advices
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
         // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
-        Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
+        // Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
+        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
+        Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
+        Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
+        Route::patch('/{id}/advice/{advice}/like', [AdviceController::class, 'likeToggle'])->name('advice.like');
+        Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
     });
 
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-        Route::get('/{id}/dailylog', [App\Http\Controllers\UserController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });
 
@@ -125,6 +139,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/index', [AdminController::class, 'index'])->name('index');
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+        Route::patch('/{id}/allocateNutritionist', [UsersController::class, 'allocateNutritionist'])->name('users.allocateNutritionist');
 
         Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
         Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
@@ -145,7 +160,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 });
-
 
 
 

@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Nutritionist;
+use App\Models\NutritionistsProfile;
 use App\Models\User;
+use App\Models\DailyLog;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,10 +31,7 @@ class UserController extends Controller
         //
     }
 
-    public function showdailylog($user_id)
-    {
-        return view('users.dailylog');
-    }
+  
 
     public function showinputmeal()
     {
@@ -42,9 +41,22 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->user->findOrFail($id);
+        $nutritionists = NutritionistsProfile::all();
+        // dd($user->profile);
 
-        return view('users.profile', compact('user'));
+        $nutritionist_id = $user->profile->nutritionist_id;
+
+
+        $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+        $allocated = $nutritionist_in_charge->nutritionistsProfile;
+        // dd($allocated);
+
+// dd($nutritionist_in_charge);
+
+        return view('users.profile', compact('user','nutritionists','allocated'));
     }
+
+
 
     public function editprofile($id)
     {
@@ -54,7 +66,7 @@ class UserController extends Controller
     public function showhistory($user_id)
     {
         $user = $this->user->findOrFail($user_id);
-        return view('users.history',compact('user'));
+        return view('users.history', compact('user'));
     }
 
 
@@ -142,6 +154,8 @@ class UserController extends Controller
         // プロフィールページへリダイレクト
         return redirect()->route('user.profile', $user->id);
     }
+
+
 
     public function changePassword(Request $request, $id)
     {

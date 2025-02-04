@@ -30,6 +30,7 @@ main {
 .main-row{
     margin-right: 0 !important;
     margin-left: 0 !important;
+    width: 100%;
 }
 
 .container {
@@ -298,6 +299,7 @@ footer {
   position: relative;
 }
 
+
 .footer-p-1 {
 margin: 0; /* マージンをリセット */
 font-size: 14px;
@@ -414,7 +416,7 @@ background-color: #087722; /* ホバー時の色 */
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     margin-left: 2%; /* 左側との間に余白を作る */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
-    float: left; /* 右側に配置 */
+    float: right; /* 右側に配置 */
     height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
 
 }
@@ -608,6 +610,49 @@ background-color: #087722; /* ホバー時の色 */
 }
 
 
+/* テーブルのスタイル */
+.unique-table-2 {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'lora', sans-serif;
+}
+
+.unique-table-2 th, .unique-table-2 td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.unique-table-2 th {
+  background-color: #4DAF4A;
+  color: white;
+  font-weight: bold;
+}
+
+.unique-table-2 td {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+/* リンクのスタイル */
+
+.unique-table-2 td a {
+  /* display: flex; アイコンと日付を横並びに */
+  align-items: center; /* 縦方向の中央揃え */
+  text-decoration: none; /* リンクの下線を削除 */
+  color: #333; /* 必要に応じてテキストの色を変更 */
+  justify-content: center; /* 横方向の中央揃え */
+
+}
+
+.unique-table-2 a:hover {
+  color: #FFA965;
+}
+
+/* 行にホバー効果 */
+.unique-table-2 tr:hover {
+  background-color: #f1f1f1;
+}
 
 
 .nutri-material-symbols-outlined.selected {
@@ -730,83 +775,49 @@ border-radius: 5px;
 }
 
 
-/* カード全体をスタイルする */
-.login-container{
-display: flex; /* Flexboxを有効化 */
-justify-content: center; /* 横方向の中央揃え */
-align-items: center; /* 縦方向の中央揃え */
-min-height: 100vh; /* ビューポートの高さを基準に全体を中央揃え */
-padding: 0 15px; /* サイドの余白 */
-}
 
-.card.card-login {
-width: 50%;
-max-width: 600x;
-height: 300px;
-position: relative;
-border-radius: 8px;
-overflow: hidden;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-/* カードの背景画像 */
-.card.card-login::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-size: cover;
-opacity: 0.2; /* 背景画像を薄くする */
-z-index: -1;
-filter: brightness(80%);
-}
-
-/* カードヘッダーのスタイル */
+/* カードヘッダー */
 .card-header.card-header-login {
-position: absolute;
-line-height: 1.7; /* 行間をリセット */
-left: 0;
-width: 100%;
-text-align: center;
-background-color: rgba(0, 0, 0, 0.5);
-color: white;
-font-size: 2rem;
-font-weight: bold;
-z-index: 10;
+    position: absolute;
+    line-height: 1.7;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 10;
 }
 
-/* カードのコンテンツ */
+/* カードコンテンツ */
 .card-body-login {
-position: relative;
-z-index: 2;
-padding: 20px;
-background-color: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
-color: #202F55; /* テキストの色を黒に設定 */
-border-radius: 0 0 8px 8px;
-margin-top: 70px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #202F55;
+    border-radius: 0 0 8px 8px;
+    margin-top: 70px;
 }
-
-/* ログインページ全体のスタイル */
-.login-page {
-display: flex;
-align-items: center;
-justify-content: center;
-min-height: 100vh;
-position: relative;
-}
-
 
 /* 共通カードスタイル */
 /*　Edit Profile用*/
 /* 共通カードスタイル */
 /* UserProfile用 */
+.profile-main {
+    display: flex;
+    justify-content: center; /* 水平方向の中央配置 */
+    align-items: center; /* 垂直方向の中央配置 */
+    height: 100%; /* 全体の高さを指定 */
+  }
+
+
 .profile-card {
   background-color: white;
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
   margin: auto;
   margin-top: 0px;
 }
@@ -816,7 +827,7 @@ position: relative;
 
 /* 表示用カード */
 .profile-card-view {
-  justify-content: center;
+  margin: 0;
 }
 
 /* 表示用カード */
@@ -1076,6 +1087,10 @@ margin-top: 1.0px!important;
 .admin-users {
 font-family: 'Shrikhand', sans-serif!important;
 background-color: rgba(247, 252, 241, 1) !important;
+display: flex;
+    justify-content: center; /* 横中央配置 */
+    align-items: center; /* 縦中央配置 */
+    height: calc(100vh - 190px);
 }
 /*
 タイトルスタイル */
@@ -1690,6 +1705,8 @@ margin: 0 auto !important;
   margin: auto 0 !important;
   display: inline-block !important;
   vertical-align: bottom !important; /* 下部に寄せる */
+  /* margin-bottom: 0 !important; /* 必要に応じて調整 */
+  /* line-height: normal !important; テキストの高さを通常に戻す */
 }
 
 .admin-categories-add-button {
@@ -1941,6 +1958,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   justify-content: center !important;
   align-items: center !important;
   font-family: 'Poppins', sans-serif !important; /* フォントをPoppinsに設定 */
+  margin-bottom: 0;
 }
 
 .admin-pagination-item {

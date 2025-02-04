@@ -8,15 +8,15 @@
 
         <div class="row">
             @include('sidebar.nutri-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10 mt-4">
+            <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
                 <!-- main content -->
 
                 <body>
-                    <form action="{{ route('nutri.updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('nutri.updateProfile', $user->id) }}" method="POST" enctype="multipart/form-data" style="width: 60%;">
                         @csrf
                         @method('PATCH')
 
-                        <div class="profile-card profile-card-edit">
+                        <div class="profile-card profile-card-edit" style="width: 100%;">
                             <div class="profile-header profile-header-edit text-center">
                                 <!-- Avatar -->
                                 <div class="avatar-wrapper">
@@ -83,7 +83,7 @@
                 </body>
             </div>
         </div>
-  
+
 
 
 

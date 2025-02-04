@@ -2,36 +2,39 @@
     <h1 class="menu">MENU</h1>
     <ul class="nav flex-column">
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.index')}}" class="d-flex align-items-center w-100">
+            <a href="{{route('user.inputmeal')}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">home</span>
-                <span class="title">Home</span>
+                <span class="title">Top</span>
             </a>
         </li>
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.users.index')}}" class="d-flex align-items-center w-100">
+            <a href="{{route('user.profile', Auth::user()->id)}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">person</span>
-                <span class="title">Users List</span>
+                <span class="title">Users</span>
             </a>
         </li>
+
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.nutritionists.index')}}" class="d-flex align-items-center w-100">
+            <a href="{{route('user.history', Auth::user()->id)}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">spa</span>
-                <span class="title">Nutritionists List</span>
+                <span class="title">Nutritionists</span>
             </a>
         </li>
+
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.categories.index')}}" class="d-flex align-items-center w-100">
+            <a href="{{route('user.advice.index', Auth::user()->id)}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">category</span>
-                <span class="title">Categories List</span>
+                <span class="title">Categories</span>
             </a>
         </li>
+
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('admin.inquiries.index')}}" class="d-flex align-items-center w-100">
+            <a href="#" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">mail</span>
-                <span class="title">Inquires List</span>
+                <span class="title">Inquires</span>
             </a>
         </li>
-        <hr style="border-color: black; border-width: 1px;">
+
         <li class="menu-item d-flex align-items-center py-2">
             <a href="#" class="d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <span class="material-icons side-material-icons me-2">logout</span>
@@ -74,7 +77,4 @@
         });
     }
 </script>
-
-
-
 
