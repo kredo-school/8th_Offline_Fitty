@@ -35,7 +35,8 @@ class UserController extends Controller
 
     public function showinputmeal()
     {
-        return view('users.inputmeal');
+        $lastWeight = DailyLog::latest()->value('weight'); // 最新のweightを取得
+        return view('users.inputmeal', compact('lastWeight'));
     }
 
     public function profile($id)

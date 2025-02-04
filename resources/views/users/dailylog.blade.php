@@ -19,12 +19,18 @@
             </div>
 
             @php
-                $meal_names = ['Breakfast' => '🍳 Breakfast', 'Lunch' => '🥗 Lunch', 'Dinner' => '🍲 Dinner','Other' => '🍽️ Other'];
+                $meal_names = [
+                    'Breakfast' => '🍳 Breakfast',
+                    'Lunch' => '🥗 Lunch',
+                    'Dinner' => '🍲 Dinner',
+                    'Other' => '🍽️ Other'
+                ];
             @endphp
 
             @foreach ($dailylogs as $dailylog)
                 @php
                     $mealType = $dailylog->meal_type;
+                    $mealId = $dailylog->id; // unique ID for each meal log
                     $nutritions = json_decode($dailylog->nutritions, true);
                 @endphp
 
@@ -32,7 +38,11 @@
                     <div class="meal-card">
                         <div class="meal-title">{{ $meal_names[$mealType] }}</div>
                         <p>Weight: {{ $dailylog->weight }}Kg</p>
-                        <div class="accordion" id="accordion{{ $mealType }}">
+                        <p>Meal: {{ $dailylog->meal_content }}</p>
+                        @if($dailylog->comment)
+                        <p>Comment: {{ $dailylog->comment }}</p>
+                        @endif
+                        <div class="accordion" id="accordion{{ $mealType }}{{ $mealId }}">
 
                             @foreach ($categories as $category)
                                 @if (isset($nutritions[$category->name]))
@@ -42,11 +52,11 @@
                                     @endphp
 
                                     <div class="accordion-item custom-accordion-item">
-                                        <h2 class="accordion-header" id="heading{{ $mealType }}{{ $category->id }}">
+                                        <h2 class="accordion-header" id="heading{{ $mealType }}{{ $category->id }}{{ $mealId }}">
                                             <button class="accordion-button custom-accordion-toggle collapsed" type="button"
-                                                data-bs-target="#collapse{{ $mealType }}{{ $category->id }}"
+                                                data-bs-target="#collapse{{ $mealType }}{{ $category->id }}{{ $mealId }}"
                                                 aria-expanded="false"
-                                                aria-controls="collapse{{ $mealType }}{{ $category->id }}">
+                                                aria-controls="collapse{{ $mealType }}{{ $category->id }}{{ $mealId }}">
                                                 <div class="d-flex justify-content-between align-items-center w-100">
                                                     <span>{{ $category->name }}: {{ $categoryData }}</span>
                                                     <span class="admin-categories-toggle-icon">
@@ -58,8 +68,8 @@
                                                 </div>
                                             </button>
                                         </h2>
-                                        <div id="collapse{{ $mealType }}{{ $category->id }}" class="accordion-collapse collapse"
-                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}">
+                                        <div id="collapse{{ $mealType }}{{ $category->id }}{{ $mealId }}" class="accordion-collapse collapse"
+                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}{{ $mealId }}">
                                             <div class="accordion-body">
                                                 <ul>
                                                     @foreach ($category->subcategory as $sub_category)
@@ -74,15 +84,12 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 @endif
                             @endforeach
-
                         </div>
                     </div>
                 @endif
             @endforeach
-
         </div>
     </div>
 </div>

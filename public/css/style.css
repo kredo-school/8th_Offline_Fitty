@@ -770,6 +770,23 @@ border: 2px dashed #9575cd; /* Purple dashed border */
 border-radius: 5px;
 }
 
+.inputmeal #loadingMessage {
+  font-size: 1.2em;
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
 /* omori add end */
 
 
