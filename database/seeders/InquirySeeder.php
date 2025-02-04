@@ -28,6 +28,7 @@ class InquirySeeder extends Seeder
                 'status' => ['pending', 'in_progress', 'completed'][array_rand(['pending', 'in_progress', 'completed'])],
                 'created_at' => Carbon::now()->subDays(rand(1, 30)), // 過去 30 日以内のランダムな日付
                 'updated_at' => Carbon::now(),
+                'person_in_charge'=> ['sukiyaki daisuki', 'toumin shitai', 'yakiniku tabetai'][array_rand(['sukiyaki daisuki', 'toumin shitai', 'yakiniku tabetai'])],
             ];
         }
 

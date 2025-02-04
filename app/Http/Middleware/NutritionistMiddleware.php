@@ -17,7 +17,7 @@ class NutritionistMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         // ユーザーが認証されていて、roleが'N'でない場合
-        if (Auth::check() && Auth::user()->role !== 'N') {
+        if (Auth::check() && Auth::user()->role == 'U') {
             // ログインページにリダイレクト
             return redirect()->route('login');
         }

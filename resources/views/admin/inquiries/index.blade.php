@@ -2,12 +2,10 @@
 
 @section('content')
     @include('sidebar.humburger')
-
-    <div class="d-flex admin-inquiries">
-        <div class="row w-100">
+        <div class="row row-main w-100">
             @include('sidebar.admin-sidebar')
 
-            <div class="col-md-9 ms-sm-auto col-lg-10">
+            <div class="col-md-9 ms-sm-auto col-lg-10 admin-inquiries">
                 <!-- Main Content -->
                 <div class="container my-5 mx-1 admin-inquiries">
                     <!-- Header Section -->
@@ -41,6 +39,7 @@
                                     <th>Name</th>
                                     <th>Submission Date</th>
                                     <th>Status</th>
+                                    <th>Person in Charge</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,31 +48,33 @@
                                     <tr class="admin-inquiries-row {{ $inquiry->status === 'In Progress' ? 'table-warning' : ($inquiry->status === 'Unresolved' ? 'table-danger' : '') }}">
                                         <td>{{ $inquiry->category }}</td>
                                         <td>{{ $inquiry->name }}</td>
-                                        <td>{{ $inquiry->submission_date->format('Y/m/d') }}</td>
+                                        <td>{{ optional($inquiry->created_at)->format('m/d/y') ?? 'N/A' }}</td>
                                         <td>
-                                            @if ($inquiry->status === 'Resolved')
-                                                <span class="status-badge status-resolved admin-inquiries-status">
-                                                    Resolved
-                                                </span>
-                                            @elseif ($inquiry->status === 'In Progress')
-                                                <span class="status-badge status-in-progress admin-inquiries-status">
-                                                    In Progress
-                                                </span>
+                                            @if ($inquiry->status === 'completed')
+                                                <span class="status-badge badge-completed">Completed</span>
+                                            @elseif ($inquiry->status === 'in_progress')
+                                                <span class="status-badge badge-in-progress">In Progress</span>
                                             @else
-                                                <span class="status-badge status-unresolved admin-inquiries-status">
-                                                    Unresolved
-                                                </span>
+                                                <span class="status-badge badge-pending">Pending</span>
                                             @endif
-                                        </td>
+                                        </td>                                       
+                                        <td>{{ $inquiry->person_in_charge }}</td>
                                         <td>
-                                            <a href="#" class="admin-inquiries-action-button">
-                                                <span class="material-symbols-outlined">mail</span>
-                                            </a>
-                                            <a href="#" class="admin-inquiries-action-button" data-bs-toggle="modal"
-                                               data-bs-target="#deleteModal-{{ $inquiry->id }}">
-                                                <span class="material-symbols-outlined">delete</span>
-                                            </a>
+                                            <div class="d-flex gap-3">
+                                                <a href="{{ route('user.profile', ['id' => $inquiry->id]) }}" class="admin-inquiries-action-button">
+                                                    <span class="material-symbols-outlined">person</span>
+                                                </a>
+                                                <a href="{{ route('admin.inquiries.show', $inquiry->id) }}" class="admin-inquiries-action-button">
+                                                    <span class="material-symbols-outlined">mail</span>
+                                                </a>
+                                                <a href="#" class="admin-inquiries-action-button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $inquiry->id }}">
+                                                    <span class="material-symbols-outlined">delete</span>
+                                                </a>
+                                            </div>
+                                            
                                         </td>
+                                        
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -87,33 +88,33 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     <!-- Delete Confirmation Modal -->
     @foreach ($inquiries as $inquiry)
-        <div class="modal fade admin-inquiries-delete-modal" id="deleteModal-{{ $inquiry->id }}" tabindex="-1"
+        <div class="modal fade admin-users-delete-modal" id="deleteModal-{{ $inquiry->id }}" tabindex="-1"
              aria-labelledby="deleteModalLabel-{{ $inquiry->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered admin-inquiries-modal-dialog">
-                <div class="modal-content admin-inquiries-modal-content">
+            <div class="modal-dialog modal-dialog-centered admin-users-modal-dialog">
+                <div class="modal-content admin-users-modal-content">
                     <!-- Modal Header -->
-                    <div class="modal-header admin-inquiries-modal-header">
-                        <span class="material-symbols-outlined modal-icon admin-inquiries-modal-icon">delete</span>
-                        <h5 class="modal-title admin-inquiries-modal-title" id="deleteModalLabel-{{ $inquiry->id }}">Delete Inquiry</h5>
-                        <button type="button" class="btn-close admin-inquiries-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header admin-users-modal-header pb-2">
+                        <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
+                        <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $inquiry->id }}">Delete Inquiry</h5>
+                        <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <!-- Modal Body -->
-                    <div class="modal-body admin-inquiries-modal-body">
+                    <div class="modal-body admin-users-modal-body">
                         <p>Are you sure you want to delete this inquiry?</p>
                     </div>
 
                     <!-- Modal Footer -->
-                    <div class="modal-footer admin-inquiries-modal-footer">
-                        <button type="button" class="btn cancel-btn admin-inquiries-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                    <div class="modal-footer admin-users-modal-footer">
+                        <button type="button" class="btn cancel-btn admin-users-cancel-btn admin-btn-equal" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('admin.inquiries.destroy', $inquiry->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn delete-btn admin-inquiries-delete-btn">Delete</button>
+                            <button type="submit" class="btn delete-btn admin-users-delete-btn admin-btn-equal">Delete</button>
                         </form>
                     </div>
                 </div>

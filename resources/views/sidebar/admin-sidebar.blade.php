@@ -1,4 +1,3 @@
-
 <div id="sidebar" class="sidemenu col-md-3 col-lg-2">
     <h1 class="menu">MENU</h1>
     <ul class="nav flex-column">

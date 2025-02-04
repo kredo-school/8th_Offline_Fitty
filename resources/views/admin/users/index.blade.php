@@ -92,7 +92,7 @@
                 <div class="modal-content admin-users-modal-content">
 
                     <!-- Modal Header -->
-                    <div class="modal-header admin-users-modal-header">
+                    <div class="modal-header admin-users-modal-header pb-2">
                         <span class="material-symbols-outlined modal-icon admin-users-modal-icon">delete</span>
                         <h5 class="modal-title admin-users-modal-title" id="deleteModalLabel-{{ $user_profile->id }}">Delete User</h5>
                         <button type="button" class="btn-close admin-users-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -105,11 +105,11 @@
 
                     <!-- Modal Footer -->
                     <div class="modal-footer admin-users-modal-footer">
-                        <button type="button" class="btn cancel-btn admin-users-cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn cancel-btn admin-users-cancel-btn admin-btn-equal" data-bs-dismiss="modal">Cancel</button>
                         <form action="{{ route('admin.users.destroy', $user_profile->user_id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn delete-btn admin-users-delete-btn">Delete</button>
+                            <button type="submit" class="btn delete-btn admin-users-delete-btn admin-btn-equal">Delete</button>
                         </form>
                     </div>
 
