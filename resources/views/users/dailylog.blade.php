@@ -19,13 +19,13 @@
             </div>
 
             @php
-                $meal_names = ['Breakfast' => '🍳 Breakfast', 'Lunch' => '🥗 Lunch', 'Dinner' => '🍲 Dinner'];
+                $meal_names = ['Breakfast' => '🍳 Breakfast', 'Lunch' => '🥗 Lunch', 'Dinner' => '🍲 Dinner','Other' => '🍽️ Other'];
             @endphp
 
             @foreach ($dailylogs as $dailylog)
                 @php
-                    $mealType = $dailylog->meal_type; // 各dailylogの食事タイプ（Breakfast, Lunch, Dinner）
-                    $nutritions = json_decode($dailylog->nutritions, true); // JSON を配列に変換
+                    $mealType = $dailylog->meal_type;
+                    $nutritions = json_decode($dailylog->nutritions, true);
                 @endphp
 
                 @if (isset($meal_names[$mealType]))
@@ -41,18 +41,25 @@
                                         $subCategoryData = $nutritions["Subcategories"];
                                     @endphp
 
-                                    <div class="accordion-item">
+                                    <div class="accordion-item custom-accordion-item">
                                         <h2 class="accordion-header" id="heading{{ $mealType }}{{ $category->id }}">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            <button class="accordion-button custom-accordion-toggle collapsed" type="button"
                                                 data-bs-target="#collapse{{ $mealType }}{{ $category->id }}"
-                                                aria-expanded="true"
+                                                aria-expanded="false"
                                                 aria-controls="collapse{{ $mealType }}{{ $category->id }}">
-                                                {{ $category->name }}: {{ $categoryData  }}
+                                                <div class="d-flex justify-content-between align-items-center w-100">
+                                                    <span>{{ $category->name }}: {{ $categoryData }}</span>
+                                                    <span class="admin-categories-toggle-icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <polyline points="8 10 12 14 16 10" class="icon-chevron-down"></polyline>
+                                                            <polyline points="8 14 12 10 16 14" class="icon-chevron-up" style="display: none;"></polyline>
+                                                        </svg>
+                                                    </span>
+                                                </div>
                                             </button>
                                         </h2>
                                         <div id="collapse{{ $mealType }}{{ $category->id }}" class="accordion-collapse collapse"
-                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}"
-                                            data-bs-parent="#accordion{{ $mealType }}">
+                                            aria-labelledby="heading{{ $mealType }}{{ $category->id }}">
                                             <div class="accordion-body">
                                                 <ul>
                                                     @foreach ($category->subcategory as $sub_category)
@@ -79,5 +86,61 @@
         </div>
     </div>
 </div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const accordionButtons = document.querySelectorAll('.custom-accordion-toggle');
+
+    accordionButtons.forEach(button => {
+        const targetId = button.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        const chevronDown = button.querySelector('.icon-chevron-down');
+        const chevronUp = button.querySelector('.icon-chevron-up');
+
+        function setInitialState() {
+            if (target.classList.contains('show')) {
+                chevronDown.style.display = 'none';
+                chevronUp.style.display = 'block';
+            } else {
+                chevronDown.style.display = 'block';
+                chevronUp.style.display = 'none';
+            }
+        }
+        setInitialState();
+
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            
+            const isOpen = target.classList.contains('show');
+            
+            document.querySelectorAll('.accordion-collapse.show').forEach(collapse => {
+                collapse.classList.remove('show');
+                collapse.previousElementSibling.setAttribute('aria-expanded', 'false');
+            });
+            
+            document.querySelectorAll('.custom-accordion-toggle').forEach(btn => {
+                btn.setAttribute('aria-expanded', 'false');
+            });
+            
+            document.querySelectorAll('.icon-chevron-down').forEach(icon => icon.style.display = 'block');
+            document.querySelectorAll('.icon-chevron-up').forEach(icon => icon.style.display = 'none');
+
+            if (isOpen) {
+                target.classList.remove('show');
+                button.setAttribute('aria-expanded', 'false');
+                chevronDown.style.display = 'block';
+                chevronUp.style.display = 'none';
+            } else {
+                target.classList.add('show');
+                button.setAttribute('aria-expanded', 'true');
+                chevronDown.style.display = 'none';
+                chevronUp.style.display = 'block';
+            }
+        });
+    });
+});
+</script>
 
 @endsection

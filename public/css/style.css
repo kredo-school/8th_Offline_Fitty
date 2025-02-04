@@ -740,6 +740,13 @@ background-color: #087722; /* ホバー時の色 */
   background-color: #f8f9fa;
 }
 
+.user-dailylog .custom-accordion-item:hover {
+  background-color: #00984f !important;
+}
+
+.user-dailylog .custom-accordion-toggle:hover {
+  background-color: transparent !important;
+}
 
 .inputmeal {
 max-width: 600px;
