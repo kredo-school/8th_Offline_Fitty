@@ -14,10 +14,13 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 
 <body>
-    <main class="py-4 main-content">
+    <main class="main-content">
         @yield('content')
     </main>
 
