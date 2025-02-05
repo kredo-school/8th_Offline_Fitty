@@ -16,10 +16,10 @@ class NutritionistMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // ユーザーが認証されていて、roleが'N'でない場合
-        if (Auth::check() && Auth::user()->role !== 'N') {
-            // ログインページにリダイレクト
-            return redirect()->route('login');
+        // Redirect users with the role 'U' (regular users) to the login page
+        // This page is intended for nutritionists ('N') and admins ('A') only
+        if (Auth::check() && Auth::user()->role == 'U') {
+            return redirect()->route('login'); // Redirect to the login page
         }
 
         return $next($request);

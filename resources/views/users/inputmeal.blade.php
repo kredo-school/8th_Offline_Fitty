@@ -6,27 +6,12 @@
 
 </head>
 <body>
-<style>
-    #loadingMessage {
-    font-size: 1.2em;
-    color: #555;
-    text-align: center;
-    margin-top: 10px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-</style>
 
 <div class="form-container inputmeal">
+            <div class="fixed-back-button">
+                <button class="btn btn-outline-secondary custom-back-button" onclick="window.history.back()">&larr;</button>
+            </div>
+
     <h2 class="text-center mb-4 text-success">Input meal</h2>
     <form id="mealForm" action="{{route('user.inputmeal.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -40,10 +25,10 @@
         <div class="mb-3">
             <label for="mealType" class="form-label">Meal Type</label>
             <select class="form-select" id="mealType" name="meal_type">
-                <option selected>Breakfast</option>
-                <option value="1">Lunch</option>
-                <option value="2">Dinner</option>
-                <option value="3">Other</option>
+                <option selected value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Other">Other</option>
             </select>
         </div>
 
@@ -62,7 +47,7 @@
         <!-- Weight Input -->
         <div class="mb-3">
             <label for="weight" class="form-label">Weight (kg)</label>
-            <input type="number" class="form-control" id="weight" name="weight" placeholder="Enter your weight" step="0.1">
+            <input type="number" class="form-control" id="weight" name="weight" value="{{ old('weight', $lastWeight) }}" placeholder="Enter your weight" step="0.1">
         </div>
 
         <!-- Image Upload -->

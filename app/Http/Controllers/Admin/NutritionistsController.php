@@ -10,12 +10,11 @@ use Illuminate\Http\Request;
 class NutritionistsController extends Controller
 {
     private $nutritionist_profile;
-    private $nutritionist;
+   
 
-    public function __construct(NutritionistsProfile $nutritionist_profile, Nutritionist $nutritionist)
+    public function __construct(NutritionistsProfile $nutritionist_profile)
     {
         $this->nutritionist_profile = $nutritionist_profile;
-        $this->nutritionist = $nutritionist;
     }
 
     /*

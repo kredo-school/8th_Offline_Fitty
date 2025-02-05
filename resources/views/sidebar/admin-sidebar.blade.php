@@ -1,44 +1,80 @@
-
 <div id="sidebar" class="sidemenu col-md-3 col-lg-2">
-    <a href="#" class="menu-item">
-        <span class="material-icons">home</span> Top
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">person</span> Users
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">spa</span> Nutritionists
-    </a>
-    <a href="#" class="menu-item">
-        <span class="material-icons">category</span> Categories
-    </a>
-    <a href="#" class="menu-item active">
-        <span class="material-icons">mail</span> Inquires
-    </a>
-    <hr style="border-color: black; border-width: 1px;">
-    <a href="#" class="menu-item">
-        <span class="material-icons">logout</span> Logout
-    </a>
+    <h1 class="menu">MENU</h1>
+    <ul class="nav flex-column">
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('user.inputmeal')}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">home</span>
+                <span class="title">Top</span>
+            </a>
+        </li>
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('user.profile', Auth::user()->id)}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">person</span>
+                <span class="title">Users</span>
+            </a>
+        </li>
+
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('user.history', Auth::user()->id)}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">spa</span>
+                <span class="title">Nutritionists</span>
+            </a>
+        </li>
+
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="{{route('user.advice.index', Auth::user()->id)}}" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">category</span>
+                <span class="title">Categories</span>
+            </a>
+        </li>
+
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="#" class="d-flex align-items-center w-100">
+                <span class="material-icons side-material-icons me-2">mail</span>
+                <span class="title">Inquires</span>
+            </a>
+        </li>
+
+        <li class="menu-item d-flex align-items-center py-2">
+            <a href="#" class="d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                <span class="material-icons side-material-icons me-2">logout</span>
+                <span class="title">Logout</span>
+            </a>
+        </li>
+
+    </ul>
 </div>
+@include('sidebar.modals.logout-modal')
+
+
 
 <script>
-        // Handle active menu state
-        document.querySelectorAll('.menu-item').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
-                this.classList.add('active');
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+        // 現在のURLを取得
+        const currentUrl = window.location.href;
+
+        // サイドメニューのリンクをすべて取得
+        const menuLinks = document.querySelectorAll('.nav li a');
+
+        // 現在のURLに一致するリンクに「active」クラスを付与
+        menuLinks.forEach(link => {
+            if (link.href === currentUrl) {
+                link.parentElement.classList.add('active');
+            } else {
+                link.parentElement.classList.remove('active');
+            }
         });
+    });
 
+    // サイドバーとハンバーガーボタンのトグル機能
+    const sidebar = document.getElementById('sidebar');
+    const hamburgerButton = document.getElementById('hamburgerButton');
 
-
-        // サイドバーとハンバーガーボタンのトグル機能
-        const sidebar = document.getElementById('sidebar');
-        const hamburgerButton = document.getElementById('hamburgerButton');
-
-        // ハンバーガーボタンをクリックしたらサイドバーを開閉
+    // ハンバーガーボタンがクリックされたときにサイドバーの表示を切り替え
+    if (hamburgerButton) {
         hamburgerButton.addEventListener('click', () => {
             sidebar.classList.toggle('show');
         });
+    }
+</script>
 
-    </script>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('category')->nullable(); // お問い合わせのカテゴリ
             $table->text('memo')->nullable(); // 運営側のメモ（対応履歴など）
             $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending'); // ステータス
+            $table->string('person_in_charge')->nullable(); // 担当者
             $table->timestamps(); // created_at & updated_at（デフォルトで追加される）
             
             // 外部キー制約（ユーザーが削除されたときに問い合わせも削除される場合）

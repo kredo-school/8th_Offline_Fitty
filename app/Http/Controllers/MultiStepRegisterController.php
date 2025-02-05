@@ -8,14 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
+//assign a nutritionist omori
+use App\Services\NutritionistAssignmentService;
+
 class MultiStepRegisterController extends Controller
 {
 
     private $user;
+    private $nutritionistAssignmentService;
 
-    public function __construct(User $user)
+    public function __construct(User $user,NutritionistAssignmentService $nutritionistAssignmentService)
     {
         $this->user = $user;
+        $this->nutritionistAssignmentService = $nutritionistAssignmentService;
     }
 
     public function showStep1()
@@ -111,6 +116,10 @@ class MultiStepRegisterController extends Controller
         $profile->dietary_preferences = json_encode($request->dietary_preferences ?? []);
         $profile->food_allergies = $request->food_allergies ?? null;
         $profile->goals = $request->goals ?? null;
+
+        // assign a nutritionist omori
+        $nutritionistId = $this->nutritionistAssignmentService->assignNutritionist();
+        $profile->nutritionist_id = $nutritionistId;
 
         $profile->save();
 
