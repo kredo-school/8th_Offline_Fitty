@@ -16,10 +16,10 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // ユーザーが認証されていて、roleが'N'でない場合
+        // Redirect users with the role 'N' (nutritionists) to the login page
+        // This page is intended for regular users('U') and admins ('A') only
         if (Auth::check() && Auth::user()->role == 'N') {
-            // ログインページにリダイレクト
-            return redirect()->route('login');
+            return redirect()->route('login'); // Redirect to the login page
         }
 
         return $next($request);
