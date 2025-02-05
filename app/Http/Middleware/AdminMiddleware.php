@@ -17,10 +17,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // ユーザーが認証されていて、roleが'N'でない場合
+        // If the user is authenticated but does not have the role 'A' (admin)
+        // Redirect them to the login page
         if (Auth::check() && Auth::user()->role !== 'A') {
-            // ログインページにリダイレクト
-            return redirect()->route('login');
+            return redirect()->route('login'); // Redirect to the login page
         }
         
         return $next($request);
