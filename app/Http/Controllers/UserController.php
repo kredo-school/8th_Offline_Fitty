@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Nutritionist;
 use App\Models\NutritionistsProfile;
 use App\Models\User;
+use App\Models\Inquiry;
+
+
 use App\Models\DailyLog;
 
 use Illuminate\Support\Facades\Auth;
@@ -48,13 +51,16 @@ class UserController extends Controller
         $nutritionist_id = $user->profile->nutritionist_id;
 
 
-        $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
-        $allocated = $nutritionist_in_charge->nutritionistsProfile;
+        // エラーが出るため一時的にコメント
+        // $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+        // $allocated = $nutritionist_in_charge->nutritionistsProfile;
         // dd($allocated);
 
 // dd($nutritionist_in_charge);
 
-        return view('users.profile', compact('user','nutritionists','allocated'));
+        return view('users.profile', compact('user','nutritionists'
+        // ,'allocated'
+    ));
     }
 
 
@@ -193,5 +199,44 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showInquiryForm($id)
+    {
+
+        $user = $this->user->findOrFail($id);
+
+        return view('users.sendInquiry', compact('user'));
+
+    }
+
+    public function storeInquiry(Request $request ,$id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        // dd($request->all());
+
+
+        // プロフィールがない場合はエラー
+        if (!$user->profile) {
+            return back()->withErrors(['profile' => 'User profile not found. Please create profile page.']);
+    }
+
+        $request->validate([
+            'category' => 'required|string|max:255',
+            'content'  => 'required|string|min:30',
+        ]);
+// dd('omori');
+        // 問い合わせデータの作成
+        Inquiry::create([
+            'user_id'  => $user->id,
+            'email'    => $user->email,
+            'name'     => $user->name,
+            'category' => $request->category,
+            'content'  => $request->content,
+        ]);
+
+        return redirect()->route('user.sendInquiry.form', $user->id)->with('success', 'Inquiry sent successfully.');
+
     }
 }

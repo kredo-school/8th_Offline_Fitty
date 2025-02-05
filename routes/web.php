@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\NutritionistController;
 use App\Http\Controllers\MultiStepRegisterController;
 use App\Http\Controllers\DailyLogController;
@@ -124,6 +125,24 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
     });
 
+    //Users get advices
+    Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
+        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
+        Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
+        Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
+        Route::patch('/{id}/advice/{advice}/like', [AdviceController::class, 'likeToggle'])->name('advice.like');
+        Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
+
+    //Users send inquiries
+        Route::get('/{id}/sendInquiry', [UserController::class, 'showInquiryForm'])->name('sendInquiry.form');
+        Route::post('{id}/sendInquiry', [UserController::class, 'storeInquiry'])->name('sendInquiry.store');
+
+
+    });
+
+
+    
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');

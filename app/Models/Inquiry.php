@@ -10,11 +10,19 @@ class Inquiry extends Model
     use HasFactory;
 
     // 一括代入を許可する属性
+    // protected $fillable = [
+    //     'category',
+    //     'name',
+    //     'submission_date',
+    //     'status',
+    // ];
+
     protected $fillable = [
-        'category',
-        'name',
-        'submission_date',
-        'status',
+        'user_id', 
+        'email', 
+        'name', 
+        'category', 
+        'content'
     ];
 
     // submission_dateをCarbonインスタンスとして扱う
