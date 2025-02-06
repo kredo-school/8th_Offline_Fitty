@@ -14,6 +14,7 @@
                             Inquiries <span class="text-muted">({{ $inquiries->total() }})</span>
                         </h1>
 
+                        
                         <div class="admin-users-search-box">
                             <form action="{{ route('admin.inquiries.index') }}" method="GET" class="w-100">
                                 <div class="input-group admin-inquiries-input-group w-100">
