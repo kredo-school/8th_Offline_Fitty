@@ -2098,23 +2098,63 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   border-color: #e74c3c;
 }
 
-.admin-inquiries-action-button {
+/* .admin-inquiries-action-button {
   padding: 6px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-}
+} */
 
 .material-symbols-outlined {
   font-size: 20px;
   color: #333;
 }
 
-.inquiry-title {
-  font-family: 'Shrikhand', cursive !important;
-  font-size: 32px!important;
-  color: #00804F!important;
-  line-height: 1.5!important; 
+
+.admin-inquiries-table {
+  border-collapse: collapse !important;
+  width: 100%;
+  font-family: 'Poppins', sans-serif !important;
 }
+
+/* テーブルヘッダーのスタイル */
+.admin-inquiries-table-head th {
+  color: #6c757d !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+  border-bottom: 1px solid #d6d6d6 !important;
+  text-align: left !important;
+}
+
+/* テーブルのボディ */
+.admin-inquiries-table tbody td {
+  padding: 10px !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+/* テーブル行ホバー時のスタイル */
+.admin-inquiries-table tbody tr:hover td {
+  background-color: #ffa965 !important;
+  color: white !important;
+}
+
+/* バッジのホバースタイル */
+.admin-inquiries-table tbody tr:hover .status-badge {
+  color: white !important;
+  background-color: transparent !important;
+  border-color: white !important;
+}
+
+/* アイコンおよびリンクのホバースタイル */
+.admin-inquiries-table tbody tr:hover a,
+.admin-inquiries-table tbody tr:hover .admin-inquiries-material-symbols-outlined {
+  color: white !important;
+}
+
+/* アクションアイコンのホバースタイル */
+.admin-inquiries-action-button:hover {
+  color: white !important;
+}
+
 
 
 /* ここからinqury form */
@@ -2123,6 +2163,13 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   border-radius: 8px !important;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1) !important;
   font-family: 'Shrikhand', sans-serif !important;
+}
+
+.inquiry-title {
+  font-family: 'Shrikhand', cursive !important;
+  font-size: 32px!important;
+  color: #00804F!important;
+  line-height: 1.5!important; 
 }
 
 .inquiry-card {
@@ -2215,11 +2262,11 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   border-color: #e74c3c;
 }
 
-.admin-inquiries-action-button {
+/* .admin-inquiries-action-button {
   padding: 6px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-}
+} */
 
 .material-symbols-outlined {
   font-size: 20px;

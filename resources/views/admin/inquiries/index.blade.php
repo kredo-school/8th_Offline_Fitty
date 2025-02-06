@@ -60,14 +60,14 @@
                                         </td>                                       
                                         <td>{{ $inquiry->person_in_charge }}</td>
                                         <td>
-                                            <div class="d-flex gap-3">
-                                                <a href="{{ route('user.profile', ['id' => $inquiry->id]) }}" class="admin-inquiries-action-button">
+                                            <div class=" d-flex gap-3 admin-inquiries-action-button">
+                                                <a href="{{ route('user.profile', ['id' => $inquiry->id]) }}" ">
                                                     <span class="material-symbols-outlined">person</span>
                                                 </a>
-                                                <a href="{{ route('admin.inquiries.show', $inquiry->id) }}" class="admin-inquiries-action-button">
+                                                <a href="{{ route('admin.inquiries.show', $inquiry->id) }}" ">
                                                     <span class="material-symbols-outlined">mail</span>
                                                 </a>
-                                                <a href="#" class="admin-inquiries-action-button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $inquiry->id }}">
+                                                <a href="#" n " data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $inquiry->id }}">
                                                     <span class="material-symbols-outlined">delete</span>
                                                 </a>
                                             </div>
