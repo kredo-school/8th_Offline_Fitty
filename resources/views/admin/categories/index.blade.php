@@ -6,7 +6,7 @@
 
 @include('sidebar.humburger')
 
-<div class="bg-light d-flex vh-100 admin-nutritionists">
+<div class="d-flex vh-100 admin-nutritionists">
     <div class="row w-100">
         @include('sidebar.admin-sidebar')
 

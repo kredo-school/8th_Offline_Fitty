@@ -52,14 +52,14 @@ class UserController extends Controller
 
 
         // エラーが出るため一時的にコメント
-        // $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
-        // $allocated = $nutritionist_in_charge->nutritionistsProfile;
+         $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
+         $allocated = $nutritionist_in_charge->nutritionistsProfile;
         // dd($allocated);
 
 // dd($nutritionist_in_charge);
 
         return view('users.profile', compact('user','nutritionists'
-        // ,'allocated'
+         ,'allocated'
     ));
     }
 
