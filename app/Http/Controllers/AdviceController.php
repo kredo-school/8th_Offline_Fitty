@@ -452,21 +452,10 @@ class AdviceController extends Controller
 
         ));
     }
-
     public function showWeight($id, $date)
     {
-        // dd($adviceDate);
-
         $endDate = Carbon::parse($date)->subDay();
-        // dd($endDate);
-
-        // dd($endDate);
-
         $startDate = $endDate->copy()->subDays(6);
-
-
-
-        // dd($startDate);
 
         // データを取得
         $dailyLogs = DailyLog::where('user_id', $id)
@@ -474,19 +463,20 @@ class AdviceController extends Controller
             ->orderBy('input_date', 'asc')
             ->get();
 
-        // グラフ用のデータを整形
-        $dates = [];
-        $weights = [];
+        // グループ化して日ごとの平均を計算
+        $groupedData = $dailyLogs->groupBy(function ($log) {
+            return Carbon::parse($log->input_date)->format('Y-m-d'); // 日付だけ取得
+        })->map(function ($logs) {
+            return $logs->avg('weight'); // 体重の平均を計算
+        });
 
-        foreach ($dailyLogs as $log) {
-            $dates[] = Carbon::parse($log->input_date)->format('Y-m-d');
-            $weights[] = $log->weight;
-        }
+        // グラフ用のデータに変換
+        $averageDates = $groupedData->keys()->toArray();  // 日付ラベル
+        $averageWeights = $groupedData->values()->toArray(); // 平均体重データ
 
-        // ビューにデータを渡す
         return [
-            'dates' => $dates,
-            'weights' => $weights,
+            'dates' => $averageDates, // 修正: 日ごとのラベル
+            'weights' => $averageWeights, // 修正: 平均体重
             'message' => $dailyLogs->isEmpty() ? 'No data available.' : null
         ];
     }
