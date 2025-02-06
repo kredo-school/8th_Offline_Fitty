@@ -59,6 +59,7 @@ padding: 0 15px;
 font-family: "Shrikhand", serif !important;
 color: #FFA965 !important;
 font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+cursor: default;
 }
 
 .nav-link.nav-username {
@@ -146,6 +147,12 @@ width: 100%;
 
 .sidemenu .title {
     white-space: nowrap;
+    /* omori add 0206*/
+    z-index:9999; 
+    white-space: normal; /* 改行を許可 */
+    word-wrap: break-word; /* 単語の途中でも折り返し */
+    overflow-wrap: break-word; /* どこでも折り返し */
+    /* omori add 0206 end*/
   }
 
 .nav .active{
@@ -1109,7 +1116,7 @@ margin-top: 1.0px!important;
 
 /* 全体のフォント */
 .admin-users {
-  font-family: 'Shrikhand', sans-serif!important;
+  /* font-family: 'Shrikhand', sans-serif!important; */
   background-color: rgba(247, 252, 241, 1) !important;
 }
 
@@ -1365,7 +1372,7 @@ margin: 0;
 /* 全体のフォント */
 .admin-nutritionists {
 background-color: rgba(247, 252, 241, 1) !important;
-font-family: 'Poppins', sans-serif!important;
+/* font-family: 'Poppins', sans-serif!important; */
 }
 
 /* タイトルスタイル */
@@ -1698,7 +1705,7 @@ color: #757575 !important;
 /* admin categories*/
 .admin-categories-container {
 background-color: rgba(247, 252, 241, 1) !important;
-padding: 87px 80px !important;
+padding: 30px 80px !important;
 display: flex !important;
 flex-direction: column !important;
 align-items: center !important;

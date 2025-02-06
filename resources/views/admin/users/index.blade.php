@@ -6,7 +6,7 @@
         @include('sidebar.admin-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10 admin-users">
-    <div class="mx-auto" style="width: 60%;">
+    <div class="mx-auto" style="width: 80%;">
         <!-- Main Content -->
 
         <!-- Header Section -->
