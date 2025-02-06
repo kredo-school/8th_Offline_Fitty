@@ -7,10 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class NutritionistsProfile extends Model
 {
-    // リレーション: Userモデルに属する
+    use HasFactory;
+
+    /**
+     * マスアサインメントを許可する属性
+     */
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'profile_image',
+        'introduction',
+    ];
+
+    /**
+     * リレーション: Userモデルに属する
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }
+
+
