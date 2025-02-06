@@ -28,19 +28,20 @@
                     </form>
                 @endif
 
-            <!-- main content -->
-            <div class="profile-card profile-card-view " style="width: 60%;">
-                <div class="profile-header profile-header-view">
-                    @if($user->avatar)
-                        <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
-                    @else
-                        <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture profile-picture-view">
-                    @endif
-                    <div class="info info-view">
-                        <h2 class="profile-name profile-name-view">{{ $user->name }}</h2>
-                        <p class="profile-email profile-email-view">{{ $user->email }}</p>
+                <!-- main content -->
+                <div class="profile-card profile-card-view" style="width: 60%;">
+                    <div class="profile-header profile-header-view">
+                        @if($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="Profile Picture" class="profile-picture profile-picture-view">
+                        @else
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="Default Profile Picture" class="profile-picture profile-picture-view">
+                        @endif
+                        <div class="info info-view">
+                            <h2 class="profile-name profile-name-view">{{ $user->name }}</h2>
+                            <p class="profile-email profile-email-view">{{ $user->email }}</p>
+                        </div>
                     </div>
-                </div>
+                {{-- </div> --}}
 
                 <div class="details details-view">
                     <div class="row">

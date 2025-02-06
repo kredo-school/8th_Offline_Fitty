@@ -13,8 +13,9 @@ class ChatGptController extends Controller
     {
 
         //chatgptの動作確認するときは、envファイルを設定して以下の2行をコメントアウトしてください。 omori
-        // $json_test = '{"Protein":"88g","Fat":"19g","Carbohydrates":"109g","Vitamins":"19mg","Minerals":"278mg","Subcategories":{"Simple Sugars":"30g","Complex Carbohydrates":"40g","Fiber":"15g","Starches":"20g","Polysaccharides":"4g","Lysine":"2.1g","Leucine":"2.0g","Isoleucine":"2.7g","Valine":"2.6g","Threonine":"1.8g","Methionine":"1.2g","Phenylalanine":"1.4g","Histidine":"1.1g","Arginine":"1.3g","Saturated Fats":"7g","Unsaturated Fats":"10g","Omega-3 Fatty Acids":"1.5g","Omega-6 Fatty Acids":"1.2g","Trans Fats":"0.3g","Vitamin A":"700µg","Vitamin B1 (Thiamine)":"1.2mg","Vitamin B2 (Riboflavin)":"1.3mg","Vitamin B6 (Pyridoxine)":"1.7mg","Vitamin B12 (Cobalamin)":"2.4µg","Vitamin C":"90mg","Vitamin D":"15µg","Vitamin E":"10mg","Vitamin K":"120µg","Calcium":"1000mg","Iron":"18mg","Magnesium":"400mg","Potassium":"3500mg","Sodium":"2300mg","Zinc":"11mg","Phosphorus":"700mg","Copper":"0.9mg","Manganese":"2.3mg","Fluoride":"4mg"}}';
-        // return $json_test;
+        $json_test = '{"Protein":"88g","Fat":"19g","Carbohydrates":"109g","Vitamins":"19mg","Minerals":"278mg","Subcategories":{"Simple Sugars":"30g","Complex Carbohydrates":"40g","Fiber":"15g","Starches":"20g","Polysaccharides":"4g","Lysine":"2.1g","Leucine":"2.0g","Isoleucine":"2.7g","Valine":"2.6g","Threonine":"1.8g","Methionine":"1.2g","Phenylalanine":"1.4g","Histidine":"1.1g","Arginine":"1.3g","Saturated Fats":"7g","Unsaturated Fats":"10g","Omega-3 Fatty Acids":"1.5g","Omega-6 Fatty Acids":"1.2g","Trans Fats":"0.3g","Vitamin A":"700µg","Vitamin B1 (Thiamine)":"1.2mg","Vitamin B2 (Riboflavin)":"1.3mg","Vitamin B6 (Pyridoxine)":"1.7mg","Vitamin B12 (Cobalamin)":"2.4µg","Vitamin C":"90mg","Vitamin D":"15µg","Vitamin E":"10mg","Vitamin K":"120µg","Calcium":"1000mg","Iron":"18mg","Magnesium":"400mg","Potassium":"3500mg","Sodium":"2300mg","Zinc":"11mg","Phosphorus":"700mg","Copper":"0.9mg","Manganese":"2.3mg","Fluoride":"4mg"}}';
+        return $json_test;
+         
 
         $mealContent = $request->input('meal_content');
 
@@ -23,6 +24,7 @@ class ChatGptController extends Controller
         if ($response) {
             // 必要なnutritionデータのみを返却
             $nutritionData = $response['choices'][0]['message']['content'] ?? null;
+
             if ($nutritionData) {
                 return response()->json(json_decode($nutritionData, true));
             } else {
@@ -38,57 +40,71 @@ class ChatGptController extends Controller
         // 環境変数からAPIキーを取得
         $apiKey = env('OPENAI_API_KEY');
 
-        \Log::info('API Key:', ['key' => env('OPENAI_API_KEY')]);
-
         // ChatGPT APIエンドポイント
         $url = "https://api.openai.com/v1/chat/completions";
-
+    
         // CategoriesとSubcategoriesをデータベースから取得
-        \Log::info('Starting API request...');
         $categories = Category::pluck('name')->toArray();
-        \Log::info('Categories:', ['categories' => $categories]);
-
         $subcategories = Subcategory::pluck('name')->toArray();
-
-        \Log::info('Subcategories:', ['subcategories' => $subcategories]);
-        \Log::info('Meal Content:', ['meal_content' => $mealContent]);
-
+    
         // プロンプトを生成
         $prompt = "
-You are a nutritional analysis assistant. Calculate the nutritional intake from the given meal based on the following categories and subcategories. Ensure all nutritional units are aligned with the standard units from the USDA FoodData Central. For the Vitamins and Minerals in the Major Nutrients section, calculate and output only their total amounts in mg. Do not include detailed breakdowns of individual vitamins or minerals in the Major Nutrients section. Output the results in JSON format.
-
-### Categories:
-- " . implode(", ", $categories) . "
-
-### Subcategories:
-- " . implode(", ", $subcategories) . "
-
-### Meal:
-- " . $mealContent . "
-
-### Output format:
-Provide the calculated nutritional values in JSON format, grouped by major categories.
-
-Example output:
-{
-    \"Protein\": \"30g\",
-    \"Fat\": \"20g\",
-    \"Carbohydrates\": \"40g\",
-    \"Vitamins\": \"30mg\",
-    \"Minerals\": \"50mg\",
-    \"Subcategories\": {
-        \"Valine\": \"2g\",
-        \"Isoleucine\": \"1.5g\",
-        \"Leucine\": \"1.8g\",
-        \"Lysine\": \"2g\"
-        ...
+    You are a nutritional analysis assistant. Calculate the nutritional intake from the given meal based on the following categories and subcategories. Ensure all nutritional units are aligned with the standard units from the USDA FoodData Central. For the Vitamins and Minerals in the Major Nutrients section, calculate and output only their total amounts in mg. Do not include detailed breakdowns of individual vitamins or minerals in the Major Nutrients section. Output the results in JSON format.
+    
+    ### Categories:
+    - " . implode(", ", $categories) . "
+    
+    ### Subcategories:
+    - " . implode(", ", $subcategories) . "
+    
+    ### Meal:
+    - " . $mealContent . "
+    
+    ### Important Rules:
+    1. If the meal is valid (e.g., \"Grilled chicken with rice and vegetables\"), calculate the nutritional values normally.
+    2. If the meal is meaningless, nonsensical, generic (e.g., \"test\", \"no meal\", \"unknown\", \"random\", \"nothing\", \"food\", \"meal\"), return the following JSON:
+    {
+        \"error\": \"Meal not recognized\"
     }
-}
-";
+    3. Do not generate nutritional values if the meal is not clearly defined or is ambiguous.
+    
+    ### Example Valid Output:
+    {
+        \"Protein\": \"30g\",
+        \"Fat\": \"20g\",
+        \"Carbohydrates\": \"40g\",
+        \"Vitamins\": \"30mg\",
+        \"Minerals\": \"50mg\",
+        \"Subcategories\": {
+            \"Valine\": \"2g\",
+            \"Isoleucine\": \"1.5g\",
+            \"Leucine\": \"1.8g\",
+            \"Lysine\": \"2g\"
+        }
+    }
+    
+    ### Example Invalid Input Responses:
+    1. **Input:** \"test\"
+       **Output:**
+    {
+        \"error\": \"Meal not recognized\"
+    }
+    
+    2. **Input:** \"no meal\"
+       **Output:**
+    {
+        \"error\": \"Meal not recognized\"
+    }
+    
+    3. **Input:** \"some food\"
+       **Output:**
+    {
+        \"error\": \"Meal not recognized\"
+    }
+    ";
 
-\Log::info('Generated Prompt:', ['prompt' => $prompt]);
-
-
+    \Log::info('Generated Prompt:', ['prompt' => $prompt]);
+    
         try {
             // APIリクエストを送信
             $response = Http::withHeaders([
@@ -103,21 +119,17 @@ Example output:
                 'max_tokens' => 1000,
                 'temperature' => 0.7,
             ]);
-
+    
+            $responseData = $response->json();
+    
             \Log::info('Response body:', ['body' => $response->body()]);
 
-            if ($response->ok()) {
-                return $response->json();
-            } else {
-
-                // エラー内容をログに記録
-                \Log::error('ChatGPT API error:', [
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-
-                return null;
+            // ChatGPTのレスポンスを確認
+            if (isset($responseData['error']) && $responseData['error'] === "Meal not recognized") {
+                return response()->json(['error' => 'Your meal is not recognized.'], 400);
             }
+    
+            return $responseData;
         } catch (\Exception $e) {
             // 例外をログに記録
             \Log::error('ChatGPT API exception:', ['message' => $e->getMessage()]);

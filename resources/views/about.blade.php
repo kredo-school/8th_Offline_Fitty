@@ -4,15 +4,86 @@
 
 @section('content')
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
+<style>
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+
+.about-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    /* すべての要素のスタイルを完全にリセット */
+    * {
+        all: revert;  /* ブラウザのデフォルトスタイルに戻す */
+    }
+
+    /* body に最低限のデフォルト設定を適用 */
+    body {
+        background: rgb(32, 200, 24);
+        color: black !important;
+        font-family: Arial, sans-serif !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* すべてのレイアウト要素を非表示 */
+    .about-page, .about-content-wrapper, .about-description, .features-list, .about-image-section {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 画像もリセット */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 2px !important;
+    }
+
+    br{
+        margin:0% !important;
+    }
+
+    h2 {
+        font-size: 20px !important;
+    }
+
+    .material-symbols-outlined{
+        font-size: 35px !important;
+    }
+
+    span {
+        font-size: 20px;
+    }
+
+    .team-button{
+        margin-top: 2px !important;
+        font-size: 5px !important;
+        text-align: center !important;
+
+    }
+}
+
+
+
+
+
+
+
+
+</style>
 
     <!-- About Section -->
     <div class="about-page">

@@ -409,6 +409,8 @@ class AdviceController extends Controller
 
     public function index($user_id)
     {
+        $user = User::findOrFail($user_id);
+
         // 指定されたユーザーIDに関連するアドバイスを取得
         $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();

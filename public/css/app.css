@@ -84,6 +84,7 @@
 }
 
 footer {
+    margin-top: 40px;
     padding: 20px 10%;
     text-align: center;
     font-size: 1.2rem;
@@ -95,15 +96,20 @@ footer span {
 }
 
 /* about page用 */
+
+
 .about-page {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #00984F; /* 緑色 */
     color: #ffffff;
-    min-height: 100vh; /* 画面全体の高さをカバー */
+    height: 100%;
     padding: 20px 10%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .about-header-section {
@@ -112,6 +118,14 @@ footer span {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .about-header-section{
+        width: auto;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
 }
 
 .about-content-wrapper {
@@ -132,6 +146,8 @@ footer span {
     margin-bottom: 30px;
     line-height: 1.8;
 }
+
+
 
 .features-list {
     display: grid;
@@ -255,14 +271,20 @@ footer span {
     width: 100%;
     max-width: 1200px;
     box-sizing: border-box;
+    justify-content: center; /* 🟢 中央揃え */
+    align-items: center; /* 🟢 アイテムの垂直方向の中央揃え */
+    text-align: center; /* 🟢 すべてのテキストを中央揃え */
 }
 
 .team-card {
     background-color: white;
     border-radius: 10px;
-    text-align: center;
+    text-align: center; /* 🟢 中央揃え */
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* 🟢 追加 */
+    flex-direction: column; /* 🟢 縦に並べる */
+    align-items: center; /* 🟢 中央揃え */
 }
 
 .team-image {
@@ -270,7 +292,9 @@ footer span {
     height: 120px;
     border-radius: 10%;
     margin-bottom: 10px;
+    display: block; /* 🟢 画像が余計な余白を持たないように */
 }
+
 
 .team-name {
     font-size: 1.2rem;

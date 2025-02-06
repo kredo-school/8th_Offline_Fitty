@@ -740,6 +740,13 @@ background-color: #087722; /* ホバー時の色 */
   background-color: #f8f9fa;
 }
 
+.user-dailylog .custom-accordion-item:hover {
+  background-color: #00984f !important;
+}
+
+.user-dailylog .custom-accordion-toggle:hover {
+  background-color: transparent !important;
+}
 
 .inputmeal {
 max-width: 600px;
@@ -761,6 +768,23 @@ background-color: #ffa726; /* Darker orange on hover */
 .inputmeal .textarea-border {
 border: 2px dashed #9575cd; /* Purple dashed border */
 border-radius: 5px;
+}
+
+.inputmeal #loadingMessage {
+  font-size: 1.2em;
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
 }
 
 /* omori add end */
