@@ -1147,6 +1147,7 @@ display: flex!important;
 align-items: center!important;
 }
 
+
 /* テーブルスタイル */
 .admin-users-table {
 font-family: 'Poppins', sans-serif!important;
@@ -2056,72 +2057,72 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 
 /* ここからinquiries index */
 .admin-inquiries {
-  max-width: 1000px !important;
+  width: 80% !important;
   background: #f9fdf4 !important;
   border-radius: 8px !important;
-}
-
-.admin-inquiries-title {
-  font-family: 'Shrikhand', cursive !important;
-  font-size: 32px!important;
+  font-family: 'Shrikhand', sans-serif !important;
   color: #00804F!important;
-  line-height: 1.5!important; 
 }
 
-.admin-inquiries-table{
-  border: none !important;
+.admin-inquiries-table {
+  border-collapse: collapse !important;
+  width: 100%;
   font-family: 'Poppins', sans-serif !important;
+  background: #f9fdf4 !important; /* 周りと同じ色に統一 */
+  border: 1px solid #d6d6d6 !important; /* 薄いグレーの境界線 */
 }
 
-.status-badge {
-  display: inline-block!important;
-  padding: 5px 10px!important;
-  font-size: 14px!important;
-  border-radius: 20px!important;
-  border: 1px solid!important;
-  font-weight: bold!important;
-  text-align: center!important;
-  min-width: 100px!important;
+/* テーブルヘッダーのスタイル */
+.admin-inquiries-table-head th {
+  background: #f9fdf4 !important; /* ヘッダー背景も同じに */
+  color: #6c757d !important;
+  font-weight: bold !important;
+  padding: 10px !important;
+  border-bottom: 1px solid #d6d6d6 !important;
+  text-align: left !important;
 }
 
-/* Completedバッジ */
-.badge-completed {
-  color: #2c3e50;
-  background-color: transparent;
-  border-color: #2c3e50;
+/* テーブルのボディ */
+.admin-inquiries-table tbody td {
+  background: #f9fdf4 !important;
+  padding: 10px !important;
+  border-bottom: 1px solid #e0e0e0 !important;
 }
 
-/* In Progressバッジ */
-.badge-in-progress {
-  color: hsl(248, 91%, 49%);
-  background-color: transparent;
-  border-color: hsl(248, 91%, 49%);
+/* テーブル行ホバー時のスタイル */
+.admin-inquiries-table tbody tr:hover td {
+  background-color: #ffa965 !important;
+  color: white !important;
 }
 
-/* Pendingバッジ */
-.badge-pending {
-  color: #e74c3c;
-  background-color: transparent;
-  border-color: #e74c3c;
+/* テーブル行ホバー時のスタイル */
+.admin-inquiries-table tbody tr:hover td span{
+  color: white !important;
 }
 
-.admin-inquiries-action-button {
-  padding: 6px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+/* バッジのホバースタイル */
+.admin-inquiries-table tbody tr:hover .status-badge {
+  color: white !important;
+  background-color: transparent !important;
+  border-color: white !important;
 }
 
-.material-symbols-outlined {
-  font-size: 20px;
-  color: #333;
+/* アイコンおよびリンクのホバースタイル */
+.admin-inquiries-table tbody tr:hover a,
+.admin-inquiries-table tbody tr:hover .admin-inquiries-material-symbols-outlined {
+  color: white !important;
 }
 
-.inquiry-title {
-  font-family: 'Shrikhand', cursive !important;
-  font-size: 32px!important;
-  color: #00804F!important;
-  line-height: 1.5!important; 
+/* アクションアイコンのホバースタイル */
+.admin-inquiries-action-button:hover {
+  color: white !important;
 }
+
+.admin-inquiries-table,
+.admin-inquiries-table td {
+  border: none !important;
+}
+
 
 
 /* ここからinqury form */
@@ -2130,6 +2131,14 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   border-radius: 8px !important;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1) !important;
   font-family: 'Shrikhand', sans-serif !important;
+  color: rgba(247, 252, 241, 1) !important;
+}
+
+.inquiry-title {
+  font-family: 'Shrikhand', cursive !important;
+  font-size: 32px!important;
+  color: #00804F!important;
+  line-height: 1.5!important; 
 }
 
 .inquiry-card {
@@ -2165,8 +2174,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 .cancel-btn {
   background: none !important;
   color: #f08a5d !important;
-  border: 1px solid #f08a5d !important;
-  padding: 8px 16px !important;
+  border: 2px solid #f08a5d !important;
   border-radius: 5px !important;
   margin-right: 10px !important;
   transition: 0.3s !important;
@@ -2222,11 +2230,11 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   border-color: #e74c3c;
 }
 
-.admin-inquiries-action-button {
+/* .admin-inquiries-action-button {
   padding: 6px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-}
+} */
 
 .material-symbols-outlined {
   font-size: 20px;

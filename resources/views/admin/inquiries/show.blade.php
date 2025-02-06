@@ -5,7 +5,7 @@
         <div class="row row-main w-100">
             @include('sidebar.admin-sidebar')
 
-            <div class="col-md-9 ms-sm-auto col-lg-10 admin-inquiries">
+            <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- Main Content -->
 <div class="container inquiry-container">
     <div class="card inquiry-card">
@@ -57,8 +57,10 @@
                 </div>
 
                 <div class="form-buttons">
-                    <a href="{{ route('admin.inquiries.index') }}" class="btn cancel-btn admin-btn-equal">Cancel</a>
-                    <button type="submit" class="btn send-btn admin-btn-equal">Save</button>
+                    <a href="{{ route('admin.inquiries.index') }}" class="btn cancel-btn admin-users-cancel-btn admin-btn-equal">Cancel</a>
+                    <button type="submit" class="btn send-btn admin-users-delete-btn admin-btn-equal">Save</button>
+
+
                 </div>
             </form>
           </div>
