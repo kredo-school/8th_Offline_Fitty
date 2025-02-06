@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Inquiry;
 
 
+
 use App\Models\DailyLog;
 
 use Illuminate\Support\Facades\Auth;
@@ -217,7 +218,7 @@ class UserController extends Controller
         // dd($request->all());
 
 
-        // プロフィールがない場合はエラー
+        //  Error if there is no profile
         if (!$user->profile) {
             return back()->withErrors(['profile' => 'User profile not found. Please create profile page.']);
     }
@@ -226,8 +227,8 @@ class UserController extends Controller
             'category' => 'required|string|max:255',
             'content'  => 'required|string|min:30',
         ]);
-// dd('omori');
-        // 問い合わせデータの作成
+
+        // Create Inquiry data
         Inquiry::create([
             'user_id'  => $user->id,
             'email'    => $user->email,
@@ -236,7 +237,13 @@ class UserController extends Controller
             'content'  => $request->content,
         ]);
 
-        return redirect()->route('user.sendInquiry.form', $user->id)->with('success', 'Inquiry sent successfully.');
+        // Send the thank you email
+        // `MailController` の `sendThankYouMail` を呼び出す
+            $mailController = new MailController();
+            $mailController->sendThankYouMail($id);
+
+
+        return redirect()->route('user.sendInquiry.form', $user->id)->with('success', 'Inquiry submit successfully and a confirmation email has been sent!');
 
     }
 }

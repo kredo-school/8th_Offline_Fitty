@@ -8,6 +8,22 @@
     <div class="col-md-9 ms-sm-auto col-lg-10 "> 
         <div class="d-flex justify-content-center">
             <div class="nurti-card w-50  m-3">
+
+                @if (session('success'))
+                    <div id="success-message" class="alert alert-success text-center" style="font-size: 16px; padding: 15px; border-radius: 5px;">
+                        🎉 {{ session('success') }}
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('success-message').style.opacity = '0';
+                            setTimeout(function() {
+                                document.getElementById('success-message').style.display = 'none';
+                            }, 500);
+                        }, 3000);
+                    </script>
+                @endif
+
                 <div class="card-header" style="border-bottom: 2px solid #00984f;">
                     <h3>Inquiry Form</h3>
                 </div>
