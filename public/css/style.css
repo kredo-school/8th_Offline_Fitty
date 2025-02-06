@@ -1109,13 +1109,10 @@ margin-top: 1.0px!important;
 
 /* 全体のフォント */
 .admin-users {
-font-family: 'Shrikhand', sans-serif!important;
-background-color: rgba(247, 252, 241, 1) !important;
-display: flex;
-    justify-content: center; /* 横中央配置 */
-    align-items: center; /* 縦中央配置 */
-    height: calc(100vh - 190px);
+  font-family: 'Shrikhand', sans-serif!important;
+  background-color: rgba(247, 252, 241, 1) !important;
 }
+
 /*
 タイトルスタイル */
 .admin-users-title {

@@ -13,15 +13,14 @@
         const weightChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: @json($dates), // 日付
+                labels: @json($dates), // 修正: 日付ごとのラベル
                 datasets: [{
-                    label: 'Weight Transition (kg)',
-                    data: @json($weights), // 体重
+                    label: 'Daily Average Weight (kg)',
+                    data: @json($weights), // 修正: 平均体重
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderWidth: 2,
                     fill: true,
-                    tension: 0.4
                 }]
             },
             options: {

@@ -222,7 +222,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // 全てのアコーディオンを閉じる（開いているものを閉じる）
             document.querySelectorAll('.accordion-collapse.show').forEach(collapse => {
                 collapse.classList.remove('show');
-                collapse.previousElementSibling.setAttribute('aria-expanded', 'false');
+                const previousButton = document.querySelector(`[aria-controls="${collapse.id}"]`);
+                if (previousButton) {
+                    previousButton.setAttribute('aria-expanded', 'false');
+                }
             });
 
             // アイコンの状態をリセット
