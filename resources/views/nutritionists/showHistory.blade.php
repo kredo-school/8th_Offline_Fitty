@@ -117,6 +117,7 @@
 
                     const labels = Object.keys(subCategoryRates);
                     const values = Object.values(subCategoryRates);
+                    const adjustedValues = values.map(v => Math.min(v, 160)); // 150%以上を150でカット
 
                     new Chart(ctx, {
                         type: 'radar',
@@ -124,23 +125,58 @@
                             labels: labels,
                             datasets: [{
                                 label: '{{ $category }} Subcategories (%)',
-                                data: values,
+                                data: adjustedValues,
                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                                 borderColor: 'rgba(75, 192, 192, 1)',
                                 pointBackgroundColor: 'rgba(75, 192, 192, 1)',
                             }]
                         },
                         options: {
+                            responsive: true,
                             scales: {
                                 r: {
                                     suggestedMin: 0,
-                                    suggestedMax: 150
+                                    suggestedMax: 160,
+                                    ticks: {
+                                        stepSize: 20, // 20%刻みに変更
+                                        backdropColor: 'rgba(255, 255, 255, 0.8)',
+                                        color: 'rgba(0, 0, 0, 0.8)',
+                                        font: {
+                                            size: 12
+                                        }
+                                    },
+                                    grid: {
+                                        color: function (context) {
+                                            return context.tick.value === 100 ? 'orange' : 'rgba(0, 0, 0, 0.1)'; // 100%の線をオレンジに
+                                        },
+                                        lineWidth: function (context) {
+                                            return context.tick.value === 100 ? 2 : 1; // 100%の線を太く
+                                        }
+                                    },
+                                    pointLabels: {
+                                        font: {
+                                            size: 14,
+                                            weight: 'bold'
+                                        },
+                                        color: 'rgba(0, 0, 0, 0.8)'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        beforeBody: function (tooltipItems) {
+                                            let originalValue = values[tooltipItems[0].dataIndex];
+                                            return originalValue > 160 ? '⚠ Over 160%! Actual: ' + originalValue + '%' : '';
+                                        }
+                                    }
                                 }
                             }
                         }
                     });
                 });
             </script>
+
             @endif
         @endforeach
 
