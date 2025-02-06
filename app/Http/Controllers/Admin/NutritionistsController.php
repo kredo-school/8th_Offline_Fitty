@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Nutritionist;
+use App\Models\User;
 use App\Models\NutritionistsProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class NutritionistsController extends Controller
 {
@@ -58,6 +59,44 @@ class NutritionistsController extends Controller
     {
         return view('admin.nutritionists.profile.register');
     }
+
+    public function store(Request $request)
+{
+    // バリデーション
+    $validated = $request->validate([
+        'username' => 'required|string|max:255',
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|confirmed|min:8',
+        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+    ]);
+
+    // ユーザーの作成
+    $user = User::create([
+        'name' => $validated['username'],
+        'email' => $validated['email'],
+        'password' => Hash::make($validated['password']),
+    ]);
+
+    // プロファイルの作成
+    $profileData = [
+        'user_id' => $user->id,
+        'first_name' => $validated['first_name'],
+        'last_name' => $validated['last_name'],
+        'introduction' => $request->introduction,
+    ];
+
+    if ($request->hasFile('profile_image')) {
+        $profileData['profile_image'] = $request->file('profile_image')->store('profiles', 'public');
+    }
+
+    NutritionistsProfile::create($profileData);
+
+    return redirect()->route('admin.nutritionists.index')->with('success', 'Nutritionist added successfully.');
+}
+
+
 }
 
 

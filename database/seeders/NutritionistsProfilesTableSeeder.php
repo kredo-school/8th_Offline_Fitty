@@ -19,7 +19,7 @@ class NutritionistsProfilesTableSeeder extends Seeder
                 'user_id' => $user->id,
                 'first_name' => 'First' . $user->id, // 仮の名前
                 'last_name' => 'Last' . $user->id,  // 仮の名字
-                'memo' => 'This is a memo for nutritionist ' . $user->id, // 仮のメモ
+                'introduction' => 'This is a memo for nutritionist ' . $user->id, // 仮のメモ
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
