@@ -7,7 +7,7 @@
 
             <div class="col-md-9 ms-sm-auto col-lg-10 admin-inquiries">
                 <!-- Main Content -->
-                <div class="container my-5 mx-1 admin-inquiries">
+                <div class="container admin-inquiries">
                     <!-- Header Section -->
                     <div class="d-flex justify-content-between align-items-center mb-3 admin-inquiries-header">
                         <h1 class="admin-inquiries-title">
