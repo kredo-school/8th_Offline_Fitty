@@ -71,8 +71,8 @@
                                     </div>
                                 </div>
                                 <div class="detail-item detail-item-edit">
-                                    <span class="detail-label detail-label-edit">Description</span>
-                                    <textarea name="memo" class="detail-textarea detail-textarea-edit">{{ $user->nutritionistsProfile->memo }}</textarea>
+                                    <span class="detail-label detail-label-edit">Introduction</span>
+                                    <textarea name="introduction" class="detail-textarea detail-textarea-edit">{{ $user->nutritionistsProfile->introduction }}</textarea>
                                 </div>
                             </div>
                             <div class="edit-button edit-button-edit">
