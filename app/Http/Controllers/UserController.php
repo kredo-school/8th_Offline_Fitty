@@ -38,7 +38,7 @@ class UserController extends Controller
 
     public function showinputmeal()
     {
-        $lastWeight = DailyLog::latest()->value('weight'); // 最新のweightを取得
+        $lastWeight = DailyLog::latest()->where('user_id', Auth::id())->value('weight'); // 最新のweightを取得
         return view('users.inputmeal', compact('lastWeight'));
     }
 
