@@ -1129,23 +1129,52 @@ color: #00984f!important;
 }
 
 /* 検索ボックスのカスタムスタイル */
-.admin-users-search-box .input-group {
-font-family: 'Poppins', sans-serif!important;
-max-width: 300px!important; /* 幅を細く調整 */
-border: 2px solid #00984F!important;
-border-radius: 8px!important;
-overflow: hidden!important;
+.admin-users-search-box {
+  width: 30% !important;
+  /* max-width: 400px !important; */
+  padding: 0 !important;
+  margin-left: auto !important;
+  margin-right: 0 !important; /* 右端に配置 */
+}
+.admin-users-input-group {
+  display: flex !important;
+  align-items: stretch !important; /* ボタンと入力フィールドを同じ高さにする */
+  border: 2px solid #00984F !important;
+  border-radius: 30px !important;
+  overflow: hidden !important;
+  background: white !important;
+}
+.admin-users-search-input {
+  flex: 1 !important;
+  border: none !important;
+  padding: 12px 15px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
+  color: #00984F !important;
+  outline: none !important;
+}
+.admin-users-search-input::placeholder {
+  color: #99bfa5 !important;
+}
+.admin-users-search-btn {
+  width: 60px !important;
+  background: #00984F !important;
+  border: none !important;
+ 
 }
 
-/* 検索ボタンのスタイル */
-.admin-users-search-btn {
-background-color: #00984F!important;
-border: none!important;
-color: white!important;
-padding: 4px 10px!important; /* 少し小さく調整 */
-display: flex!important;
-align-items: center!important;
+/* アイコンのスタイル */
+.admin-users-search-btn span {
+  font-size: 18px!important;
+    color: white !important;
 }
+
+
+
+
+
+
+
 
 
 /* テーブルスタイル */
@@ -1383,16 +1412,16 @@ margin-top: 20px;
 }
 
 /* 検索ボックスのカスタムスタイル */
-.admin-nutritionists .admin-nutritionists-search-box .input-group {
+/* .admin-nutritionists .admin-nutritionists-search-box .input-group {
   font-family: 'Poppins', sans-serif!important;
-max-width: 300px; /* 幅を細く調整 */
-border: 2px solid #00984F;
+max-width: 300px; 幅を細く調整 */
+/* border: 2px solid #00984F;
 border-radius: 8px;
 overflow: hidden;
-}
+} */
 
 /* 検索ボタンのスタイル */
-.admin-nutritionists .admin-nutritionists-search-btn {
+/* .admin-nutritionists .admin-nutritionists-search-btn {
 font-family: 'Poppins', sans-serif!important;
 background-color: #00984F;
 border: none;
@@ -1402,13 +1431,13 @@ border-radius: 0;
 display: flex;
 align-items: right;
 justify-content: right;
-transition: background-color 0.3s ease;
-}
+transition: background-color 0.3s ease; */
+/* } */
 
-.admin-nutritionists .admin-nutritionists-search-btn:hover {
+/* .admin-nutritionists .admin-nutritionists-search-btn:hover {
 background-color: #007b3a;
 font-family: 'Poppins', sans-serif!important;
-}
+} */
 
 /* テーブルスタイル */
 .admin-nutritionists .admin-nutritionists-table {
@@ -1630,8 +1659,6 @@ margin: 0;
 padding: 0;
 display: flex;
 justify-content: center;
-align-items: center;
-height: 100vh;
 }
 
 .admin-nutri-profile-container {
@@ -1704,18 +1731,15 @@ color: #757575 !important;
 
 /* admin categories*/
 .admin-categories-container {
-background-color: rgba(247, 252, 241, 1) !important;
 padding: 30px 80px !important;
-display: flex !important;
-flex-direction: column !important;
-align-items: center !important;
-justify-content: center !important;
+
 }
 
 .admin-categories-content-wrapper {
 max-width: 819px !important;
 width: 100% !important;
 margin: 0 auto !important;
+font-family: 'Poppins', sans-serif !important;
 }
 
 /* ヘッダーセクション */
@@ -1777,6 +1801,7 @@ font-size: 24px !important;
   padding: 5px 0 !important;
   border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
   z-index:9999 !important;
+  
 }
 
 .admin-categories-subcategory-name {
@@ -1848,7 +1873,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 }
 
 .admin-categories-header-section {
-  margin-bottom: 20px !important; /* ヘッダーとリストの間にスペースを追加 */
+  margin-bottom: 30px !important; /* ヘッダーとリストの間にスペースを追加 */
 }
 
 /* アコーディオンのボタンのスタイル */
@@ -1898,7 +1923,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 
 /* アコーディオンの隙間 */
 .accordion-item.admin-categories-accordion-item {
-  margin-bottom: 20px !important;
+  margin-bottom: 25px !important;
 }
 
 
@@ -2061,8 +2086,17 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   background: #f9fdf4 !important;
   border-radius: 8px !important;
   font-family: 'Shrikhand', sans-serif !important;
+  color: rgba(0, 152, 79, 1) !important;
+}
+
+.admin-inquiries-header {
+  width: 80% !important;
+  background: #f9fdf4 !important;
+  border-radius: 8px !important;
+  font-family: 'Shrikhand', sans-serif !important;
   color: #00804F!important;
 }
+
 
 .admin-inquiries-table {
   border-collapse: collapse !important;
@@ -2137,7 +2171,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
 .inquiry-title {
   font-family: 'Shrikhand', cursive !important;
   font-size: 32px!important;
-  color: #00804F!important;
+  color: rgba(0, 152, 79, 1) !important;
   line-height: 1.5!important; 
 }
 
@@ -2240,6 +2274,8 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   font-size: 20px;
   color: #333;
 }
+
+
 
 
 

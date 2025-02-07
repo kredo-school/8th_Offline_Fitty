@@ -18,7 +18,7 @@
             <!-- Search Box -->
             <div class="admin-users-search-box">
                 <form action="{{ route('admin.users.index') }}" method="GET" class="w-100">
-                    <div class="input-group admin-users-input-group w-100">
+                    <div class="input-group admin-users-input-group ">
                         <input type="text" name="search" class="form-control admin-users-search-input"
                                placeholder="Search" value="{{ old('search', $search) }}">
                         <button class="btn admin-users-search-btn" type="submit">

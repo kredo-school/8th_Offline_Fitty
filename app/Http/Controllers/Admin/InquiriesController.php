@@ -9,17 +9,20 @@ use Illuminate\Http\Request;
 class InquiriesController extends Controller
 {
     public function index(Request $request)
-    {
-        $search = $request->get('search', '');
-        $inquiries = Inquiry::when($search, function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
-                      ->orWhere('category', 'like', "%{$search}%");
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+{
+    $search = $request->get('search', '');
+    $inquiries = Inquiry::when($search, function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('category', 'like', "%{$search}%")
+                  ->orWhere('person_in_charge', 'like', "%{$search}%");
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
-        return view('admin.inquiries.index', compact('inquiries', 'search'));
-    }
+    return view('admin.inquiries.index', compact('inquiries', 'search'));
+}
+
+
 
     public function show($id)
     {
