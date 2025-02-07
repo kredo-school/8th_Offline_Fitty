@@ -318,7 +318,7 @@ class NutritionistController extends Controller
             'avatar' => 'mimes:jpeg,png,jpg|max:2048',
             'first_name' => 'required|min:1|max:255',
             'last_name' => 'required|min:1|max:255',
-            'memo' => 'required|min:1|max:255',
+            'introduction' => 'required|min:1|max:255',
         ]);
 
         // データを更新
@@ -335,7 +335,7 @@ class NutritionistController extends Controller
         $profile = $user->nutritionistsProfile;
         $profile->first_name = $request->first_name;
         $profile->last_name = $request->last_name;
-        $profile->memo = $request->memo;
+        $profile->introduction = $request->introduction;
 
         $profile->save();
 

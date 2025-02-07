@@ -29,8 +29,8 @@
                             <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->first_name}} {{$user->nutritionistsProfile->last_name}}</span>
                         </div>
                         <div class="detail-item detail-item-view">
-                            <span class="detail-label detail-label-view">Description</span>
-                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->memo}}</span>
+                            <span class="detail-label detail-label-view">Introduction</span>
+                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->introduction}}</span>
                         </div>
                     </div>
                     <div class="edit-button edit-button-view">
