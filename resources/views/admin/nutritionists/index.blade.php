@@ -17,11 +17,11 @@
                         </h1>
 
                         <!-- Search Box -->
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex ">
                             <form action="{{ route('admin.nutritionists.index') }}" method="GET" class="d-flex me-3">
-                                <div class="input-group admin-users-input-group">
+                                <div class="input-group admin-users-input-group ">
                                     <input type="text" name="search" class="form-control admin-users-search-input"
-                                           placeholder="Search" value="{{ request('search') }}">
+                                           placeholder="Search" value="{{ old('search', $search) }}">
                                     <button class="btn admin-users-search-btn" type="submit">
                                         <span class="material-symbols-outlined">search</span>
                                     </button>
