@@ -237,7 +237,6 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/memo.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const overallContainer = document.getElementById('overall');
