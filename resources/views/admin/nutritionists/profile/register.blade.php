@@ -6,7 +6,7 @@
     <div class="row row-main w-100">
         @include('sidebar.admin-sidebar')
 
-        <div class="col-md-9 ms-sm-auto col-lg-10 admin-inquiries">
+        <div class="col-md-9 ms-sm-auto col-lg-10">
             <!-- Main Content -->
             <div class="admin-nutri-profile">
                 <div class="col-8">

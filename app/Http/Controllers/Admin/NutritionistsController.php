@@ -25,21 +25,21 @@ class NutritionistsController extends Controller
     {
         // 検索クエリを取得
         $search = $request->input('search');
-
+    
         // 栄養士データを検索
         $query = $this->nutritionist_profile->query();
-
+    
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('email', 'like', '%' . $search . '%');
+            $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$search}%"]);
         }
-
+    
         // ページネーションでデータを取得
         $nutritionists_profiles = $query->paginate(10);
-
+    
         // ビューにデータを渡す
         return view('admin.nutritionists.index', compact('nutritionists_profiles', 'search'));
     }
+    
 
     /**
      * 栄養士の削除

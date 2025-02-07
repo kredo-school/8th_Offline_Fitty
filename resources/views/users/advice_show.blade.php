@@ -8,6 +8,45 @@
         #app {
             min-height: auto !important;
         }
+
+        @media (max-width: 768px) { /* スマホ画面 */
+            .combined-section {
+                display: flex;
+                flex-direction: column; /* 縦方向に並べる */
+            }
+
+            .combined-section > div {
+                margin-bottom: 20px; /* 要素間の間隔 */
+            }
+
+            .chart-container { /* チャートのサイズ調整 */
+                max-width: 100%; /* 親要素に合わせて最大幅を設定 */
+                overflow-x: auto; /* 横スクロールが必要な場合に表示 */
+            }
+
+            .custom-right-section{
+                width: 95%;
+
+            }
+        }
+
+        @media (min-width: 769px) { /* PC・タブレット画面 */
+            .combined-section {
+                display: flex;
+                flex-direction: row; /* 横方向に並べる */
+                align-items: flex-start; /* 上に揃える */
+            }
+
+            .combined-section > div {
+                width: 50%; /* 各要素の幅を50%にする */
+                margin-right: 20px; /* 要素間の間隔 */
+            }
+
+            .combined-section > div:last-child {
+                margin-right: 0; /* 右側のマージンをなくす */
+            }
+        }
+
     </style>
 
 @include('sidebar.humburger')
@@ -18,8 +57,9 @@
             @include('sidebar.user-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
+                <div class="combined-section">
                 {{-- Right Section start--}}
-                <div class="custom-right-section">
+                 <div class="custom-right-section">
                     <h4 class="text-center p-1">Advice</h4>
                         <!-- Overall Rating -->
                         <div class="mb-3">
@@ -96,6 +136,7 @@
 
                 {{-- Left Section end --}}
 
+            </div>
             </div>
         </div>
     </div>
