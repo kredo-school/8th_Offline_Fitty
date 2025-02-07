@@ -11,8 +11,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\InquiriesController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Admin\NutritionistsController;
+use App\Http\Controllers\UserProfileController;
+
 
 
 use App\Http\Controllers\ChatGptController;
@@ -158,11 +159,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         Route::get('/index', [AdminController::class, 'index'])->name('index');
+
         Route::get('/users', [UsersController::class, 'index'])->name('users.index');
         Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
         Route::patch('/{id}/allocateNutritionist', [UsersController::class, 'allocateNutritionist'])->name('users.allocateNutritionist');
 
         Route::get('/nutritionists', [NutritionistsController::class, 'index'])->name('nutritionists.index');
+        Route::post('/nutritionists/store', [NutritionistsController::class, 'store'])->name('nutritionists.store');
         Route::get('/nutritionists/create', [NutritionistsController::class, 'create'])->name('nutritionists.create');
         Route::delete('/nutritionists/{id}', [NutritionistsController::class, 'destroy'])->name('nutritionists.destroy');
 
@@ -178,15 +181,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 });
 
-
-
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
 
 
 

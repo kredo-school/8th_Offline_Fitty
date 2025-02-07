@@ -5,8 +5,8 @@
     <div class="row main-row">
         @include('sidebar.admin-sidebar')
 
-        <div class="col-md-9 ms-sm-auto col-lg-10 admin-users" style="height: calc(100vh - 190px); ">
-    <div class="mx-auto" style="width: 60%;">
+        <div class="col-md-9 ms-sm-auto col-lg-10 admin-users">
+    <div class="mx-auto" style="width: 80%;">
         <!-- Main Content -->
 
         <!-- Header Section -->
@@ -18,7 +18,7 @@
             <!-- Search Box -->
             <div class="admin-users-search-box">
                 <form action="{{ route('admin.users.index') }}" method="GET" class="w-100">
-                    <div class="input-group admin-users-input-group w-100">
+                    <div class="input-group admin-users-input-group ">
                         <input type="text" name="search" class="form-control admin-users-search-input"
                                placeholder="Search" value="{{ old('search', $search) }}">
                         <button class="btn admin-users-search-btn" type="submit">
@@ -39,7 +39,6 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Registration Date</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -49,17 +48,6 @@
                             <td><a href="#" class="admin-users-id-link">{{ $user_profile->id }}</a></td>
                             <td>{{ $user_profile->first_name }} {{ $user_profile->last_name }}</td>
                             <td>{{ $user_profile->created_at->format('m/d/Y') }}</td>
-                            <td>
-                                @if ($user_profile->is_active)
-                                    <span class="status-badge status-active admin-users-status">
-                                        <span class="status-dot admin-users-status-dot"></span> Active
-                                    </span>
-                                @else
-                                    <span class="status-badge status-inactive admin-users-status">
-                                        <span class="status-dot admin-users-status-dot"></span> Inactive
-                                    </span>
-                                @endif
-                            </td>
                             <td>
                                 <a href="{{ route('user.profile', ['id' => $user_profile->user_id]) }}" class="admin-users-action-button">
                                     <span class="material-symbols-outlined">person</span>
@@ -76,7 +64,7 @@
         @endif
 
         <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-4">
+        <div class="mt-4">
             {{ $user_profiles->links('admin.pagination') }}
         </div>
     </div>

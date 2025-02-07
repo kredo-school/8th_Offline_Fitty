@@ -7,9 +7,9 @@
         <div class="row w-100">
             @include('sidebar.admin-sidebar')
 
-            <div class="col-md-9 ms-sm-auto col-lg-10">
+            <div class="col-md-9 ms-sm-auto col-lg-10" >
                 <!-- Main Content -->
-                <div class="container my-5 mx-1 admin-users">
+                <div class="mx-auto" style="width: 80%;">
                     <!-- Header Section -->
                     <div class="d-flex justify-content-between align-items-center mb-3 admin-users-header">
                         <h1 class="admin-users-title">
@@ -17,11 +17,11 @@
                         </h1>
 
                         <!-- Search Box -->
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex ">
                             <form action="{{ route('admin.nutritionists.index') }}" method="GET" class="d-flex me-3">
-                                <div class="input-group admin-users-input-group">
+                                <div class="input-group admin-users-input-group ">
                                     <input type="text" name="search" class="form-control admin-users-search-input"
-                                           placeholder="Search" value="{{ request('search') }}">
+                                           placeholder="Search" value="{{ old('search', $search) }}">
                                     <button class="btn admin-users-search-btn" type="submit">
                                         <span class="material-symbols-outlined">search</span>
                                     </button>
@@ -30,7 +30,7 @@
 
                             <!-- Add Button -->
                             <a href="{{ route('admin.nutritionists.create') }}" class="admin-nutritionists-add-button">
-                                <span class="material-symbols-outlined">add</span>
+                                <span class="material-symbols-outlined text-white">add</span>
                                 <span>Add</span>
                             </a>
                         </div>
@@ -46,7 +46,6 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Last Login</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,18 +56,7 @@
                                         <td>{{ $nutritionist_profile->first_name }} {{ $nutritionist_profile->last_name }}</td>
                                         <td>{{ $nutritionist_profile->updated_at ? $nutritionist_profile->updated_at->format('m/d/Y') : 'N/A' }}</td>
                                         <td>
-                                            @if ($nutritionist_profile->is_active)
-                                                <span class="status-badge status-active admin-users-status">
-                                                    <span class="status-dot admin-users-status-dot"></span> Active
-                                                </span>
-                                            @else
-                                                <span class="status-badge status-inactive admin-users-status">
-                                                    <span class="status-dot admin-users-status-dot"></span> Inactive
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href={{ route('nutri.profile', ['id' => $nutritionist_profile->user_id]) }} class="admin-users-action-button">
+                                            <a href={{ route('nutri.profile',$nutritionist_profile->user_id) }} class="admin-users-action-button">
                                                 <span class="material-symbols-outlined">person</span>
                                             </a>
                                             <a href="#" class="admin-users-action-button" data-bs-toggle="modal"
@@ -83,7 +71,7 @@
                     @endif
 
                     <!-- Pagination -->
-                    <div class="d-flex justify-content-center mt-4">
+                    <div class="mt-4">
                         {{ $nutritionists_profiles->links('admin.pagination') }}
                     </div>
                 </div>

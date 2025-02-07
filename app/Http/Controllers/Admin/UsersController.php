@@ -24,23 +24,24 @@ class UsersController extends Controller
      * ユーザー一覧の表示（検索機能付き）
      */
     public function index(Request $request)
-    {
-        // 検索クエリを取得
-        $search = $request->input('search');
+{
+    // 検索クエリを取得
+    $search = $request->input('search');
 
-        // ユーザープロファイルを検索
-        $query = $this->user_profile->query(); // user_profile にアクセスする
+    // ユーザーデータを検索
+    $query = $this->user_profile->query();
 
-        if ($search) {
-            $query->where('name', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%'); // 必要に応じて検索フィールドを追加
-        }
-
-        // ページネーションで10件ずつ表示
-        $user_profiles = $query->paginate(10);
-
-        return view('admin.users.index', compact('user_profiles', 'search'));
+    if ($search) {
+        $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$search}%"]);
     }
+
+    // ページネーションでデータを取得
+    $user_profiles = $query->paginate(10);
+
+    // ビューにデータを渡す
+    return view('admin.users.index', compact('user_profiles', 'search'));
+}
+
 
     /**
      * ユーザーの削除
