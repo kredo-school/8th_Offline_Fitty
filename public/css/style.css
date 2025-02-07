@@ -59,6 +59,7 @@ padding: 0 15px;
 font-family: "Shrikhand", serif !important;
 color: #FFA965 !important;
 font-size: 50px !important; /* ナビゲーションブランドのフォントサイズ */
+cursor: default;
 }
 
 .nav-link.nav-username {
@@ -146,6 +147,12 @@ width: 100%;
 
 .sidemenu .title {
     white-space: nowrap;
+    /* omori add 0206*/
+    z-index:9999; 
+    white-space: normal; /* 改行を許可 */
+    word-wrap: break-word; /* 単語の途中でも折り返し */
+    overflow-wrap: break-word; /* どこでも折り返し */
+    /* omori add 0206 end*/
   }
 
 .nav .active{
@@ -1109,12 +1116,9 @@ margin-top: 1.0px!important;
 
 /* 全体のフォント */
 .admin-users {
-font-family: 'Shrikhand', sans-serif!important;
+/* font-family: 'Shrikhand', sans-serif!important; */
 background-color: rgba(247, 252, 241, 1) !important;
 display: flex;
-    justify-content: center; /* 横中央配置 */
-    align-items: center; /* 縦中央配置 */
-    height: calc(100vh - 190px);
 }
 /*
 タイトルスタイル */
@@ -2203,7 +2207,6 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   background: none !important;
   color: #f08a5d !important;
   border: 1px solid #f08a5d !important;
-  padding: 8px 16px !important;
   border-radius: 5px !important;
   margin-right: 10px !important;
   transition: 0.3s !important;
