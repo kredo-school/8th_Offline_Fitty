@@ -103,6 +103,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //mail test
     Route::get('/send-test-mail', [MailController::class, 'sendTestMail']);
+    Route::get('/send-thankyou-mail/{id}', [MailController::class, 'sendThankYouMail'])->name('send.thankyou.mail');
+
 
 
     Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
