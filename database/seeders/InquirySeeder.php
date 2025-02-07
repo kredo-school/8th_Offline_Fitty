@@ -21,7 +21,7 @@ class InquirySeeder extends Seeder
                 'user_id' => rand(2, 11), // 2〜11 のランダムな user_id
                 'name' => 'User ' . $i,
                 'email' => 'user' . $i . '@example.com',
-                'title' => 'Sample Inquiry ' . $i,
+                'title'    => null, // NULL に設定
                 'content' => 'This is a sample inquiry message number ' . $i . '.',
                 'category' => ['Login Issues', 'Billing', 'Feature Request', 'Other'][array_rand(['Login Issues', 'Billing', 'Feature Request', 'Other'])],
                 'memo' => 'This is a memo for inquiry ' . $i,
