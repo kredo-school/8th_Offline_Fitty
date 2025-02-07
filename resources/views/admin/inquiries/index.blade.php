@@ -14,18 +14,20 @@
                             Inquiries <span class="text-muted">({{ $inquiries->total() }})</span>
                         </h1>
 
-                        <!-- Search Box -->
-                        <div class="admin-inquiries-search-box">
-                            <form action="{{ route('admin.inquiries.index') }}" method="GET">
-                                <div class="input-group admin-inquiries-input-group">
-                                    <input type="text" name="search" class="form-control admin-inquiries-search-input"
+                        
+                        <div class="admin-users-search-box">
+                            <form action="{{ route('admin.inquiries.index') }}" method="GET" class="w-100">
+                                <div class="input-group admin-inquiries-input-group w-100">
+                                    <input type="text" name="search" class="form-control admin-users-search-input"
                                            placeholder="Search" value="{{ old('search', $search) }}">
-                                    <button class="btn admin-inquiries-search-btn" type="submit">
+                                    <button class="btn admin-users-search-btn" type="submit">
                                         <span class="material-symbols-outlined">search</span>
                                     </button>
                                 </div>
                             </form>
                         </div>
+
+
                     </div>
 
                     <!-- Inquiries Table -->
@@ -60,14 +62,14 @@
                                         </td>                                       
                                         <td>{{ $inquiry->person_in_charge }}</td>
                                         <td>
-                                            <div class="d-flex gap-3">
-                                                <a href="{{ route('user.profile', ['id' => $inquiry->id]) }}" class="admin-inquiries-action-button">
+                                            <div class=" d-flex gap-3 admin-inquiries-action-button">
+                                                <a href="{{ route('user.profile', $inquiry->user_id) }}" ">
                                                     <span class="material-symbols-outlined">person</span>
                                                 </a>
-                                                <a href="{{ route('admin.inquiries.show', $inquiry->id) }}" class="admin-inquiries-action-button">
+                                                <a href="{{ route('admin.inquiries.show', $inquiry->id) }}" ">
                                                     <span class="material-symbols-outlined">mail</span>
                                                 </a>
-                                                <a href="#" class="admin-inquiries-action-button" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $inquiry->id }}">
+                                                <a href="#" n " data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $inquiry->id }}">
                                                     <span class="material-symbols-outlined">delete</span>
                                                 </a>
                                             </div>
@@ -82,7 +84,7 @@
                     @endif
 
                     <!-- Pagination -->
-                    <div class="d-flex justify-content-center mt-4">
+                    <div class="mt-4">
                         {{ $inquiries->links('admin.pagination') }}
                     </div>
                 </div>

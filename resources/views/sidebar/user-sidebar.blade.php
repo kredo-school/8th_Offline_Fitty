@@ -5,7 +5,7 @@
         <li class="menu-item d-flex align-items-center py-2">
             <a href="{{route('user.inputmeal')}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">assignment</span>
-                <span class="title">Record</span>
+                <span class="title">Input meal</span>
             </a>
         </li>
         <li class="menu-item d-flex align-items-center py-2">
