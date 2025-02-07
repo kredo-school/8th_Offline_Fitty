@@ -1401,7 +1401,7 @@ margin: 0;
 /* 全体のフォント */
 .admin-nutritionists {
 background-color: rgba(247, 252, 241, 1) !important;
-font-family: 'Poppins', sans-serif!important;
+
 }
 
 /* タイトルスタイル */
@@ -1659,8 +1659,6 @@ margin: 0;
 padding: 0;
 display: flex;
 justify-content: center;
-align-items: center;
-height: 100vh;
 }
 
 .admin-nutri-profile-container {
