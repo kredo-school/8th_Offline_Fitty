@@ -110,8 +110,8 @@ class NutritionistController extends Controller
         }
 
         $actualValues = [
-            "Proteins" => $actualValues["Protein"] ?? 0,
-            "Fats" => $actualValues["Fat"] ?? 0,
+            "Proteins" => $actualValues["Proteins"] ?? 0,
+            "Fats" => $actualValues["Fats"] ?? 0,
             "Carbohydrates" => $actualValues["Carbohydrates"] ?? 0,
             "Vitamins" => $actualValues["Vitamins"] ?? 0,
             "Minerals" => $actualValues["Minerals"] ?? 0,
@@ -122,6 +122,7 @@ class NutritionistController extends Controller
             $actual = $actualValues[$key] ?? 0;
             $satisfactionRates[$key] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
+
 
         return [
             'satisfactionRates' => $satisfactionRates,

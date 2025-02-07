@@ -202,8 +202,8 @@ class AdviceController extends Controller
         }
 
         $actualValues = [
-            "Proteins" => $actualValues["Protein"] ?? 0,
-            "Fats" => $actualValues["Fat"] ?? 0,
+            "Proteins" => $actualValues["Proteins"] ?? 0,
+            "Fats" => $actualValues["Fats"] ?? 0,
             "Carbohydrates" => $actualValues["Carbohydrates"] ?? 0,
             "Vitamins" => $actualValues["Vitamins"] ?? 0,
             "Minerals" => $actualValues["Minerals"] ?? 0,
