@@ -78,7 +78,7 @@ class DailyLogController extends Controller
         $this->dailylog->save();
 
         // リダイレクト
-        return redirect()->route('user.profile',Auth::id());
+        return redirect()->route('user.dailylog', [Auth::id(), $request->input('input_date')]);
     }
 
     /**
