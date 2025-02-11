@@ -33,11 +33,13 @@
                             <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->introduction}}</span>
                         </div>
                     </div>
-                    @if($user->role != 'U')
+
+                    @if(Auth::user()->role !== 'U')
                     <div class="edit-button edit-button-view">
                         <a href="{{route('nutri.editProfile',$user->id)}}" class="edit-link edit-link-view">Edit Profile</a>
                     </div>
                     @endif
+
                 </div>
             </div>
         </div>
