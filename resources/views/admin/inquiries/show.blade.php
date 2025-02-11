@@ -3,7 +3,7 @@
 @section('content')
     @include('sidebar.humburger')
         <div class="row row-main w-100">
-            @include('sidebar.admin-sidebar')
+            @include('sidebar.include-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <!-- Main Content -->

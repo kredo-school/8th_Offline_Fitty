@@ -7,7 +7,7 @@
 @include('sidebar.humburger')
 
 <div class="row row-main">
-    @include('sidebar.user-sidebar')
+    @include('sidebar.include-sidebar')
 
     <div class="col-md-9 ms-sm-auto col-lg-10">
         <!-- 中央寄せと高さ調整 -->

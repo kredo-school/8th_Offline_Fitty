@@ -8,7 +8,7 @@
 
 <div class="d-flex vh-100 admin-nutritionists">
     <div class="row w-100">
-        @include('sidebar.admin-sidebar')
+    @include('sidebar.include-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10">
             <div class="admin-categories-container">

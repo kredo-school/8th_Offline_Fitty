@@ -13,7 +13,7 @@ use App\Models\SubCategory;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Services\ChartsService;//レーダーチャート表示のshowpfcvmを外部に移動 omori
+use App\Services\ChartsService; //ChartsServiceに処理を記載し共通化 omori
 
 
 

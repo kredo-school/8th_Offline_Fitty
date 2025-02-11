@@ -186,20 +186,6 @@ class ChartsService
             $actual = $subCategoryTotals[$subCategoryName] ?? 0;
             $subCategoryRates[$subCategoryName] = $recommended > 0 ? round(($actual / $recommended) * 100, 1) : 0;
         }
-        // dd([
-        //     'Subcategory' => $subCategoryName,
-        //     'Requirement per Day (mg/kg)' => $requirement,
-        //     'Weight (kg)' => $weight,
-        //     'Weekly Requirement (mg)' => $requirement * $weight * 7,
-        //     'subCategoryRecommended' => $subCategoryRecommended, // 現在の全体状況
-        // ]);
-
-        // dd([
-        //     'Subcategory' => $subCategoryName,
-        //     'Actual Value (mg)' => $actual, // 実績値
-        //     'Recommended Value (mg)' => $recommended, // 推奨値
-        //     'Satisfaction Rate (%)' => $subCategoryRates[$subCategoryName] // 充足率
-        // ]);
 
         return [
             'subCategoryRates' => $subCategoryRates,
@@ -248,8 +234,6 @@ class ChartsService
                     $normalized[$key] = $numericValue;
                     break;
             }
-
-
 
         }
 
