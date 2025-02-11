@@ -52,6 +52,7 @@ class UserController extends Controller
         $nutritionist_id = $user->profile->nutritionist_id;
 
 
+
         // エラーが出るため一時的にコメント
          $nutritionist_in_charge = User::where('id', $nutritionist_id)->first();
          $allocated = $nutritionist_in_charge->nutritionistsProfile;
