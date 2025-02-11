@@ -15,8 +15,10 @@
 
             <!-- Header Section -->
             <div class="user-dailylog-header">
-                <h1>Daily Log ({{ \Carbon\Carbon::parse($date)->format('D M d') }})</h1>
+                <h1>Meal Log ({{ \Carbon\Carbon::parse($date)->format('D M d') }})</h1>
             </div>
+
+
 
             @php
                 $meal_names = [
@@ -91,6 +93,15 @@
                 @endif
             @endforeach
         </div>
+        <div class="card m-2">
+                <div class="card-body">
+                    @include('users.charts.radarchartDailylog', [
+                        'satisfactionRates' => $satisfactionRates,
+                        'user' => $user_profile,
+                        'message' => $message ?? 'No data available.'
+                    ])
+                </div>
+            </div>
     </div>
 </div>
 

@@ -425,6 +425,7 @@ background-color: #087722; /* ホバー時の色 */
     margin-right: 50px; /* 右端にボタン幅分の余白を追加 */
     float: right; /* 右側に配置 */
     height: calc(100vh - 130px); /* ヘッダーや余白を差し引いた高さ */
+    overflow-y: auto;   /* 縦スクロール可能 */
 
 }
 
@@ -757,7 +758,7 @@ background-color: #087722; /* ホバー時の色 */
 
 .inputmeal {
 max-width: 600px;
-margin: 50px auto;
+margin: auto;
 padding: 20px;
 border: 1px solid #ddd;
 border-radius: 8px;
@@ -765,12 +766,13 @@ background-color: #ffffff; /* White background for the form */
 box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 .inputmeal .btn-submit {
-background-color: #ffcc80; /* Orange submit button */
+background-color: #FFA965; /* Orange submit button */
 color: #ffffff;
 border: none;
 }
 .inputmeal .btn-submit:hover {
-background-color: #ffa726; /* Darker orange on hover */
+background-color: #FFA965; /* Darker orange on hover */
+color: #ffffff;
 }
 .inputmeal .textarea-border {
 border: 2px dashed #9575cd; /* Purple dashed border */
