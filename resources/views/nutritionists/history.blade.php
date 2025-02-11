@@ -37,6 +37,9 @@
             @endforelse
         </tbody>
     </table>
+    <div class="mt-4">
+        {{ $adviceList->links('nutritionists.pagination') }}
+    </div>
 </div>
 
 

@@ -5,7 +5,7 @@
 @section('content')
 
     @include('sidebar.humburger')
-    
+
 
         <div class="row row-main">
             @include('sidebar.include-sidebar')
@@ -31,7 +31,7 @@
                         </div>
                         <div class="detail-item detail-item-view">
                             <span class="detail-label detail-label-view">Introduction</span>
-                            <span class="detail-value detail-value-view">{{$user->nutritionistsProfile->introduction}}</span>
+                            <span class="detail-value detail-value-view">{!! nl2br(e($user->nutritionistsProfile->introduction)) !!}</span>
                         </div>
                     </div>
                     @if($user->role != 'U')
