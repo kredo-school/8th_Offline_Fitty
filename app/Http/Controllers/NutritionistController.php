@@ -57,7 +57,6 @@ class NutritionistController extends Controller
     {
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
         $dailylog = $this->dailylog->where('user_id', $user_id)->first();
-        //$radarChartData = $this->showpfcvm($user_id);
         $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
 
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
@@ -66,7 +65,6 @@ class NutritionistController extends Controller
         $categoryData = [];
 
         foreach ($categories as $category) {
-            //$categoryData[$category] = $this->showCategory($user_id, $category);
             $categoryData[$category] = $this->ChartsService->showCategory($user_id, $category);
         }
 

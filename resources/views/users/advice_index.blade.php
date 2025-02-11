@@ -6,7 +6,7 @@
 @include('sidebar.humburger')
 
 <div class="container">
-        @include('sidebar.user-sidebar') 
+        @include('sidebar.include-sidebar')
         <div class="d-flex justify-content-center">
           <table class="unique-table-2">
               <thead>

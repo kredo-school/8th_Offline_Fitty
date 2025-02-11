@@ -6,7 +6,7 @@
 
     @include('sidebar.humburger')
     <div class="row row-main">
-    @include('sidebar.admin-sidebar')
+    @include('sidebar.include-sidebar')
 
     <div class="col-md-9 ms-sm-auto col-lg-10 admin-home">
 
