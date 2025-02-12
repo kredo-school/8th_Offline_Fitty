@@ -6,8 +6,9 @@
 
     @include('sidebar.humburger')
 
+
         <div class="row">
-            @include('sidebar.nutri-sidebar')
+            @include('sidebar.include-sidebar')
             <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
                 <!-- main content -->
 
@@ -137,6 +138,7 @@
         });
     </script>
 @endif
+
 
 
 @endsection

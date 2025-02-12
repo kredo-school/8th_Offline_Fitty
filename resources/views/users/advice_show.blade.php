@@ -54,7 +54,7 @@
 
 
         <div class="row">
-            @include('sidebar.user-sidebar')
+            @include('sidebar.include-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10">
                 <div class="combined-section">

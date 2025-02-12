@@ -8,7 +8,14 @@
 @include('sidebar.humburger')
 
 <div class="row main-row">
-    @include('sidebar.user-sidebar')
+    @if(Auth::user()->role == "A")
+        @include('sidebar.admin-sidebar')
+    @elseif(Auth::user()->role == "N")
+        @include('sidebar.nutri-sidebar')
+    @else
+        @include('sidebar.user-sidebar')
+    @endif
+
 
     <div class="col-md-9 ms-sm-auto col-lg-10" style="min-height: calc(100vh - 190px);">
         <div class="user-dailylog">
@@ -50,7 +57,7 @@
                                 @if (isset($nutritions[$category->name]))
                                     @php
                                         $categoryData = $nutritions[$category->name];
-                                        $subCategoryData = $nutritions["Subcategories"];
+                                        $subCategoryData = isset($nutritions["Subcategories"]) ? $nutritions["Subcategories"] : [];
                                     @endphp
 
                                     <div class="accordion-item custom-accordion-item">

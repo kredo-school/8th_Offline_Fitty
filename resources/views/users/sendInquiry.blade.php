@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row row-main">
-    @include('sidebar.user-sidebar') 
+    @include('sidebar.include-sidebar')
     <div class="col-md-9 ms-sm-auto col-lg-10 "> 
         <div class="d-flex justify-content-center">
             <div class="nurti-card w-50  m-3">

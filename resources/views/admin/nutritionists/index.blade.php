@@ -5,7 +5,7 @@
 
     <div class="d-flex admin-users">
         <div class="row w-100">
-            @include('sidebar.admin-sidebar')
+            @include('sidebar.include-sidebar')
 
             <div class="col-md-9 ms-sm-auto col-lg-10" >
                 <!-- Main Content -->
