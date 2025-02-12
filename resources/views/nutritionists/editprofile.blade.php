@@ -37,7 +37,7 @@
                                 <!-- Name -->
                                 <div class="form-group mt-4">
                                     <label for="name" class="form-label fw-bold">User Name</label>
-                                    <input type="text" name="name" id="name" value="{{ $user->name }}"
+                                    <input type="text" name="name" id="name" value="{{ old('name',$user->name) }}"
                                         class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
                                         placeholder="Enter your name">
                                 </div>
@@ -45,7 +45,7 @@
                                 <!-- Email -->
                                 <div class="form-group mt-4">
                                     <label for="email" class="form-label fw-bold">Email</label>
-                                    <input type="email" name="email" id="email" value="{{ $user->email }}"
+                                    <input type="email" name="email" id="email" value="{{ old('email',$user->email) }}"
                                         class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
                                         placeholder="Enter your email">
                                 </div>
@@ -58,7 +58,7 @@
                                             <span class="detail-label detail-label-edit">First Name</span>
 
                                             <input type="text" name="first_name"
-                                                value="{{ $user->nutritionistsProfile->first_name }}"
+                                                value="{{ old('first_name',$user->nutritionistsProfile->first_name) }}"
                                                 class="detail-input detail-input-edit">
                                         </div>
 
@@ -66,7 +66,7 @@
                                             <span class="detail-label detail-label-edit">Last Name</span>
 
                                             <input type="text" name="last_name"
-                                                value="{{ $user->nutritionistsProfile->last_name }}"
+                                                value="{{ old('last_name',$user->nutritionistsProfile->last_name) }}"
                                                 class="detail-input detail-input-edit">
                                         </div>
                                     </div>
