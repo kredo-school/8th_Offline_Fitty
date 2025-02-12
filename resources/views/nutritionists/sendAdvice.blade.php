@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Send Advice')
 @section('content')
+
     <div class="container send-container">
         <div class="custom-left-section">
             <!-- Back Button -->
@@ -256,10 +257,13 @@
         });
     </script>
 
+    <!-- Bootstrap JS & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         .selected {
             color: #FFA965;
-            font-weight: bold;
         }
 
         .nutri-material-symbols-outlined {
