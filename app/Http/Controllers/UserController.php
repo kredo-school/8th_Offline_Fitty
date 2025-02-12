@@ -217,15 +217,13 @@ class UserController extends Controller
     {
         $user = $this->user->findOrFail($id);
 
-        // dd($request->all());
-
-
         //  Error if there is no profile
         if (!$user->profile) {
             return back()->withErrors(['profile' => 'User profile not found. Please create profile page.']);
     }
-
         $request->validate([
+            'name'     => 'required|string|max:100',
+            'email'    => 'required|email|max:255',
             'category' => 'required|string|max:255',
             'content'  => 'required|string|min:30',
         ]);
@@ -233,8 +231,8 @@ class UserController extends Controller
         // Create Inquiry data
         Inquiry::create([
             'user_id'  => $user->id,
-            'email'    => $user->email,
-            'name'     => $user->name,
+            'email'    => $request->email,
+            'name'     => $request->name,
             'category' => $request->category,
             'content'  => $request->content,
         ]);
@@ -242,7 +240,7 @@ class UserController extends Controller
         // Send the thank you email
         // `MailController` の `sendThankYouMail` を呼び出す
             $mailController = new MailController();
-            $mailController->sendThankYouMail($id);
+            $mailController->sendThankYouMail($user->id, $request->email);
 
 
         return redirect()->route('user.sendInquiry.form', $user->id)->with('success', 'Inquiry submit successfully and a confirmation email has been sent!');
