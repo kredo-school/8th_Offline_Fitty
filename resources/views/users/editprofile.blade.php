@@ -37,17 +37,19 @@
                         <!-- Name -->
                         <div class="form-group mt-4">
                             <label for="name" class="form-label fw-bold">User Name</label>
-                            <input type="text" name="name" id="name" value="{{ $user->name }}"
-                                class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
-                                placeholder="Enter your name">
+                            <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}"
+                            class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                            placeholder="Enter your name">
+
                         </div>
 
                         <!-- Email -->
                         <div class="form-group mt-4">
                             <label for="email" class="form-label fw-bold">Email</label>
-                            <input type="email" name="email" id="email" value="{{ $user->email }}"
-                                class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
-                                placeholder="Enter your email">
+                            <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
+                            class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
+                            placeholder="Enter your email">
+
                         </div>
                     </div>
 
@@ -56,14 +58,14 @@
                             {{-- First Name --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">First Name</span>
-                                <input type="text" name="first_name" id="first_name" value="{{ $user->profile->first_name }}"
+                                <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->profile->first_name) }}"
                                     class="form-control">
                             </div>
 
                             {{-- Last Name --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Last Name</span>
-                                <input type="text" name="last_name" id="last_name" value="{{ $user->profile->last_name }}"
+                                <input type="text" name="last_name" id="last_name" value="{{ old('last_name',$user->profile->last_name) }}"
                                     class="form-control">
                             </div>
                         </div>
@@ -73,19 +75,21 @@
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Gender</span>
                                 <select name="gender" class="form-select form-select-edit">
-                                    <option value="male" {{ $user->profile->gender == 'male' ? 'selected' : '' }}>Male</option>
-                                    <option value="female" {{ $user->profile->gender == 'female' ? 'selected' : '' }}>Female</option>
-                                    <option value="non-binary" {{ $user->profile->gender == 'non-binary' ? 'selected' : '' }}>Non-binary</option>
-                                    <option value="prefer_not_to_say" {{ $user->profile->gender == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer-not-to-say</option>
-                                    <option value="other" {{ $user->profile->gender == 'other' ? 'selected' : '' }}>Other</option>
+                                    <option value="male" {{ old('gender', $user->profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ old('gender', $user->profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                                    <option value="non-binary" {{ old('gender', $user->profile->gender) == 'non-binary' ? 'selected' : '' }}>Non-binary</option>
+                                    <option value="prefer_not_to_say" {{ old('gender', $user->profile->gender) == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer-not-to-say</option>
+                                    <option value="other" {{ old('gender', $user->profile->gender) == 'other' ? 'selected' : '' }}>Other</option>
                                 </select>
+
                             </div>
 
                             {{-- Birthday --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Birthday</span>
-                                <input type="date" name="birthday" value="{{ $user->profile->birthday }}"
-                                    class="detail-input detail-input-edit">
+                                <input type="date" name="birthday" value="{{ old('birthday', $user->profile->birthday) }}"
+                                class="detail-input detail-input-edit">
+
                             </div>
                         </div>
 
@@ -93,7 +97,7 @@
                             {{-- Height --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Height(cm)</span>
-                                <input type="number" name="height" value="{{ $user->profile->height }}"
+                                <input type="number" name="height" value="{{ old('height',$user->profile->height) }}"
                                     class="detail-input detail-input-edit">
                             </div>
 
@@ -175,14 +179,14 @@
                             {{-- Food Allergies --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Food Allergies</span>
-                                <input type="text" name="food_allergies" id="food_allergies" value="{{ $user->profile->food_allergies }}"
+                                <input type="text" name="food_allergies" id="food_allergies" value="{{ old('food_allergies',$user->profile->food_allergies) }}"
                                     class="form-control">
                             </div>
 
                             {{-- Goals --}}
                             <div class="detail-item detail-item-edit col-6">
                                 <span class="detail-label detail-label-edit">Goals</span>
-                                <input type="text" name="goals" id="goals" value="{{ $user->profile->goals }}"
+                                <input type="text" name="goals" id="goals" value="{{ old('goals',$user->profile->goals) }}"
                                     class="form-control">
                             </div>
                         </div>
