@@ -1,46 +1,67 @@
-@if ($adviceList->hasPages())
-    <div class="d-flex justify-content-between align-items-center mb-3 pagination-wrapper">
-        <!-- Showing data information -->
-        <div style="text-align: left; font-family: 'Poppins', sans-serif; font-size: 14px; color: #333;">
-            Showing {{ $adviceList->firstItem() }} to {{ $adviceList->lastItem() }} of {{ $adviceList->total() }} entries
-        </div>
+@if ($paginator->hasPages())
+    <div class="pagination-container" style="width: 50%;">
 
-        <!-- Pagination Navigation -->
-        <nav class="admin-pagination-container">
-            <ul class="admin-pagination">
-                {{-- Previous Page Link --}}
-                <li class="admin-pagination-item {{ $adviceList->onFirstPage() ? 'disabled' : '' }}">
-                    <a href="{{ $adviceList->previousPageUrl() }}" rel="prev">&lt;</a>
-                </li>
+        <div class="d-flex justify-content-between align-items-center mb-3 pagination-wrapper">
+            <!-- Showing data information -->
+            <div style="font-family: 'Poppins', sans-serif; font-size: 14px; color:">
+                Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} out of {{ $paginator->total() }} pieces of advice
+            </div>
 
-                {{-- Pagination Elements --}}
-                @foreach ($adviceList->links()->elements() as $element)
-                    @if (is_string($element))
-                        <li class="admin-pagination-item disabled">
-                            <span class="admin-pagination-ellipsis">{{ $element }}</span>
+            <!-- Pagination Navigation -->
+            <nav class="admin-pagination-container">
+                <ul class="admin-pagination d-flex justify-content-end">
+                    {{-- Previous Page Link --}}
+                    @if ($paginator->onFirstPage())
+                        <li class="admin-pagination-item disabled" aria-disabled="true">
+                            <span>&lt;</span>
+                        </li>
+                    @else
+                        <li class="admin-pagination-item">
+                            <a href="{{ $paginator->previousPageUrl() }}" rel="prev">&lt;</a>
                         </li>
                     @endif
 
-                    @if (is_array($element))
-                        @foreach ($element as $page => $url)
-                            @if ($page == $adviceList->currentPage())
-                                <li class="admin-pagination-item active">
-                                    <span>{{ $page }}</span>
-                                </li>
-                            @else
-                                <li class="admin-pagination-item">
-                                    <a href="{{ $url }}">{{ $page }}</a>
-                                </li>
-                            @endif
-                        @endforeach
-                    @endif
-                @endforeach
+                    {{-- Pagination Elements --}}
+                    @foreach ($elements as $element)
+                        {{-- "Three Dots" Separator --}}
+                        @if (is_string($element))
+                            <li class="admin-pagination-item disabled" aria-disabled="true">
+                                <span class="admin-pagination-ellipsis">{{ $element }}</span>
+                            </li>
+                        @endif
 
-                {{-- Next Page Link --}}
-                <li class="admin-pagination-item {{ $adviceList->hasMorePages() ? '' : 'disabled' }}">
-                    <a href="{{ $adviceList->nextPageUrl() }}" rel="next">&gt;</a>
-                </li>
-            </ul>
-        </nav>
+                        {{-- Array Of Links --}}
+                        @if (is_array($element))
+                            @foreach ($element as $page => $url)
+                                @if ($page == $paginator->currentPage())
+                                    <li class="admin-pagination-item active" aria-current="page">
+                                        <span>{{ $page }}</span>
+                                    </li>
+                                @elseif ($page == 1 || $page == $paginator->lastPage() || abs($page - $paginator->currentPage()) <= 1)
+                                    <li class="admin-pagination-item">
+                                        <a href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @elseif ($page == 2 || $page == $paginator->lastPage() - 1)
+                                    <li class="admin-pagination-item disabled">
+                                        <span class="admin-pagination-ellipsis">...</span>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
+
+                    {{-- Next Page Link --}}
+                    @if ($paginator->hasMorePages())
+                        <li class="admin-pagination-item">
+                            <a href="{{ $paginator->nextPageUrl() }}" rel="next">&gt;</a>
+                        </li>
+                    @else
+                        <li class="admin-pagination-item disabled" aria-disabled="true">
+                            <span>&gt;</span>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
+        </div>
     </div>
 @endif

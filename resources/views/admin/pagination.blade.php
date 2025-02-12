@@ -1,10 +1,10 @@
 @if ($paginator->hasPages())
     <div class="d-flex justify-content-between align-items-center mb-3 pagination-wrapper">
         <!-- Showing data information -->
-        <div style="text-align: left; font-family: 'Poppins', sans-serif; font-size: 14px color: #333;">
+        <div style="text-align: left; font-family: 'Poppins', sans-serif; font-size: 14px;">
             Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} entries
         </div>
-        
+
 
         <!-- Pagination Navigation -->
         <nav class="admin-pagination-container">

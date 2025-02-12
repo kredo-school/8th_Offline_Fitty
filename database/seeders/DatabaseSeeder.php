@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             SubCategoriesTableSeeder::class,
             DailyLogSeeder::class,
             InquirySeeder::class,
-            // AdviceSeeder::class,
+            AdviceSeeder::class,
 
         ]);
 
