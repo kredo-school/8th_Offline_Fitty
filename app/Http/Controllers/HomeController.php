@@ -38,7 +38,7 @@ class HomeController extends Controller
                 $userId = Auth::user()->id;
                 return redirect('/user/'.$userId.'/profile');
             default:
-                return view('home');  // その他
+                return view('login');  // その他
         }
 
     }
