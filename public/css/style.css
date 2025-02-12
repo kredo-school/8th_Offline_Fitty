@@ -148,7 +148,7 @@ width: 100%;
 .sidemenu .title {
     white-space: nowrap;
     /* omori add 0206*/
-    z-index:9999; 
+    z-index:9999;
     white-space: normal; /* 改行を許可 */
     word-wrap: break-word; /* 単語の途中でも折り返し */
     overflow-wrap: break-word; /* どこでも折り返し */
@@ -597,9 +597,14 @@ background-color: #087722; /* ホバー時の色 */
 
 }
 
-  .unique-table a:hover {
+.unique-table a:hover {
     color: #FFA965;
-  }
+}
+
+/* 顔文字のホバー時の色変更 */
+.unique-table a:hover .history-icon {
+    color: #FFA965;
+}
 
   /* 行にホバー効果 */
   .unique-table tr:hover {
@@ -1162,7 +1167,7 @@ color: #00984f!important;
   width: 60px !important;
   background: #00984F !important;
   border: none !important;
- 
+
 }
 
 /* アイコンのスタイル */
@@ -1803,7 +1808,7 @@ font-size: 24px !important;
   padding: 5px 0 !important;
   border-bottom: 1px solid rgba(0, 152, 79, 0.1) !important;
   z-index:9999 !important;
-  
+
 }
 
 .admin-categories-subcategory-name {
@@ -2169,7 +2174,7 @@ color: rgba(0, 152, 79, 0.8) !important; /* ホバー時も少し薄い緑色 */
   font-family: 'Shrikhand', cursive !important;
   font-size: 32px!important;
   color: rgba(0, 152, 79, 1) !important;
-  line-height: 1.5!important; 
+  line-height: 1.5!important;
 }
 
 .inquiry-card {
