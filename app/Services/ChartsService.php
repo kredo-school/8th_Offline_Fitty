@@ -98,7 +98,7 @@ class ChartsService
     }
 
 
-    public function showCategory($user_id, $category)
+    public function showCategory($user_id, $category, $startDate = null, $endDate = null)
     {
         // ユーザー情報を取得
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
@@ -110,9 +110,18 @@ class ChartsService
             ];
         }
 
-        // 1週間分のデータを取得
-        $endDate = Carbon::yesterday();
-        $startDate = $endDate->copy()->subDays(6);
+        // パラメータが渡されなかった場合はデフォルトの日付を設定
+        if (!$endDate) {
+            $endDate = Carbon::yesterday(); // デフォルト：昨日
+        } else {
+            $endDate = Carbon::parse($endDate); // 渡された場合は Carbon インスタンス化
+        }
+    
+        if (!$startDate) {
+            $startDate = $endDate->copy()->subDays(6); // デフォルト：過去7日間
+        } else {
+            $startDate = Carbon::parse($startDate); // 渡された場合は Carbon インスタンス化
+        }
 
         $dailyLogs = DailyLog::where('user_id', $user_id)
             ->whereBetween('input_date', [$startDate, $endDate])
