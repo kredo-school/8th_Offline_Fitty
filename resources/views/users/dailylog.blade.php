@@ -57,7 +57,7 @@
                                 @if (isset($nutritions[$category->name]))
                                     @php
                                         $categoryData = $nutritions[$category->name];
-                                        $subCategoryData = $nutritions["Subcategories"];
+                                        $subCategoryData = isset($nutritions["Subcategories"]) ? $nutritions["Subcategories"] : [];
                                     @endphp
 
                                     <div class="accordion-item custom-accordion-item">

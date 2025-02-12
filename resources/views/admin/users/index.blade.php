@@ -64,9 +64,10 @@
         @endif
 
         <!-- Pagination -->
-        <div class="mt-4" style="width: 50px;">
-            {{ $user_profiles->links('admin.pagination') }}
-        </div>
+<div class="mt-4" style="color: #333">
+    {{ $user_profiles->appends(request()->query())->links('admin.pagination') }}
+</div>
+
     </div>
 </div>
 
