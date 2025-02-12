@@ -184,6 +184,8 @@ class UserController extends Controller
 
         // 現在のパスワードが正しいか確認
         if (!Hash::check($request->current_password, $user->password)) {
+            dd(session()->all());
+
             return back()->withErrors(['current_password' => 'The current password is incorrect.'])->withInput();
         }
 
