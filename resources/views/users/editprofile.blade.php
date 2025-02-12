@@ -32,6 +32,9 @@
                             @endif
                             <input type="file" name="avatar" id="avatar" class="mt-2"
                                 style="max-width: 300px; margin: 0 auto;">
+                                @error('avatar')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Name -->
@@ -40,6 +43,9 @@
                             <input type="text" name="name" id="name" value="{{ old('name', $user->name) }}"
                             class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
                             placeholder="Enter your name">
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
                         </div>
 
@@ -49,6 +55,9 @@
                             <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
                             class="form-control text-center" style="max-width: 300px; margin: 0 auto;"
                             placeholder="Enter your email">
+                            @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
 
                         </div>
                     </div>
@@ -60,6 +69,9 @@
                                 <span class="detail-label detail-label-edit">First Name</span>
                                 <input type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->profile->first_name) }}"
                                     class="form-control">
+                                    @error('first_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Last Name --}}
@@ -67,6 +79,9 @@
                                 <span class="detail-label detail-label-edit">Last Name</span>
                                 <input type="text" name="last_name" id="last_name" value="{{ old('last_name',$user->profile->last_name) }}"
                                     class="form-control">
+                                    @error('last_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -81,6 +96,9 @@
                                     <option value="prefer_not_to_say" {{ old('gender', $user->profile->gender) == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer-not-to-say</option>
                                     <option value="other" {{ old('gender', $user->profile->gender) == 'other' ? 'selected' : '' }}>Other</option>
                                 </select>
+                                @error('gender')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
                             </div>
 
@@ -89,6 +107,9 @@
                                 <span class="detail-label detail-label-edit">Birthday</span>
                                 <input type="date" name="birthday" value="{{ old('birthday', $user->profile->birthday) }}"
                                 class="detail-input detail-input-edit">
+                                @error('birthday')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
                             </div>
                         </div>
@@ -99,6 +120,9 @@
                                 <span class="detail-label detail-label-edit">Height(cm)</span>
                                 <input type="number" name="height" value="{{ old('height',$user->profile->height) }}"
                                     class="detail-input detail-input-edit">
+                                    @error('height')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             {{-- Activity Level --}}
@@ -109,6 +133,9 @@
                                     <option value="2" title="Moderate activity" {{ $user->profile->activity_level == 2 ? 'selected' : '' }}>2 - Moderate Activity</option>
                                     <option value="3" title="High activity" {{ $user->profile->activity_level == 3 ? 'selected' : '' }}>3 - High Activity</option>
                                 </select>
+                                @error('activity_level')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
 
@@ -214,26 +241,70 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                {{-- 成功メッセージ --}}
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                {{-- エラーメッセージ --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('user.change_password', $user->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
+
                     <div class="mb-3">
                         <label for="currentPassword" class="form-label">Current Password</label>
                         <input type="password" class="form-control" id="currentPassword" name="current_password" required>
+                        @error('current_password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="newPassword" class="form-label">New Password</label>
                         <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                        @error('new_password')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+                        <input type="password" class="form-control" id="confirmPassword" name="new_password_confirmation" required>
+                        @error('new_password_confirmation')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <button type="submit" class="btn btn-success">Save Changes</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
+@if (session('success') || $errors->any())
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+            passwordModal.show();
+        });
+    </script>
+@endif
+
+
 
 @endsection
