@@ -241,30 +241,52 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                {{-- 成功メッセージ --}}
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                {{-- エラーメッセージ --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('user.change_password', $user->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
+
                     <div class="mb-3">
                         <label for="currentPassword" class="form-label">Current Password</label>
                         <input type="password" class="form-control" id="currentPassword" name="current_password" required>
                         @error('current_password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="newPassword" class="form-label">New Password</label>
                         <input type="password" class="form-control" id="newPassword" name="new_password" required>
                         @error('new_password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm New Password</label>
                         <input type="password" class="form-control" id="confirmPassword" name="new_password_confirmation" required>
                         @error('new_password_confirmation')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <button type="submit" class="btn btn-success">Save Changes</button>
                 </form>
             </div>
@@ -272,7 +294,9 @@
     </div>
 </div>
 
-@if ($errors->any())
+
+
+@if (session('success') || $errors->any())
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
@@ -280,6 +304,7 @@
         });
     </script>
 @endif
+
 
 
 @endsection

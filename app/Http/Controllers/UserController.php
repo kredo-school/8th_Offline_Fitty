@@ -172,7 +172,7 @@ class UserController extends Controller
         // バリデーション
         $validator = Validator::make($request->all(), [
             'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed', // confirmedでnew_passwordとnew_password_confirmationを一致させる
+            'new_password' => 'required|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -187,10 +187,6 @@ class UserController extends Controller
             return back()->withErrors(['current_password' => 'The current password is incorrect.'])->withInput();
         }
 
-        // デバッグ: パスワードが変更される前に出力
-        \Log::info('Old Password:', ['hashed' => $user->password]);
-        \Log::info('New Password:', ['raw' => $request->new_password]);
-
         // 新しいパスワードを保存
         $user->password = Hash::make($request->new_password);
         if ($user->save()) {
@@ -199,6 +195,7 @@ class UserController extends Controller
             return back()->withErrors(['new_password' => 'Failed to update password.'])->withInput();
         }
     }
+
 
 
     /**
