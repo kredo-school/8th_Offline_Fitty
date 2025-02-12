@@ -111,7 +111,7 @@
                                             <input type="text" name="name" id="categoryName" class="form-control admin-categories-form-input" placeholder="Enter subcategory name" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="requirement" class="form-label admin-categories-form-label">Nutrient Requirement</label>
+                                            <label for="requirement" class="form-label admin-categories-form-label">Nutrient Requirement (mg)</label>
                                             <input type="number" step="0.01" name="requirement" id="requirement" class="form-control admin-categories-form-input" placeholder="Enter nutrient requirement" required>
                                         </div>
                                         <div class="mb-3">
