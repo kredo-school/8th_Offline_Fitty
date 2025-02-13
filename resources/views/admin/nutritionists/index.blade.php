@@ -71,8 +71,8 @@
                     @endif
 
                     <!-- Pagination -->
-                    <div class="mt-4">
-                        {{ $nutritionists_profiles->links('admin.pagination') }}
+                    <div class="mt-4" style="color: #333">
+                        {{ $nutritionists_profiles->appends(request()->query())->links('admin.pagination') }}
                     </div>
                 </div>
             </div>

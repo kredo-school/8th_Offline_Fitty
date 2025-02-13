@@ -46,6 +46,13 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->user->findOrFail($id);
+
+        //dd($user->profile);
+        //user_profileが存在していなければ登録画面にリダイレクト omori
+        if (!$user->profile()->exists()) {
+            return redirect()->route('register.step2');
+        }
+
         $nutritionists = NutritionistsProfile::all();
         // dd($user->profile);
 
@@ -172,7 +179,7 @@ class UserController extends Controller
         // バリデーション
         $validator = Validator::make($request->all(), [
             'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed', // confirmedでnew_passwordとconfirm_passwordを一致させる
+            'new_password' => 'required|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -189,11 +196,13 @@ class UserController extends Controller
 
         // 新しいパスワードを保存
         $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        // 成功メッセージを設定
-        return back()->with('success', 'Password updated successfully.');
+        if ($user->save()) {
+            return back()->with('success', 'Password updated successfully.');
+        } else {
+            return back()->withErrors(['new_password' => 'Failed to update password.'])->withInput();
+        }
     }
+
 
 
     /**

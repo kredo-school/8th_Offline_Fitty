@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container register-page d-flex flex-column align-items-center justify-content-center" style="gap: 40px;">
+<div class="container register-page d-flex flex-column align-items-center justify-content-center" style="height:100%;">
 
     <div class="form-box p-5 shadow-lg rounded bg-white" style="width: 500px; ">
         <h3 class="mb-4">1. Basic Information</h3>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary w-100 mt-3">Next Step</button>
+            <button type="submit" class="btn  w-100 mt-3" style="background-color: #28a745; color:#FFF;">Next Step</button>
         </form>
     </div>
 </div>
