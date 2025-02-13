@@ -224,7 +224,7 @@
                     </div>
 
                     <div class="edit-button edit-button-edit mt-2 text-end">
-                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</a>
+                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal" style="color: #00984F;">Change Password</a>
                     </div>
                 </div>
             </form>
@@ -305,6 +305,49 @@
     </script>
 @endif
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function handleExclusiveSelection(groupName, noneValue) {
+        const checkboxes = document.querySelectorAll(`input[name="${groupName}[]"]`);
+        const noneCheckbox = [...checkboxes].find(cb => cb.value === noneValue);
+
+        noneCheckbox.addEventListener("change", function () {
+            if (this.checked) {
+                checkboxes.forEach((checkbox) => {
+                    if (checkbox !== this) {
+                        checkbox.checked = false;
+                        checkbox.disabled = true;
+                        checkbox.parentElement.style.opacity = "0.5"; // 薄くする
+                    }
+                });
+            } else {
+                checkboxes.forEach((checkbox) => {
+                    checkbox.disabled = false;
+                    checkbox.parentElement.style.opacity = "1"; // 元に戻す
+                });
+            }
+        });
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox !== noneCheckbox) {
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        noneCheckbox.checked = false;
+                        noneCheckbox.disabled = false;
+                        noneCheckbox.parentElement.style.opacity = "1"; // None を元の色に戻す
+                    }
+                });
+            }
+        });
+    }
+
+    // "Current Health Conditions" セクションのチェックボックス処理
+    handleExclusiveSelection("health_conditions", "none");
+
+    // "Dietary Preferences" セクションのチェックボックス処理
+    handleExclusiveSelection("dietary_preferences", "no_restrictions");
+});
+</script>
 
 
 @endsection

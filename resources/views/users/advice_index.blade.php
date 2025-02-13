@@ -6,8 +6,10 @@
 @include('sidebar.humburger')
 
 <div class="container">
+        <div class="row row-main">
         @include('sidebar.include-sidebar')
-        <div class="d-flex justify-content-center">
+
+        <div class="col-md-9 ms-sm-auto col-lg-10  d-flex justify-content-center">
           <table class="unique-table-2">
               <thead>
                   <tr>
@@ -62,11 +64,11 @@
                               </span>
                           </a>
                           @else
-                          <span class="text-muted">No Date</span> 
+                          <span class="text-muted">No Date</span>
                            @endif
                     </td>
                     <td style="width: 10%;">
-                            
+
                               <!-- Rate Face Here -->
                               @if ($advice->overall == 5)
                                   <span class="material-symbols-outlined history-icon">sentiment_excited</span>

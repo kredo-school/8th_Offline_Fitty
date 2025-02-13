@@ -70,7 +70,7 @@
                                         <div class="detail-item detail-item-view col-sm-6">
                                             <span class="detail-label detail-label-view">Nutritionist in Charge</span>
                                             <span class="detail-value detail-value-view">
-                                                <a href="{{route('nutri.profile',$user->profile->nutritionist_id)}}" style="text-decoration: none;" ><img src="{{$avatar}}" class="nav-user-icon" alt="" alt="">{{$allocated->first_name}} {{$allocated->last_name}}</a>
+                                                <a href="{{route('nutri.profile',$user->profile->nutritionist_id)}}" style="text-decoration: none; color: #00984F;" ><img src="{{$avatar}}" class="nav-user-icon" alt="" >{{$allocated->first_name}} {{$allocated->last_name}}</a>
                                             </span>
                                         </div>
                                     </div>

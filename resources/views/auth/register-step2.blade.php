@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="register-page mt-5" >
+<div class="register-page mt-4" >
 
     <div class="container d-flex justify-content-center w-50">
         <form method="POST" action="{{ route('register.step2.submit') }}" enctype="multipart/form-data">
@@ -130,13 +130,40 @@
                     <label for="health_conditions">Current Health Conditions (if any)</label>
 
                         <div>
-                            <label><input type="checkbox" name="health_conditions[]" value="none" {{ in_array('none', old('health_conditions', [])) ? 'checked' : '' }}> None
-                            </label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="pregnant" {{ in_array('pregnant', old('health_conditions', [])) ? 'checked' : '' }}> Pregnant</label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="breastfeeding" {{ in_array('breastfeeding', old('health_conditions', [])) ? 'checked' : '' }}> Breastfeeding</label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="chronic_disease" {{ in_array('chronic_disease', old('health_conditions', [])) ? 'checked' : '' }}> Chronic Disease</label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="mental_health" {{ in_array('mental_health', old('health_conditions', [])) ? 'checked' : '' }}> Mental Health Issues</label><br>
-                            <label><input type="checkbox" name="health_conditions[]" value="other" {{ in_array('other', old('health_conditions', [])) ? 'checked' : '' }}> Other </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="none" name="health_conditions[]" value="none" {{ in_array('none', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="none">None</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pregnant" name="health_conditions[]" value="pregnant" {{ in_array('pregnant', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pregnant">Pregnant</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="breastfeeding" name="health_conditions[]" value="breastfeeding" {{ in_array('breastfeeding', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="breastfeeding">Breastfeeding</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chronic_disease" name="health_conditions[]" value="chronic_disease" {{ in_array('chronic_disease', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="chronic_disease">Chronic Disease</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="mental_health" name="health_conditions[]" value="mental_health" {{ in_array('mental_health', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="mental_health">Mental Health Issues</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="other" name="health_conditions[]" value="other" {{ in_array('other', old('health_conditions', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="other">Other</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lactose_free" name="dietary_preferences[]" value="lactose_free" {{ in_array('lactose_free', old('dietary_preferences', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="lactose_free">Lactose-Free</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -255,4 +282,49 @@
     </div>
 
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function handleExclusiveSelection(groupName, noneValue) {
+        const checkboxes = document.querySelectorAll(`input[name="${groupName}[]"]`);
+        const noneCheckbox = [...checkboxes].find(cb => cb.value === noneValue);
+
+        noneCheckbox.addEventListener("change", function () {
+            if (this.checked) {
+                checkboxes.forEach((checkbox) => {
+                    if (checkbox !== this) {
+                        checkbox.checked = false;
+                        checkbox.disabled = true;
+                        checkbox.parentElement.style.opacity = "0.5"; // 薄くする
+                    }
+                });
+            } else {
+                checkboxes.forEach((checkbox) => {
+                    checkbox.disabled = false;
+                    checkbox.parentElement.style.opacity = "1"; // 元に戻す
+                });
+            }
+        });
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox !== noneCheckbox) {
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        noneCheckbox.checked = false;
+                        noneCheckbox.disabled = false;
+                        noneCheckbox.parentElement.style.opacity = "1"; // None を元の色に戻す
+                    }
+                });
+            }
+        });
+    }
+
+    // "Current Health Conditions" セクションのチェックボックス処理
+    handleExclusiveSelection("health_conditions", "none");
+
+    // "Dietary Preferences" セクションのチェックボックス処理
+    handleExclusiveSelection("dietary_preferences", "no_restrictions");
+});
+</script>
+
 @endsection
