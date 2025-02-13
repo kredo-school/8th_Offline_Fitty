@@ -100,7 +100,7 @@
                 @endif
             @endforeach
         </div>
-        <div class="card m-2">
+        <div class="card">
                 <div class="card-body">
                     @include('users.charts.radarchartDailylog', [
                         'satisfactionRates' => $satisfactionRates,

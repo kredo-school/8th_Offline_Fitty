@@ -26,6 +26,16 @@ class MultiStepRegisterController extends Controller
     public function showStep1()
     {
         $user = Auth::user(); // ログイン中のユーザーを取得
+
+        if ($user) {
+            //step2からブラウザバックして戻った時のバグ修正 omori
+            if ($user->role === 'U' && !$user->profile()->exists()) {
+                return response()->view('auth.register-step2'); // ビューを直接表示
+            } else {
+                return redirect()->route('login'); // それ以外はログイン画面へ
+            }
+        }
+
         return view('auth.register-step1', compact('user')); // ビューに渡す
     }
 
@@ -41,8 +51,6 @@ class MultiStepRegisterController extends Controller
     
         $user = new User(); // 新しいUserインスタンスを作成
 
-        // dd($validatedData['avatar']);
-
         // If the user uploaded an avatar...
         if ($request->avatar) {
             $user->avatar = 'data:image/' . $request->avatar->extension() .
@@ -56,11 +64,11 @@ class MultiStepRegisterController extends Controller
     
         $user->save(); // ここで保存
     
-        // 空のプロファイルを作成
-        $user->profile()->create([
-            'first_name' => '', // 空文字またはデフォルト値
-            'last_name' => '',  // 空文字またはデフォルト値
-        ]);
+      //  // 空のプロファイルを作成
+      //  $user->profile()->create([
+      //      'first_name' => '', // 空文字またはデフォルト値
+      //      'last_name' => '',  // 空文字またはデフォルト値
+      //  ]);
     
         Auth::login($user);
     
