@@ -114,7 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/editprofile', [App\Http\Controllers\UserController::class, 'editprofile'])->name('editprofile');
         Route::patch('/{id}/update', [App\Http\Controllers\UserController::class, 'userUpdate'])->name('update');
 
-        Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
+
 
         //Users get advices
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
@@ -145,10 +145,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    
+
     //any login user can access
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+        Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
         Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });

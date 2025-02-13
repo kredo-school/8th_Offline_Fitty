@@ -18,27 +18,33 @@
                 @method('PATCH')
             
                 <div class="form-group mb-3">
-                    <label>Full Name</label>
-                    <input type="text" class="form-control" value="{{ $inquiry->name }}" readonly>
+                    <label >Full Name :</label>
+                    <input type="text" class="form-control" value="{{ $inquiry->name }}" readonly 
+                    style="border: none; outline: none; box-shadow: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;"
+                    >
                 </div>
             
                 <div class="form-group mb-3">
-                    <label>Email Address</label>
-                    <input type="email" class="form-control" value="{{ $inquiry->email }}" readonly>
+                    <label>Email Address :</label>
+                    <input type="text" name="name" class="form-control" value="{{ $inquiry->name }}" readonly
+       style="border: none; outline: none; box-shadow: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif; ">
                 </div>
             
                 <div class="form-group mb-3">
-                    <label>Category</label>
-                    <input type="text" class="form-control" value="{{ $inquiry->category }}" readonly>
+                    <label>Category :</label>
+                    <input type="text" class="form-control" value="{{ $inquiry->category }}" readonly
+                    style="border: none; outline: none; box-shadow: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
+               
                 </div>
             
                 <div class="form-group mb-3">
-                    <label>Content</label>
-                    <textarea class="form-control" rows="12" readonly>{{ $inquiry->content }}</textarea>
+                    <label>Content :</label>
+                    <textarea class="form-control" rows="8" readonly
+                        style="border: none; outline: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif; text-align: left; display: block; width: 100%;">{{ ltrim($inquiry->content) }}</textarea>
                 </div>
-            
+   
                 <div class="form-group mb-3">
-                    <label>Status</label>
+                    <label>Status :</label>
                     <select class="form-control" name="status">
                         <option value="pending" {{ $inquiry->status == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="in_progress" {{ $inquiry->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
@@ -47,12 +53,12 @@
                 </div>
             
                 <div class="form-group mb-3">
-                    <label>Person in Charge</label>
+                    <label>Person in Charge :</label>
                     <input type="text" name="person_in_charge" class="form-control" value="{{ $inquiry->person_in_charge }}">
                 </div>
             
                 <div class="form-group mb-3">
-                    <label>Memo</label>
+                    <label>Memo :</label>
                     <textarea class="form-control" name="memo" rows="3">{{ $inquiry->memo }}</textarea>
                 </div>
 

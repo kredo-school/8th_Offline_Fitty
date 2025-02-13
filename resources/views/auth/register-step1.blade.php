@@ -55,7 +55,7 @@ er-page d-flex flex-column align-items-center justify-content-center" style="gap
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary w-100 mt-3">Next Step</button>
+            <button type="submit" class="btn  w-100 mt-3" style="background-color: #28a745; color:#FFF;">Next Step</button>
         </form>
     </div>
 </div>
