@@ -255,7 +255,38 @@ document.addEventListener('DOMContentLoaded', function () {
     updateFooterPosition();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const footer = document.querySelector("footer");
+    const sidebar = document.querySelector(".sidebar-nav");
+    const mainContent = document.querySelector(".row");
+
+    function checkFooterVisibility() {
+        if (!footer || !sidebar || !mainContent) return;
+
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const footerRect = footer.getBoundingClientRect();
+
+        // サイドバーの下端がフッターの上端に接触またはオーバーラップしたら非表示
+        if (sidebarRect.bottom >= footerRect.top) {
+            footer.style.visibility = "hidden";  // 非表示にするが、レイアウトは維持
+            footer.style.opacity = "0";  // フェードアウト
+        } else {
+            footer.style.visibility = "visible"; // 再表示
+            footer.style.opacity = "1";
+        }
+    }
+
+    // スクロールやリサイズ時に実行
+    window.addEventListener("resize", checkFooterVisibility);
+    window.addEventListener("scroll", checkFooterVisibility);
+
+    // 初回実行
+    checkFooterVisibility();
+});
+
 
 </script>
+
+
 
 @endsection
