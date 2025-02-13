@@ -54,14 +54,11 @@
 
                     {{-- Gender --}}
                     <div class="form-group mb-2">
-                        <label for="gender">Gender</label>
+                        <label for="gender">Sex</label>
                         <select id="gender" name="gender" class="form-control">
                             <option value="" {{ old('gender') == '' ? 'selected' : '' }}>--Please choose an option--</option>
                             <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                             <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-                            <option value="non_binary" {{ old('gender') == 'non_binary' ? 'selected' : '' }}>Non-binary</option>
-                            <option value="prefer_not_to_say" {{ old('gender') == 'prefer_not_to_say' ? 'selected' : '' }}>Prefer not to say</option>
-                            <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
                         </select>
                         @error('gender')
                             <small class="text-danger">{{ $message }}</small>

@@ -12,13 +12,19 @@ html, body {
 
 
 .about-page {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative; /* 固定から相対位置に変更 */
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh; /* 最低限の高さを確保 */
+    overflow-y: auto; /* 縦方向のスクロールを許可 */
 }
+
+@media (max-height: 600px) {
+    /* 縦がつぶれたときにスクロールできるように */
+    .about-page {
+        overflow-y: auto !important;
+    }
+}
+
 
 @media (max-width: 768px) {
     /* すべての要素のスタイルを完全にリセット */
