@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="edit-button edit-button-edit mt-2 text-end">
-                                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal">Change Password</a>
+                                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal" style="color: #00984F;">Change Password</a>
                             </div>
                         </div>
                     </form>
