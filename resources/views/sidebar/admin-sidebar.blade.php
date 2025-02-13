@@ -1,6 +1,6 @@
 <div id="sidebar" class="sidemenu col-md-3 col-lg-2">
     <h1 class="menu">MENU</h1>
-    <ul class="nav flex-column">
+    <ul class="nav flex-column sidebar-nav">
         <li class="menu-item d-flex align-items-center py-2">
             <a href="{{route('admin.index')}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">home</span>

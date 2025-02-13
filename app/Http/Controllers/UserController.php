@@ -46,6 +46,13 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = $this->user->findOrFail($id);
+
+        //dd($user->profile);
+        //user_profileが存在していなければ登録画面にリダイレクト omori
+        if (!$user->profile()->exists()) {
+            return redirect()->route('register.step2');
+        }
+
         $nutritionists = NutritionistsProfile::all();
         // dd($user->profile);
 

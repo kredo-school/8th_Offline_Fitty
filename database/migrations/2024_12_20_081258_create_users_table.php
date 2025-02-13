@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->longtext('avatar')->nullable();
             $table->string('role')->default('U');
+            $table->rememberToken();
             $table->timestamps();
         });
 
