@@ -2,8 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container regist
-er-page d-flex flex-column align-items-center justify-content-center" style="gap: 40px;">
+<div class="container register-page d-flex flex-column align-items-center justify-content-center" style="height:100%;">
 
     <div class="form-box p-5 shadow-lg rounded bg-white" style="width: 500px; ">
         <h3 class="mb-4">1. Basic Information</h3>
