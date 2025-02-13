@@ -6,8 +6,8 @@
 @include('sidebar.humburger')
 
 <div class="container">
-        <div class="row row-main">
-        @include('sidebar.include-sidebar')
+    <div class="row row-main">
+        @include('sidebar.user-sidebar')
 
         <div class="col-md-9 ms-sm-auto col-lg-10  d-flex justify-content-center">
           <table class="unique-table-2">
