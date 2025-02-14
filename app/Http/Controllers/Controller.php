@@ -10,6 +10,10 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    function landing()
+    {
+        return view('landing');
+    }
     function about()
     {
         return view('about');
