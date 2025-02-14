@@ -2,7 +2,7 @@
 @section('title', 'Send Advice')
 @section('content')
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-4">
     <table class="unique-table">
         <thead>
             <tr>
@@ -36,9 +36,16 @@
             </tr>
             @endforelse
         </tbody>
+
     </table>
+
+
 </div>
 
-
+@if ($adviceList->hasPages())
+    <div class="d-flex justify-content-center mt-4">
+        {{ $adviceList->links('nutritionists.pagination') }}
+    </div>
+@endif
 
 @endsection

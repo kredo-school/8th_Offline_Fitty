@@ -114,14 +114,17 @@ class AdviceController extends Controller
 
 
     public function history($user_id)
-    {
-        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-        $adviceList = $this->advice->where('user_id', $user_id)->orderBy('created_at', 'desc')->get();
+{
+    $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+    $adviceList = $this->advice->where('user_id', $user_id)
+                                ->orderBy('created_at', 'desc')
+                                ->paginate(10);  // ページネーションを追加
 
-        return view('nutritionists.history')
-            ->with('user_profile', $user_profile)
-            ->with('adviceList', $adviceList);
-    }
+    return view('nutritionists.history')
+        ->with('user_profile', $user_profile)
+        ->with('adviceList', $adviceList);
+}
+
 
     public function showHistory($user_id, Request $request)
     {
@@ -190,7 +193,12 @@ class AdviceController extends Controller
         $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        return view('users.advice_index', compact('user', 'adviceList'));
+        $query = $this->advice->query();
+
+        $advices = $query->paginate(10);
+
+
+        return view('users.advice_index', compact('user', 'adviceList','advices'));
     }
 
 

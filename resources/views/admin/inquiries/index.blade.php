@@ -95,8 +95,10 @@
                     </table>
                 @endif
 
-                <div class="mt-4" style="color: #333">
-                    {{ $inquiries->links('admin.pagination') }}
+                    <!-- Pagination -->
+                    <div class="mt-4" style="color: #333">
+                        {{ $inquiries->appends(request()->query())->links('admin.pagination') }}
+                    </div>
                 </div>
             </div>
         </div>
