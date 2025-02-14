@@ -42,6 +42,8 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('/landing', [App\Http\Controllers\Controller::class, 'landing'])->name('landing');
+
 // Laravelのデフォルト認証ルート
 Auth::routes();
 

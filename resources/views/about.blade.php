@@ -80,6 +80,8 @@ html, body {
         text-align: center !important;
 
     }
+
+
 }
 
 
@@ -91,8 +93,11 @@ html, body {
 
 </style>
 
+
     <!-- About Section -->
     <div class="about-page">
+
+
         <!-- About Header -->
         <div class="about-header-section">
             ~ WHO WE ARE ~
@@ -137,3 +142,24 @@ html, body {
             </div>
         </div>
     </div>
+
+    <style>
+        .back-button-container {
+            margin-top: 20px;
+            margin-left: 20px;
+
+        }
+        .back-button {
+            background-color: transparent;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #008000;
+        }
+    </style>
