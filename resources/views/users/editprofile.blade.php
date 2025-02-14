@@ -223,9 +223,11 @@
                         <button type="submit" class="save-button save-button-edit">Save Changes</button>
                     </div>
 
+                    @if(Auth::user()->role === 'U')
                     <div class="edit-button edit-button-edit mt-2 text-end">
                         <a href="#" class="" data-bs-toggle="modal" data-bs-target="#passwordModal" style="color: #00984F;">Change Password</a>
                     </div>
+                    @endif
                 </div>
             </form>
         </div>
