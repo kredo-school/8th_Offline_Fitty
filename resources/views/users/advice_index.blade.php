@@ -9,6 +9,33 @@
         <div class="row row-main">
         @include('sidebar.include-sidebar')
 
+
+        <!-- Filter Buttons -->
+          <div class="mb-3 d-flex justify-content-center">
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'all']) }}" 
+              class="btn {{ request('filter') == 'all' || !request('filter') ? 'btn-primary' : 'btn-secondary' }} me-2">
+                All
+            </a>
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'read']) }}" 
+              class="btn {{ request('filter') == 'read' ? 'btn-primary' : 'btn-secondary' }} me-2">
+                Read
+            </a>
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unread']) }}" 
+              class="btn {{ request('filter') == 'unread' ? 'btn-primary' : 'btn-secondary' }} me-2">
+                Unread
+            </a>
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'liked']) }}" 
+              class="btn {{ request('filter') == 'liked' ? 'btn-primary' : 'btn-secondary' }} me-2">
+                With-Star
+            </a>
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unliked']) }}" 
+              class="btn {{ request('filter') == 'unliked' ? 'btn-primary' : 'btn-secondary' }}">
+                No-Star
+            </a>
+          </div>
+
+          {{-- Advice Table --}}
+
         <div class="col-md-9 ms-sm-auto col-lg-10  d-flex justify-content-center">
           <table class="unique-table-2">
               <thead>
@@ -96,11 +123,10 @@
           </div>
           
           <!-- Pagination -->
-          <div class="mt-4">
-            {{ $advices->links('admin.pagination') }}
+          <div class="mt-4 d-flex justify-content-center">
+            {{ $advices->links('nutritionists.pagination') }}
           </div>
           
-        
       </div>
   
 @endsection
