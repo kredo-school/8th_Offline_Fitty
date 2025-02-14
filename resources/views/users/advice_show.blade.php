@@ -45,7 +45,14 @@
             .combined-section > div:last-child {
                 margin-right: 0; /* 右側のマージンをなくす */
             }
+
         }
+
+        .chart-container {
+                display: flex;
+                flex-direction: column; /* 縦方向に並べる */
+                gap: 20px; /* カード間の間隔 */
+            }
 
     </style>
 
@@ -101,17 +108,18 @@
                         </div>
 
                         {{-- Back Button --}}
-                        <a href="{{ route('user.advice.index', ['id' => $user_profile->user_id]) }}" class="btn btn-secondary">
+                        <a href="{{ route('user.advice.index', ['id' => $user_profile->id]) }}" class="btn btn-secondary">
                             ← Back to Advice List
                         </a>
 
                         <!-- User ID -->
-                        <input type="hidden" name="user_id" value="{{ $user_profile->user_id }}">
+                        <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
                 </div>
                 {{-- Right Section end --}}
 
                 {{-- Left Section start--}}
                 <!-- Radar Chart Placeholder -->
+            <div class="chart-container">
                 <div class="card m-2">
                     <div class="card-body">
                         @include('nutritionists.charts.radarchartSendAdvice', [
@@ -132,6 +140,7 @@
                         ])
                     </div>
                 </div>
+            </div>
 
 
                 {{-- Left Section end --}}
