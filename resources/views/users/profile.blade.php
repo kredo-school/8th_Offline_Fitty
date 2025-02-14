@@ -7,8 +7,9 @@
     @include('sidebar.humburger')
     <div class="row row-main">
         @include('sidebar.include-sidebar')
-        <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center" style="min-height: calc(100vh - 190px);">
-            <div class="container"> <div class="row justify-content-center">
+        <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 190px);">
+            <div class="container d-flex justify-content-center align-items-center" style="flex-grow: 1;">
+                <div class="row justify-content-center w-100">
                     <div class="col-md-8">
                         @if(Auth::user()->role === 'A')
                             <div class="card mb-3">
@@ -31,7 +32,7 @@
                             </div>
                         @endif
 
-                        <div class="card mt-4">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="profile-header profile-header-view">
                                     @if($user->avatar)
