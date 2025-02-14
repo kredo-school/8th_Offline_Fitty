@@ -185,7 +185,7 @@ class AdviceController extends Controller
         //
     }
 
-    public function index($user_id)
+    public function index($user_id,Request $request)
     {
         $user = User::findOrFail($user_id);
 
@@ -196,6 +196,18 @@ class AdviceController extends Controller
         $query = $this->advice->query();
 
         $advices = $query->paginate(10);
+
+        $filter = $request->query('filter', 'all'); // デフォルトは 'all'
+
+            if ($filter === 'read') {
+                $query->where('is_read', true);
+            } elseif ($filter === 'unread') {
+                $query->where('is_read', false);
+            } elseif ($filter === 'liked') {
+                $query->where('is_liked', true);
+            } elseif ($filter === 'unliked') {
+                $query->where('is_liked', false);
+        }
 
 
         return view('users.advice_index', compact('user', 'adviceList','advices'));
