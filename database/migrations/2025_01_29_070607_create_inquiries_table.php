@@ -1,9 +1,7 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 return new class extends Migration
 {
     /**
@@ -23,12 +21,10 @@ return new class extends Migration
             $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending'); // ステータス
             $table->string('person_in_charge')->nullable(); // 担当者
             $table->timestamps(); // created_at & updated_at（デフォルトで追加される）
-            
             // 外部キー制約（ユーザーが削除されたときに問い合わせも削除される場合）
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
     /**
      * Reverse the migrations.
      */
@@ -37,3 +33,10 @@ return new class extends Migration
         Schema::dropIfExists('inquiries');
     }
 };
+
+
+
+
+
+
+

@@ -12,23 +12,23 @@
 
         <!-- Filter Buttons -->
           <div class="mb-3 d-flex justify-content-center">
-            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'all']) }}" 
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'all']) }}"
               class="btn {{ request('filter') == 'all' || !request('filter') ? 'btn-primary' : 'btn-secondary' }} me-2">
                 All
             </a>
-            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'read']) }}" 
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'read']) }}"
               class="btn {{ request('filter') == 'read' ? 'btn-primary' : 'btn-secondary' }} me-2">
                 Read
             </a>
-            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unread']) }}" 
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unread']) }}"
               class="btn {{ request('filter') == 'unread' ? 'btn-primary' : 'btn-secondary' }} me-2">
                 Unread
             </a>
-            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'liked']) }}" 
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'liked']) }}"
               class="btn {{ request('filter') == 'liked' ? 'btn-primary' : 'btn-secondary' }} me-2">
                 With-Star
             </a>
-            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unliked']) }}" 
+            <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unliked']) }}"
               class="btn {{ request('filter') == 'unliked' ? 'btn-primary' : 'btn-secondary' }}">
                 No-Star
             </a>

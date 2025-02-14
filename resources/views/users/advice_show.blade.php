@@ -101,12 +101,12 @@
                         </div>
 
                         {{-- Back Button --}}
-                        <a href="{{ route('user.advice.index', ['id' => $user_profile->id]) }}" class="btn btn-secondary">
+                        <a href="{{ route('user.advice.index', ['id' => $user_profile->user_id]) }}" class="btn btn-secondary">
                             ← Back to Advice List
                         </a>
 
                         <!-- User ID -->
-                        <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
+                        <input type="hidden" name="user_id" value="{{ $user_profile->user_id }}">
                 </div>
                 {{-- Right Section end --}}
 

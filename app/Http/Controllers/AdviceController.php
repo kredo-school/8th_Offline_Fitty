@@ -193,7 +193,7 @@ class AdviceController extends Controller
         $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        $query = $this->advice->query();
+        $query = $this->advice->where('user_id',$user_id);
 
         $advices = $query->paginate(10);
 
