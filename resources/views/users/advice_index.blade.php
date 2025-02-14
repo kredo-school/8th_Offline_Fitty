@@ -5,7 +5,6 @@
 @section('content')
 @include('sidebar.humburger')
 
-<div class="container">
     <div class="row row-main">
         @include('sidebar.user-sidebar')
 
@@ -98,5 +97,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
