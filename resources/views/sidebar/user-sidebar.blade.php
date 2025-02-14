@@ -23,7 +23,7 @@
         </li>
 
         <li class="menu-item d-flex align-items-center py-2">
-            <a href="{{route('user.advice.index', Auth::user()->id)}}" class="d-flex align-items-center w-100">
+            <a href="{{route('user.advice.index',Auth::user()->id)}}" class="d-flex align-items-center w-100">
                 <span class="material-icons side-material-icons me-2">notifications</span>
                 <span class="title">Nutrition Advice</span>
             </a>

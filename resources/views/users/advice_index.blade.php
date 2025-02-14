@@ -90,7 +90,7 @@
                         </td>
                         <td style="width: 40%;">
                             @if ($advice->created_at)
-                            <a href="{{ route('user.advice.showAdvice', ['id' => $user->id, 'date' => $advice->created_at->format('Y-m-d')]) }}" class="d-flex align-items-center">
+                            <a href="{{ route('user.advice.showAdvice',$advice->id) }}" class="d-flex align-items-center">
                                 <span class="me-2">{{ $advice->created_at->format('Y/m/d') }}</span>
                             </a>
                             @else

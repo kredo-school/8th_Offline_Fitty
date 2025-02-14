@@ -121,29 +121,16 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
         // Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
         Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
+        Route::get('/{id}/advice/show', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
         Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
         Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
         Route::patch('/{id}/advice/{advice}/like', [AdviceController::class, 'likeToggle'])->name('advice.like');
         Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
-    });
-
-    //Users get advices
-    Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'user'], function () {
-        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        Route::get('/{id}/advice/{date}', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
-        Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
-        Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
-        Route::patch('/{id}/advice/{advice}/like', [AdviceController::class, 'likeToggle'])->name('advice.like');
-        Route::patch('{id}/advice/{advice}/unlike', [AdviceController::class, 'unlike'])->name('advice.unlike');
-
-    //Users send inquiries
+        //Users send inquiries
         Route::get('/{id}/sendInquiry', [UserController::class, 'showInquiryForm'])->name('sendInquiry.form');
         Route::post('{id}/sendInquiry', [UserController::class, 'storeInquiry'])->name('sendInquiry.store');
-
-
+   
     });
-
 
 
     //any login user can access

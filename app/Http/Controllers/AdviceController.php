@@ -216,11 +216,13 @@ class AdviceController extends Controller
     }
 
 
-    public function showAdvice($id, $date)
+    public function showAdvice($advice_id)
     {
         $advice = $this->advice
-            ->where('id', $id)
+            ->where('id', $advice_id)
             ->firstOrFail();
+
+        $date = $advice->created_at;
 
         $user_profile = $advice->user->where('id', $advice->user_id)->first();
         // dd($user_profile);
