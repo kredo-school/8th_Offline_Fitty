@@ -192,7 +192,11 @@ class AdviceController extends Controller
         // 指定されたユーザーIDに関連するアドバイスを取得
         $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
-        $query = $this->advice->where('user_id', $user_id);
+
+        $query = $this->advice->where('user_id',$user_id);
+
+        $advices = $query->paginate(10);
+
         $filter = $request->query('filter', 'all'); // デフォルトは 'all'
 
         if ($filter === 'read') {
@@ -204,7 +208,7 @@ class AdviceController extends Controller
         } elseif ($filter === 'unliked') {
             $query->where('is_liked', false);
         }
-        
+
 
         $advices = $query->orderBy('created_at', 'desc')->paginate(10);
 
