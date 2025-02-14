@@ -199,16 +199,18 @@ class AdviceController extends Controller
 
         $filter = $request->query('filter', 'all'); // デフォルトは 'all'
 
-            if ($filter === 'read') {
-                $query->where('is_read', true);
-            } elseif ($filter === 'unread') {
-                $query->where('is_read', false);
-            } elseif ($filter === 'liked') {
-                $query->where('is_liked', true);
-            } elseif ($filter === 'unliked') {
-                $query->where('is_liked', false);
+        if ($filter === 'read') {
+            $query->where('is_read', true);
+        } elseif ($filter === 'unread') {
+            $query->where('is_read', false);
+        } elseif ($filter === 'liked') {
+            $query->where('is_liked', true);
+        } elseif ($filter === 'unliked') {
+            $query->where('is_liked', false);
         }
 
+
+        $advices = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('users.advice_index', compact('user', 'adviceList','advices'));
     }
