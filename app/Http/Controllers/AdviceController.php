@@ -218,6 +218,10 @@ class AdviceController extends Controller
             ->where('id', $advice_id)
             ->firstOrFail();
 
+        //advice詳細にアクセスしたら既読 omori
+        $advice->is_read = 1;
+        $advice->save();
+
         $date = $advice->created_at;
 
         $user_profile = $advice->user->where('id', $advice->user_id)->first();
