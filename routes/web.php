@@ -129,7 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
         //Users send inquiries
         Route::get('/{id}/sendInquiry', [UserController::class, 'showInquiryForm'])->name('sendInquiry.form');
         Route::post('{id}/sendInquiry', [UserController::class, 'storeInquiry'])->name('sendInquiry.store');
-   
+
     });
 
 
@@ -138,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
         Route::patch('/{id}/changePassword', [App\Http\Controllers\UserController::class, 'changePassword'])->name('change_password');
         Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
+        Route::get('/{id}/history/events', [DailyLogController::class, 'getEvents'])->name('dailylog.events');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
     });
 
