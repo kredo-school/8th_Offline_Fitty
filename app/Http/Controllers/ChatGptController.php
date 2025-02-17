@@ -13,9 +13,9 @@ class ChatGptController extends Controller
     {
 
         //chatgptの動作確認するときは、envファイルを設定して以下の2行をコメントアウトしてください。 omori
-        // $json_test = '{"Protein":"88g","Fat":"19g","Carbohydrates":"109g","Vitamins":"19mg","Minerals":"278mg","Subcategories":{"Simple Sugars":"30g","Complex Carbohydrates":"40g","Fiber":"15g","Starches":"20g","Polysaccharides":"4g","Lysine":"2.1g","Leucine":"2.0g","Isoleucine":"2.7g","Valine":"2.6g","Threonine":"1.8g","Methionine":"1.2g","Phenylalanine":"1.4g","Histidine":"1.1g","Arginine":"1.3g","Saturated Fats":"7g","Unsaturated Fats":"10g","Omega-3 Fatty Acids":"1.5g","Omega-6 Fatty Acids":"1.2g","Trans Fats":"0.3g","Vitamin A":"700µg","Vitamin B1 (Thiamine)":"1.2mg","Vitamin B2 (Riboflavin)":"1.3mg","Vitamin B6 (Pyridoxine)":"1.7mg","Vitamin B12 (Cobalamin)":"2.4µg","Vitamin C":"90mg","Vitamin D":"15µg","Vitamin E":"10mg","Vitamin K":"120µg","Calcium":"1000mg","Iron":"18mg","Magnesium":"400mg","Potassium":"3500mg","Sodium":"2300mg","Zinc":"11mg","Phosphorus":"700mg","Copper":"0.9mg","Manganese":"2.3mg","Fluoride":"4mg"}}';
-        // return $json_test;
-        
+        $json_test = '{"Proteins":"88g","Fats":"19g","Carbohydrates":"109g","Vitamins":"19mg","Minerals":"278mg","Subcategories":{"Simple Sugars":"30g","Complex Carbohydrates":"40g","Fiber":"15g","Starches":"20g","Polysaccharides":"4g","Lysine":"2.1g","Leucine":"2.0g","Isoleucine":"2.7g","Valine":"2.6g","Threonine":"1.8g","Methionine":"1.2g","Phenylalanine":"1.4g","Histidine":"1.1g","Arginine":"1.3g","Saturated Fats":"7g","Unsaturated Fats":"10g","Omega-3 Fatty Acids":"1.5g","Omega-6 Fatty Acids":"1.2g","Trans Fats":"0.3g","Vitamin A":"700µg","Vitamin B1 (Thiamine)":"1.2mg","Vitamin B2 (Riboflavin)":"1.3mg","Vitamin B6 (Pyridoxine)":"1.7mg","Vitamin B12 (Cobalamin)":"2.4µg","Vitamin C":"90mg","Vitamin D":"15µg","Vitamin E":"10mg","Vitamin K":"120µg","Calcium":"1000mg","Iron":"18mg","Magnesium":"400mg","Potassium":"3500mg","Sodium":"2300mg","Zinc":"11mg","Phosphorus":"700mg","Copper":"0.9mg","Manganese":"2.3mg","Fluoride":"4mg"}}';
+        return $json_test;
+
 
         $mealContent = $request->input('meal_content');
 

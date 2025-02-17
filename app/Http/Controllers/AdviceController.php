@@ -190,12 +190,9 @@ class AdviceController extends Controller
         $user = User::findOrFail($user_id);
 
         // 指定されたユーザーIDに関連するアドバイスを取得
-        $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        $query = $this->advice->where('user_id',$user_id);
-
-        $advices = $query->paginate(10);
+        $query = Advice::where('user_id',$user_id);
 
         $filter = $request->query('filter', 'all'); // デフォルトは 'all'
 
@@ -209,10 +206,10 @@ class AdviceController extends Controller
             $query->where('is_liked', false);
         }
 
+        // ページネーションを適用（`appends()` を使って `filter` を保持）
+        $advices = $query->orderBy('created_at', 'desc')->paginate(10)->appends(['filter' => $filter]);
 
-        $advices = $query->orderBy('created_at', 'desc')->paginate(10);
-
-        return view('users.advice_index', compact('user', 'adviceList','advices'));
+        return view('users.advice_index', compact('user', 'adviceList','advices', 'filter'));
     }
 
 
@@ -221,6 +218,10 @@ class AdviceController extends Controller
         $advice = $this->advice
             ->where('id', $advice_id)
             ->firstOrFail();
+
+        //advice詳細にアクセスしたら既読 omori
+        $advice->is_read = 1;
+        $advice->save();
 
         $date = $advice->created_at;
 
