@@ -133,33 +133,76 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js"></script>
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+
+    var userId = "{{ auth()->user()->id }}";
+
+    var mealOrder = { 'Breakfast': 1, 'Lunch': 2, 'Dinner': 3, 'Other': 4 };
+
+    var mealColors = {
+        'Breakfast': '#FFA07A', // Light Salmon 🟥
+        'Lunch': '#98FB98', // Pale Green 🟩
+        'Dinner': '#87CEFA', // Light Sky Blue 🟦
+        'Other': '#FFD700' // Gold 🟨
+    };
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth', // 📌 デフォルトビューを「月」に固定
+        initialView: 'dayGridMonth',
         headerToolbar: {
-            left: 'prev,next today',  // 📌 ナビゲーションボタンのみ
+            left: 'prev,next today',
             center: 'title',
-            right: '' // 📌 他のビュー切り替えボタンを削除
+            right: ''
         },
         editable: true,
         droppable: true,
         themeSystem: 'standard',
 
-        // 📌 追加: 日付クリック時の処理
+        // 📌 イベントを取得してカレンダーに表示
+      events: function(fetchInfo, successCallback, failureCallback) {
+        fetch(`/user/${userId}/history/events`)
+    .then(response => response.json())
+                .then(events => {
+                    console.log("取得したイベント:", events); // デバッグ用
+                    let mealFullNames = { 'B': 'Breakfast', 'L': 'Lunch', 'D': 'Dinner', 'O': 'Other' };
+let mealOrder = { 'Breakfast': 1, 'Lunch': 2, 'Dinner': 3, 'Other': 4 };
+
+let formattedEvents = events.map(event => {
+    let mealType = mealFullNames[event.title.charAt(0)] || 'Other'; // 一文字をフルネームに変換
+
+    return {
+        title: mealType, // タイトルをフルネームに変更
+        start: event.start,
+        backgroundColor: event.backgroundColor || mealColors[mealType] || '#808080',
+        borderColor: event.borderColor || mealColors[mealType] || '#808080',
+        textColor: event.textColor || '#fff',
+        mealOrder: mealOrder[mealType] || 99 // ソート用
+    };
+}).sort((a, b) => a.mealOrder - b.mealOrder); // Breakfast → Lunch → Dinner → Other の順にソート
+
+console.log("Formatted Events:", formattedEvents); // すべてのイベントを表示
+
+
+                    successCallback(formattedEvents);
+                })
+                .catch(error => {
+                    console.error("イベント取得エラー:", error);
+                    failureCallback(error);
+                });
+},
+
+        // 📌 日付クリック時の処理
         dateClick: function(info) {
-            var userId = "{{ auth()->user()->id }}"; // 現在のユーザーIDを取得
-            var clickedDate = info.dateStr; // クリックされた日付
-
-            // URLを生成
+            var userId = "{{ auth()->user()->id }}";
+            var clickedDate = info.dateStr;
             var url = `/user/${userId}/dailylog/${clickedDate}`;
-
-            // 画面遷移
             window.location.href = url;
         }
     });
+
     calendar.render();
 });
+
 
 </script>
 @endpush
