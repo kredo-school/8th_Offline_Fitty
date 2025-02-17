@@ -1,12 +1,9 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-
 class InquirySeeder extends Seeder
 {
     /**
@@ -15,7 +12,6 @@ class InquirySeeder extends Seeder
     public function run(): void
     {
         $data = [];
-
         for ($i = 1; $i <= 50; $i++) {
             $data[] = [
                 'user_id' => rand(2, 11), // 2〜11 のランダムな user_id
@@ -31,7 +27,6 @@ class InquirySeeder extends Seeder
                 'person_in_charge'=> ['sukiyaki daisuki', 'toumin shitai', 'yakiniku tabetai'][array_rand(['sukiyaki daisuki', 'toumin shitai', 'yakiniku tabetai'])],
             ];
         }
-
         DB::table('inquiries')->insert($data);
     }
 }

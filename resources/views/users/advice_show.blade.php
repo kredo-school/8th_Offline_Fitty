@@ -45,7 +45,14 @@
             .combined-section > div:last-child {
                 margin-right: 0; /* 右側のマージンをなくす */
             }
+
         }
+
+        .chart-container {
+                display: flex;
+                flex-direction: column; /* 縦方向に並べる */
+                gap: 20px; /* カード間の間隔 */
+            }
 
     </style>
 
@@ -112,6 +119,7 @@
 
                 {{-- Left Section start--}}
                 <!-- Radar Chart Placeholder -->
+            <div class="chart-container">
                 <div class="card m-2">
                     <div class="card-body">
                         @include('nutritionists.charts.radarchartSendAdvice', [
@@ -132,6 +140,7 @@
                         ])
                     </div>
                 </div>
+            </div>
 
 
                 {{-- Left Section end --}}

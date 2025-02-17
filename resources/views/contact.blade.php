@@ -27,5 +27,32 @@
                 <p>3-18-12 Midoricho, Yamagata-shi, Yamagata-ken, Japan</p>
             </div>
         </div>
+
+             <!-- 戻るボタン -->
+             <div class="back-button-container">
+                <button class="back-button" onclick="window.history.back();">←Back</button>
+            </div>
+
+
     </body>
+
+    <style>
+        .back-button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-button {
+            background-color: #FFA965;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #fc8529;
+        }
+    </style>
  @endsection

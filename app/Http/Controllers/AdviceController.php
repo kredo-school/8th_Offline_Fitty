@@ -185,7 +185,7 @@ class AdviceController extends Controller
         //
     }
 
-    public function index($user_id)
+    public function index($user_id,Request $request)
     {
         $user = User::findOrFail($user_id);
 
@@ -193,20 +193,36 @@ class AdviceController extends Controller
         $user = $this->user_profile->where('user_id', $user_id)->first();
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        $query = $this->advice->query();
+        $query = $this->advice->where('user_id',$user_id);
 
         $advices = $query->paginate(10);
 
+        $filter = $request->query('filter', 'all'); // デフォルトは 'all'
+
+        if ($filter === 'read') {
+            $query->where('is_read', true);
+        } elseif ($filter === 'unread') {
+            $query->where('is_read', false);
+        } elseif ($filter === 'liked') {
+            $query->where('is_liked', true);
+        } elseif ($filter === 'unliked') {
+            $query->where('is_liked', false);
+        }
+
+
+        $advices = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('users.advice_index', compact('user', 'adviceList','advices'));
     }
 
 
-    public function showAdvice($id, $date)
+    public function showAdvice($advice_id)
     {
         $advice = $this->advice
-            ->where('id', $id)
+            ->where('id', $advice_id)
             ->firstOrFail();
+
+        $date = $advice->created_at;
 
         $user_profile = $advice->user->where('id', $advice->user_id)->first();
         // dd($user_profile);
