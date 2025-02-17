@@ -72,8 +72,8 @@ class DailyLogSeeder extends Seeder
                         'comment' => 'happy meal',
                         'image' => null, // 画像は今回はnull
                         'nutritions' => json_encode([
-                            "Proteins" => rand(20, 60) . "g",
-                            "Fats" => rand(10, 30) . "g",
+                            "Protein" => rand(20, 60) . "g",
+                            "Fat" => rand(10, 30) . "g",
                             "Carbohydrates" => rand(80, 120) . "g",
                             "Vitamins" => rand(10, 20) . "mg",
                             "Minerals" => rand(100, 300) . "mg",

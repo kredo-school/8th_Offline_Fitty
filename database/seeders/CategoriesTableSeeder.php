@@ -16,8 +16,8 @@ class CategoriesTableSeeder extends Seeder
     {
         $categories = [
             ['name' => 'Carbohydrates', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Proteins', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Fats', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Protein', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Fat', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Vitamins', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Minerals', 'created_at' => now(), 'updated_at' => now()],
         ];

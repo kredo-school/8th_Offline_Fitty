@@ -54,8 +54,8 @@ class ChartsService
         $weight = $dailyLogs->first()->weight;
         $recommendedValues = [
             "Carbohydrates" => $weight * 5 * $dateRangeDays,
-            "Fats" => $weight * 1.0 * $dateRangeDays,
-            "Proteins" => $weight * 1.2 * $dateRangeDays,
+            "Fat" => $weight * 1.0 * $dateRangeDays,
+            "Protein" => $weight * 1.2 * $dateRangeDays,
             "Vitamins" => $weight * 2 * $dateRangeDays,
             "Minerals" => $weight * 10 * $dateRangeDays,
         ];
@@ -75,8 +75,8 @@ class ChartsService
         
        
         $actualValues = [
-            "Proteins" => $actualValues["Proteins"] ?? 0,
-            "Fats" => $actualValues["Fats"] ?? 0,
+            "Protein" => $actualValues["Protein"] ?? 0,
+            "Fat" => $actualValues["Fat"] ?? 0,
             "Carbohydrates" => $actualValues["Carbohydrates"] ?? 0,
             "Vitamins" => $actualValues["Vitamins"] ?? 0,
             "Minerals" => $actualValues["Minerals"] ?? 0,
