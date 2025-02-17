@@ -206,12 +206,10 @@ class AdviceController extends Controller
             $query->where('is_liked', false);
         }
 
+        // ページネーションを適用（`appends()` を使って `filter` を保持）
+        $advices = $query->orderBy('created_at', 'desc')->paginate(10)->appends(['filter' => $filter]);
 
-        $advices = $query->orderBy('created_at', 'desc')->paginate(10);
-        $advices = $query->orderBy('created_at', 'desc')->paginate(10);
-
-
-        return view('users.advice_index', compact('user', 'adviceList','advices'));
+        return view('users.advice_index', compact('user', 'adviceList','advices', 'filter'));
     }
 
 
