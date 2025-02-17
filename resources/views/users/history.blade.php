@@ -6,12 +6,26 @@
 
 @include('sidebar.humburger')
 <div class="row main-row">
-    <!-- Header Section -->
     @include('sidebar.include-sidebar')
-    <div class="col-md-9 ms-sm-auto col-lg-10 user-history " style="min-height: calc(100vh - 190px);">
-        <!-- main content -->
-        <!-- FullCalendar Section -->
+    <div class="col-md-9 ms-sm-auto col-lg-10 user-history " style="">
         <div id="calendar" class="h-100"></div>
+
+        <div class="d-flex justify-content-center mt-3 mb-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if (!empty($weightData['labels']) && !empty($weightData['weights']))
+                        @include('nutritionists.charts.lineGraphMothly', [
+                            'type' => $weightData['type'],
+                            'dates' => $weightData['labels'],
+                            'weights' => $weightData['weights'],
+                            'message' => $weightData['message']
+                        ])
+                    @else
+                        <p>No weight data available.</p>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -28,6 +42,19 @@
         border-radius: 12px;
         padding: 20px;
     }
+    #weightChart {
+    display: block; /* canvas要素をブロック要素にする */
+    margin: 0 auto; /* 左右のmarginをautoに設定して中央揃え */
+}
+
+    .main-content {
+    padding-bottom: 500px; /* 必要に応じて値を調整 */
+}
+
+    .user-history {
+    min-height: auto !important;
+    height: auto !important;
+}
 
     .fc-toolbar {
         margin-bottom: 20px;
@@ -80,6 +107,10 @@
     text-decoration: none !important;
 }
 
+.card {
+    width: 60%;
+}
+
 
 /* 📌 レスポンシブ調整 */
 @media (max-width: 1200px) {
@@ -93,6 +124,10 @@
 
     .fc-col-header-cell {
         font-size: 19px;
+    }
+
+    .card {
+        width: 90% !important;
     }
 }
 
@@ -109,6 +144,10 @@
     .fc-col-header-cell {
         font-size: 17px;
     }
+
+    .card{
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -122,6 +161,8 @@
         font-weight: lighter;
     }
 }
+
+
 
 
 
@@ -202,6 +243,8 @@ console.log("Formatted Events:", formattedEvents); // すべてのイベント�
 
     calendar.render();
 });
+
+
 
 
 </script>
