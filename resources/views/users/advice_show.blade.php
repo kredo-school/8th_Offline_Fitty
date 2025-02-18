@@ -129,17 +129,6 @@
                         ])
                     </div>
                 </div>
-
-                <!-- Radar Chart Placeholder -->
-                <div class="card m-2">
-                    <div class="card-body">
-                        @include('nutritionists.charts.lineGraph', [
-                            'dates' => $weightData['dates'],
-                            'weights' => $weightData['weights'],
-                            'message' => $weightData['message']
-                        ])
-                    </div>
-                </div>
             </div>
 
 

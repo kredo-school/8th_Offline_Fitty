@@ -61,7 +61,7 @@ class NutritionistController extends Controller
 
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
+        $categories = ['Carbohydrate', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
         $categoryData = [];
 
         foreach ($categories as $category) {
