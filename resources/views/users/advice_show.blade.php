@@ -119,19 +119,17 @@
 
                 {{-- Left Section start--}}
                 <!-- Radar Chart Placeholder -->
-            <div class="chart-container">
-                <div class="card m-2">
-                    <div class="card-body">
-                        @include('nutritionists.charts.radarchartSendAdvice', [
-                            'satisfactionRates' => $satisfactionRates,
-                            'user' => $user_profile,
-                            'message' => $message ?? 'No data available.'
-                        ])
+                <div class="chart-container">
+                    <div class="card m-2">
+                        <div class="card-body">
+                            @include('nutritionists.charts.radarchartSendAdvice', [
+                                'satisfactionRates' => $satisfactionRates,
+                                'user' => $user_profile,
+                                'message' => $message ?? 'No data available.'
+                            ])
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
                 {{-- Left Section end --}}
 
             </div>
