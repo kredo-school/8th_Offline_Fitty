@@ -140,6 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/dailylog/{date}', [App\Http\Controllers\DailylogController::class, 'showdailylog'])->name('dailylog');
         Route::get('/{id}/history/events', [DailyLogController::class, 'getEvents'])->name('dailylog.events');
         Route::get('/{id}/history', [App\Http\Controllers\UserController::class, 'showhistory'])->name('history');
+        Route::get('/{id}/history/weight-data', [UserController::class, 'showWeightData'])->name('user.weightData');
     });
 
     // *********************************************
