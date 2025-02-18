@@ -10,7 +10,7 @@
         <div class="col-md-9 ms-sm-auto col-lg-10">
         <div class="container w-75">
 
-            <h3 class=" nutri-h2">Send Feedback to</h3>
+            <h3 class=" nutri-h2 mt-5">Send Feedback to</h3>
             <div class="row g-4 mb-5">
                 @forelse ($user_profiles as $user_profile)
                     <div class="col-12 col-sm-6 col-md-3 col-lg-3 d-flex justify-content-center">

@@ -3,9 +3,11 @@
 @section('title', 'Conctact')
 
 @section('content')
+<!-- Navbar -->
+@include('navbar.fitty-navbar')
 
 
-    <body class="contact-page">
+    <div class="contact-page">
         <div>
             <h1 class="contact-title">Contact Information</h1>
             <div class="contact-item">
@@ -34,7 +36,7 @@
             </div>
 
 
-    </body>
+</div>
 
     <style>
         .back-button-container {

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Nutritionist;
 use App\Models\NutritionistsProfile;
 use App\Models\User;
+use Carbon\Carbon; // Carbonをインポート
 use App\Models\Inquiry;
 
 
@@ -82,9 +83,77 @@ class UserController extends Controller
     }
     public function showhistory($user_id)
     {
+
+        $date = Carbon::today()->toDateString(); // 本日の日付を取得（'YYYY-MM-DD' 形式）
+
         $user = $this->user->findOrFail($user_id);
-        return view('users.history', compact('user'));
+        $weightData = $this->showWeight($user_id, $date);
+
+        return view('users.history', compact('user','weightData'));
     }
+
+    public function showWeightData(Request $request, $user_id)
+{
+    try {
+        $date = Carbon::today()->toDateString();
+        $type = $request->query('type', 'monthly'); // クエリパラメータで `type` を取得
+
+        $weightData = $this->showWeight($user_id, $date, $type);
+
+        return response()->json([
+            'weightData' => $weightData
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => 'Something went wrong',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+}
+
+public function showWeight($id, $date, $type = 'daily')
+{
+    $endDate = Carbon::parse($date)->subDay(); // 前日を取得
+
+    switch ($type) {
+        case 'daily': // ✅ 修正: daily は過去7日間
+            $startDate = $endDate->copy()->subDays(6); // 過去7日分
+            break;
+        case 'weekly': // ✅ 修正: weekly は過去4週間分
+            $startDate = $endDate->copy()->subDays(29);
+            break;
+        case 'monthly': // ✅ 修正: monthly は過去12ヶ月分
+            $startDate = $endDate->copy()->subDays(364);
+            break;
+        default:
+            $startDate = $endDate->copy()->subDays(6);
+    }
+
+    $dailyLogs = DailyLog::where('user_id', $id)
+        ->whereBetween('input_date', [$startDate, $endDate])
+        ->orderBy('input_date', 'asc')
+        ->get();
+
+    $groupedData = $dailyLogs->groupBy(function ($log) use ($type) {
+        switch ($type) {
+            case 'daily':
+                return Carbon::parse($log->input_date)->format('Y-m-d'); // ✅ `Y-m-d` に修正
+            case 'weekly':
+                return Carbon::parse($log->input_date)->startOfWeek()->format('Y-m-d');
+            case 'monthly':
+                return Carbon::parse($log->input_date)->format('Y-m'); // ✅ `Y-m` で月単位
+            default:
+                return Carbon::parse($log->input_date)->format('Y-m-d');
+        }
+    })->map(fn($logs) => $logs->avg('weight'));
+
+    return [
+        'labels' => $groupedData->keys()->toArray(),
+        'weights' => $groupedData->values()->toArray(),
+        'message' => $dailyLogs->isEmpty() ? 'No data available.' : null,
+        'type' => $type
+    ];
+}
 
 
     /**

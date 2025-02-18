@@ -94,6 +94,9 @@ html, body {
 </style>
 
 
+<!-- Navbar -->
+@include('navbar.fitty-navbar')
+
     <!-- About Section -->
     <div class="about-page">
 

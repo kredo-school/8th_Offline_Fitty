@@ -6,11 +6,23 @@
 
     @include('sidebar.humburger')
 
+    <style>
+    .custom-back-button {
+        position: absolute;
+        top: 15px;  /* 上部に配置 */
+        left: 20px; /* サイドバーより少し右に配置 */
+        z-index: 10;
+    }
+    </style>
+
 
         <div class="row row-main">
             @include('sidebar.include-sidebar')
-            <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px);">
+            <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="height: calc(100vh - 190px); position:relative;">
                 <!-- main content -->
+                @if(Auth::user()->role === "A")
+                <button class="btn btn-outline-secondary custom-back-button" onclick="window.history.back()">&larr;</button>
+                @endif
 
                 <div class="profile-card profile-card-view" style="width: 60%;">
                     <div class="profile-header profile-header-view">

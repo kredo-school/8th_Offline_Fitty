@@ -18,7 +18,7 @@
                 @method('PATCH')
             
                 <div class="form-group mb-3">
-                    <label >Full Name :</label>
+                    <label >User Name :</label>
                     <input type="text" class="form-control" value="{{ $inquiry->name }}" readonly 
                     style="border: none; outline: none; box-shadow: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;"
                     >
