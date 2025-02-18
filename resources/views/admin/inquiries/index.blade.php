@@ -2,7 +2,7 @@
 
 <style>
         .main-content {
-    padding-bottom: 500px; /* 必要に応じて値を調整 */
+    margin-bottom: 500px; /* 必要に応じて値を調整 */
 }
 </style>
 
