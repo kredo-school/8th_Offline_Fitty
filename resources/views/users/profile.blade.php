@@ -10,6 +10,11 @@
         <div class="col-md-9 ms-sm-auto col-lg-10 d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 190px);">
             <div class="container d-flex justify-content-center align-items-center" style="flex-grow: 1;">
                 <div class="row justify-content-center w-100">
+                @if(Auth::user()->role === "A")
+                <div>
+                    <button class="btn btn-outline-secondary custom-back-button" onclick="window.history.back()">&larr;</button>
+                </div>
+                @endif
                     <div class="col-md-8">
                         @if(Auth::user()->role === 'A')
                             <div class="card mb-3">

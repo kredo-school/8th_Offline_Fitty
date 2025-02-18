@@ -69,7 +69,10 @@ class ChatGptController extends Controller
 
     ### Important Rules:
     1. If the meal is valid (e.g., \"Grilled chicken with rice and vegetables\"), calculate the nutritional values normally.
-    2. If the meal is meaningless, nonsensical, generic (e.g., \"test\", \"no meal\", \"unknown\", \"random\", \"nothing\", \"food\", \"meal\"), return the following JSON:
+    2. **Always include the \"Subcategories\" key in the JSON output.** If there are no subcategories, return \"Subcategories\": {} instead of omitting it.
+    3. **Each category and subcategory must be included in the output.** If a nutrient is negligible, return \"0g\" or \"0mg\", but do not omit it.
+    4. **Output must strictly follow the JSON format and must not contain any explanations or unnecessary text.**
+    5. If the meal is meaningless, nonsensical, generic (e.g., \"test\", \"no meal\", \"unknown\", \"random\", \"nothing\", \"food\", \"meal\"), return the following JSON:
     {
         \"error\": \"Meal not recognized\"
     }
@@ -77,8 +80,8 @@ class ChatGptController extends Controller
 
     ### Example Valid Output:
     {
-        \"Proteins\": \"30g\",
-        \"Fats\": \"20g\",
+        \"Protein\": \"30g\",
+        \"Fat\": \"20g\",
         \"Carbohydrates\": \"40g\",
         \"Vitamins\": \"30mg\",
         \"Minerals\": \"50mg\",

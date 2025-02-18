@@ -31,6 +31,9 @@ html {
 
     </style>
 
+<!-- Navbar -->
+@include('navbar.fitty-navbar')
+
 <body class="bg-green-100">
     {{-- <header class="text-center py-5 bg-green-300">
         <h1 class="text-3xl font-bold">Fitty</h1>
