@@ -114,16 +114,16 @@ class AdviceController extends Controller
 
 
     public function history($user_id)
-{
-    $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-    $adviceList = $this->advice->where('user_id', $user_id)
-                                ->orderBy('created_at', 'desc')
-                                ->paginate(10);  // ページネーションを追加
+    {
+        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
+        $adviceList = $this->advice->where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);  // ページネーションを追加
 
-    return view('nutritionists.history')
-        ->with('user_profile', $user_profile)
-        ->with('adviceList', $adviceList);
-}
+        return view('nutritionists.history')
+            ->with('user_profile', $user_profile)
+            ->with('adviceList', $adviceList);
+    }
 
 
     public function showHistory($user_id, Request $request)
@@ -144,7 +144,7 @@ class AdviceController extends Controller
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
+        $categories = ['Carbohydrate', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
         $categoryData = [];
 
         foreach ($categories as $category) {
@@ -185,14 +185,14 @@ class AdviceController extends Controller
         //
     }
 
-    public function index($user_id,Request $request)
+    public function index($user_id, Request $request)
     {
         $user = User::findOrFail($user_id);
 
         // 指定されたユーザーIDに関連するアドバイスを取得
         $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        $query = Advice::where('user_id',$user_id);
+        $query = Advice::where('user_id', $user_id);
 
         $filter = $request->query('filter', 'all'); // デフォルトは 'all'
 
@@ -209,7 +209,7 @@ class AdviceController extends Controller
         // ページネーションを適用（`appends()` を使って `filter` を保持）
         $advices = $query->orderBy('created_at', 'desc')->paginate(10)->appends(['filter' => $filter]);
 
-        return view('users.advice_index', compact('user', 'adviceList','advices', 'filter'));
+        return view('users.advice_index', compact('user', 'adviceList', 'advices', 'filter'));
     }
 
 
@@ -234,12 +234,12 @@ class AdviceController extends Controller
         // showWeightメソッドを呼び出してグラフ用データを取得
         $weightData = $this->showWeight($advice->user_id, $date);
 
-        $radarChartData = $this->ChartsService->showpfcvm($advice->user_id,"", $date); // 指定した日付の前日（2/14）から過去7日間（2/8〜2/14）のデータを取得
+        $radarChartData = $this->ChartsService->showpfcvm($advice->user_id, "", $date); // 指定した日付の前日（2/14）から過去7日間（2/8〜2/14）のデータを取得
 
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
+        $categories = ['Carbohydrate', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
         $categoryData = [];
 
 
