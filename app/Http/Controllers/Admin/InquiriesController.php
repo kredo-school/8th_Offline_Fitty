@@ -10,10 +10,19 @@ class InquiriesController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->get('search', '');
-        $category = $request->get('category', '');
-        $status = $request->get('status', '');
+        // セッションから検索条件を取得
+        $search = $request->get('search', session('search', ''));
+        $category = $request->get('category', session('category', ''));
+        $status = $request->get('status', session('status', ''));
 
+        // セッションに検索条件を保存
+        session([
+            'search' => $search,
+            'category' => $category,
+            'status' => $status
+        ]);
+
+        // 問い合わせの取得
         $inquiries = Inquiry::query()
             ->when($search, function ($query, $search) {
                 $query->where(function ($q) use ($search) {
@@ -37,16 +46,12 @@ class InquiriesController extends Controller
                 'status' => $status
             ]);
 
+        // カテゴリーとステータスのリストを取得
         $categories = Inquiry::select('category')->distinct()->pluck('category');
         $statuses = Inquiry::select('status')->distinct()->pluck('status');
 
         return view('admin.inquiries.index', compact('inquiries', 'search', 'category', 'status', 'categories', 'statuses'));
     }
-
-
-
-
-
 
     public function show($id)
     {
