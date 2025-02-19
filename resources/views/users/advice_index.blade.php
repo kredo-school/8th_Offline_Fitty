@@ -5,10 +5,7 @@
 @section('content')
 @include('sidebar.humburger')
 
-<<<<<<< HEAD
-=======
 
->>>>>>> main
     <div class="row row-main">
         @include('sidebar.user-sidebar')
 
@@ -128,8 +125,5 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 @endsection
