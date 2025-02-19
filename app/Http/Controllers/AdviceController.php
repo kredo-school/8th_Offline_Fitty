@@ -117,16 +117,18 @@ class AdviceController extends Controller
     function sendAdvice($user_id)
     {
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-    
+
         // 本日の日付を取得
-        $date = Carbon::today(); // 2/17
-    
+        $date = Carbon::today();
+
         // 昨日の日付（今日の前日）
-        $endDate = $date->copy()->subDay(); // 2/16
-    
+        $endDate = $date->copy()->subDay(); // 2/17
+
+
+
         // 1週間前の日付（昨日から過去1週間）
-        $startDate = $endDate->copy()->subDays(7); // 2/10
-    
+        $startDate = $endDate->copy()->subDays(6); // 2/11
+
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
             ->where('user_id', $user_id)
@@ -136,11 +138,10 @@ class AdviceController extends Controller
 
 
 
-         // 栄養カテゴリとサブカテゴリを取得
-         $categories = Category::all(); // 例: 全カテゴリ取得
-         //dd($categories);
-         $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
-
+        // 栄養カテゴリとサブカテゴリを取得
+        $categories = Category::all(); // 例: 全カテゴリ取得
+        //dd($categories);
+        $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
 
         $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
 
@@ -152,8 +153,10 @@ class AdviceController extends Controller
         foreach ($categories as $category) {
             $categoryData[$category->name] = $this->ChartsService->showCategory($user_id, $category->name);
         }
+        $weightData = $this->showWeight($user_id, $date);
+        $user = $this->user->where('id', $user_id)->first();
 
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories','dailylogs','date'));
+        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories', 'dailylogs', 'date', 'user', 'weightData'));
     }
 
 
@@ -179,10 +182,10 @@ class AdviceController extends Controller
 
         // 昨日の日付（今日の前日）
         $endDate = $date->copy()->subDay(); // 2/16
-    
+
         // 1週間前の日付（昨日から過去1週間）
         $startDate = $endDate->copy()->subDays(7); // 2/10
-    
+
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
             ->where('user_id', $user_id)
@@ -290,10 +293,10 @@ class AdviceController extends Controller
 
         // 昨日の日付（今日の前日）
         $endDate = $date->copy()->subDay(); // 2/16
-    
+
         // 1週間前の日付（昨日から過去1週間）
         $startDate = $endDate->copy()->subDays(7); // 2/10
-    
+
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
             ->where('user_id', $advice->user_id)
@@ -319,8 +322,13 @@ class AdviceController extends Controller
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        
+
         $categoryData = [];
+
+        $user_id = $advice->user_id;
+        $user = $this->user->where('id', $user_id)->first();
+
+        $weightData = $this->showWeight($user_id, $date);
 
 
         return view('users.advice_show', compact(
@@ -332,37 +340,73 @@ class AdviceController extends Controller
             'categories',
             'weightData',
             'user_profile',
-
+            'user',
+            'weightData'
         ));
     }
-    public function showWeight($id, $date)
+    public function showWeightData(Request $request, $user_id)
     {
-        $endDate = Carbon::parse($date)->subDay();
-        $startDate = $endDate->copy()->subDays(6);
+        try {
+            $date = Carbon::today()->toDateString();
+            $type = $request->query('type', 'monthly'); // クエリパラメータで `type` を取得
 
-        // データを取得
+            $weightData = $this->showWeight($user_id, $date, $type);
+
+            return response()->json([
+                'weightData' => $weightData
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Something went wrong',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function showWeight($id, $date, $type = 'daily')
+    {
+        $endDate = Carbon::parse($date)->subDay(); // 前日を取得
+
+        switch ($type) {
+            case 'daily': // ✅ 修正: daily は過去7日間
+                $startDate = $endDate->copy()->subDays(6); // 過去7日分
+                break;
+            case 'weekly': // ✅ 修正: weekly は過去4週間分
+                $startDate = $endDate->copy()->subDays(29);
+                break;
+            case 'monthly': // ✅ 修正: monthly は過去12ヶ月分
+                $startDate = $endDate->copy()->subDays(364);
+                break;
+            default:
+                $startDate = $endDate->copy()->subDays(6);
+        }
+
         $dailyLogs = DailyLog::where('user_id', $id)
             ->whereBetween('input_date', [$startDate, $endDate])
             ->orderBy('input_date', 'asc')
             ->get();
 
-        // グループ化して日ごとの平均を計算
-        $groupedData = $dailyLogs->groupBy(function ($log) {
-            return Carbon::parse($log->input_date)->format('Y-m-d'); // 日付だけ取得
-        })->map(function ($logs) {
-            return $logs->avg('weight'); // 体重の平均を計算
-        });
-
-        // グラフ用のデータに変換
-        $averageDates = $groupedData->keys()->toArray();  // 日付ラベル
-        $averageWeights = $groupedData->values()->toArray(); // 平均体重データ
+        $groupedData = $dailyLogs->groupBy(function ($log) use ($type) {
+            switch ($type) {
+                case 'daily':
+                    return Carbon::parse($log->input_date)->format('Y-m-d'); // ✅ `Y-m-d` に修正
+                case 'weekly':
+                    return Carbon::parse($log->input_date)->startOfWeek()->format('Y-m-d');
+                case 'monthly':
+                    return Carbon::parse($log->input_date)->format('Y-m'); // ✅ `Y-m` で月単位
+                default:
+                    return Carbon::parse($log->input_date)->format('Y-m-d');
+            }
+        })->map(fn($logs) => $logs->avg('weight'));
 
         return [
-            'dates' => $averageDates, // 修正: 日ごとのラベル
-            'weights' => $averageWeights, // 修正: 平均体重
-            'message' => $dailyLogs->isEmpty() ? 'No data available.' : null
+            'labels' => $groupedData->keys()->toArray(),
+            'weights' => $groupedData->values()->toArray(),
+            'message' => $dailyLogs->isEmpty() ? 'No data available.' : null,
+            'type' => $type
         ];
     }
+
 
 
     public function readToggle($id, $adviceId)
