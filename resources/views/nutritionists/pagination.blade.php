@@ -4,9 +4,8 @@
         <div class="d-flex justify-content-between align-items-center mb-3 pagination-wrapper">
             <!-- Showing data information -->
             <div style="font-family: 'Poppins', sans-serif; font-size: 14px; color:">
-                Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} out of {{ $paginator->total() }} pieces of advice
+                Showing {{ $paginator->firstItem() }} - {{ $paginator->lastItem() }} out of {{ $paginator->total() }}
             </div>
-
             <!-- Pagination Navigation -->
             <nav class="admin-pagination-container">
                 <ul class="admin-pagination d-flex justify-content-end">

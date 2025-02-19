@@ -180,6 +180,7 @@
             @endif
         @endforeach
 
+        @include('nutritionists.advice-dailylog')
 
         </div>
 

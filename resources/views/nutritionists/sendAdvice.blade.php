@@ -200,6 +200,8 @@
 
 
 
+        @include('nutritionists.advice-dailylog')
+
         </div>
 
         <div class="custom-right-section">
@@ -270,6 +272,8 @@
                     }
                 });
             }
+
+  
         });
     </script>
 
