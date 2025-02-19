@@ -52,26 +52,7 @@ class NutritionistController extends Controller
     }
 
 
-
-    function sendAdvice($user_id)
-    {
-        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-        $dailylog = $this->dailylog->where('user_id', $user_id)->first();
-        $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
-
-        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
-        $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Proteins', 'Fats', 'Vitamins', 'Minerals'];
-        $categoryData = [];
-
-        foreach ($categories as $category) {
-            $categoryData[$category] = $this->ChartsService->showCategory($user_id, $category);
-        }
-
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories'));
-    }
-
-
+    
     function profile($id)
     {
 
