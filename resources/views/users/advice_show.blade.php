@@ -115,6 +115,9 @@
                         <!-- User ID -->
                         <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
                 </div>
+
+                @include('nutritionists.advice-dailylog')
+                
                 {{-- Right Section end --}}
 
                 {{-- Left Section start--}}
