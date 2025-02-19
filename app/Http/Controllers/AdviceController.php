@@ -119,13 +119,13 @@ class AdviceController extends Controller
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
     
         // 本日の日付を取得
-        $date = Carbon::today();
+        $date = Carbon::today(); // 2/17
     
         // 昨日の日付（今日の前日）
-        $endDate = $date->copy()->subDay(); // 2/17
+        $endDate = $date->copy()->subDay(); // 2/16
     
         // 1週間前の日付（昨日から過去1週間）
-        $startDate = $endDate->copy()->subDays(6); // 2/11
+        $startDate = $endDate->copy()->subDays(7); // 2/10
     
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
@@ -175,13 +175,13 @@ class AdviceController extends Controller
     {
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
-        $date = Carbon::createFromFormat('Y-m-d', $request->input('date'));
+        $date = Carbon::createFromFormat('Y-m-d', $request->input('date'));// 2/17
 
         // 昨日の日付（今日の前日）
-        $endDate = $date->copy()->subDay(); // 2/17
+        $endDate = $date->copy()->subDay(); // 2/16
     
         // 1週間前の日付（昨日から過去1週間）
-        $startDate = $endDate->copy()->subDays(6); // 2/11
+        $startDate = $endDate->copy()->subDays(7); // 2/10
     
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
@@ -203,9 +203,9 @@ class AdviceController extends Controller
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
         $chart_categories = ['Carbohydrates', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
+
         // 栄養カテゴリとサブカテゴリを取得
         $categories = Category::all(); // 例: 全カテゴリ取得
-        //dd($categories);
         $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
         $categoryData = [];
 
@@ -286,7 +286,24 @@ class AdviceController extends Controller
         $advice->is_read = 1;
         $advice->save();
 
-        $date = $advice->created_at;
+        $date = Carbon::parse($advice->created_at); //2/17
+
+        // 昨日の日付（今日の前日）
+        $endDate = $date->copy()->subDay(); // 2/16
+    
+        // 1週間前の日付（昨日から過去1週間）
+        $startDate = $endDate->copy()->subDays(7); // 2/10
+    
+        // 指定した期間のデータを取得
+        $dailylogs = $this->dailylog
+            ->where('user_id', $advice->user_id)
+            ->whereBetween('input_date', [$startDate, $endDate])
+            ->orderBy('input_date', 'asc')
+            ->get();
+
+        // 栄養カテゴリとサブカテゴリを取得
+        $categories = Category::all(); // 例: 全カテゴリ取得
+        $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
 
         $user_profile = $advice->user->where('id', $advice->user_id)->first();
         // dd($user_profile);
@@ -302,7 +319,7 @@ class AdviceController extends Controller
         // 必要に応じて radarChartData のデータを加工
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrates', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
+        
         $categoryData = [];
 
 
@@ -311,7 +328,8 @@ class AdviceController extends Controller
             'satisfactionRates',
             'categoryData',
             'message',
-            'dailylog',
+            'dailylogs',
+            'categories',
             'weightData',
             'user_profile',
 
