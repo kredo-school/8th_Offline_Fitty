@@ -117,16 +117,19 @@ class AdviceController extends Controller
     function sendAdvice($user_id)
     {
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-    
+
         // 本日の日付を取得
         $date = Carbon::today();
-    
+
+        $user = $this->user_profile->where('user_id', $user_id)->first();
+
+
         // 昨日の日付（今日の前日）
         $endDate = $date->copy()->subDay(); // 2/17
-    
+
         // 1週間前の日付（昨日から過去1週間）
         $startDate = $endDate->copy()->subDays(6); // 2/11
-    
+
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
             ->where('user_id', $user_id)
@@ -141,6 +144,7 @@ class AdviceController extends Controller
          //dd($categories);
          $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
 
+         $weightData = $this->showWeight($user_id, $date);
 
         $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
 
@@ -153,7 +157,7 @@ class AdviceController extends Controller
             $categoryData[$category->name] = $this->ChartsService->showCategory($user_id, $category->name);
         }
 
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories','dailylogs','date'));
+        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories','dailylogs','date','user','weightData'));
     }
 
 
@@ -179,10 +183,10 @@ class AdviceController extends Controller
 
         // 昨日の日付（今日の前日）
         $endDate = $date->copy()->subDay(); // 2/17
-    
+
         // 1週間前の日付（昨日から過去1週間）
         $startDate = $endDate->copy()->subDays(6); // 2/11
-    
+
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
             ->where('user_id', $user_id)
