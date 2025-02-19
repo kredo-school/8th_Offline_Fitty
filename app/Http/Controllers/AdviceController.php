@@ -121,11 +121,10 @@ class AdviceController extends Controller
         // 本日の日付を取得
         $date = Carbon::today();
 
-        $user = $this->user_profile->where('user_id', $user_id)->first();
-
-
         // 昨日の日付（今日の前日）
         $endDate = $date->copy()->subDay(); // 2/17
+
+
 
         // 1週間前の日付（昨日から過去1週間）
         $startDate = $endDate->copy()->subDays(6); // 2/11
@@ -139,12 +138,10 @@ class AdviceController extends Controller
 
 
 
-         // 栄養カテゴリとサブカテゴリを取得
-         $categories = Category::all(); // 例: 全カテゴリ取得
-         //dd($categories);
-         $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
-
-         $weightData = $this->showWeight($user_id, $date);
+        // 栄養カテゴリとサブカテゴリを取得
+        $categories = Category::all(); // 例: 全カテゴリ取得
+        //dd($categories);
+        $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
 
         $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
 
@@ -156,8 +153,10 @@ class AdviceController extends Controller
         foreach ($categories as $category) {
             $categoryData[$category->name] = $this->ChartsService->showCategory($user_id, $category->name);
         }
+        $weightData = $this->showWeight($user_id, $date);
+        $user = $this->user->where('id', $user_id)->first();
 
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories','dailylogs','date','user','weightData'));
+        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories', 'dailylogs', 'date', 'user', 'weightData'));
     }
 
 
@@ -179,13 +178,13 @@ class AdviceController extends Controller
     {
         $user_profile = $this->user_profile->where('user_id', $user_id)->first();
 
-        $date = Carbon::createFromFormat('Y-m-d', $request->input('date'));
+        $date = Carbon::createFromFormat('Y-m-d', $request->input('date'));// 2/17
 
         // 昨日の日付（今日の前日）
-        $endDate = $date->copy()->subDay(); // 2/17
+        $endDate = $date->copy()->subDay(); // 2/16
 
         // 1週間前の日付（昨日から過去1週間）
-        $startDate = $endDate->copy()->subDays(6); // 2/11
+        $startDate = $endDate->copy()->subDays(7); // 2/10
 
         // 指定した期間のデータを取得
         $dailylogs = $this->dailylog
@@ -207,15 +206,18 @@ class AdviceController extends Controller
         $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
         $message = $radarChartData['message'] ?? null;
         $chart_categories = ['Carbohydrates', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
+
         // 栄養カテゴリとサブカテゴリを取得
         $categories = Category::all(); // 例: 全カテゴリ取得
-        //dd($categories);
         $sub_categories = SubCategory::all(); // 例: 全サブカテゴリ取得
         $categoryData = [];
 
         foreach ($chart_categories as $category) {
             $categoryData[$category] = $this->ChartsService->showCategory($user_id, $category, "", $adviceDate); // 指定した日付の前日（2/14）から過去7日間（2/8〜2/14）のデータを取得
         }
+
+        $user = $this->user->where('id', $user_id)->first();
+        $weightData = $this->showWeight($user_id, $date);
 
         return view('nutritionists.showHistory', compact(
             'user_profile',
@@ -224,7 +226,9 @@ class AdviceController extends Controller
             'message',
             'dailylogs',
             'categories',
-            'advice'
+            'advice',
+            'user',
+            'weightData'
         ));
     }
 
