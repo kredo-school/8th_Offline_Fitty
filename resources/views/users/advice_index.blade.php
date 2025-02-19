@@ -44,8 +44,8 @@
                 <thead>
                     <tr>
                         <th style="width: 10%;">Read/Unread</th>
-                        <th style="width: 10%;">Star/Unstar</th>
-                        <th style="width: 40%;">Advice</th>
+                        <th style="width: 10%;">Starred/Unstarred</th>
+                        <th style="width: 40%;">Advice Date</th>
                         <th style="width: 10%;">Overall</th>
                     </tr>
                 </thead>
