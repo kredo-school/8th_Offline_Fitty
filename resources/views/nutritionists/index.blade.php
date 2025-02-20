@@ -39,6 +39,11 @@
                     <div><h5>No tasks yet</h5></div>
                 @endforelse
             </div>
+            @if ($user_profiles->hasPages())
+    <div class="d-flex justify-content-center mt-4">
+        {{ $user_profiles->links('nutritionists.pagination') }}
+    </div>
+@endif
         </div>
     </div>
 </div>

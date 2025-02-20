@@ -37,22 +37,24 @@ class NutritionistController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $one_week_ago = now()->subWeek();
+{
+    $one_week_ago = now()->subWeek();
 
-        // 栄養士に関連するユーザー情報を取得（advice_sent_dateが一週間前よりも前のデータを取得）
-        $user_profiles = $this->user_profile
-            ->where('nutritionist_id', Auth::user()->id)
-            ->where(function ($query) use ($one_week_ago) {
-                $query->where('advice_sent_date', '<', $one_week_ago)
-                    ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
-            })
-            ->get();
-        return view('nutritionists.index', compact('user_profiles'));
-    }
+    // 栄養士に関連するユーザー情報を取得
+    $user_profiles = $this->user_profile
+        ->where('nutritionist_id', Auth::user()->id)
+        ->where(function ($query) use ($one_week_ago) {
+            $query->where('advice_sent_date', '<', $one_week_ago)
+                ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
+        })
+        ->paginate(8); // ← ページネーションを適用
+
+    return view('nutritionists.index', compact('user_profiles'));
+}
 
 
-    
+
+
     function profile($id)
     {
 
