@@ -26,7 +26,7 @@
             
                 <div class="form-group mb-3">
                     <label>Email Address :</label>
-                    <input type="text" name="name" class="form-control" value="{{ $inquiry->name }}" readonly
+                    <input type="text" name="name" class="form-control" value="{{ $inquiry->email }}" readonly
        style="border: none; outline: none; box-shadow: none; background-color: transparent; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif; ">
                 </div>
             
