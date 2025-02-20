@@ -76,6 +76,7 @@ class NutritionistsController extends Controller
     $user = User::create([
         'name' => $validated['username'],
         'email' => $validated['email'],
+        'role' => 'N',
         'password' => Hash::make($validated['password']),
     ]);
 

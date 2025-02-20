@@ -46,7 +46,9 @@
                 @if (isset($meal_names[$mealType]))
                     <div class="meal-card">
                         <div class="meal-title">{{ $meal_names[$mealType] }}</div>
-                        <p>Weight: {{ $dailylog->weight }}Kg</p>
+                        @if($dailylog->image)
+                        <img src="{{ $dailylog->image }}" alt="">
+                        @endif
                         <p>Meal: {{ $dailylog->meal_content }}</p>
                         @if($dailylog->comment)
                         <p>Comment: {{ $dailylog->comment }}</p>
