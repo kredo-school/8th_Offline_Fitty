@@ -248,14 +248,14 @@ class AdviceController extends Controller
         //
     }
 
-    public function index($user_id, Request $request)
+    public function index(Request $request)
     {
-        $user = User::findOrFail($user_id);
+        $user = Auth::user(); // ログインユーザーのみ
 
-        // 指定されたユーザーIDに関連するアドバイスを取得
-        $adviceList = $this->advice->where('user_id', $user_id)->get();
+        // // 指定されたユーザーIDに関連するアドバイスを取得
+        // $adviceList = $this->advice->where('user_id', $user_id)->get();
 
-        $query = Advice::where('user_id', $user_id);
+        $query = Advice::where('user_id', $user->id);
 
         $filter = $request->query('filter', 'all'); // デフォルトは 'all'
 
@@ -272,14 +272,14 @@ class AdviceController extends Controller
         // ページネーションを適用（`appends()` を使って `filter` を保持）
         $advices = $query->orderBy('created_at', 'desc')->paginate(10)->appends(['filter' => $filter]);
 
-        return view('users.advice_index', compact('user', 'adviceList', 'advices', 'filter'));
+        return view('users.advice_index', compact('user', 'advices', 'filter'));
     }
 
 
     public function showAdvice($advice_id)
     {
-        $advice = $this->advice
-            ->where('id', $advice_id)
+        $advice = Advice::where('id', $advice_id)
+            ->where('user_id', Auth::id()) // ログインユーザーのみ取得可能
             ->firstOrFail();
 
         //advice詳細にアクセスしたら既読 omori
@@ -351,7 +351,9 @@ class AdviceController extends Controller
     {
         \Log::info("readToggle method called with id: {$id}, adviceId: {$adviceId}");
 
-        $advice = Advice::findOrFail($adviceId);
+        $advice = Advice::where('id', $adviceId)
+        ->where('user_id', Auth::id()) // ログインユーザーのデータのみ変更可能
+        ->firstOrFail();
 
         $advice->is_read = 1;
         $advice->save();
