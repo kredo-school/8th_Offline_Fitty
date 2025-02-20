@@ -8,11 +8,11 @@
     <div class="row row-main">
     @include('sidebar.include-sidebar')
 
-    <div class="col-md-9 ms-sm-auto col-lg-10 admin-home">
+    <div class="col-md-9 ms-sm-auto col-lg-10 admin-home" >
 
         <!-- main content -->
-        <div class="text-center">
-            <div class="row gx-0 gy-2 justify-content-center align-items-center w-75 mx-auto">
+        <div class="text-center" >
+            <div class="row gx-0 gy-2 justify-content-center align-items-center w-75 mx-auto" >
                  <!-- Admin Index タイトル用の行 -->
                  <div class="col-md-10 col-sm-12 d-flex mb-3 mx-auto">
                     <div class="title">Admin Index</div>
