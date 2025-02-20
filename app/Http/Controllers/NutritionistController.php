@@ -37,39 +37,22 @@ class NutritionistController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $one_week_ago = now()->subWeek();
+{
+    $one_week_ago = now()->subWeek();
 
-        // 栄養士に関連するユーザー情報を取得（advice_sent_dateが一週間前よりも前のデータを取得）
-        $user_profiles = $this->user_profile
-            ->where('nutritionist_id', Auth::user()->id)
-            ->where(function ($query) use ($one_week_ago) {
-                $query->where('advice_sent_date', '<', $one_week_ago)
-                    ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
-            })
-            ->get();
-        return view('nutritionists.index', compact('user_profiles'));
-    }
+    // 栄養士に関連するユーザー情報を取得
+    $user_profiles = $this->user_profile
+        ->where('nutritionist_id', Auth::user()->id)
+        ->where(function ($query) use ($one_week_ago) {
+            $query->where('advice_sent_date', '<', $one_week_ago)
+                ->orWhereNull('advice_sent_date'); // advice_sent_dateがnullの場合も含める
+        })
+        ->paginate(8); // ← ページネーションを適用
+
+    return view('nutritionists.index', compact('user_profiles'));
+}
 
 
-
-    function sendAdvice($user_id)
-    {
-        $user_profile = $this->user_profile->where('user_id', $user_id)->first();
-        $dailylog = $this->dailylog->where('user_id', $user_id)->first();
-        $radarChartData = $this->ChartsService->showpfcvm($user_id); //ChartsServiceに処理を記載し共通化 omori
-
-        $satisfactionRates = $radarChartData['satisfactionRates'] ?? [];
-        $message = $radarChartData['message'] ?? null;
-        $categories = ['Carbohydrate', 'Protein', 'Fat', 'Vitamins', 'Minerals'];
-        $categoryData = [];
-
-        foreach ($categories as $category) {
-            $categoryData[$category] = $this->ChartsService->showCategory($user_id, $category);
-        }
-
-        return view('nutritionists.sendAdvice', compact('user_profile', 'satisfactionRates', 'categoryData', 'message', 'categories'));
-    }
 
 
     function profile($id)

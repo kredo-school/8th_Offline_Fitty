@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 <style>
-        .main-content {
-    margin-bottom: 500px; /* 必要に応じて値を調整 */
-}
+
 </style>
 
 @section('content')
@@ -105,7 +103,7 @@
                     <div class="mt-4" style="color: #333">
                         {{ $inquiries->appends(request()->query())->links('admin.pagination') }}
                     </div>
-                </div>
+           
             </div>
         </div>
     </div>

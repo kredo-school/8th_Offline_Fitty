@@ -22,7 +22,7 @@ class AdviceSeeder extends Seeder
                     'message' => 'Advice message for user ' . $user->id, // 仮のアドバイス内容
                     'user_id' => $user->id, // ユーザーIDを紐付け
                     'nutritionist_id' => $user->id + 50, // ユーザーIDを紐付け
-                    'created_at' => now()->subDays(rand(0, 15)), // 過去30日以内のランダムな日付
+                    'created_at' => now()->subDays(7*$i), // 過去30日以内のランダムな日付
                     'updated_at' => now(),
                 ];
             }

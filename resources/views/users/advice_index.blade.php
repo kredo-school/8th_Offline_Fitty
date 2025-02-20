@@ -26,11 +26,11 @@
             </a>
             <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'liked']) }}"
               class="btn {{ request('filter') == 'liked' ? 'btn-primary' : 'btn-secondary' }} me-2">
-                With-Star
+                Starred
             </a>
             <a href="{{ route('user.advice.index', ['id' => $user->id, 'filter' => 'unliked']) }}"
               class="btn {{ request('filter') == 'unliked' ? 'btn-primary' : 'btn-secondary' }}">
-                No-Star
+                Unstarred
             </a>
           </div>
 

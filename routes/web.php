@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
     // *********************************************
     Route::group(['prefix' => 'nutri', 'as' => 'nutri.', 'middleware' => 'nutri'], function () {
         Route::get('/index', [NutritionistController::class, 'index'])->name('index');
-        Route::get('/sendAdvice/{id}', [NutritionistController::class, 'sendAdvice'])->name('sendAdvice');
+        Route::get('/sendAdvice/{id}', [AdviceController::class, 'sendAdvice'])->name('sendAdvice');
         Route::post('store', [AdviceController::class, 'store'])->name('store');
         Route::post('updateMemo/{id}', [AdviceController::class, 'updateMemo'])->name('updateMemo');
         Route::get('/{id}/editProfile', [NutritionistController::class, 'editProfile'])->name('editProfile');
@@ -117,10 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         //Users get advices
-        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
-        // Route::get('/{id}/advice/show', [AdviceController::class, 'show'])->name('advice.show');
-        // Route::get('/{id}/advice/{adviceId}', [AdviceController::class, 'show'])->name('advice.show');
-        Route::get('/{id}/advice', [AdviceController::class, 'index'])->name('advice.index');
+        Route::get('/advice', [AdviceController::class, 'index'])->name('advice.index');
         Route::get('/{id}/advice/show', [AdviceController::class, 'showAdvice'])->name('advice.showAdvice');
         Route::patch('/{id}/advice/{advice}/read', [AdviceController::class, 'readToggle'])->name('advice.read');
         Route::patch('{id}/advice/{advice}/unread', [AdviceController::class, 'unread'])->name('advice.unread');
