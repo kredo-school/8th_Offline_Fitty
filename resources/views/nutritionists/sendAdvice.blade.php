@@ -87,6 +87,22 @@
 
             <div class="card m-2">
                 <div class="card-body">
+                    @if (!empty($weightData['labels']) && !empty($weightData['weights']))
+                    @include('nutritionists.charts.lineGraphMothly', [
+                        'type' => $weightData['type'],
+                        'dates' => $weightData['labels'],
+                        'weights' => $weightData['weights'],
+                        'message' => $weightData['message']
+                    ])
+                @else
+                    <p>No weight data available.</p>
+                @endif
+                </div>
+            </div>
+
+
+            <div class="card m-2">
+                <div class="card-body">
                     @include('nutritionists.charts.radarchartSendAdvice', [
                         'satisfactionRates' => $satisfactionRates,
                         'user' => $user_profile,
@@ -257,7 +273,7 @@
                 });
             }
 
-  
+
         });
     </script>
 

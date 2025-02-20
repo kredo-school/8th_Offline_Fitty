@@ -115,6 +115,9 @@
                         <!-- User ID -->
                         <input type="hidden" name="user_id" value="{{ $user_profile->id }}">
                 </div>
+
+                @include('nutritionists.advice-dailylog')
+
                 {{-- Right Section end --}}
 
                 {{-- Left Section start--}}
@@ -127,6 +130,20 @@
                                 'user' => $user_profile,
                                 'message' => $message ?? 'No data available.'
                             ])
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-body">
+                            @if (!empty($weightData['labels']) && !empty($weightData['weights']))
+                            @include('nutritionists.charts.lineGraphMothly', [
+                                'type' => $weightData['type'],
+                                'dates' => $weightData['labels'],
+                                'weights' => $weightData['weights'],
+                                'message' => $weightData['message']
+                            ])
+                             @else
+                            <p>No weight data available.</p>
+                             @endif
                         </div>
                     </div>
                 </div>
